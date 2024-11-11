@@ -1,0 +1,67 @@
+@import url(../css/fonts.css);
+
+$primary: #ff4646;
+$dark: #181c29;
+$white: #fff;
+
+@mixin action-small {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $dark;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  max-width: 1440px;
+  width: 100%;
+  height: 200px;
+  background-color: grey;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 40px 11px;
+  margin: 0 auto;
+  max-width: calc(1276px - 40px);
+  background-color: $white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+#logo__mark {
+  fill: $primary;
+}
+
+#logo__text {
+  @include action-small();
+  fill: $primary;
+}
+
+.nav {
+  @include action-small();
+  display: flex;
+  align-items: center;
+  padding: 0;
+
+  .nav__list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    column-gap: 49px;
+  }
+}
