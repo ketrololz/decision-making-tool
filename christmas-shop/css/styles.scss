@@ -58,6 +58,16 @@ $white: #fff;
   margin: 0;
 }
 
+@mixin slider-text($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 80px;
+  text-transform: uppercase;
+  text-align: center;
+  color: $color;
+  margin: 0;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -111,7 +121,7 @@ body {
 
 /* -------------- ABOUT SECTION -------------- */
 
-#about {
+#about-section {
   background: center url(../images/bg-snow.png), $primary;
   background-size: cover;
   display: flex;
@@ -158,6 +168,97 @@ body {
       width: 100%;
       min-height: 528px;
     }
+  }
+}
+
+/* -------------- SLIDER SECTION -------------- */
+
+#slider-section {
+  background: center url(../images/bg-snow.png), $primary;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px;
+  row-gap: 20px;
+  overflow-x: hidden;
+
+  .slider-section__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 12px;
+  }
+
+  .caption-text {
+    @include caption();
+  }
+
+  h2 {
+    @include header-2();
+  }
+
+  .slider {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    transform: translateX(360px);
+  }
+
+  .slider__text {
+    @include slider-text();
+    letter-spacing: 0.015em;
+  }
+
+  .slider__image-box {
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px;
+  }
+
+  .slider-image-1 {
+    background-image: url(../images/snowman.png);
+  }
+
+  .slider-image-2 {
+    background-image: url(../images/christmas-trees.png);
+  }
+
+  .slider-image-3 {
+    background-image: url(../images/christmas-tree-ball.png);
+  }
+
+  .slider-image-4 {
+    background-image: url(../images/fairytale-house.png);
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: right;
+    max-width: 1276px;
+    width: 100%;
+    column-gap: 22px;
+  }
+  
+  .arrow-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 53.5px;
+    width: 53.5px;
+    border-radius: 20px;
+    border: 1px solid $white;
+  }
+
+  .reverse-button {
+    transform: rotate(180deg);
+  }
+
+  .inactive {
+    opacity: 0.4;
   }
 }
 
