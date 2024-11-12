@@ -183,6 +183,7 @@ body {
   padding: 60px 8px;
   row-gap: 20px;
   overflow-x: hidden;
+  position: relative;
 
   .slider-section__text {
     display: flex;
@@ -204,6 +205,12 @@ body {
     align-items: center;
     column-gap: 20px;
     transform: translateX(360px);
+  }
+
+  @media screen and (max-width: 1296px) {
+    .slider {
+      transform: translateX(calc(360px + ((1296px - 100dvw) / 2)));
+    }
   }
 
   .slider__text {
