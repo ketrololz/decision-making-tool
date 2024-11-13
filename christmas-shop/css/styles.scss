@@ -1,5 +1,6 @@
 @import url(../css/fonts.css);
 @import url(../css/header.css);
+@import url(../css/gift-cards.css);
 
 $primary: #ff4646;
 $dark: #181c29;
@@ -184,7 +185,6 @@ body {
   padding: 60px 8px;
   row-gap: 20px;
   overflow-x: hidden;
-  position: relative;
 
   .slider-section__text {
     display: flex;
@@ -270,3 +270,23 @@ body {
   }
 }
 
+/* -------------- GIFTS SECTION -------------- */
+
+#gifts-section {
+  background: center url(../images/bg-snow.png), $primary;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px;
+  row-gap: 12px;
+
+  .caption-text {
+    @include caption();
+  }
+
+  h2 {
+    @include header-2();
+  }
+}
