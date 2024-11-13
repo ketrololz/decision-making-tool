@@ -50,6 +50,18 @@ $white: #fff;
   margin: 0;
 }
 
+@mixin header-4($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: $color;
+  margin: 0;
+}
+
 @mixin paragraph-text($color: $white) {
   font-family: Montserrat, sans-serif;
   font-weight: 400;
@@ -99,11 +111,13 @@ body {
   
   .caption-text {
     @include caption();
+    text-align: center;
     
   }
 
   h1 {
     @include header-1();
+    text-align: center;
     max-width: 426px;
   }
 }
@@ -195,10 +209,12 @@ body {
 
   .caption-text {
     @include caption();
+    text-align: center;
   }
 
   h2 {
     @include header-2();
+    text-align: center;
   }
 
   .slider {
@@ -284,9 +300,69 @@ body {
 
   .caption-text {
     @include caption();
+    text-align: center;
   }
 
   h2 {
     @include header-2();
+    text-align: center;
   }
+}
+
+/* -------------- CTA SECTION -------------- */
+
+#cta-section {
+  background: center url(../images/bg-forest.png), center url(../images/bg-snow.png), $primary;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px 60px;
+  min-height: 548px;
+  row-gap: 16px;
+  border-radius: 0 0 20px 20px;
+
+  
+  h2 {
+    @include header-2();
+    text-align: center;
+    max-width: 426px;
+  }
+  
+  .caption-text {
+    @include caption();
+    text-align: center;
+    margin: 4px 0 8px;
+  }
+
+  .timer {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px 12px 12px;
+    width: 320px;
+    height: 52px;
+    border-radius: 20px;
+    background-color: rgba($white, 0.4);
+  }
+
+  .timer__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 52px;
+
+    h4 {
+      @include header-4();
+    }
+  }
+
+  .line {
+    width: 1px;
+    height: 20px;
+    background-color: rgba($white, 0.4);
+  }
+
 }

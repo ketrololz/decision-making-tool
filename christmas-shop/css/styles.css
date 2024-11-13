@@ -36,6 +36,7 @@ body {
   letter-spacing: 0.05em;
   color: #fff;
   margin: 0;
+  text-align: center;
 }
 #start-screen h1 {
   font-family: Montserrat, sans-serif;
@@ -47,6 +48,7 @@ body {
   text-align: center;
   color: #fff;
   margin: 0;
+  text-align: center;
   max-width: 426px;
 }
 
@@ -158,6 +160,7 @@ body {
   letter-spacing: 0.05em;
   color: #fff;
   margin: 0;
+  text-align: center;
 }
 #slider-section h2 {
   font-family: Montserrat, sans-serif;
@@ -168,6 +171,7 @@ body {
   text-transform: uppercase;
   color: #fff;
   margin: 0;
+  text-align: center;
 }
 #slider-section .slider {
   display: flex;
@@ -253,6 +257,7 @@ body {
   letter-spacing: 0.05em;
   color: #fff;
   margin: 0;
+  text-align: center;
 }
 #gifts-section h2 {
   font-family: Montserrat, sans-serif;
@@ -263,4 +268,75 @@ body {
   text-transform: uppercase;
   color: #fff;
   margin: 0;
+  text-align: center;
+}
+
+/* -------------- CTA SECTION -------------- */
+#cta-section {
+  background: center url(../images/bg-forest.png), center url(../images/bg-snow.png), #ff4646;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px 60px;
+  min-height: 548px;
+  row-gap: 16px;
+  border-radius: 0 0 20px 20px;
+}
+#cta-section h2 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  max-width: 426px;
+}
+#cta-section .caption-text {
+  font-family: Allura, serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  margin: 4px 0 8px;
+}
+#cta-section .timer {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px 12px 12px;
+  width: 320px;
+  height: 52px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+#cta-section .timer__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 52px;
+}
+#cta-section .timer__box h4 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+#cta-section .line {
+  width: 1px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
 }/*# sourceMappingURL=styles.css.map */
