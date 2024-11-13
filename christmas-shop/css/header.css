@@ -3,17 +3,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 13px 40px 11px;
+  padding: 5px 40px 3px;
   margin: 0 auto;
-  max-width: 1236px;
+  max-width: 1276px;
   background-color: #fff;
 }
 
 .logo {
+  padding: 8px 20px;
   display: flex;
   align-items: center;
   -moz-column-gap: 8px;
        column-gap: 8px;
+  cursor: pointer;
 }
 
 #logo__mark {
@@ -47,6 +49,16 @@
   list-style: none;
   display: flex;
   align-items: center;
-  -moz-column-gap: 49px;
-       column-gap: 49px;
+  -moz-column-gap: 9px;
+       column-gap: 9px;
+}
+.nav .links {
+  padding: 8px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.nav .links:hover {
+  background-color: rgba(255, 70, 70, 0.1);
+  color: #ff4646;
 }/*# sourceMappingURL=header.css.map */

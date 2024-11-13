@@ -138,6 +138,13 @@ main {
   width: 235px;
   height: 56px;
   background-color: $dark;
+  cursor: pointer;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out;
+
+  &:hover {
+    background-color: $white;
+    color: $dark;
+  }
 }
 
 /* -------------- ABOUT SECTION -------------- */
@@ -281,6 +288,14 @@ main {
     width: 53.5px;
     border-radius: 20px;
     border: 1px solid $white;
+    stroke: $white;
+    transition: stroke .2s ease-in-out, background-color .2s ease-in-out;
+    cursor: pointer;
+
+    &:hover:not(.inactive) {
+      background-color: $white;
+      stroke: $primary;
+    }
   }
 
   .reverse-button {
@@ -289,6 +304,7 @@ main {
 
   .inactive {
     opacity: 0.4;
+    cursor: not-allowed;
   }
 }
 

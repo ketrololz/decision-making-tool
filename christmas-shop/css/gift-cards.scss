@@ -44,6 +44,11 @@ $pink: #FF43F7;
   height: 342px;
   border-radius: 20px;
   background: $content;
+  cursor: pointer;
+
+  &:hover h3 {
+    color: $primary;
+  }
 
   .gift-card__image {
     background-size: cover;
@@ -75,18 +80,19 @@ $pink: #FF43F7;
   }
 
   .for-work {
-    @include header-3($purple)
+    @include header-3($purple);
   }
 
   .for-health {
-    @include header-3($green)
+    @include header-3($green);
   }
 
   .for-harmony {
-    @include header-3($pink)
+    @include header-3($pink);
   }
 
   h3 {
-    @include header-4($dark)
+    @include header-4($dark);
+    transition: color .2s ease-in-out;
   }
 }

@@ -81,6 +81,11 @@ $content: #ECF3F8;
     width: 100%;
     border-radius: 20px;
     background-color: $content;
+    cursor: pointer;
+
+    &:hover h3, &:hover .action-large {
+      color: $primary;
+    }
   }
 
   .contacts-cards__image {
@@ -96,10 +101,12 @@ $content: #ECF3F8;
     @include action-large($dark);
     margin-bottom: 12px;
     letter-spacing: 0.17em;
+    transition: color .2s ease-in-out;
   }
 
   h3 {
     @include header-3($dark);
+    transition: color .2s ease-in-out;
   }
 
   .social-media {
@@ -116,6 +123,13 @@ $content: #ECF3F8;
     justify-content: center;
     width: 40px;
     height: 40px;
+    cursor: pointer;
+    stroke: $dark;
+    transition: stroke .2s ease-in-out;
+
+    &:hover {
+      stroke: $primary;
+    }
   }
 
   .paragraph-text {
@@ -125,7 +139,11 @@ $content: #ECF3F8;
 
   .caption-text {
     @include caption($dark);
+    cursor: pointer;
+    transition: color .2s ease-in-out;
+
+    &:hover {
+      color: $primary;
+    }
   }
-
-
 }

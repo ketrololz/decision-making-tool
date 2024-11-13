@@ -18,16 +18,18 @@ $white: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 13px 40px 11px;
+  padding: 5px 40px 3px;
   margin: 0 auto;
-  max-width: calc(1276px - 40px);
+  max-width: calc(1316px - 40px);
   background-color: $white;
 }
 
 .logo {
+  padding: 8px 20px;
   display: flex;
   align-items: center;
   column-gap: 8px;
+  cursor: pointer;
 }
 
 #logo__mark {
@@ -49,6 +51,18 @@ $white: #fff;
     list-style: none;
     display: flex;
     align-items: center;
-    column-gap: 49px;
+    column-gap: 9px;
+  }
+
+  .links {
+    padding: 8px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: color .2s ease-in-out, background-color .2s ease-in-out;
+
+    &:hover {
+      background-color: rgba($primary, 0.1);
+      color: $primary;
+    }
   }
 }

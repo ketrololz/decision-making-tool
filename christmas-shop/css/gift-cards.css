@@ -13,6 +13,10 @@
   height: 342px;
   border-radius: 20px;
   background: #ECF3F8;
+  cursor: pointer;
+}
+.gift-card:hover h3 {
+  color: #ff4646;
 }
 .gift-card .gift-card__image {
   background-size: cover;
@@ -77,4 +81,5 @@
   text-transform: uppercase;
   color: #181c29;
   margin: 0;
+  transition: color 0.2s ease-in-out;
 }/*# sourceMappingURL=gift-cards.css.map */

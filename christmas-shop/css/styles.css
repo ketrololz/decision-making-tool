@@ -74,6 +74,12 @@ main {
   width: 235px;
   height: 56px;
   background-color: #181c29;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.button-dark:hover {
+  background-color: #fff;
+  color: #181c29;
 }
 
 /* -------------- ABOUT SECTION -------------- */
@@ -236,12 +242,20 @@ main {
   width: 53.5px;
   border-radius: 20px;
   border: 1px solid #fff;
+  stroke: #fff;
+  transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+#slider-section .arrow-button:hover:not(.inactive) {
+  background-color: #fff;
+  stroke: #ff4646;
 }
 #slider-section .reverse-button {
   transform: rotate(180deg);
 }
 #slider-section .inactive {
   opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* -------------- GIFTS SECTION -------------- */
