@@ -1,0 +1,99 @@
+@import url(../css/fonts.css);
+#footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 60px 8px;
+}
+#footer .contacts-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1276px;
+  -moz-column-gap: 12px;
+       column-gap: 12px;
+  margin-bottom: 60px;
+}
+@media screen and (max-width: 1080px) {
+  #footer .contacts-cards {
+    flex-direction: column;
+    row-gap: 12px;
+  }
+}
+#footer .contacts-cards__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 204px;
+  width: 100%;
+  border-radius: 20px;
+  background-color: #ECF3F8;
+}
+#footer .contacts-cards__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 80px;
+  margin-bottom: 14px;
+}
+#footer .action-large {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #181c29;
+  margin: 0;
+  margin-bottom: 12px;
+  letter-spacing: 0.17em;
+}
+#footer h3 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 152%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #181c29;
+  margin: 0;
+}
+#footer .social-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -moz-column-gap: 12px;
+       column-gap: 12px;
+  margin-bottom: 12px;
+}
+#footer .social-media__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+#footer .paragraph-text {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 148%;
+  color: #181c29;
+  margin: 0;
+  margin-bottom: 12px;
+}
+#footer .caption-text {
+  font-family: Allura, serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  color: #181c29;
+  margin: 0;
+}/*# sourceMappingURL=footer.css.map */

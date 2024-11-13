@@ -1,6 +1,7 @@
 @import url(../css/fonts.css);
 @import url(../css/header.css);
 @import url(../css/gift-cards.css);
+@import url(../css/footer.css);
 
 $primary: #ff4646;
 $dark: #181c29;
@@ -86,11 +87,16 @@ body {
   margin: 0;
 }
 
+main {
+  background-color: $primary;
+  border-radius: 20px;
+}
+
 .wrapper {
   max-width: 1440px;
   width: 100%;
   height: 1000px;
-  background-color: grey;
+  background-color: $white;
   margin: 0 auto;
 }
 
