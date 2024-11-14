@@ -1,4 +1,4 @@
-@import url(../css/fonts.css);
+@import url(../css/general/fonts.css);
 .gift-cards-container {
   padding-top: 8px;
   display: flex;
@@ -24,13 +24,13 @@
   height: 230px;
 }
 .gift-card .for-work-image {
-  background-image: url(../images/gift-for-work.png);
+  background-image: url(../../images/gift-for-work.png);
 }
 .gift-card .for-health-image {
-  background-image: url(../images/gift-for-health.png);
+  background-image: url(../../images/gift-for-health.png);
 }
 .gift-card .for-harmony-image {
-  background-image: url(../images/gift-for-harmony.png);
+  background-image: url(../../images/gift-for-harmony.png);
 }
 .gift-card .gift-card__text {
   display: flex;

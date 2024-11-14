@@ -1,4 +1,4 @@
-@import url(../css/fonts.css);
+@import url(../css/general/fonts.css);
 
 $primary: #ff4646;
 $dark: #181c29;
@@ -57,15 +57,15 @@ $pink: #FF43F7;
   }
 
   .for-work-image {
-    background-image: url(../images/gift-for-work.png);
+    background-image: url(../../images/gift-for-work.png);
   }
 
   .for-health-image {
-    background-image: url(../images/gift-for-health.png);
+    background-image: url(../../images/gift-for-health.png);
   }
 
   .for-harmony-image {
-    background-image: url(../images/gift-for-harmony.png);
+    background-image: url(../../images/gift-for-harmony.png);
   }
 
   .gift-card__text {

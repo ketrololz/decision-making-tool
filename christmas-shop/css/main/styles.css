@@ -1,7 +1,7 @@
-@import url(../css/fonts.css);
-@import url(../css/header.css);
-@import url(../css/gift-cards.css);
-@import url(../css/footer.css);
+@import url(../general/fonts.css);
+@import url(../general/header.css);
+@import url(../general/gift-cards.css);
+@import url(../general/footer.css);
 html {
   scroll-behavior: smooth;
 }
@@ -30,7 +30,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: center url(../images/bg-ball.png), center url(../images/bg-snow.png), #ff4646;
+  background: center url(../../images/bg-ball.png), center url(../../images/bg-snow.png), #ff4646;
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -90,7 +90,7 @@ main {
 
 /* -------------- ABOUT SECTION -------------- */
 #about-section {
-  background: center url(../images/bg-snow.png), #ff4646;
+  background: center url(../../images/bg-snow.png), #ff4646;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -142,7 +142,7 @@ main {
 }
 #about-section .container .about__image-box {
   border-radius: 20px;
-  background: center url(../images/santa.png);
+  background: center url(../../images/santa.png);
   background-size: cover;
   max-height: 528px;
   max-width: 638px;
@@ -154,7 +154,7 @@ main {
 
 /* -------------- SLIDER SECTION -------------- */
 #slider-section {
-  background: center url(../images/bg-snow.png), #ff4646;
+  background: center url(../../images/bg-snow.png), #ff4646;
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -221,16 +221,16 @@ main {
   border-radius: 20px;
 }
 #slider-section .slider-image-1 {
-  background-image: url(../images/snowman.png);
+  background-image: url(../../images/snowman.png);
 }
 #slider-section .slider-image-2 {
-  background-image: url(../images/christmas-trees.png);
+  background-image: url(../../images/christmas-trees.png);
 }
 #slider-section .slider-image-3 {
-  background-image: url(../images/christmas-tree-ball.png);
+  background-image: url(../../images/christmas-tree-ball.png);
 }
 #slider-section .slider-image-4 {
-  background-image: url(../images/fairytale-house.png);
+  background-image: url(../../images/fairytale-house.png);
 }
 #slider-section .buttons-container {
   display: flex;
@@ -266,7 +266,7 @@ main {
 
 /* -------------- GIFTS SECTION -------------- */
 #gifts-section {
-  background: center url(../images/bg-snow.png), #ff4646;
+  background: center url(../../images/bg-snow.png), #ff4646;
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -299,7 +299,7 @@ main {
 
 /* -------------- CTA SECTION -------------- */
 #cta-section {
-  background: center url(../images/bg-forest.png), center url(../images/bg-snow.png), #ff4646;
+  background: center url(../../images/bg-forest.png), center url(../../images/bg-snow.png), #ff4646;
   background-size: cover;
   display: flex;
   flex-direction: column;
