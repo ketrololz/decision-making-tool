@@ -85,5 +85,5 @@ main {
 }
 #gifts-section .tabs .active {
   background-color: rgba(255, 255, 255, 0.2);
-  cursor: not-allowed;
+  cursor: default;
 }/*# sourceMappingURL=styles.css.map */

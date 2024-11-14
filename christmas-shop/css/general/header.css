@@ -55,9 +55,8 @@
 }
 .nav .links {
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
 }
-.nav .links:hover a {
+.nav .links:hover:not(.active) a {
   color: #ff4646;
   background-color: rgba(255, 70, 70, 0.1);
 }
@@ -67,5 +66,10 @@
   border-radius: 12px;
   text-decoration: none;
   color: #181c29;
-  transition: color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.nav .active a {
+  color: #ff4646;
+  background-color: rgba(255, 70, 70, 0.1);
+  cursor: default;
 }/*# sourceMappingURL=header.css.map */
