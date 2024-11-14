@@ -89,7 +89,6 @@ main {
     margin-bottom: 13px;
     cursor: pointer;
 
-
     .tabs__item {
       @include action-small();
       border-radius: 12px;
@@ -101,7 +100,6 @@ main {
       }
     }
 
-    
     .active {
       background-color: rgba($white, 0.2);
       cursor: default;
