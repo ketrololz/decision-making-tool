@@ -16,6 +16,7 @@
   -moz-column-gap: 8px;
        column-gap: 8px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 #logo__mark {
@@ -53,12 +54,18 @@
        column-gap: 9px;
 }
 .nav .links {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.nav .links:hover a {
+  color: #ff4646;
+  background-color: rgba(255, 70, 70, 0.1);
+}
+.nav a {
+  display: block;
   padding: 8px 20px;
   border-radius: 12px;
-  cursor: pointer;
-  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-.nav .links:hover {
-  background-color: rgba(255, 70, 70, 0.1);
-  color: #ff4646;
+  text-decoration: none;
+  color: #181c29;
+  transition: color 0.2s ease-in-out;
 }/*# sourceMappingURL=header.css.map */

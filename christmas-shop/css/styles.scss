@@ -82,6 +82,10 @@ $white: #fff;
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -131,13 +135,15 @@ main {
 
 .button-dark {
   @include action-small();
+  display: block;
   color: $white;
   border-radius: 20px;
   border: none;
   padding: 20px 32px;
-  width: 235px;
-  height: 56px;
+  width: 171px;
+  height: 16px;
   background-color: $dark;
+  text-decoration: none;
   cursor: pointer;
   transition: color .2s ease-in-out, background-color .2s ease-in-out;
 

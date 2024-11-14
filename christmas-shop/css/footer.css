@@ -31,6 +31,7 @@
   width: 100%;
   border-radius: 20px;
   background-color: #ECF3F8;
+  text-decoration: none;
   cursor: pointer;
 }
 #footer .contacts-cards__item:hover h3, #footer .contacts-cards__item:hover .action-large {
@@ -110,6 +111,7 @@
   margin: 0;
   cursor: pointer;
   transition: color 0.2s ease-in-out;
+  text-decoration: none;
 }
 #footer .caption-text:hover {
   color: #ff4646;

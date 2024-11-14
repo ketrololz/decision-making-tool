@@ -81,6 +81,7 @@ $content: #ECF3F8;
     width: 100%;
     border-radius: 20px;
     background-color: $content;
+    text-decoration: none;
     cursor: pointer;
 
     &:hover h3, &:hover .action-large {
@@ -141,6 +142,7 @@ $content: #ECF3F8;
     @include caption($dark);
     cursor: pointer;
     transition: color .2s ease-in-out;
+    text-decoration: none;
 
     &:hover {
       color: $primary;

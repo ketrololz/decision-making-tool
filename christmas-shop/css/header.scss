@@ -30,6 +30,7 @@ $white: #fff;
   align-items: center;
   column-gap: 8px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 #logo__mark {
@@ -55,14 +56,21 @@ $white: #fff;
   }
 
   .links {
+    cursor: pointer;
+    transition: background-color .2s ease-in-out;
+
+    &:hover a {
+      color: $primary;
+      background-color: rgba($primary, 0.1);
+    }
+  }
+
+  a {
+    display: block;
     padding: 8px 20px;
     border-radius: 12px;
-    cursor: pointer;
-    transition: color .2s ease-in-out, background-color .2s ease-in-out;
-
-    &:hover {
-      background-color: rgba($primary, 0.1);
-      color: $primary;
-    }
+    text-decoration: none;
+    color: $dark;
+    transition: color .2s ease-in-out;
   }
 }
