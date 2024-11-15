@@ -1,0 +1,395 @@
+@import url(../general/fonts.css);
+@import url(../general/header.css);
+@import url(../general/gift-cards.css);
+@import url(../general/footer.css);
+
+$primary: #ff4646;
+$dark: #181c29;
+$white: #fff;
+
+@mixin action-small($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $color;
+  margin: 0;
+}
+
+@mixin caption($color: $white) {
+  font-family: Allura, serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  color: $color;
+  margin: 0;
+}
+
+@mixin header-1($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 150%;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  color: $color;
+  margin: 0;
+}
+
+@mixin header-2($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $color;
+  margin: 0;
+}
+
+@mixin header-4($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: $color;
+  margin: 0;
+}
+
+@mixin paragraph-text($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 148%;
+  color: $color;
+  margin: 0;
+}
+
+@mixin slider-text($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 80px;
+  text-transform: uppercase;
+  text-align: center;
+  color: $color;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  background-color: $primary;
+  border-radius: 20px;
+}
+
+.wrapper {
+  max-width: 1440px;
+  width: 100%;
+  height: 1000px;
+  background-color: $white;
+  margin: 0 auto;
+}
+
+/* -------------- START SCREEN -------------- */
+
+#start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: center url(../../images/bg-ball.png), center url(../../images/bg-snow.png), $primary;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 524px;
+  row-gap: 12px;
+  border-radius: 20px 20px 0 0;
+  
+  .caption-text {
+    @include caption();
+    text-align: center;
+    
+  }
+
+  h1 {
+    @include header-1();
+    text-align: center;
+    max-width: 426px;
+  }
+}
+
+
+.button-dark {
+  @include action-small();
+  display: block;
+  color: $white;
+  border-radius: 20px;
+  border: none;
+  padding: 20px 32px;
+  width: 171px;
+  height: 16px;
+  background-color: $dark;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out;
+
+  &:hover {
+    background-color: $white;
+    color: $dark;
+  }
+}
+
+/* -------------- ABOUT SECTION -------------- */
+
+#about-section {
+  background: center url(../../images/bg-snow.png), $primary;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  padding: 60px 8px;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    background-color: $white;
+    border-radius: 20px;
+    max-width: 1276px;
+    height: 100%;
+    width: 100%;
+
+    .about__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 60px;
+      max-width: 426px;
+      row-gap: 20px;
+    }
+    
+    .caption-text {
+      @include caption($primary);
+    }
+  
+    h2 {
+      @include header-2($dark);
+    }
+  
+    .paragraph-text {
+      @include paragraph-text($dark);
+    }
+
+    .about__image-box {
+      border-radius: 20px;
+      background: center url(../../images/santa.png);
+      background-size: cover;
+      max-height: 528px;
+      max-width: 638px;
+      height: 100%;
+      width: 100%;
+      min-height: 528px;
+      min-width: 376px;
+    }
+  }
+}
+
+/* -------------- SLIDER SECTION -------------- */
+
+#slider-section {
+  background: center url(../../images/bg-snow.png), $primary;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px;
+  row-gap: 20px;
+  overflow-x: hidden;
+
+  .slider-section__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 12px;
+  }
+
+  .caption-text {
+    @include caption();
+    text-align: center;
+  }
+
+  h2 {
+    @include header-2();
+    text-align: center;
+  }
+
+  .slider {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    transform: translateX(360px);
+  }
+
+  @media screen and (max-width: 1296px) {
+    .slider {
+      transform: translateX(calc(360px + ((1296px - 100dvw) / 2)));
+    }
+  }
+
+  .slider__text {
+    @include slider-text();
+    letter-spacing: 0.015em;
+  }
+
+  .slider__image-box {
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px;
+  }
+
+  .slider-image-1 {
+    background-image: url(../../images/snowman.png);
+  }
+
+  .slider-image-2 {
+    background-image: url(../../images/christmas-trees.png);
+  }
+
+  .slider-image-3 {
+    background-image: url(../../images/christmas-tree-ball.png);
+  }
+
+  .slider-image-4 {
+    background-image: url(../../images/fairytale-house.png);
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: right;
+    max-width: 1276px;
+    width: 100%;
+    column-gap: 22px;
+  }
+  
+  .arrow-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 53.5px;
+    width: 53.5px;
+    border-radius: 20px;
+    border: 1px solid $white;
+    stroke: $white;
+    transition: stroke .2s ease-in-out, background-color .2s ease-in-out;
+    cursor: pointer;
+
+    &:hover:not(.inactive) {
+      background-color: $white;
+      stroke: $primary;
+    }
+  }
+
+  .reverse-button {
+    transform: rotate(180deg);
+  }
+
+  .inactive {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/* -------------- GIFTS SECTION -------------- */
+
+#gifts-section {
+  background: center url(../../images/bg-snow.png), $primary;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px;
+  row-gap: 12px;
+
+  .caption-text {
+    @include caption();
+    text-align: center;
+  }
+
+  h2 {
+    @include header-2();
+    text-align: center;
+  }
+}
+
+/* -------------- CTA SECTION -------------- */
+
+#cta-section {
+  background: center url(../../images/bg-forest.png), center url(../../images/bg-snow.png), $primary;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px 60px;
+  min-height: 548px;
+  row-gap: 16px;
+  border-radius: 0 0 20px 20px;
+
+  
+  h2 {
+    @include header-2();
+    text-align: center;
+    max-width: 426px;
+  }
+  
+  .caption-text {
+    @include caption();
+    text-align: center;
+    margin: 4px 0 8px;
+  }
+
+  .timer {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px 12px 12px;
+    width: 320px;
+    height: 52px;
+    border-radius: 20px;
+    background-color: rgba($white, 0.4);
+  }
+
+  .timer__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 52px;
+
+    h4 {
+      @include header-4();
+    }
+  }
+
+  .line {
+    width: 1px;
+    height: 20px;
+    background-color: rgba($white, 0.4);
+  }
+}

@@ -1,0 +1,98 @@
+@import url(../general/fonts.css);
+
+$primary: #ff4646;
+$dark: #181c29;
+$white: #fff;
+$content: #ECF3F8;
+$purple: #4361FF;
+$green: #06A44F;
+$pink: #FF43F7;
+
+@mixin header-3($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $color;
+  margin: 0;
+}
+
+@mixin header-4($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 152%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color;
+  margin: 0;
+}
+
+.gift-cards-container {
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.gift-card {
+  width: 310px;
+  height: 342px;
+  border-radius: 20px;
+  background: $content;
+  cursor: pointer;
+
+  &:hover h3 {
+    color: $primary;
+  }
+
+  .gift-card__image {
+    background-size: cover;
+    background-position: center;
+    height: 230px;
+  }
+
+  .for-work-image {
+    background-image: url(../../images/gift-for-work.png);
+  }
+
+  .for-health-image {
+    background-image: url(../../images/gift-for-health.png);
+  }
+
+  .for-harmony-image {
+    background-image: url(../../images/gift-for-harmony.png);
+  }
+
+  .gift-card__text {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 270px;
+    height: 72px;
+    border-radius: 20px;
+    row-gap: 8px;
+    background-color: $white;
+  }
+
+  .for-work {
+    @include header-3($purple);
+  }
+
+  .for-health {
+    @include header-3($green);
+  }
+
+  .for-harmony {
+    @include header-3($pink);
+  }
+
+  h3 {
+    @include header-4($dark);
+    transition: color .2s ease-in-out;
+  }
+}

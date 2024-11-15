@@ -1,0 +1,368 @@
+@import url(../general/fonts.css);
+@import url(../general/header.css);
+@import url(../general/gift-cards.css);
+@import url(../general/footer.css);
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  background-color: #ff4646;
+  border-radius: 20px;
+}
+
+.wrapper {
+  max-width: 1440px;
+  width: 100%;
+  height: 1000px;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+/* -------------- START SCREEN -------------- */
+#start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: center url(../../images/bg-ball.png), center url(../../images/bg-snow.png), #ff4646;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 524px;
+  row-gap: 12px;
+  border-radius: 20px 20px 0 0;
+}
+#start-screen .caption-text {
+  font-family: Allura, serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+#start-screen h1 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 150%;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  max-width: 426px;
+}
+
+.button-dark {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  display: block;
+  color: #fff;
+  border-radius: 20px;
+  border: none;
+  padding: 20px 32px;
+  width: 171px;
+  height: 16px;
+  background-color: #181c29;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.button-dark:hover {
+  background-color: #fff;
+  color: #181c29;
+}
+
+/* -------------- ABOUT SECTION -------------- */
+#about-section {
+  background: center url(../../images/bg-snow.png), #ff4646;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  padding: 60px 8px;
+}
+#about-section .container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 20px;
+  max-width: 1276px;
+  height: 100%;
+  width: 100%;
+}
+#about-section .container .about__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 60px;
+  max-width: 426px;
+  row-gap: 20px;
+}
+#about-section .container .caption-text {
+  font-family: Allura, serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  color: #ff4646;
+  margin: 0;
+}
+#about-section .container h2 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #181c29;
+  margin: 0;
+}
+#about-section .container .paragraph-text {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 148%;
+  color: #181c29;
+  margin: 0;
+}
+#about-section .container .about__image-box {
+  border-radius: 20px;
+  background: center url(../../images/santa.png);
+  background-size: cover;
+  max-height: 528px;
+  max-width: 638px;
+  height: 100%;
+  width: 100%;
+  min-height: 528px;
+  min-width: 376px;
+}
+
+/* -------------- SLIDER SECTION -------------- */
+#slider-section {
+  background: center url(../../images/bg-snow.png), #ff4646;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px;
+  row-gap: 20px;
+  overflow-x: hidden;
+}
+#slider-section .slider-section__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+}
+#slider-section .caption-text {
+  font-family: Allura, serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+#slider-section h2 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+#slider-section .slider {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  transform: translateX(360px);
+}
+@media screen and (max-width: 1296px) {
+  #slider-section .slider {
+    transform: translateX(calc(360px + (1296px - 100dvw) / 2));
+  }
+}
+#slider-section .slider__text {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 80px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.015em;
+}
+#slider-section .slider__image-box {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+}
+#slider-section .slider-image-1 {
+  background-image: url(../../images/snowman.png);
+}
+#slider-section .slider-image-2 {
+  background-image: url(../../images/christmas-trees.png);
+}
+#slider-section .slider-image-3 {
+  background-image: url(../../images/christmas-tree-ball.png);
+}
+#slider-section .slider-image-4 {
+  background-image: url(../../images/fairytale-house.png);
+}
+#slider-section .buttons-container {
+  display: flex;
+  justify-content: right;
+  max-width: 1276px;
+  width: 100%;
+  -moz-column-gap: 22px;
+       column-gap: 22px;
+}
+#slider-section .arrow-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 53.5px;
+  width: 53.5px;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  stroke: #fff;
+  transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+#slider-section .arrow-button:hover:not(.inactive) {
+  background-color: #fff;
+  stroke: #ff4646;
+}
+#slider-section .reverse-button {
+  transform: rotate(180deg);
+}
+#slider-section .inactive {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* -------------- GIFTS SECTION -------------- */
+#gifts-section {
+  background: center url(../../images/bg-snow.png), #ff4646;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px;
+  row-gap: 12px;
+}
+#gifts-section .caption-text {
+  font-family: Allura, serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+#gifts-section h2 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+
+/* -------------- CTA SECTION -------------- */
+#cta-section {
+  background: center url(../../images/bg-forest.png), center url(../../images/bg-snow.png), #ff4646;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 8px 60px;
+  min-height: 548px;
+  row-gap: 16px;
+  border-radius: 0 0 20px 20px;
+}
+#cta-section h2 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  max-width: 426px;
+}
+#cta-section .caption-text {
+  font-family: Allura, serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  margin: 4px 0 8px;
+}
+#cta-section .timer {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px 12px 12px;
+  width: 320px;
+  height: 52px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+#cta-section .timer__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 52px;
+}
+#cta-section .timer__box h4 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+#cta-section .line {
+  width: 1px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
+}/*# sourceMappingURL=styles.css.map */

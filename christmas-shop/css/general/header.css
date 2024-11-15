@@ -1,0 +1,75 @@
+@import url(../general/fonts.css);
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 40px 3px;
+  margin: 0 auto;
+  max-width: 1276px;
+  background-color: #fff;
+}
+
+.logo {
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#logo__mark {
+  fill: #ff4646;
+}
+
+#logo__text {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #181c29;
+  fill: #ff4646;
+}
+
+.nav {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #181c29;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.nav .nav__list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 9px;
+       column-gap: 9px;
+}
+.nav .links {
+  cursor: pointer;
+}
+.nav .links:hover:not(.active) a {
+  color: #ff4646;
+  background-color: rgba(255, 70, 70, 0.1);
+}
+.nav a {
+  display: block;
+  padding: 8px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #181c29;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.nav .active a {
+  color: #ff4646;
+  background-color: rgba(255, 70, 70, 0.1);
+  cursor: default;
+}/*# sourceMappingURL=header.css.map */
