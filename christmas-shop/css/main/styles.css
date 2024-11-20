@@ -22,6 +22,7 @@ main {
   height: 1000px;
   background-color: #fff;
   margin: 0 auto;
+  container-type: inline-size;
 }
 
 /* -------------- START SCREEN -------------- */
@@ -197,6 +198,12 @@ main {
        column-gap: 18px;
   text-align: left;
   margin-left: 72px;
+  transition: all 0.2s;
+}
+@container (max-width: 768px) {
+  #slider-section .slider {
+    margin-left: 0px;
+  }
 }
 #slider-section .slider__text {
   font-family: Montserrat, sans-serif;
@@ -231,7 +238,7 @@ main {
 #slider-section .buttons-container {
   display: flex;
   justify-content: right;
-  max-width: 1276px;
+  max-width: 1350px;
   width: 100%;
   -moz-column-gap: 22px;
        column-gap: 22px;
