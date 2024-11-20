@@ -387,8 +387,7 @@ main {
   }
   #about-section .container .about__image-box {
     min-width: 364px;
-    max-width: -moz-max-content;
-    max-width: max-content;
+    max-width: none;
   }
   #cta-section {
     padding: 78px 8px;
