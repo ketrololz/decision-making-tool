@@ -19,7 +19,6 @@ main {
 .wrapper {
   max-width: 1440px;
   width: 100%;
-  height: 1000px;
   background-color: #fff;
   margin: 0 auto;
   container-type: inline-size;
@@ -38,6 +37,7 @@ main {
   min-height: 524px;
   row-gap: 12px;
   border-radius: 20px 20px 0 0;
+  transition: padding 0.2s ease-in-out;
 }
 #start-screen .caption-text {
   font-family: Allura, serif;
@@ -105,6 +105,7 @@ main {
   max-width: 1276px;
   height: 100%;
   width: 100%;
+  transition: padding 0.2s ease-in-out, margin 0.2s ease-in-out;
 }
 #about-section .container .about__text {
   display: flex;
@@ -113,6 +114,7 @@ main {
   padding: 0 60px;
   max-width: 426px;
   row-gap: 20px;
+  transition: padding 0.2s ease-in-out, margin 0.2s ease-in-out;
 }
 #about-section .container .caption-text {
   font-family: Allura, serif;
@@ -146,7 +148,6 @@ main {
   background: center url(../../images/santa.png);
   background-size: cover;
   max-height: 528px;
-  max-width: 638px;
   height: 100%;
   width: 100%;
   min-height: 528px;
@@ -368,4 +369,21 @@ main {
   width: 1px;
   height: 20px;
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+@container (max-width: 720px) {
+  #start-screen {
+    padding: 24px 0;
+  }
+  #about-section .container {
+    flex-direction: column;
+    padding: 60px 0 0;
+  }
+  #about-section .container .about__text {
+    padding: 0 20px;
+    margin-bottom: 60px;
+  }
+  #about-section .container .about__image-box {
+    min-width: 364px;
+  }
 }/*# sourceMappingURL=styles.css.map */

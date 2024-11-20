@@ -26,7 +26,7 @@ $white: #fff;
   max-width: calc(1316px - 40px);
   min-height: 64px;
   background-color: $white;
-  transition: all .2s;
+  transition: padding .2s ease-in-out;
   
 }
 
@@ -126,7 +126,6 @@ $white: #fff;
 }
 
 @container (max-width: 769px) {
-
   .nav {
     display: none;
   }
