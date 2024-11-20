@@ -148,9 +148,11 @@ main {
   cursor: pointer;
   transition: color .2s ease-in-out, background-color .2s ease-in-out;
 
-  &:hover {
-    background-color: $white;
-    color: $dark;
+  @media (hover: hover) {
+    &:hover {
+      background-color: $white;
+      color: $dark;
+    }
   }
 }
 
@@ -303,9 +305,11 @@ main {
     transition: stroke .2s ease-in-out, background-color .2s ease-in-out;
     cursor: pointer;
 
-    &:hover:not(.inactive) {
-      background-color: $white;
-      stroke: $primary;
+    @media (hover: hover) {
+      &:hover:not(.inactive) {
+        background-color: $white;
+        stroke: $primary;
+      }
     }
   }
 

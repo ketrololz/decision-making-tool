@@ -84,8 +84,10 @@ $content: #ECF3F8;
     text-decoration: none;
     cursor: pointer;
 
-    &:hover h3, &:hover .action-large {
-      color: $primary;
+    @media (hover: hover) {
+      &:hover h3, &:hover .action-large {
+        color: $primary;
+      }
     }
   }
 
@@ -128,8 +130,10 @@ $content: #ECF3F8;
     stroke: $dark;
     transition: stroke .2s ease-in-out;
 
-    &:hover {
-      stroke: $primary;
+    @media (hover: hover) {
+      &:hover {
+        stroke: $primary;
+      }
     }
   }
 
@@ -144,8 +148,10 @@ $content: #ECF3F8;
     transition: color .2s ease-in-out;
     text-decoration: none;
 
-    &:hover {
-      color: $primary;
+    @media (hover: hover) {
+      &:hover {
+        color: $primary;
+      }
     }
   }
 }

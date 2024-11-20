@@ -64,9 +64,11 @@ $white: #fff;
   .links {
     cursor: pointer;
 
-    &:hover:not(.active) a {
-      color: $primary;
-      background-color: rgba($primary, 0.1);
+    @media (hover: hover) {
+      &:hover:not(.active) a {
+        color: $primary;
+        background-color: rgba($primary, 0.1);
+      }
     }
   }
 
@@ -137,4 +139,8 @@ $white: #fff;
   .header {
     padding: 0 8px;
   }
+}
+
+@media (hover: hover) {
+  
 }

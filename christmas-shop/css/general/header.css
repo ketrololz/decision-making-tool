@@ -62,9 +62,11 @@
 .nav .links {
   cursor: pointer;
 }
-.nav .links:hover:not(.active) a {
-  color: #ff4646;
-  background-color: rgba(255, 70, 70, 0.1);
+@media (hover: hover) {
+  .nav .links:hover:not(.active) a {
+    color: #ff4646;
+    background-color: rgba(255, 70, 70, 0.1);
+  }
 }
 .nav a {
   display: block;

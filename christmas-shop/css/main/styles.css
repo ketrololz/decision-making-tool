@@ -84,9 +84,11 @@ main {
   cursor: pointer;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
-.button-dark:hover {
-  background-color: #fff;
-  color: #181c29;
+@media (hover: hover) {
+  .button-dark:hover {
+    background-color: #fff;
+    color: #181c29;
+  }
 }
 
 /* -------------- ABOUT SECTION -------------- */
@@ -257,9 +259,11 @@ main {
   transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
   cursor: pointer;
 }
-#slider-section .arrow-button:hover:not(.inactive) {
-  background-color: #fff;
-  stroke: #ff4646;
+@media (hover: hover) {
+  #slider-section .arrow-button:hover:not(.inactive) {
+    background-color: #fff;
+    stroke: #ff4646;
+  }
 }
 #slider-section .reverse-button {
   transform: rotate(180deg);

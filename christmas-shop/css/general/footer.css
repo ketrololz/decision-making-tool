@@ -34,8 +34,10 @@
   text-decoration: none;
   cursor: pointer;
 }
-#footer .contacts-cards__item:hover h3, #footer .contacts-cards__item:hover .action-large {
-  color: #ff4646;
+@media (hover: hover) {
+  #footer .contacts-cards__item:hover h3, #footer .contacts-cards__item:hover .action-large {
+    color: #ff4646;
+  }
 }
 #footer .contacts-cards__image {
   display: flex;
@@ -89,8 +91,10 @@
   stroke: #181c29;
   transition: stroke 0.2s ease-in-out;
 }
-#footer .social-media__icon:hover {
-  stroke: #ff4646;
+@media (hover: hover) {
+  #footer .social-media__icon:hover {
+    stroke: #ff4646;
+  }
 }
 #footer .paragraph-text {
   font-family: Montserrat, sans-serif;
@@ -113,6 +117,8 @@
   transition: color 0.2s ease-in-out;
   text-decoration: none;
 }
-#footer .caption-text:hover {
-  color: #ff4646;
+@media (hover: hover) {
+  #footer .caption-text:hover {
+    color: #ff4646;
+  }
 }/*# sourceMappingURL=footer.css.map */
