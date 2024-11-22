@@ -13,6 +13,17 @@ $white: #fff;
   text-transform: uppercase;
   color: $dark;
 }
+
+@mixin action-large {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $dark;
+}
+
 .wrapper {
   container-type: inline-size;
 }
@@ -129,7 +140,25 @@ $white: #fff;
 
 @container (max-width: 769px) {
   .nav {
-    display: none;
+    top: 64px;
+    padding: 0;
+    position: fixed;
+    z-index: 2;
+    height: calc(100dvh - 64px);
+    width: 100%;
+    background-color: $white;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+    right: -100%;
+    opacity: 0.4;
+
+    .nav__list {
+      @include action-large();
+      flex-direction: column;
+      row-gap: 8px;
+      letter-spacing: 0.15em;
+      padding: 0;
+    }
   }
 
   .burger {
@@ -141,6 +170,7 @@ $white: #fff;
   }
 }
 
-@media (hover: hover) {
-  
+.open {
+  transform: translateX(-100%);
+  opacity: 1;
 }
