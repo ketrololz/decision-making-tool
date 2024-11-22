@@ -56,8 +56,8 @@
   list-style: none;
   display: flex;
   align-items: center;
-  -moz-column-gap: 9px;
-       column-gap: 9px;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
 }
 .nav .links {
   cursor: pointer;
