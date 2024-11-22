@@ -15,8 +15,10 @@
   background: #ECF3F8;
   cursor: pointer;
 }
-.gift-card:hover h3 {
-  color: #ff4646;
+@media (hover: hover) {
+  .gift-card:hover h3 {
+    color: #ff4646;
+  }
 }
 .gift-card .gift-card__image {
   background-size: cover;

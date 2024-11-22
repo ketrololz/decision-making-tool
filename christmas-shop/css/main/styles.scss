@@ -99,9 +99,9 @@ main {
 .wrapper {
   max-width: 1440px;
   width: 100%;
-  height: 1000px;
   background-color: $white;
   margin: 0 auto;
+  container-type: inline-size;
 }
 
 /* -------------- START SCREEN -------------- */
@@ -115,9 +115,10 @@ main {
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
-  height: 524px;
+  min-height: 524px;
   row-gap: 12px;
   border-radius: 20px 20px 0 0;
+  transition: padding .2s ease-in-out;
   
   .caption-text {
     @include caption();
@@ -128,7 +129,7 @@ main {
   h1 {
     @include header-1();
     text-align: center;
-    max-width: 426px;
+    max-width: 430px;
   }
 }
 
@@ -140,16 +141,18 @@ main {
   border-radius: 20px;
   border: none;
   padding: 20px 32px;
-  width: 171px;
+  width: 172px;
   height: 16px;
   background-color: $dark;
   text-decoration: none;
   cursor: pointer;
   transition: color .2s ease-in-out, background-color .2s ease-in-out;
 
-  &:hover {
-    background-color: $white;
-    color: $dark;
+  @media (hover: hover) {
+    &:hover {
+      background-color: $white;
+      color: $dark;
+    }
   }
 }
 
@@ -170,6 +173,7 @@ main {
     max-width: 1276px;
     height: 100%;
     width: 100%;
+    transition: padding .2s ease-in-out, margin .2s ease-in-out;
 
     .about__text {
       display: flex;
@@ -178,6 +182,7 @@ main {
       padding: 0 60px;
       max-width: 426px;
       row-gap: 20px;
+      transition: padding .2s ease-in-out, margin .2s ease-in-out;
     }
     
     .caption-text {
@@ -213,7 +218,6 @@ main {
   background-size: cover;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   padding: 60px 8px;
   row-gap: 20px;
@@ -239,13 +243,15 @@ main {
   .slider {
     display: flex;
     align-items: center;
-    column-gap: 20px;
-    transform: translateX(360px);
+    column-gap: 18px;
+    text-align: left;
+    margin-left: 72px;
+    transition: all .2s;
   }
 
-  @media screen and (max-width: 1296px) {
+  @container (max-width: 768px) {
     .slider {
-      transform: translateX(calc(360px + ((1296px - 100dvw) / 2)));
+      margin-left: 0px;
     }
   }
 
@@ -255,6 +261,7 @@ main {
   }
 
   .slider__image-box {
+    flex-shrink: 0;
     width: 200px;
     height: 200px;
     background-position: center;
@@ -281,7 +288,7 @@ main {
   .buttons-container {
     display: flex;
     justify-content: right;
-    max-width: 1276px;
+    max-width: 1350px;
     width: 100%;
     column-gap: 22px;
   }
@@ -298,9 +305,11 @@ main {
     transition: stroke .2s ease-in-out, background-color .2s ease-in-out;
     cursor: pointer;
 
-    &:hover:not(.inactive) {
-      background-color: $white;
-      stroke: $primary;
+    @media (hover: hover) {
+      &:hover:not(.inactive) {
+        background-color: $white;
+        stroke: $primary;
+      }
     }
   }
 
@@ -346,10 +355,11 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 8px 60px;
+  padding: 60px 8px;
   min-height: 548px;
   row-gap: 16px;
   border-radius: 0 0 20px 20px;
+  transition: padding .2s ease-in-out;
 
   
   h2 {
@@ -391,5 +401,33 @@ main {
     width: 1px;
     height: 20px;
     background-color: rgba($white, 0.4);
+  }
+}
+
+@container (max-width: 720px) {
+  #start-screen {
+    padding: 24px 0;
+  }
+
+  #about-section {
+    
+    .container {
+      flex-direction: column;
+      padding: 60px 0 0;
+
+      .about__text {
+        padding: 0 20px;
+        margin-bottom: 60px;
+      }
+
+      .about__image-box {
+        min-width: 364px;
+        max-width: none;
+      }
+    }
+  }
+
+  #cta-section {
+    padding: 78px 8px;
   }
 }

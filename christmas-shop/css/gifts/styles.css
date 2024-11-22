@@ -19,7 +19,6 @@ main {
 .wrapper {
   max-width: 1440px;
   width: 100%;
-  height: 1000px;
   background-color: #fff;
   margin: 0 auto;
 }
@@ -55,6 +54,7 @@ main {
   text-align: center;
   max-width: 426px;
   margin-bottom: 4px;
+  transition: all 0.2s;
 }
 #gifts-section .tabs {
   display: flex;
@@ -66,6 +66,8 @@ main {
        column-gap: 8px;
   margin-bottom: 13px;
   cursor: pointer;
+  transition: column-gap 0.2s ease-in-out;
+  transition: column-gap 0.2s ease-in-out, -moz-column-gap 0.2s ease-in-out;
 }
 #gifts-section .tabs .tabs__item {
   font-family: Montserrat, sans-serif;
@@ -78,12 +80,32 @@ main {
   margin: 0;
   border-radius: 12px;
   padding: 12px 20px;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, padding 0.2s ease-in-out;
 }
-#gifts-section .tabs .tabs__item:hover:not(.active) {
-  background-color: rgba(255, 255, 255, 0.2);
+@media (hover: hover) {
+  #gifts-section .tabs .tabs__item:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 }
 #gifts-section .tabs .active {
   background-color: rgba(255, 255, 255, 0.2);
   cursor: default;
+}
+
+@container (max-width: 500px) {
+  #gifts-section h1 {
+    max-width: 370px;
+  }
+  #gifts-section .tabs .tabs__item {
+    padding: 12px 8px;
+  }
+}
+@container (max-width: 420px) {
+  #gifts-section h1 {
+    max-width: 370px;
+  }
+  #gifts-section .tabs {
+    -moz-column-gap: 0;
+         column-gap: 0;
+  }
 }/*# sourceMappingURL=styles.css.map */

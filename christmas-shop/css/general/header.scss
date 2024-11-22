@@ -13,6 +13,9 @@ $white: #fff;
   text-transform: uppercase;
   color: $dark;
 }
+.wrapper {
+  container-type: inline-size;
+}
 
 .header {
   display: flex;
@@ -21,7 +24,10 @@ $white: #fff;
   padding: 0 40px;
   margin: 0 auto;
   max-width: calc(1316px - 40px);
+  min-height: 64px;
   background-color: $white;
+  transition: padding .2s ease-in-out;
+  
 }
 
 .logo {
@@ -52,15 +58,17 @@ $white: #fff;
     list-style: none;
     display: flex;
     align-items: center;
-    column-gap: 9px;
+    column-gap: 8px;
   }
 
   .links {
     cursor: pointer;
 
-    &:hover:not(.active) a {
-      color: $primary;
-      background-color: rgba($primary, 0.1);
+    @media (hover: hover) {
+      &:hover:not(.active) a {
+        color: $primary;
+        background-color: rgba($primary, 0.1);
+      }
     }
   }
 
@@ -81,4 +89,58 @@ $white: #fff;
       cursor: default;
     }
   }
+}
+
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  .burger__line {
+    display: block;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '';
+      top: -5px;
+      left: -10px;
+      width: 20px;
+      height: 1px;
+      background-color: $dark;
+      border-radius: 5px;
+    }
+
+    &::after{
+      position: absolute;
+      content: '';
+      bottom: -4px;
+      left: -10px;
+      width: 20px;
+      height: 1px;
+      background-color: $dark;
+      border-radius: 5px;
+    }
+  }
+
+}
+
+@container (max-width: 769px) {
+  .nav {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .header {
+    padding: 0 8px;
+  }
+}
+
+@media (hover: hover) {
+  
 }

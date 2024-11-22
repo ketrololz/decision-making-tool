@@ -46,8 +46,10 @@ $pink: #FF43F7;
   background: $content;
   cursor: pointer;
 
-  &:hover h3 {
-    color: $primary;
+  @media (hover: hover) {
+    &:hover h3 {
+      color: $primary;
+    }
   }
 
   .gift-card__image {

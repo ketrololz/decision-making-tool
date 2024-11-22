@@ -4,8 +4,9 @@
 }
 
 @font-face {
-  font-family: "Montserrat-SemiBold";
+  font-family: "Montserrat";
   src: url(../../fonts/Montserrat-SemiBold.ttf);
+  font-weight: 600;
 }
 
 @font-face {
@@ -19,6 +20,7 @@
 }
 
 @font-face {
-  font-family: "SFPro-Bold";
+  font-family: "SFPro";
   src: url(../../fonts/SFProDisplay-Bold.ttf);
+  font-weight: 700;
 }
