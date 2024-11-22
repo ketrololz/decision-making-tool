@@ -103,7 +103,6 @@ $content: #ECF3F8;
   .action-large {
     @include action-large($dark);
     margin-bottom: 12px;
-    letter-spacing: 0.17em;
     transition: color .2s ease-in-out;
   }
 
