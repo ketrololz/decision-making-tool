@@ -38,7 +38,7 @@ $white: #fff;
   min-height: 64px;
   background-color: $white;
   transition: padding .2s ease-in-out;
-  
+
 }
 
 .logo {
@@ -93,7 +93,7 @@ $white: #fff;
   }
 
   .active {
-    
+
     a {
       color: $primary;
       background-color: rgba($primary, 0.1);
@@ -122,9 +122,10 @@ $white: #fff;
       height: 1px;
       background-color: $dark;
       border-radius: 5px;
+      transition: top .2s .15s ease-in-out, transform .2s ease-in-out;
     }
 
-    &::after{
+    &::after {
       position: absolute;
       content: '';
       bottom: -4px;
@@ -133,6 +134,7 @@ $white: #fff;
       height: 1px;
       background-color: $dark;
       border-radius: 5px;
+      transition: bottom .2s .15s ease-in-out, transform .2s ease-in-out;
     }
   }
 
@@ -170,7 +172,21 @@ $white: #fff;
   }
 }
 
-.open {
+.nav.active {
+  display: flex;
   transform: translateX(-100%);
   opacity: 1;
+}
+
+
+.burger__line.active::before {
+  top: -1px;
+  transform: rotate(45deg);
+  transition: transform .2s .15s ease-in-out, top .2s ease-in-out;
+}
+
+.burger__line.active::after {
+  bottom: 0px;
+  transform: rotate(-45deg);
+  transition: transform .2s .15s ease-in-out, bottom .2s ease-in-out;
 }
