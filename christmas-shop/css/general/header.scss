@@ -38,7 +38,6 @@ $white: #fff;
   min-height: 64px;
   background-color: $white;
   transition: padding .2s ease-in-out;
-
 }
 
 .logo {
@@ -143,11 +142,11 @@ $white: #fff;
 
 @container (max-width: 769px) {
   .nav {
-    top: 64px;
+    top: 63px;
     padding: 0;
     position: fixed;
     z-index: 2;
-    height: calc(100dvh - 64px);
+    height: 100dvh;
     width: 100%;
     background-color: $white;
     justify-content: center;
@@ -161,6 +160,7 @@ $white: #fff;
       row-gap: 8px;
       letter-spacing: 0.15em;
       padding: 0;
+      margin-bottom: 86px;
     }
   }
 
@@ -174,11 +174,9 @@ $white: #fff;
 }
 
 .nav.active {
-  display: flex;
   transform: translateX(-100%);
   opacity: 1;
 }
-
 
 .burger__line.active::before {
   top: -1px;
@@ -190,4 +188,8 @@ $white: #fff;
   bottom: 0px;
   transform: rotate(-45deg);
   transition: transform .2s .15s ease-in-out, bottom .2s ease-in-out;
+}
+
+.no-scroll {
+  overflow-y: hidden;
 }

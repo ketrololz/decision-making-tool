@@ -119,11 +119,11 @@
 
 @container (max-width: 769px) {
   .nav {
-    top: 64px;
+    top: 63px;
     padding: 0;
     position: fixed;
     z-index: 2;
-    height: calc(100dvh - 64px);
+    height: 100dvh;
     width: 100%;
     background-color: #fff;
     justify-content: center;
@@ -143,6 +143,7 @@
     row-gap: 8px;
     letter-spacing: 0.15em;
     padding: 0;
+    margin-bottom: 86px;
   }
   .burger {
     display: flex;
@@ -152,7 +153,6 @@
   }
 }
 .nav.active {
-  display: flex;
   transform: translateX(-100%);
   opacity: 1;
 }
@@ -167,4 +167,8 @@
   bottom: 0px;
   transform: rotate(-45deg);
   transition: transform 0.2s 0.15s ease-in-out, bottom 0.2s ease-in-out;
+}
+
+.no-scroll {
+  overflow-y: hidden;
 }/*# sourceMappingURL=header.css.map */
