@@ -19,4 +19,6 @@ function closeMenu(width = 769) {
 
 window.addEventListener('resize', () => closeMenu())
 
-menuLinks.forEach((item) => item.addEventListener('click', () => closeMenu(1)))
+menuLinks.forEach((item) => item.addEventListener('click', () => {
+  if(!item.classList.contains('active')) { closeMenu(1) }
+}))
