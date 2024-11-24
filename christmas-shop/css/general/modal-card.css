@@ -46,11 +46,6 @@ body {
     opacity: 1;
   }
 }
-@media (hover: hover) {
-  .modal-cards__item:hover h3 {
-    color: #ff4646;
-  }
-}
 .modal-cards__item .paragraph-text {
   font-family: Montserrat, sans-serif;
   font-weight: 400;
@@ -59,7 +54,7 @@ body {
   color: #181c29;
   margin: 0;
 }
-.modal-cards__item .gift-card__image {
+.modal-cards__item .modal-card__image {
   background-size: cover;
   background-position: center;
   height: 230px;
@@ -73,7 +68,7 @@ body {
 .modal-cards__item .for-harmony-image {
   background-image: url(../../images/gift-for-harmony.png);
 }
-.modal-cards__item .gift-card__description {
+.modal-cards__item .modal-card__description {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -165,7 +160,20 @@ body {
 }
 .modal-cards__item .level-list__item {
   display: flex;
+  fill: rgba(255, 70, 70, 0.1);
+}
+.modal-cards__item .filled {
   fill: #ff4646;
+  animation: test 0.5s 0.1s ease-in-out;
+}
+@keyframes test {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
 }
 
 .close-button {
@@ -175,6 +183,7 @@ body {
   right: 25px;
   top: 22px;
   z-index: 6;
+  cursor: pointer;
 }
 .close-button::before {
   position: absolute;

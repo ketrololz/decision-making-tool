@@ -93,17 +93,17 @@ body {
 
 
 .modal-cards__item {
-  @media (hover: hover) {
-    &:hover h3 {
-      color: $primary;
-    }
-  }
+  // @media (hover: hover) {
+  //   &:hover h3 {
+  //     color: $primary;
+  //   }
+  // }
 
   .paragraph-text {
     @include paragraph-text($dark);
   }
 
-  .gift-card__image {
+  .modal-card__image {
     background-size: cover;
     background-position: center;
     height: 230px;
@@ -121,7 +121,7 @@ body {
     background-image: url(../../images/gift-for-harmony.png);
   }
 
-  .gift-card__description {
+  .modal-card__description {
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -187,8 +187,25 @@ body {
 
   .level-list__item {
     display: flex;
-    fill: rgba($primary, 1);
+    fill: rgba($primary, .1);
   }
+
+  .filled {
+    fill: rgba($primary, 1);
+    animation: test .5s .1s ease-in-out;
+  }
+
+  @keyframes test {
+    0%{
+      opacity: 0;
+    }
+
+    100%{
+      transform:rotate(180deg);
+      opacity: 1;
+    }
+  }
+  
 }
 
 .close-button {
@@ -198,6 +215,7 @@ body {
   right: 25px;
   top: 22px;
   z-index: 6;
+  cursor: pointer;
 
   &::before {
     position: absolute;

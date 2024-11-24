@@ -94,7 +94,7 @@ $pink: #FF43F7;
   }
 
   h3 {
-    @include header-3($dark);
+    @include header-($dark);
     transition: color .2s ease-in-out;
   }
 }
