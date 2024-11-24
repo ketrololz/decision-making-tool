@@ -3,14 +3,18 @@ import giftsJson from '../gifts.json' with { type: 'json' };
 const giftCardsArr = document.querySelectorAll(".gift-card");
 const modalWindow = document.querySelector(".modal-cards");
 const closeButton = document.querySelector(".close-button");
+const body = document.querySelector("body");
 
 function openModal(card) {
   changeData(card);
   modalWindow.classList.remove("hidden");
+  body.classList.add("no-scroll");
+  
 }
 
 function closeModal() {
   modalWindow.classList.add("hidden");
+  body.classList.remove("no-scroll");
 }
 
 function changeData(card) {
