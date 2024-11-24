@@ -164,9 +164,9 @@ body {
 }
 .modal-cards__item .filled {
   fill: #ff4646;
-  animation: test 0.5s 0.1s ease-in-out;
+  animation: rotate 0.5s 0.1s ease-in-out;
 }
-@keyframes test {
+@keyframes rotare {
   0% {
     opacity: 0;
   }

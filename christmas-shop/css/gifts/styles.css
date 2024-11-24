@@ -93,6 +93,40 @@ main {
   cursor: default;
 }
 
+.scroll-to-top {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  background-color: #fff;
+  border: 1px solid #ff4646;
+  border-radius: 50px;
+  z-index: 2;
+  bottom: 8px;
+  right: 8px;
+  animation: scroll-btn 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 769px) {
+  .scroll-to-top {
+    display: flex;
+  }
+}
+@keyframes scroll-btn {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  85% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 @container (max-width: 500px) {
   #gifts-section h1 {
     max-width: 370px;
