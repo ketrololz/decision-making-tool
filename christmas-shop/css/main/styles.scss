@@ -246,8 +246,17 @@ main {
     align-items: center;
     column-gap: 18px;
     text-align: left;
-    margin-left: 72px;
-    transition: all .2s;
+    // margin-left: 72px;
+    margin-left: calc((100cqw - 16px - 1276px) / 2);
+    transition: transform .2s ease-in-out;
+    --x: 0px;
+    transform: translateX(var(--x));
+  }
+
+  @container (max-width: 1292px) {
+    .slider {
+      margin-left: 0px;
+    }
   }
 
   @container (max-width: 768px) {
@@ -289,7 +298,8 @@ main {
   .buttons-container {
     display: flex;
     justify-content: right;
-    max-width: 1350px;
+    // max-width: 1350px;
+    max-width: calc(100cqw - 16px - ((100cqw - 16px - 1276px) / 2));
     width: 100%;
     column-gap: 22px;
   }

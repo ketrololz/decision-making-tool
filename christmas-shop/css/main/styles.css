@@ -202,8 +202,15 @@ main {
   -moz-column-gap: 18px;
        column-gap: 18px;
   text-align: left;
-  margin-left: 72px;
-  transition: all 0.2s;
+  margin-left: calc((100cqw - 16px - 1276px) / 2);
+  transition: transform 0.2s ease-in-out;
+  --x: 0px;
+  transform: translateX(var(--x));
+}
+@container (max-width: 1292px) {
+  #slider-section .slider {
+    margin-left: 0px;
+  }
 }
 @container (max-width: 768px) {
   #slider-section .slider {
@@ -243,7 +250,7 @@ main {
 #slider-section .buttons-container {
   display: flex;
   justify-content: right;
-  max-width: 1350px;
+  max-width: calc(100cqw - 16px - (100cqw - 16px - 1276px) / 2);
   width: 100%;
   -moz-column-gap: 22px;
        column-gap: 22px;
