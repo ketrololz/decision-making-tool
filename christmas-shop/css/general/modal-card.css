@@ -175,7 +175,7 @@ body {
   fill: #ff4646;
   animation: rotate 0.5s 0.1s ease-in-out;
 }
-@keyframes rotare {
+@keyframes rotate {
   0% {
     opacity: 0;
   }
