@@ -4,6 +4,7 @@ function createCard(container, type, typeImage, typeColor, name) {
   const card = document.createElement("article");
   container.append(card);
   card.classList.add("gift-card");
+  card.dataset.type = `${typeColor}`
   card.innerHTML = `
     <div class="gift-card__image ${typeImage}"></div>
               <div class="gift-card__text">

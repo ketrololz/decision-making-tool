@@ -104,11 +104,6 @@ body {
 
 
 .modal-cards__item {
-  // @media (hover: hover) {
-  //   &:hover h3 {
-  //     color: $primary;
-  //   }
-  // }
 
   .paragraph-text {
     @include paragraph-text($dark);
