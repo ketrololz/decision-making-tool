@@ -93,7 +93,7 @@ main {
   cursor: default;
 }
 
-.scroll-to-top {
+#scroll-to-top {
   display: none;
   align-items: center;
   justify-content: center;
@@ -109,11 +109,6 @@ main {
   animation: scroll-btn 0.2s ease-in-out;
 }
 
-@media screen and (max-width: 769px) {
-  .scroll-to-top {
-    display: flex;
-  }
-}
 @keyframes scroll-btn {
   0% {
     transform: scale(0.4);

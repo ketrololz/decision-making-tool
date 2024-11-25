@@ -111,7 +111,7 @@ main {
   }
 }
 
-.scroll-to-top {
+#scroll-to-top {
   display: none;
   align-items: center;
   justify-content: center;
@@ -127,11 +127,11 @@ main {
   animation: scroll-btn .2s ease-in-out;
 }
 
-@media screen and (max-width: 769px) {
-  .scroll-to-top {
-    display: flex;
-  }
-}
+// @media screen and (max-width: 769px) {
+//   #scroll-to-top {
+//     display: flex;
+//   }
+// }
 
 @keyframes scroll-btn {
   0%{
