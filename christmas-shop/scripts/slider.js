@@ -9,8 +9,6 @@ let sliderVisibleWidth = slider.offsetWidth;
 
 let clicksCount = 0;
 
-console.log(sliderWidth)
-
 function slideRight() {
   const currentX = parseInt(sliderStyles.getPropertyValue("--x"));
 
@@ -59,7 +57,7 @@ function rightClick() {
 
   if (wrapper.clientWidth > 768 && clicksCount > 2) {
     rightBtn.classList.add("inactive");
-  } 
+  }
 }
 
 function leftClick() {
@@ -71,6 +69,14 @@ function leftClick() {
   }
 }
 
+function resetSlider() {
+  slider.style.setProperty("--x", `0px`);
+  clicksCount = 0;
+  leftBtn.classList.add("inactive");
+  rightBtn.classList.remove("inactive");
+  console.log("2");
+}
+
 rightBtn.addEventListener("click", () => {
   rightClick();
 });
@@ -78,9 +84,4 @@ leftBtn.addEventListener("click", () => {
   leftClick();
 });
 
-window.addEventListener("resize", () => {
-  slider.style.setProperty("--x", `0px`);
-  clicksCount = 0;
-  leftBtn.classList.add("inactive");
-  rightBtn.classList.remove("inactive");
-});
+window.addEventListener("resize", () => resetSlider());

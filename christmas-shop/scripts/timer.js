@@ -9,7 +9,6 @@ const minute = second * 60;
 const hour = minute * 60;
 const day = hour * 24;
 
-
 function setTimeRemain() {
   const timeRemain = newYear - Date.now();
   daysBox.innerHTML = Math.trunc(timeRemain / day);
