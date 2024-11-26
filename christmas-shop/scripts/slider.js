@@ -57,7 +57,7 @@ function rightClick() {
 
   if (wrapper.clientWidth > 768 && clicksCount > 2) {
     rightBtn.classList.add("inactive");
-  }
+  } 
 }
 
 function leftClick() {

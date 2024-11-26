@@ -1,10 +1,6 @@
 import generateCards from "./generate-cards.js";
 
 const container = document.querySelector(".gift-cards-container");
-const allTab = document.getElementById("tabs__all");
-const workTab = document.getElementById("tabs__work");
-const healthTab = document.getElementById("tabs__health");
-const harmonyTab = document.getElementById("tabs__harmony");
 const tabs = document.querySelectorAll(".tabs__item");
 
 generateCards(container, 36);

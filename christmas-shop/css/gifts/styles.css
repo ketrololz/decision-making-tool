@@ -94,7 +94,7 @@ main {
 }
 
 #scroll-to-top {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -107,6 +107,13 @@ main {
   bottom: 8px;
   right: 8px;
   animation: scroll-btn 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out, display 0.2s ease-in-out allow-discrete;
+  opacity: 1;
+}
+#scroll-to-top.hidden {
+  transform: scale(0.2);
+  opacity: 0;
+  display: none;
 }
 
 @keyframes scroll-btn {

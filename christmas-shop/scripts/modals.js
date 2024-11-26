@@ -5,16 +5,19 @@ const modalWindow = document.querySelector(".modal-cards");
 const closeButton = document.querySelector(".close-button");
 const body = document.querySelector("body");
 const blackout = document.querySelector(".blackout");
+const outside = document.querySelector(".outside");
 
 function openModal(card) {
   changeData(card);
   modalWindow.classList.remove("hidden");
   body.classList.add("no-scroll");
+  blackout.classList.remove("hidden");
 }
 
 function closeModal() {
   modalWindow.classList.add("hidden");
   body.classList.remove("no-scroll");
+  blackout.classList.add("hidden");
 }
 
 function changeData(card) {
@@ -29,7 +32,6 @@ function changeData(card) {
   const modalCreate = document.getElementById("modal-create");
   const modalLove = document.getElementById("modal-love");
   const modalDream = document.getElementById("modal-dream");
-  const modalLiveLevel = document.getElementById("modal-live-level");
 
   switch (currentCardObj.category) {
     case "For Work":
@@ -107,6 +109,6 @@ giftCardsArr.forEach((item) =>
   item.addEventListener("click", () => openModal(item))
 );
 
-blackout.addEventListener("click", () => closeModal());
+outside.addEventListener("click", () => closeModal());
 
 closeButton.addEventListener("click", () => closeModal());
