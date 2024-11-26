@@ -298,7 +298,6 @@ main {
   .buttons-container {
     display: flex;
     justify-content: right;
-    // max-width: 1350px;
     max-width: calc(100cqw - 16px - ((100cqw - 16px - 1276px) / 2));
     width: 100%;
     column-gap: 22px;

@@ -3,11 +3,13 @@ const rightBtn = document.getElementById("slider-button-right");
 const slider = document.querySelector(".slider");
 const wrapper = document.querySelector(".wrapper");
 
-const sliderWidth = slider.scrollWidth;
+const sliderWidth = 1998;
 const sliderStyles = window.getComputedStyle(slider);
 let sliderVisibleWidth = slider.offsetWidth;
 
 let clicksCount = 0;
+
+console.log(sliderWidth)
 
 function slideRight() {
   const currentX = parseInt(sliderStyles.getPropertyValue("--x"));
