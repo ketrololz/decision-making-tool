@@ -1,5 +1,5 @@
-import generateCards from "./generate-cards.js";
-
-const container = document.querySelector(".gift-cards-container");
-
-generateCards(container, 4);
+import "./burger.js"
+import "./timer.js"
+import "./slider.js"
+import "./generate-cards-main.js"
+import "./modals.js"
