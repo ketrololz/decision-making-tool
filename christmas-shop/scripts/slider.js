@@ -74,7 +74,6 @@ function resetSlider() {
   clicksCount = 0;
   leftBtn.classList.add("inactive");
   rightBtn.classList.remove("inactive");
-  console.log("2");
 }
 
 rightBtn.addEventListener("click", () => {
