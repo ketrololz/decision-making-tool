@@ -317,7 +317,7 @@ main {
     cursor: pointer;
 
     @media (hover: hover) {
-      &:hover:not(.inactive) {
+      &:hover {
         background-color: $white;
         stroke: $primary;
       }

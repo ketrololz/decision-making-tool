@@ -57,6 +57,8 @@ function rightClick() {
 
   if (wrapper.clientWidth > 768 && clicksCount > 2) {
     rightBtn.disabled = true;
+  } else if (wrapper.clientWidth <= 768 && clicksCount > 5) {
+    rightBtn.disabled = true;
   }
 }
 
@@ -64,7 +66,7 @@ function leftClick() {
   slideLeft(slider.scrollWidth - slider.offsetWidth);
   rightBtn.disabled = false;
 
-  if (wrapper.clientWidth > 768 && clicksCount < 1) {
+  if (clicksCount < 1) {
     leftBtn.disabled = true;
   }
 }

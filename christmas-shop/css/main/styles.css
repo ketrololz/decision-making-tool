@@ -269,7 +269,7 @@ main {
   cursor: pointer;
 }
 @media (hover: hover) {
-  #slider-section .arrow-button:hover:not(.inactive) {
+  #slider-section .arrow-button:hover {
     background-color: #fff;
     stroke: #ff4646;
   }
