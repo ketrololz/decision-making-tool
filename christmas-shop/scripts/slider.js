@@ -53,27 +53,27 @@ function slideLeft() {
 
 function rightClick() {
   slideRight(slider.scrollWidth - slider.offsetWidth);
-  leftBtn.classList.remove("inactive");
+  leftBtn.disabled = false;
 
   if (wrapper.clientWidth > 768 && clicksCount > 2) {
-    rightBtn.classList.add("inactive");
+    rightBtn.disabled = true;
   }
 }
 
 function leftClick() {
   slideLeft(slider.scrollWidth - slider.offsetWidth);
-  rightBtn.classList.remove("inactive");
+  rightBtn.disabled = false;
 
   if (wrapper.clientWidth > 768 && clicksCount < 1) {
-    leftBtn.classList.add("inactive");
+    leftBtn.disabled = true;
   }
 }
 
 function resetSlider() {
   slider.style.setProperty("--x", `0px`);
   clicksCount = 0;
-  leftBtn.classList.add("inactive");
-  rightBtn.classList.remove("inactive");
+  leftBtn.disabled = true;
+  rightBtn.disabled = false;
 }
 
 rightBtn.addEventListener("click", () => {

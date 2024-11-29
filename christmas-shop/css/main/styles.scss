@@ -313,6 +313,7 @@ main {
     border: 1px solid $white;
     stroke: $white;
     transition: stroke .2s ease-in-out, background-color .2s ease-in-out;
+    background-color: transparent;
     cursor: pointer;
 
     @media (hover: hover) {
@@ -321,15 +322,15 @@ main {
         stroke: $primary;
       }
     }
+
+    &[disabled] {
+      opacity: 0.4;
+      pointer-events: none;
+    }
   }
 
   .reverse-button {
     transform: rotate(180deg);
-  }
-
-  .inactive {
-    opacity: 0.4;
-    cursor: default;
   }
 }
 

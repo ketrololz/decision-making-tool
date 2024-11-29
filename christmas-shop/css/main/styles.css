@@ -265,6 +265,7 @@ main {
   border: 1px solid #fff;
   stroke: #fff;
   transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  background-color: transparent;
   cursor: pointer;
 }
 @media (hover: hover) {
@@ -273,12 +274,12 @@ main {
     stroke: #ff4646;
   }
 }
+#slider-section .arrow-button[disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+}
 #slider-section .reverse-button {
   transform: rotate(180deg);
-}
-#slider-section .inactive {
-  opacity: 0.4;
-  cursor: default;
 }
 
 /* -------------- GIFTS SECTION -------------- */
