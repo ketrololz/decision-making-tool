@@ -117,7 +117,7 @@
   transition: bottom 0.2s 0.15s ease-in-out, transform 0.2s ease-in-out;
 }
 
-@container (max-width: 769px) {
+@container (max-width: 768px) {
   .nav {
     top: 63px;
     padding: 0;
