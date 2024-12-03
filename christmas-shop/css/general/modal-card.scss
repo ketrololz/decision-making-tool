@@ -1,0 +1,266 @@
+@import url(../general/fonts.css);
+
+$primary: #ff4646;
+$dark: #181c29;
+$white: #fff;
+$content: #ECF3F8;
+$purple: #4361FF;
+$green: #06A44F;
+$pink: #FF43F7;
+$overlay: #181C29;
+
+@mixin header-4($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $color;
+  margin: 0;
+}
+
+@mixin header-3($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 152%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color;
+  margin: 0;
+}
+
+@mixin paragraph-text($color: $white) {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 148%;
+  color: $color;
+  margin: 0;
+}
+
+body {
+  position: relative;
+}
+
+.modal-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100dvh;
+  z-index: 5;
+
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out, display .2s ease-in-out allow-discrete;
+  opacity: 1;
+
+  &.hidden {
+    transform: scale(.2);
+    opacity: 0;
+    display: none;
+  }
+}
+
+.blackout {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  animation: blackout .2s ease-in-out;
+  background-color: rgba($overlay, 0.8);
+  z-index: 2;
+  cursor: pointer;
+
+  transition: opacity .2s ease-in-out, display .2s ease-in-out allow-discrete;
+  opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.modal-cards__container {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  background-color: $content;
+  border-radius: 20px;
+  animation: modal .2s ease-in-out;
+  z-index: 3;
+}
+
+@keyframes modal {
+  0%{
+    transform: scale(.5);
+    opacity: 0;
+  }
+  70%{
+    transform: scale(1.05);
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blackout {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.modal-cards__item {
+
+  .paragraph-text {
+    @include paragraph-text($dark);
+  }
+
+  .modal-card__image {
+    background-size: cover;
+    background-position: center;
+    height: 230px;
+  }
+
+  .for-work-image {
+    background-image: url(../../images/gift-for-work.png);
+  }
+
+  .for-health-image {
+    background-image: url(../../images/gift-for-health.png);
+  }
+
+  .for-harmony-image {
+    background-image: url(../../images/gift-for-harmony.png);
+  }
+
+  .modal-card__description {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    row-gap: 20px;
+    border-radius: 20px;
+    background-color: $white;
+  }
+
+  .description__text {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    row-gap: 8px;
+  }
+
+  .for-work {
+    @include header-4($purple);
+  }
+
+  .for-health {
+    @include header-4($green);
+  }
+
+  .for-harmony {
+    @include header-4($pink);
+  }
+
+  h3 {
+    @include header-3($dark);
+    transition: color .2s ease-in-out;
+  }
+
+  h4 {
+    @include header-4($dark);
+    margin-bottom: 8px;
+  }
+
+  .stats-list {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+  }
+
+  .stats-list__item {
+    display: grid;
+    grid-template-columns: 1fr 0.35fr 0.65fr;
+    column-gap: 12px;
+    align-items: center;
+  }
+
+  .stats-text {
+    text-align: right;
+  }
+
+  .stats__level-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 8px;
+    padding: 0;
+  }
+
+  .level-list__item {
+    display: flex;
+    fill: rgba($primary, .1);
+  }
+
+  .filled {
+    fill: rgba($primary, 1);
+    animation: rotate .5s .1s ease-in-out;
+  }
+
+  @keyframes rotate {
+    0%{
+      opacity: 0;
+    }
+
+    100%{
+      transform:rotate(180deg);
+      opacity: 1;
+    }
+  }
+  
+}
+
+.close-button {
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  right: 25px;
+  top: 22px;
+  z-index: 6;
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    content: '';
+    transform: rotate(45deg);
+    width: 26px;
+    bottom: 12px;
+    height: 2px;
+    background-color: $dark;
+    border-radius: 5px;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    transform: rotate(-45deg);
+    width: 26px;
+    bottom: 12px;
+    height: 2px;
+    background-color: $dark;
+    border-radius: 5px;
+  }
+}
+
+.outside {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}

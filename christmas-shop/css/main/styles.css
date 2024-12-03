@@ -2,6 +2,7 @@
 @import url(../general/header.css);
 @import url(../general/gift-cards.css);
 @import url(../general/footer.css);
+@import url(../general/modal-card.css);
 html {
   scroll-behavior: smooth;
 }
@@ -201,8 +202,15 @@ main {
   -moz-column-gap: 18px;
        column-gap: 18px;
   text-align: left;
-  margin-left: 72px;
-  transition: all 0.2s;
+  margin-left: calc((100cqw - 16px - 1276px) / 2);
+  transition: transform 0.2s ease-in-out;
+  --x: 0px;
+  transform: translateX(var(--x));
+}
+@container (max-width: 1292px) {
+  #slider-section .slider {
+    margin-left: 0px;
+  }
 }
 @container (max-width: 768px) {
   #slider-section .slider {
@@ -242,7 +250,7 @@ main {
 #slider-section .buttons-container {
   display: flex;
   justify-content: right;
-  max-width: 1350px;
+  max-width: calc(100cqw - 16px - (100cqw - 16px - 1276px) / 2);
   width: 100%;
   -moz-column-gap: 22px;
        column-gap: 22px;
@@ -257,20 +265,21 @@ main {
   border: 1px solid #fff;
   stroke: #fff;
   transition: stroke 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  background-color: transparent;
   cursor: pointer;
 }
 @media (hover: hover) {
-  #slider-section .arrow-button:hover:not(.inactive) {
+  #slider-section .arrow-button:hover {
     background-color: #fff;
     stroke: #ff4646;
   }
 }
+#slider-section .arrow-button[disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+}
 #slider-section .reverse-button {
   transform: rotate(180deg);
-}
-#slider-section .inactive {
-  opacity: 0.4;
-  cursor: default;
 }
 
 /* -------------- GIFTS SECTION -------------- */

@@ -2,6 +2,7 @@
 @import url(../general/header.css);
 @import url(../general/gift-cards.css);
 @import url(../general/footer.css);
+@import url(../general/modal-card.css);
 
 $primary: #ff4646;
 $dark: #181c29;
@@ -119,11 +120,11 @@ main {
   row-gap: 12px;
   border-radius: 20px 20px 0 0;
   transition: padding .2s ease-in-out;
-  
+
   .caption-text {
     @include caption();
     text-align: center;
-    
+
   }
 
   h1 {
@@ -184,15 +185,15 @@ main {
       row-gap: 20px;
       transition: padding .2s ease-in-out, margin .2s ease-in-out;
     }
-    
+
     .caption-text {
       @include caption($primary);
     }
-  
+
     h2 {
       @include header-2($dark);
     }
-  
+
     .paragraph-text {
       @include paragraph-text($dark);
     }
@@ -245,8 +246,17 @@ main {
     align-items: center;
     column-gap: 18px;
     text-align: left;
-    margin-left: 72px;
-    transition: all .2s;
+    // margin-left: 72px;
+    margin-left: calc((100cqw - 16px - 1276px) / 2);
+    transition: transform .2s ease-in-out;
+    --x: 0px;
+    transform: translateX(var(--x));
+  }
+
+  @container (max-width: 1292px) {
+    .slider {
+      margin-left: 0px;
+    }
   }
 
   @container (max-width: 768px) {
@@ -288,11 +298,11 @@ main {
   .buttons-container {
     display: flex;
     justify-content: right;
-    max-width: 1350px;
+    max-width: calc(100cqw - 16px - ((100cqw - 16px - 1276px) / 2));
     width: 100%;
     column-gap: 22px;
   }
-  
+
   .arrow-button {
     display: flex;
     align-items: center;
@@ -303,23 +313,24 @@ main {
     border: 1px solid $white;
     stroke: $white;
     transition: stroke .2s ease-in-out, background-color .2s ease-in-out;
+    background-color: transparent;
     cursor: pointer;
 
     @media (hover: hover) {
-      &:hover:not(.inactive) {
+      &:hover {
         background-color: $white;
         stroke: $primary;
       }
+    }
+
+    &[disabled] {
+      opacity: 0.4;
+      pointer-events: none;
     }
   }
 
   .reverse-button {
     transform: rotate(180deg);
-  }
-
-  .inactive {
-    opacity: 0.4;
-    cursor: default;
   }
 }
 
@@ -361,13 +372,13 @@ main {
   border-radius: 0 0 20px 20px;
   transition: padding .2s ease-in-out;
 
-  
+
   h2 {
     @include header-2();
     text-align: center;
     max-width: 426px;
   }
-  
+
   .caption-text {
     @include caption();
     text-align: center;
@@ -410,7 +421,7 @@ main {
   }
 
   #about-section {
-    
+
     .container {
       flex-direction: column;
       padding: 60px 0 0;

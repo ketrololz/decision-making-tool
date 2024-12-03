@@ -2,6 +2,7 @@
 @import url(../general/header.css);
 @import url(../general/gift-cards.css);
 @import url(../general/footer.css);
+@import url(../general/modal-card.css);
 
 $primary: #ff4646;
 $dark: #181c29;
@@ -107,6 +108,47 @@ main {
       background-color: rgba($white, 0.2);
       cursor: default;
     }
+  }
+}
+
+#scroll-to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  background-color: $white;
+  border: 1px solid $primary;
+  border-radius: 50px;
+  z-index: 2;
+  bottom: 8px;
+  right: 8px;
+  animation: scroll-btn .2s ease-in-out;
+
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out, display .2s ease-in-out allow-discrete;
+  opacity: 1;
+
+  &.hidden {
+    transform: scale(.2);
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes scroll-btn {
+  0%{
+    transform: scale(.4);
+    opacity: 0;
+  }
+
+  85% {
+    transform: scale(1.1);
+  }
+
+  100%{
+    transform: scale(1);
+    opacity: 1;
   }
 }
 

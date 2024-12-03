@@ -13,6 +13,17 @@ $white: #fff;
   text-transform: uppercase;
   color: $dark;
 }
+
+@mixin action-large {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $dark;
+}
+
 .wrapper {
   container-type: inline-size;
 }
@@ -27,7 +38,6 @@ $white: #fff;
   min-height: 64px;
   background-color: $white;
   transition: padding .2s ease-in-out;
-  
 }
 
 .logo {
@@ -82,7 +92,7 @@ $white: #fff;
   }
 
   .active {
-    
+
     a {
       color: $primary;
       background-color: rgba($primary, 0.1);
@@ -97,6 +107,7 @@ $white: #fff;
   justify-content: center;
   width: 40px;
   height: 40px;
+  cursor: pointer;
 
   .burger__line {
     display: block;
@@ -111,9 +122,10 @@ $white: #fff;
       height: 1px;
       background-color: $dark;
       border-radius: 5px;
+      transition: top .2s .15s ease-in-out, transform .2s ease-in-out;
     }
 
-    &::after{
+    &::after {
       position: absolute;
       content: '';
       bottom: -4px;
@@ -122,14 +134,34 @@ $white: #fff;
       height: 1px;
       background-color: $dark;
       border-radius: 5px;
+      transition: bottom .2s .15s ease-in-out, transform .2s ease-in-out;
     }
   }
 
 }
 
-@container (max-width: 769px) {
+@container (max-width: 768px) {
   .nav {
-    display: none;
+    top: 63px;
+    padding: 0;
+    position: fixed;
+    z-index: 2;
+    height: 100dvh;
+    width: 100%;
+    background-color: $white;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+    right: -100%;
+    opacity: 0.4;
+
+    .nav__list {
+      @include action-large();
+      flex-direction: column;
+      row-gap: 8px;
+      letter-spacing: 0.15em;
+      padding: 0;
+      margin-bottom: 86px;
+    }
   }
 
   .burger {
@@ -141,6 +173,23 @@ $white: #fff;
   }
 }
 
-@media (hover: hover) {
-  
+.nav.active {
+  transform: translateX(-100%);
+  opacity: 1;
+}
+
+.burger__line.active::before {
+  top: -1px;
+  transform: rotate(45deg);
+  transition: transform .2s .15s ease-in-out, top .2s ease-in-out;
+}
+
+.burger__line.active::after {
+  bottom: 0px;
+  transform: rotate(-45deg);
+  transition: transform .2s .15s ease-in-out, bottom .2s ease-in-out;
+}
+
+.no-scroll {
+  overflow-y: hidden;
 }

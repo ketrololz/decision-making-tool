@@ -2,6 +2,7 @@
 @import url(../general/header.css);
 @import url(../general/gift-cards.css);
 @import url(../general/footer.css);
+@import url(../general/modal-card.css);
 html {
   scroll-behavior: smooth;
 }
@@ -92,6 +93,42 @@ main {
   cursor: default;
 }
 
+#scroll-to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  background-color: #fff;
+  border: 1px solid #ff4646;
+  border-radius: 50px;
+  z-index: 2;
+  bottom: 8px;
+  right: 8px;
+  animation: scroll-btn 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out, display 0.2s ease-in-out allow-discrete;
+  opacity: 1;
+}
+#scroll-to-top.hidden {
+  transform: scale(0.2);
+  opacity: 0;
+  display: none;
+}
+
+@keyframes scroll-btn {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  85% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 @container (max-width: 500px) {
   #gifts-section h1 {
     max-width: 370px;
