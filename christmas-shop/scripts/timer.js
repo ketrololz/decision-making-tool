@@ -1,4 +1,4 @@
-const newYear = new Date("2024-12-31T00:00:00.000Z");
+const newYear = new Date("2024-12-31T23:59:59.000Z");
 const daysBox = document.getElementById("days");
 const hoursBox = document.getElementById("hours");
 const minutesBox = document.getElementById("minutes");
