@@ -11,3 +11,12 @@ $orange: #F6B354;
 $green: #46BA8B;
 $magenta: #CE347E;
 $purple: #927197;
+
+.background {
+  font-family: "Montserrat", sans-serif;
+  background-color: $body;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+}

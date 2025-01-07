@@ -1,1 +1,9 @@
-@import url(../css/fonts/fonts.css);/*# sourceMappingURL=styles.css.map */
+@import url(../css/fonts/fonts.css);
+.background {
+  font-family: "Montserrat", sans-serif;
+  background-color: #F1F1F8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+}/*# sourceMappingURL=styles.css.map */
