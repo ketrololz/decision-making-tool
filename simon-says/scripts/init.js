@@ -80,10 +80,17 @@ function createAttempIcons(count) {
 
 const attempIcons = createAttempIcons(2);
 
+const rounds = createElem({
+  tag: 'p',
+  text: '1/5',
+  classes: ['rounds'],
+})
+
 gameFieldContainer.append(topBar);
 
 topBar.append(attempsContainer);
 attempIcons.forEach((e) => attempsContainer.append(e));
+topBar.append(rounds);
 
 // title
 
