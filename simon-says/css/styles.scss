@@ -18,21 +18,23 @@ $keys: #F8F8FA;
   font-family: "Montserrat", sans-serif;
   background-color: $body;
   color: $text;
-  padding: 20px 10px;
+  padding: 40px 10px 20px;
   display: flex;
   flex-direction: column;
   row-gap: 15px;
   justify-content: center;
   align-items: center;
-  height: 100dvh;
   font-weight: 500;
   font-size: 30px;
 }
 
 .game-field-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
   max-width: 716px;
-  width: 100%;
   height: 80dvh;
   border-radius: 26px;
   background-color: $background;
@@ -56,17 +58,19 @@ $keys: #F8F8FA;
 .difficulty-button {
   background-color: $tab-light;
   color: $text;
+  font-size: 1.8rem;
 }
 
 .new-game-button {
   background-color: $orange;
   color: $white;
+  font-size: 1.8rem;
 }
 
 .top-bar {
   padding: 20px 20px;
   width: 100%;
-  height: 10dvh;
+  height: 6dvh;
 }
 
 .attemps-container {
@@ -75,7 +79,8 @@ $keys: #F8F8FA;
 }
 
 .title {
-  font-size: 70px;
+  margin: 0;
+  font-size: 4rem;
   font-weight: 500;
   text-align: center;
 }
@@ -93,6 +98,17 @@ $keys: #F8F8FA;
   height: 60px;
   border-radius: 20px;
   padding: 0;
+  font-size: 2rem;
   background-color: $keys;
   color: $text;
+}
+
+.start-game-btn {
+  background-color: $green;
+  color: $white;
+  max-width: 400px;
+  width: 100%;
+  height: 70px;
+  border-radius: 26px;
+  margin-bottom: 40px;
 }

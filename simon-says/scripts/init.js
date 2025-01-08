@@ -109,7 +109,7 @@ function createKeyboard(keys) {
       text: e,
       classes: ['button', 'keyboard-btn'],
     });
-  })
+  });
 
   return keyboard;
 }
@@ -118,5 +118,14 @@ const keys = 'qwertyuiopasdfghjklzxcvbnm';
 const keyboard = createKeyboard(keys.toUpperCase().split(''));
 
 gameFieldContainer.append(keyboardContainer);
-
 keyboard.forEach((e) => keyboardContainer.append(e));
+
+// start game
+
+const startGameBtn = createElem({
+  tag: 'button',
+  text: 'Start',
+  classes: ['start-game-btn', 'button'],
+});
+
+gameFieldContainer.append(startGameBtn);
