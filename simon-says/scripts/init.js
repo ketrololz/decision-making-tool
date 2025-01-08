@@ -4,6 +4,7 @@ const bodyElem = document.body;
 
 bodyElem.classList.add('background');
 
+
 // game field
 
 const gameFieldContainer = createElem({
@@ -22,7 +23,10 @@ const difficultyButtons = difficults.map((e) => createElem({
   tag: 'button',
   text: e,
   classes: ['difficulty-button', 'button'],
-}))
+}));
+
+bodyElem.append(difficultyContainer, gameFieldContainer);
+difficultyButtons.forEach((e) => difficultyContainer.append(e));
 
 // new game
 
@@ -30,14 +34,21 @@ const newGameButton = createElem({
   tag: 'button',
   text: 'New game',
   classes: ['new-game-button', 'button'],
-})
+});
+
+difficultyContainer.append(newGameButton);
 
 //top bar
 
 const topBar = createElem({
   tag: 'div',
   classes: ['top-bar']
-})
+});
+
+const attempsContainer = createElem({
+  tag: 'div',
+  classes: ['attemps-container'],
+});
 
 function createAttempIcons(count) {
   const icons = [];
@@ -68,12 +79,44 @@ function createAttempIcons(count) {
 }
 
 const attempIcons = createAttempIcons(2);
-console.log(attempIcons);
 
 gameFieldContainer.append(topBar);
-attempIcons.forEach((e) => topBar.append(e));
 
-difficultyButtons.forEach((e) => difficultyContainer.append(e));
-difficultyContainer.append(newGameButton);
+topBar.append(attempsContainer);
+attempIcons.forEach((e) => attempsContainer.append(e));
 
-bodyElem.append(difficultyContainer, gameFieldContainer);
+// title
+
+const title = createElem({
+  tag: 'h1',
+  text: 'SIMON_SAYS',
+  classes: ['title'],
+});
+
+gameFieldContainer.append(title);
+
+// keyboard
+
+const keyboardContainer = createElem({
+  tag: 'div',
+  classes: ['keyboard-container'],
+})
+
+function createKeyboard(keys) {
+  const keyboard = keys.map((e) => {
+    return createElem({
+      tag: 'button',
+      text: e,
+      classes: ['button', 'keyboard-btn'],
+    });
+  })
+
+  return keyboard;
+}
+
+const keys = 'qwertyuiopasdfghjklzxcvbnm';
+const keyboard = createKeyboard(keys.toUpperCase().split(''));
+
+gameFieldContainer.append(keyboardContainer);
+
+keyboard.forEach((e) => keyboardContainer.append(e));
