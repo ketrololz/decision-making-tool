@@ -1,9 +1,49 @@
 @import url(../css/fonts/fonts.css);
 .background {
+  position: relative;
   font-family: "Montserrat", sans-serif;
   background-color: #F1F1F8;
+  color: #595986;
+  padding: 20px 10px;
   display: flex;
+  flex-direction: column;
+  row-gap: 15px;
   justify-content: center;
   align-items: center;
   height: 100dvh;
+  font-weight: 500;
+  font-size: 30px;
+}
+
+.game-field-container {
+  max-width: 716px;
+  width: 100%;
+  height: 80dvh;
+  border-radius: 26px;
+  background-color: #E5E5F1;
+}
+
+.difficulty-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px;
+  max-width: 716px;
+  width: 100%;
+}
+
+.button {
+  border-style: none;
+  padding: 6px 32px;
+  border-radius: 30px;
+}
+
+.difficulty-button {
+  background-color: #D4D4ED;
+  color: #595986;
+}
+
+.new-game-button {
+  background-color: #F6B354;
+  color: #fff;
 }/*# sourceMappingURL=styles.css.map */
