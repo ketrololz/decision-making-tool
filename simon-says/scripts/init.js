@@ -121,7 +121,7 @@ function createKeyboard(keys) {
   return keyboard;
 }
 
-const keys = 'qwertyuiopasdfghjklzxcvbnm';
+const keys = '1234567890qwertyuiopasdfghjklzxcvbnm';
 const keyboard = createKeyboard(keys.toUpperCase().split(''));
 
 gameFieldContainer.append(keyboardContainer);
