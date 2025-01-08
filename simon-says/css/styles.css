@@ -46,4 +46,9 @@
 .new-game-button {
   background-color: #F6B354;
   color: #fff;
+}
+
+.top-bar {
+  width: 100%;
+  height: 10dvh;
 }/*# sourceMappingURL=styles.css.map */
