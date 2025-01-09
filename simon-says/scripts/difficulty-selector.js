@@ -37,6 +37,7 @@ function createKeyboard(keys) {
 
 const keys = '1234567890';
 const keyboard = createKeyboard(keys.toUpperCase().split(''));
+keyboardContainer.dataset.diff = 'easy';
 
 function switchDifficulty(target, value, parent) {
   target.classList.add('active-difficulty');
@@ -54,12 +55,15 @@ function switchKeyboard(value) {
   switch (value) {
     case 'easy':
       keys = '1234567890';
+      keyboardContainer.dataset.diff = 'easy';
       break;
     case 'medium':
       keys = 'qwertyuiopasdfghjklzxcvbnm';
+      keyboardContainer.dataset.diff = 'medium';
       break;
     case 'hard':
       keys = '1234567890qwertyuiopasdfghjklzxcvbnm';
+      keyboardContainer.dataset.diff = 'hard';
       break;
     default: 
       return;
@@ -69,10 +73,14 @@ function switchKeyboard(value) {
 }
 
 difficultyContainer.addEventListener('click', (e) => {
+  if (bodyElem.classList.contains('playing')) {
+    return;
+  }
+
   if (!e.target.classList.contains('new-game-button')) {
     difficultyContainer.childNodes.forEach((e) => e.classList.remove('active-difficulty'));
   }
- 
+
   switch (e.target.id) {
     case 'diff-easy':
       switchDifficulty(e.target, 'easy', keyboardContainer);
@@ -92,4 +100,4 @@ keyboard.forEach((e) => keyboardContainer.append(e));
 gameFieldContainer.insertBefore(keyboardContainer, gameFieldContainer.lastChild);
 gameFieldContainer.append(keyboardContainer);
 
-export { difficultyContainer };
+export { difficultyContainer, keyboardContainer };

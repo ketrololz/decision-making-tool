@@ -3,6 +3,7 @@ import { createElem } from "./create-element.js";
 import { topBar, attempsContainer, attempIcons, rounds } from "./top-bar.js";
 import { newGameButton } from "./new-game.js";
 import { difficultyContainer } from "./difficulty-selector.js";
+import { bodyElem } from "./init.js";
 
 const startGameBtn = createElem({
   tag: 'button',
@@ -20,6 +21,7 @@ startGameBtn.addEventListener('click', () => startGame());
 
 function startGame() {
   createGameField();
+  bodyElem.classList.add('playing')
 }
 
 function createGameField() {

@@ -11,10 +11,10 @@ const attempsContainer = createElem({
   classes: ['attemps-container'],
 });
 
-function createAttempIcons(count) {
+function createAttempIcons(quantity) {
   const icons = [];
   
-  for (let i = 0; i < count; i += 1) {
+  for (let i = 0; i < quantity; i += 1) {
     const attempBox = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const  attempIcon = document.createElementNS(attempBox.namespaceURI, "path");
 
