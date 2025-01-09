@@ -29,6 +29,7 @@ function createKeyboard(keys) {
       tag: 'button',
       text: e,
       classes: ['button', 'keyboard-btn'],
+      id: e,
     });
   });
 

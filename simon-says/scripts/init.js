@@ -21,4 +21,4 @@ const title = createElem({
 
 gameFieldContainer.append(title);
 
-export { bodyElem, gameFieldContainer };
+export { bodyElem, gameFieldContainer, title };

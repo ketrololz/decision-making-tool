@@ -28,4 +28,4 @@ function generateSequence(diff, quantity) {
   return sequence;
 }
 
-generateSequence(keyboardContainer.dataset.diff, 2)
+export { generateSequence };

@@ -2,8 +2,9 @@ import { gameFieldContainer } from "./init.js";
 import { createElem } from "./create-element.js";
 import { topBar, attempsContainer, attempIcons, rounds } from "./top-bar.js";
 import { newGameButton } from "./new-game.js";
-import { difficultyContainer } from "./difficulty-selector.js";
+import { difficultyContainer, keyboardContainer } from "./difficulty-selector.js";
 import { bodyElem } from "./init.js";
+import { title } from "./init.js";
 
 const startGameBtn = createElem({
   tag: 'button',
@@ -21,7 +22,8 @@ startGameBtn.addEventListener('click', () => startGame());
 
 function startGame() {
   createGameField();
-  bodyElem.classList.add('playing')
+  bodyElem.classList.add('playing');
+  rounds.dataset.round = '1';
 }
 
 function createGameField() {
@@ -30,7 +32,19 @@ function createGameField() {
   topBar.append(rounds);
   difficultyContainer.append(newGameButton);
   changeButton(startGameBtn);
+  switchTitleToInput();
 }
+
+function switchTitleToInput() {
+  title.remove()
+  gameFieldContainer.insertBefore(input, keyboardContainer);
+}
+
+const input = createElem({
+  tag: 'p',
+  text: '__',
+  classes: ['input-text'],
+});
 
 function changeButton(button) {
   if (button.classList.contains('start-game-btn')) {

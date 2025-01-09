@@ -8,5 +8,3 @@ const newGameButton = createElem({
 });
 
 export { newGameButton };
-
-// difficultyContainer.append(newGameButton);
