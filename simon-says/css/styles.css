@@ -1,6 +1,6 @@
 @import url(../css/fonts/fonts.css);
 html {
-  font-size: 16px;
+  font-size: 14px;
 }
 @media screen and (max-width: 768px) {
   html {
@@ -50,7 +50,7 @@ html {
 .difficulty-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 8px;
   max-width: 716px;
   width: 100%;
@@ -67,12 +67,31 @@ html {
   color: #595986;
   font-size: 1.8rem;
   font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.difficulty-button:hover {
+  cursor: pointer;
+  background-color: #DDDDFB;
+}
+
+.active-difficulty {
+  background-color: #595986;
+  color: #fff;
+}
+.active-difficulty:hover {
+  cursor: default;
+  background-color: #595986;
 }
 
 .new-game-button {
-  background-color: #F6B354;
+  background-color: #ECA849;
   color: #fff;
   font-size: 1.8rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+.new-game-button:hover {
+  background-color: #F3AD49;
 }
 
 .top-bar {
@@ -121,12 +140,18 @@ html {
   background-color: #F8F8FA;
   color: #595986;
   font-weight: 500;
+  transition: background-color 0.2s ease;
 }
 @media screen and (max-width: 768px) {
   .keyboard-btn {
     width: 50px;
     height: 50px;
   }
+}
+
+.keyboard-hover > :hover {
+  cursor: pointer;
+  background-color: #fff;
 }
 
 .start-game-btn {
@@ -137,10 +162,15 @@ html {
   height: 70px;
   border-radius: 26px;
   margin-bottom: 40px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
 }
 @media screen and (max-width: 768px) {
   .start-game-btn {
     margin-bottom: 20px;
     height: 60px;
   }
+}
+.start-game-btn:hover {
+  background-color: #42C691;
 }/*# sourceMappingURL=styles.css.map */

@@ -6,15 +6,18 @@ $background: #E5E5F1;
 $tab-light: #D4D4ED;
 $tab-dark: #595986;
 $inactive: #BBBBCF;
+$inactiveLight: #DDDDFB;
 $white: #fff;
-$orange: #F6B354;
+$orange: #ECA849;
+$orangeLight: #F3AD49;
 $green: #46BA8B;
+$greenLight: #42C691;
 $magenta: #CE347E;
 $purple: #927197;
 $keys: #F8F8FA;
 
 html {
-  font-size: 16px;
+  font-size: 14px;
 
   @media screen and (max-width: 768px) {
     font-size: 12px;
@@ -61,7 +64,7 @@ html {
 .difficulty-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 8px;
   max-width: 716px;
   width: 100%;
@@ -78,12 +81,34 @@ html {
   color: $text;
   font-size: 1.8rem;
   font-weight: 500;
+  transition: background-color .2s ease;
+  
+  &:hover {
+    cursor: pointer;
+    background-color: $inactiveLight;
+  }
+}
+
+.active-difficulty {
+  background-color: $tab-dark;
+  color: $white;
+
+  &:hover {
+    cursor: default;
+    background-color: #595986;
+  }
 }
 
 .new-game-button {
   background-color: $orange;
   color: $white;
   font-size: 1.8rem;
+  transition: background-color .2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orangeLight;
+  }
 }
 
 .top-bar {
@@ -131,11 +156,17 @@ html {
   background-color: $keys;
   color: $text;
   font-weight: 500;
+  transition: background-color .2s ease;
 
   @media screen and (max-width: 768px) {
     width: 50px;
     height: 50px;
   }
+}
+
+.keyboard-hover > :hover {
+  cursor: pointer;
+  background-color: $white;
 }
 
 .start-game-btn {
@@ -146,9 +177,15 @@ html {
   height: 70px;
   border-radius: 26px;
   margin-bottom: 40px;
+  transition: background-color .2s ease;
+  cursor: pointer;
 
   @media screen and (max-width: 768px) {
     margin-bottom: 20px;
     height: 60px;
+  }
+
+  &:hover {
+    background-color: $greenLight;
   }
 }
