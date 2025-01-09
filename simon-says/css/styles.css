@@ -71,7 +71,7 @@ html {
 }
 .difficulty-button:hover {
   cursor: pointer;
-  background-color: #DDDDFB;
+  background-color: #E3E3FF;
 }
 
 .active-difficulty {
@@ -84,14 +84,14 @@ html {
 }
 
 .new-game-button {
-  background-color: #ECA849;
+  background-color: #F5B253;
   color: #fff;
   font-size: 1.8rem;
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
 .new-game-button:hover {
-  background-color: #F3AD49;
+  background-color: #FFC446;
 }
 
 .top-bar {
@@ -173,4 +173,25 @@ html {
 }
 .start-game-btn:hover {
   background-color: #42C691;
+}
+
+.repeat-btn {
+  background-color: #927197;
+  color: #fff;
+  max-width: 400px;
+  width: 100%;
+  height: 70px;
+  border-radius: 26px;
+  margin-bottom: 40px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .repeat-btn {
+    margin-bottom: 20px;
+    height: 60px;
+  }
+}
+.repeat-btn:hover {
+  background-color: #AB82B1;
 }/*# sourceMappingURL=styles.css.map */

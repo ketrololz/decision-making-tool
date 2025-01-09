@@ -21,14 +21,4 @@ const title = createElem({
 
 gameFieldContainer.append(title);
 
-// start game
-
-const startGameBtn = createElem({
-  tag: 'button',
-  text: 'Start',
-  classes: ['start-game-btn', 'button'],
-});
-
-gameFieldContainer.append(startGameBtn);
-
 export { bodyElem, gameFieldContainer };

@@ -6,14 +6,15 @@ $background: #E5E5F1;
 $tab-light: #D4D4ED;
 $tab-dark: #595986;
 $inactive: #BBBBCF;
-$inactiveLight: #DDDDFB;
+$inactiveLight: #E3E3FF;
 $white: #fff;
-$orange: #ECA849;
-$orangeLight: #F3AD49;
+$orange: #F5B253;
+$orangeLight: #FFC446;
 $green: #46BA8B;
 $greenLight: #42C691;
 $magenta: #CE347E;
 $purple: #927197;
+$purpleLight: #AB82B1;
 $keys: #F8F8FA;
 
 html {
@@ -187,5 +188,26 @@ html {
 
   &:hover {
     background-color: $greenLight;
+  }
+}
+
+.repeat-btn {
+  background-color: $purple;
+  color: $white;
+  max-width: 400px;
+  width: 100%;
+  height: 70px;
+  border-radius: 26px;
+  margin-bottom: 40px;
+  transition: background-color .2s ease;
+  cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 20px;
+    height: 60px;
+  }
+
+  &:hover {
+    background-color: $purpleLight;
   }
 }

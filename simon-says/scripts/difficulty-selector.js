@@ -16,6 +16,7 @@ const difficultyButtons = difficults.map((e) => createElem({
 
 bodyElem.append(difficultyContainer, gameFieldContainer);
 difficultyButtons.forEach((e) => difficultyContainer.append(e));
+difficultyContainer.firstChild.classList.add('active-difficulty');
 
 const keyboardContainer = createElem({
   tag: 'div',
@@ -34,7 +35,7 @@ function createKeyboard(keys) {
   return keyboard;
 }
 
-const keys = '1234567890qwertyuiopasdfghjklzxcvbnm';
+const keys = '1234567890';
 const keyboard = createKeyboard(keys.toUpperCase().split(''));
 
 function switchDifficulty(target, value, parent) {
@@ -68,7 +69,9 @@ function switchKeyboard(value) {
 }
 
 difficultyContainer.addEventListener('click', (e) => {
-  difficultyContainer.childNodes.forEach((e) => e.classList.remove('active-difficulty'));
+  if (!e.target.classList.contains('new-game-button')) {
+    difficultyContainer.childNodes.forEach((e) => e.classList.remove('active-difficulty'));
+  }
  
   switch (e.target.id) {
     case 'diff-easy':
@@ -87,5 +90,6 @@ difficultyContainer.addEventListener('click', (e) => {
 
 keyboard.forEach((e) => keyboardContainer.append(e));
 gameFieldContainer.insertBefore(keyboardContainer, gameFieldContainer.lastChild);
+gameFieldContainer.append(keyboardContainer);
 
 export { difficultyContainer };

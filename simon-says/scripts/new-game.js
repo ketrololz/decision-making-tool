@@ -7,4 +7,6 @@ const newGameButton = createElem({
   classes: ['new-game-button', 'button'],
 });
 
+export { newGameButton };
+
 // difficultyContainer.append(newGameButton);

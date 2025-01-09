@@ -49,6 +49,4 @@ const rounds = createElem({
 
 gameFieldContainer.insertBefore(topBar, gameFieldContainer.firstChild);
 
-// topBar.append(attempsContainer);
-// attempIcons.forEach((e) => attempsContainer.append(e));
-// topBar.append(rounds);
+export { topBar, attempsContainer, attempIcons, rounds };
