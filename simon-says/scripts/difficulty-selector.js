@@ -78,7 +78,7 @@ difficultyContainer.addEventListener('click', (e) => {
     return;
   }
 
-  if (!e.target.classList.contains('new-game-button')) {
+  if (e.target.classList.contains('difficulty-button')) {
     difficultyContainer.childNodes.forEach((e) => e.classList.remove('active-difficulty'));
   }
 
@@ -101,4 +101,4 @@ keyboard.forEach((e) => keyboardContainer.append(e));
 gameFieldContainer.insertBefore(keyboardContainer, gameFieldContainer.lastChild);
 gameFieldContainer.append(keyboardContainer);
 
-export { difficultyContainer, keyboardContainer };
+export { difficultyContainer, keyboardContainer, difficultyButtons };

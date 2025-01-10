@@ -5,16 +5,16 @@ $text: #595986;
 $background: #E5E5F1;
 $tab-light: #D4D4ED;
 $tab-dark: #595986;
-$inactive: #BBBBCF;
-$inactiveLight: #E3E3FF;
+$tab-hover: #E3E3FF;
+$disabled: #BBBBCF;
 $white: #fff;
 $orange: #F5B253;
-$orangeLight: #FFC446;
+$orange-hover: #FFC446;
 $green: #46BA8B;
-$greenLight: #42C691;
+$green-hover: #42C691;
 $magenta: #CE347E;
 $purple: #927197;
-$purpleLight: #AB82B1;
+$purple-hover: #AB82B1;
 $keys: #F8F8FA;
 
 html {
@@ -86,7 +86,13 @@ html {
   
   &:hover {
     cursor: pointer;
-    background-color: $inactiveLight;
+    background-color: $tab-hover;
+  }
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: default;
+    color: $white;
   }
 }
 
@@ -108,7 +114,13 @@ html {
   cursor: pointer;
 
   &:hover {
-    background-color: $orangeLight;
+    background-color: $orange-hover;
+  }
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: default;
+    color: $white;
   }
 }
 
@@ -188,7 +200,7 @@ html {
   }
 
   &:hover {
-    background-color: $greenLight;
+    background-color: $green-hover;
   }
 }
 
@@ -209,7 +221,7 @@ html {
   }
 
   &:hover {
-    background-color: $purpleLight;
+    background-color: $purple-hover;
   }
 }
 

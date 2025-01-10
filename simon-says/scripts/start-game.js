@@ -5,6 +5,7 @@ import { newGameButton } from "./new-game.js";
 import { difficultyContainer, keyboardContainer } from "./difficulty-selector.js";
 import { bodyElem } from "./init.js";
 import { title } from "./init.js";
+import { startRound } from "./start-round.js";
 
 const startGameBtn = createElem({
   tag: 'button',
@@ -24,6 +25,7 @@ function startGame() {
   createGameField();
   bodyElem.classList.add('playing');
   rounds.dataset.round = '1';
+  startRound(1, title);
 }
 
 function createGameField() {
@@ -32,19 +34,7 @@ function createGameField() {
   topBar.append(rounds);
   difficultyContainer.append(newGameButton);
   changeButton(startGameBtn);
-  switchTitleToInput();
 }
-
-function switchTitleToInput() {
-  title.remove()
-  gameFieldContainer.insertBefore(input, keyboardContainer);
-}
-
-const input = createElem({
-  tag: 'p',
-  text: '__',
-  classes: ['input-text'],
-});
 
 function changeButton(button) {
   if (button.classList.contains('start-game-btn')) {
@@ -57,3 +47,5 @@ function changeButton(button) {
 }
 
 gameFieldContainer.append(startGameBtn);
+
+export { startGameBtn, repeatGameBtn }

@@ -73,6 +73,11 @@ html {
   cursor: pointer;
   background-color: #E3E3FF;
 }
+.difficulty-button:disabled {
+  background-color: #BBBBCF;
+  cursor: default;
+  color: #fff;
+}
 
 .active-difficulty {
   background-color: #595986;
@@ -92,6 +97,11 @@ html {
 }
 .new-game-button:hover {
   background-color: #FFC446;
+}
+.new-game-button:disabled {
+  background-color: #BBBBCF;
+  cursor: default;
+  color: #fff;
 }
 
 .top-bar {
