@@ -8,47 +8,46 @@ import { newGameButton } from "./new-game.js";
 import { createElem } from "./create-element.js";
 
 let roundNum = 1;
-let userInputArr = [];
 let pressedKey = '';
+let inputCount = 0;
 
 function startRound(roundNum, input) {
   const sequenceLength = 2 * roundNum;
   const sequence = generateSequence(keyboardContainer.dataset.diff, sequenceLength);
 
+  showSequence(sequence);
   switchTitleToInput();
+
   
   input.textContent = '_'.repeat(sequenceLength);
   difficultyButtons.forEach((e) => { if (!e.classList.contains('active-difficulty')) disableButton(e) });
   disableButton(newGameButton);
+
+  document.addEventListener('keydown', (key) => { 
+    if (pressedKey) {
+      return;
+    }
+    regUserInputByDifficulty(key, keyboardContainer.dataset.diff, sequence);
+    inputCount += 1;
+  });
 }
 
 function showSequence(sequence) {
   sequence.forEach((e, i) => showKey(e, i + 1, 1000));
 
   function showKey(key, i, timeout) {
-    setTimeout(() => document.getElementById(key).classList.add('highlight'), timeout * i);
-    setTimeout(() => document.getElementById(key).classList.remove('highlight'), (timeout * i) + timeout);
+    setTimeout(() => document.getElementById(key.toUpperCase()).classList.add('highlight'), timeout * i);
+    setTimeout(() => document.getElementById(key.toUpperCase()).classList.remove('highlight'), (timeout * i) + timeout);
   }
 }
-
-function checkUserInputByDifficulty(userInput, diff) {
-  
-}
-
-document.addEventListener('keydown', (key) => { 
-  if (pressedKey) {
-    return;
-  }
-  regUserInputByDifficulty(key, keyboardContainer.dataset.diff);
-});
 
 document.addEventListener('keyup', (key) => {
-  if (key.keyCode === pressedKey) {
+  if (String.fromCharCode(key.keyCode) === pressedKey) {
     pressedKey = '';
   }
 });
 
-function regUserInputByDifficulty(key, difficulty) {
+function regUserInputByDifficulty(key, difficulty, sequence) {
   let keys = '';
 
   switch (difficulty) {
@@ -56,10 +55,10 @@ function regUserInputByDifficulty(key, difficulty) {
       keys = '1234567890';
       break;
     case 'medium':
-      keys = 'qwertyuiopasdfghjklzxcvbnm';
+      keys = 'QWERTYUIOPASDFGHJKLZXCVBNM';
       break;
     case 'hard':
-      keys = '1234567890qwertyuiopasdfghjklzxcvbnm';
+      keys = '1234567890QWERTYUIOPASDFGHJKLZXCVBNM';
       break;
     default: 
       return;
@@ -68,11 +67,18 @@ function regUserInputByDifficulty(key, difficulty) {
   const keysArr = keys.toUpperCase().split('');
 
   if (keysArr.includes(String.fromCharCode(key.keyCode))) {
-    pressedKey = key.keyCode;
-    userInputArr.push(key.keyCode);  
+    pressedKey = String.fromCharCode(key.keyCode);
+    console.log(sequence)
+    console.log(pressedKey)
+    
+      if (pressedKey === sequence[inputCount]) {
+        console.log('ye')
+      } else {
+        console.log('no')
+      }
+
     return key;
   }
-
 }
 
 function disableButton(button) {
@@ -93,7 +99,5 @@ const input = createElem({
   text: '__',
   classes: ['input-text'],
 });
-
-// showSequence([0, 2]);
 
 export { startRound };

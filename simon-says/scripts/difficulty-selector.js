@@ -59,11 +59,11 @@ function switchKeyboard(value) {
       keyboardContainer.dataset.diff = 'easy';
       break;
     case 'medium':
-      keys = 'qwertyuiopasdfghjklzxcvbnm';
+      keys = 'QWERTYUIOPASDFGHJKLZXCVBNM';
       keyboardContainer.dataset.diff = 'medium';
       break;
     case 'hard':
-      keys = '1234567890qwertyuiopasdfghjklzxcvbnm';
+      keys = '1234567890QWERTYUIOPASDFGHJKLZXCVBNM';
       keyboardContainer.dataset.diff = 'hard';
       break;
     default: 

@@ -9,10 +9,10 @@ function generateSequence(diff, quantity) {
       keys = '1234567890';
       break;
     case 'medium':
-      keys = 'qwertyuiopasdfghjklzxcvbnm';
+      keys = 'QWERTYUIOPASDFGHJKLZXCVBNM';
       break;
     case 'hard':
-      keys = '1234567890qwertyuiopasdfghjklzxcvbnm';
+      keys = '1234567890QWERTYUIOPASDFGHJKLZXCVBNM';
       break;
     default:
       return;
