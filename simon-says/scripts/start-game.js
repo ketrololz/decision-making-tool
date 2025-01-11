@@ -5,7 +5,8 @@ import { newGameButton } from "./new-game.js";
 import { difficultyContainer, keyboardContainer } from "./difficulty-selector.js";
 import { bodyElem } from "./init.js";
 import { title } from "./init.js";
-import { startRound } from "./start-round.js";
+import { startRound, input, repeatGameBtn } from "./start-round.js";
+
 
 const startGameBtn = createElem({
   tag: 'button',
@@ -13,19 +14,13 @@ const startGameBtn = createElem({
   classes: ['start-game-btn', 'button'],
 });
 
-const repeatGameBtn = createElem({
-  tag: 'button',
-  text: 'Repeat the sequence',
-  classes: ['repeat-btn', 'button'],
-})
-
 startGameBtn.addEventListener('click', () => startGame());
 
 function startGame() {
   createGameField();
   bodyElem.classList.add('playing');
   rounds.dataset.round = '1';
-  startRound(1, title);
+  startRound(1, input);
 }
 
 function createGameField() {
@@ -34,18 +29,19 @@ function createGameField() {
   topBar.append(rounds);
   difficultyContainer.append(newGameButton);
   changeButton(startGameBtn);
+  switchTitleToInput(title, input);
 }
 
-function changeButton(button) {
-  if (button.classList.contains('start-game-btn')) {
-    startGameBtn.remove();
-    gameFieldContainer.append(repeatGameBtn);
-  } else {
-    repeatGameBtn.remove();
-    gameFieldContainer.append(startGameBtn);
-   }
+function changeButton(button, newButton = repeatGameBtn) {
+    button.remove();
+    gameFieldContainer.append(newButton);
+}
+
+function switchTitleToInput(title) {
+  title.remove();
+  gameFieldContainer.insertBefore(input, keyboardContainer);
 }
 
 gameFieldContainer.append(startGameBtn);
 
-export { startGameBtn, repeatGameBtn }
+export { startGameBtn, repeatGameBtn, changeButton }

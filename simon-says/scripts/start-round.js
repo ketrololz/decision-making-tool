@@ -1,42 +1,76 @@
 import { generateSequence } from "./generate-sequence.js";
 import { keyboardContainer } from "./difficulty-selector.js";
-import { startGameBtn, repeatGameBtn } from "./start-game.js";
+import { startGameBtn, changeButton } from "./start-game.js";
 import { difficultyButtons } from "./difficulty-selector.js";
 import { gameFieldContainer } from "./init.js";
 import { title } from "./init.js";
 import { newGameButton } from "./new-game.js";
 import { createElem } from "./create-element.js";
-import { attempIcons } from "./top-bar.js";
+import { attempIcons, rounds } from "./top-bar.js";
+import { endRound, nextGameButton } from "./end-round.js";
 
-let roundNum = 1;
+let round = 1;
 let currentAttemp = 0;
 let pressedKey = '';
 let inputCount = 0;
 let isGameStopped = false;
+let currentSequence = [];
 
-function startRound(roundNum, title) {
+const repeatGameBtn = createElem({
+  tag: 'button',
+  text: 'Repeat the sequence',
+  classes: ['repeat-btn', 'button'],
+})
+
+function startRound(roundNum, input) {
+  currentSequence = [];
+
   const sequenceLength = 2 * roundNum;
   const sequence = generateSequence(keyboardContainer.dataset.diff, sequenceLength);
 
-  showSequence(sequence);
-  switchTitleToInput(title);
+  sequence.forEach((e) => currentSequence.push(e));
 
+  enableButton(repeatGameBtn);
+  clearData();
+  changeButton(nextGameButton, repeatGameBtn);
+  gameFieldContainer.classList.remove('congratulations');
+  
+  showSequence(sequence);
+  
   input.textContent = '_'.repeat(sequenceLength);
   difficultyButtons.forEach((e) => { if (!e.classList.contains('active-difficulty')) disableButton(e) });
   disableButton(newGameButton);
+  
+  console.log('seq', sequence)
+  
+}
 
-  document.addEventListener('keydown', (key) => {
-    if (pressedKey || isGameStopped) {
-      return;
-    }
-    regUserInputByDifficulty(key, keyboardContainer.dataset.diff, sequence);
-  });
+repeatGameBtn.addEventListener('click', () => {
+  showSequence(currentSequence);
+  input.textContent = '_'.repeat(currentSequence.length);
+  inputCount = 0;
+  isGameStopped = false;
+  disableButton(repeatGameBtn);
+});
 
-  repeatGameBtn.addEventListener('click', () => {
-    showSequence(sequence);
-    input.textContent = '_'.repeat(sequenceLength);
-    inputCount = 0;
-  });
+document.addEventListener('keydown', (key) => {
+  if (pressedKey || isGameStopped) {
+    return;
+  }
+  regUserInputByDifficulty(key, keyboardContainer.dataset.diff, currentSequence);
+});
+
+nextGameButton.addEventListener('click', () => nextRound());
+
+function clearData() {
+  currentAttemp = 0;
+  inputCount = 0;
+}
+
+function nextRound() {
+  round += 1;
+  rounds.textContent = `${round}/5`;
+  startRound(round, input);
 }
 
 function showSequence(sequence) {
@@ -82,6 +116,7 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
     if (pressedKey === sequence[inputCount] && inputCount === sequence.length - 1) {
       updateInput(pressedKey);
       congrats();
+      endRound('win', input);
     }
 
     if (pressedKey === sequence[inputCount]) {
@@ -93,7 +128,11 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
       shake();
       changeAttempColor(attempIcons);
       isGameStopped = true;
+      currentAttemp += 1;
+    }
 
+    if(currentAttemp >= 2) {
+      endRound('lose', input);
     }
 
     inputCount += 1;
@@ -102,17 +141,14 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
   }
 }
 
-function disableButton(button) {
+function disableButton(button) { 
   button.disabled = 'true';
 }
 
 function enableButton(button) {
-  button.disabled = 'false';
-}
-
-function switchTitleToInput(title) {
-  title.remove();
-  gameFieldContainer.insertBefore(input, keyboardContainer);
+  if (button.disabled) {
+    button.disabled = 'false';
+  }
 }
 
 function updateInput(char) {
@@ -149,4 +185,4 @@ const input = createElem({
   classes: ['input-text'],
 });
 
-export { startRound };
+export { startRound, disableButton, input, nextRound, repeatGameBtn };
