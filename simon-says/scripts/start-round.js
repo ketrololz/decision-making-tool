@@ -35,10 +35,10 @@ function startRound(roundNum, input) {
   clearData();
   changeButton(nextGameButton, repeatGameBtn);
   gameFieldContainer.classList.remove('congratulations');
-  
+
   showSequence(sequence);
   console.log(sequence);
-  
+
   input.textContent = '_'.repeat(sequenceLength);
   difficultyButtons.forEach((e) => { if (!e.classList.contains('active-difficulty')) disableButton(e) });
   disableButton(newGameButton);
@@ -58,7 +58,7 @@ document.addEventListener('keydown', (key) => {
   }
   const keyValue = String.fromCharCode(key.keyCode);
   regUserInputByDifficulty(keyValue, keyboardContainer.dataset.diff, currentSequence);
-}); 
+});
 
 keyboardContainer.addEventListener('mousedown', (e) => {
   if (e.target.tagName !== 'BUTTON') {
@@ -186,7 +186,7 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
       showActiveKey(pressedKey, 'incorrect');
     }
 
-    if(currentAttemp >= 2) {
+    if (currentAttemp >= 2) {
       endRound('lose', input);
       showActiveKey(pressedKey, 'incorrect');
     }
@@ -197,12 +197,12 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
   }
 }
 
-function disableButton(button) { 
+function disableButton(button) {
   button.disabled = true;
 }
 
 function enableButton(button) {
-    button.disabled = false;
+  button.disabled = false;
 }
 
 function updateInput(char) {
@@ -246,7 +246,7 @@ function showActiveKey(key, status) {
     currentKey.classList.add('incorrect');
     setTimeout(() => { currentKey.classList.remove('incorrect') }, 200);
   }
-  
+
   currentKey.classList.add('correct');
   setTimeout(() => { currentKey.classList.remove('correct') }, 200);
 }

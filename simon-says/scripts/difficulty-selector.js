@@ -47,7 +47,7 @@ function switchDifficulty(target, value, parent) {
 }
 
 function switchKeyboard(value) {
-  while(keyboardContainer.firstChild) {
+  while (keyboardContainer.firstChild) {
     keyboardContainer.lastChild.remove();
   }
 
@@ -66,7 +66,7 @@ function switchKeyboard(value) {
       keys = '1234567890QWERTYUIOPASDFGHJKLZXCVBNM';
       keyboardContainer.dataset.diff = 'hard';
       break;
-    default: 
+    default:
       return;
   }
 
@@ -88,7 +88,7 @@ difficultyContainer.addEventListener('click', (e) => {
     case 'diff-hard':
       switchDifficulty(e.target, 'hard', keyboardContainer);
       break;
-    default: 
+    default:
       return;
   }
 });

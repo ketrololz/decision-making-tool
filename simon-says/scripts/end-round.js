@@ -41,7 +41,7 @@ function endRound(result, input) {
       case 5:
         message = 'WELL DONE';
         break;
-      default: 
+      default:
         message = 'GOOD';
     }
 

@@ -20,7 +20,7 @@ function createInitialScreen() {
 }
 
 function clearChilds(parent) {
-  while(parent.firstChild) {
+  while (parent.firstChild) {
     parent.lastChild.remove();
   }
 }

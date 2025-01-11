@@ -32,8 +32,8 @@ function createGameField() {
 }
 
 function changeButton(button, newButton = repeatGameBtn) {
-    button.remove();
-    gameFieldContainer.append(newButton);
+  button.remove();
+  gameFieldContainer.append(newButton);
 }
 
 function switchTitleToInput(title) {

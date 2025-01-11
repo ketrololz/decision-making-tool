@@ -3,7 +3,7 @@ export function createElem(options) {
   const elem = document.createElement(tag);
 
   elem.textContent = text;
-  
+
   if (id) {
     elem.id = id;
   }

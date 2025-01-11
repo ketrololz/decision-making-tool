@@ -13,10 +13,10 @@ const attempsContainer = createElem({
 
 function createAttempIcons(quantity) {
   const icons = [];
-  
+
   for (let i = 0; i < quantity; i += 1) {
     const attempBox = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    const  attempIcon = document.createElementNS(attempBox.namespaceURI, "path");
+    const attempIcon = document.createElementNS(attempBox.namespaceURI, "path");
 
     const attempBoxOptions = {
       'height': '30px',
