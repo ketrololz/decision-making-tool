@@ -1,12 +1,10 @@
 import { gameFieldContainer } from "./init.js";
 import { createElem } from "./create-element.js";
 import { topBar, attempsContainer, attempIcons, rounds } from "./top-bar.js";
-import { newGameButton } from "./new-game.js";
 import { difficultyContainer, keyboardContainer } from "./difficulty-selector.js";
 import { bodyElem } from "./init.js";
 import { title } from "./init.js";
-import { startRound, input, repeatGameBtn } from "./start-round.js";
-
+import { startRound, input, repeatGameBtn, newGameButton } from "./start-round.js";
 
 const startGameBtn = createElem({
   tag: 'button',

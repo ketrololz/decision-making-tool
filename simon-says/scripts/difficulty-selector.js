@@ -74,10 +74,6 @@ function switchKeyboard(value) {
 }
 
 difficultyContainer.addEventListener('click', (e) => {
-  if (bodyElem.classList.contains('playing')) {
-    return;
-  }
-
   if (e.target.classList.contains('difficulty-button')) {
     difficultyContainer.childNodes.forEach((e) => e.classList.remove('active-difficulty'));
   }

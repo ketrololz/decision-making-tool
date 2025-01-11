@@ -245,9 +245,7 @@ html {
 
   &:disabled:not(.highlight) {
     cursor: default;
-    // background-color: $disabled;
     opacity: 0.7;
-    // color: $white;
   }
 }
 

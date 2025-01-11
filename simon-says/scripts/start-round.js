@@ -4,7 +4,7 @@ import { startGameBtn, changeButton } from "./start-game.js";
 import { difficultyButtons } from "./difficulty-selector.js";
 import { gameFieldContainer } from "./init.js";
 import { title } from "./init.js";
-import { newGameButton } from "./new-game.js";
+import { createInitialScreen } from "./new-game.js";
 import { createElem } from "./create-element.js";
 import { attempIcons, rounds } from "./top-bar.js";
 import { endRound, nextGameButton } from "./end-round.js";
@@ -78,6 +78,8 @@ nextGameButton.addEventListener('click', () => nextRound());
 function clearData() {
   currentAttemp = 0;
   inputCount = 0;
+  isGameStopped = false;
+  rounds.textContent = `${round}/5`;
   attempIcons.forEach((e) => e.classList.remove('spent'));
 }
 
@@ -97,6 +99,7 @@ async function showSequence(sequence) {
 
   isShowingSequence = true;
   keyboardContainer.childNodes.forEach((e) => disableButton(e));
+  disableButton(newGameButton);
 
   for (const char of sequence) {
     showKey(char);
@@ -113,6 +116,7 @@ async function showSequence(sequence) {
   }
 
   keyboardContainer.childNodes.forEach((e) => enableButton(e));
+  enableButton(newGameButton);
   isShowingSequence = false;
 }
 
@@ -240,4 +244,16 @@ function showActiveKey(key, status) {
   setTimeout(() => { currentKey.classList.remove('correct') }, 300);
 }
 
-export { startRound, disableButton, input, nextRound, repeatGameBtn };
+const newGameButton = createElem({
+  tag: 'button',
+  text: 'New game',
+  classes: ['new-game-button', 'button'],
+});
+
+newGameButton.addEventListener('click', () => {
+  clearData();
+  createInitialScreen();
+  round = 1;
+})
+
+export { startRound, disableButton, input, nextRound, repeatGameBtn, clearData, newGameButton };
