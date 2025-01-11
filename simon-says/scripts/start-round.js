@@ -54,14 +54,30 @@ document.addEventListener('keydown', (key) => {
   if (pressedKey || isGameStopped) {
     return;
   }
-  regUserInputByDifficulty(key, keyboardContainer.dataset.diff, currentSequence);
-});
+  const keyValue = String.fromCharCode(key.keyCode);
+  regUserInputByDifficulty(keyValue, keyboardContainer.dataset.diff, currentSequence);
+}); 
+
+keyboardContainer.addEventListener('click', (e) => {
+  if (e.target.tagName !== 'BUTTON') {
+    return;
+  }
+
+  if (pressedKey || isGameStopped) {
+    return;
+  }
+
+  const keyValue = e.target.id;
+  regUserInputByDifficulty(keyValue, keyboardContainer.dataset.diff, currentSequence);
+  pressedKey = '';
+})
 
 nextGameButton.addEventListener('click', () => nextRound());
 
 function clearData() {
   currentAttemp = 0;
   inputCount = 0;
+  attempIcons.forEach((e) => e.classList.remove('spent'));
 }
 
 function nextRound() {
@@ -106,8 +122,8 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
 
   const keysArr = keys.toUpperCase().split('');
 
-  if (keysArr.includes(String.fromCharCode(key.keyCode))) {
-    pressedKey = String.fromCharCode(key.keyCode);
+  if (keysArr.includes(key)) {
+    pressedKey = key;
 
     if (inputCount >= sequence.length) {
       return;

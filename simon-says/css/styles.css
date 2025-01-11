@@ -214,7 +214,7 @@ html {
   color: #fff;
 }
 
-.keyboard-hover > :hover {
+.keyboard-hover:not(.highlight, .blocked):hover {
   cursor: pointer;
   background-color: #fff;
 }
