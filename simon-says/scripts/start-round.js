@@ -119,7 +119,9 @@ async function showSequence(sequence) {
 
   keyboardContainer.childNodes.forEach((e) => enableButton(e));
   enableButton(newGameButton);
-  enableButton(repeatGameBtn);
+  if (currentAttemp < 1) {
+    enableButton(repeatGameBtn);
+  }
   isShowingSequence = false;
 }
 
