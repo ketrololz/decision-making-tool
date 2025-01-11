@@ -87,6 +87,26 @@ html {
       transform: translateX(0);
     }
   }
+
+  &.congratulations {
+    animation: congrats 2s ease-in-out;
+    animation-iteration-count: infinite;
+    box-shadow: 0 0 20px $green;
+  }
+
+  @keyframes congrats {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(0.98);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
 }
 
 .difficulty-container {
@@ -260,6 +280,12 @@ html {
 
   &:hover {
     background-color: $purple-hover;
+  }
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: default;
+    color: $white;
   }
 }
 

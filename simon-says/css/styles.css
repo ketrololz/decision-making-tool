@@ -67,6 +67,22 @@ html {
     transform: translateX(0);
   }
 }
+.game-field-container.congratulations {
+  animation: congrats 2s ease-in-out;
+  animation-iteration-count: infinite;
+  box-shadow: 0 0 20px #46BA8B;
+}
+@keyframes congrats {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 .difficulty-container {
   display: flex;
@@ -237,6 +253,11 @@ html {
 }
 .repeat-btn:hover {
   background-color: #AB82B1;
+}
+.repeat-btn:disabled {
+  background-color: #BBBBCF;
+  cursor: default;
+  color: #fff;
 }
 
 .input-text {

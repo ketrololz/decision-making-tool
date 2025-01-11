@@ -12,24 +12,30 @@ let roundNum = 1;
 let currentAttemp = 0;
 let pressedKey = '';
 let inputCount = 0;
+let isGameStopped = false;
 
-function startRound(roundNum, input) {
+function startRound(roundNum, title) {
   const sequenceLength = 2 * roundNum;
   const sequence = generateSequence(keyboardContainer.dataset.diff, sequenceLength);
 
   showSequence(sequence);
-  switchTitleToInput();
-  
+  switchTitleToInput(title);
+
   input.textContent = '_'.repeat(sequenceLength);
   difficultyButtons.forEach((e) => { if (!e.classList.contains('active-difficulty')) disableButton(e) });
   disableButton(newGameButton);
 
-  document.addEventListener('keydown', (key) => { 
-    if (pressedKey) {
+  document.addEventListener('keydown', (key) => {
+    if (pressedKey || isGameStopped) {
       return;
     }
     regUserInputByDifficulty(key, keyboardContainer.dataset.diff, sequence);
-    inputCount += 1;
+  });
+
+  repeatGameBtn.addEventListener('click', () => {
+    showSequence(sequence);
+    input.textContent = '_'.repeat(sequenceLength);
+    inputCount = 0;
   });
 }
 
@@ -61,7 +67,7 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
     case 'hard':
       keys = '1234567890QWERTYUIOPASDFGHJKLZXCVBNM';
       break;
-    default: 
+    default:
       return;
   }
 
@@ -69,16 +75,28 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
 
   if (keysArr.includes(String.fromCharCode(key.keyCode))) {
     pressedKey = String.fromCharCode(key.keyCode);
-    console.log(sequence);
-    console.log(pressedKey);
-    
-      if (pressedKey === sequence[inputCount]) {
-        updateInput(pressedKey);
-      } else {
-        updateInput('×');
-        shake();
-        changeAttempColor(attempIcons);
-      }
+
+    if (inputCount >= sequence.length) {
+      return;
+    }
+    if (pressedKey === sequence[inputCount] && inputCount === sequence.length - 1) {
+      updateInput(pressedKey);
+      congrats();
+    }
+
+    if (pressedKey === sequence[inputCount]) {
+      updateInput(pressedKey);
+    }
+
+    if (!(pressedKey === sequence[inputCount])) {
+      updateInput('×');
+      shake();
+      changeAttempColor(attempIcons);
+      isGameStopped = true;
+
+    }
+
+    inputCount += 1;
 
     return key;
   }
@@ -92,7 +110,7 @@ function enableButton(button) {
   button.disabled = 'false';
 }
 
-function switchTitleToInput() {
+function switchTitleToInput(title) {
   title.remove();
   gameFieldContainer.insertBefore(input, keyboardContainer);
 }
@@ -108,7 +126,15 @@ function shake() {
   setTimeout(() => { gameFieldContainer.classList.remove('shake') }, 300);
 }
 
+function congrats() {
+  gameFieldContainer.classList.add('congratulations');
+}
+
 function changeAttempColor(attempContainer, index = 0) {
+  if (!attempContainer[index]) {
+    return;
+  }
+
   if (!attempContainer[index].classList.contains('spent')) {
     attempContainer[index].classList.add('spent');
     return;
