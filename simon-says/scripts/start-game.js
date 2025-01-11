@@ -17,7 +17,6 @@ startGameBtn.addEventListener('click', () => startGame());
 function startGame() {
   createGameField();
   keyboardContainer.childNodes.forEach((e) => e.classList.add('keyboard-hover'));
-  bodyElem.classList.add('playing');
   rounds.dataset.round = '1';
   startRound(1, input);
 }

@@ -25,6 +25,7 @@ const repeatGameBtn = createElem({
 
 function startRound(roundNum, input) {
   currentSequence = [];
+  isGameStopped = false;
 
   const sequenceLength = 2 * roundNum;
   const sequence = generateSequence(keyboardContainer.dataset.diff, sequenceLength);
@@ -270,6 +271,7 @@ const newGameButton = createElem({
 newGameButton.addEventListener('click', () => {
   clearData();
   createInitialScreen();
+  isGameStopped = true;
   round = 1;
 })
 
