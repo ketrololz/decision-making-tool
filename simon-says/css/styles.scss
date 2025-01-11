@@ -242,9 +242,16 @@ html {
     background-color: $magenta;
     color: $white;
   }
+
+  &:disabled:not(.highlight) {
+    cursor: default;
+    // background-color: $disabled;
+    opacity: 0.7;
+    // color: $white;
+  }
 }
 
-.keyboard-hover:not(.highlight, .blocked):hover {
+.keyboard-hover:not(.highlight, .blocked, :disabled, .correct, .incorrect):hover {
   cursor: pointer;
   background-color: $white;
 }

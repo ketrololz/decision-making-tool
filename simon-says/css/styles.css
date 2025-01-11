@@ -213,8 +213,12 @@ html {
   background-color: #CE347E;
   color: #fff;
 }
+.keyboard-btn:disabled:not(.highlight) {
+  cursor: default;
+  opacity: 0.7;
+}
 
-.keyboard-hover:not(.highlight, .blocked):hover {
+.keyboard-hover:not(.highlight, .blocked, :disabled, .correct, .incorrect):hover {
   cursor: pointer;
   background-color: #fff;
 }

@@ -15,6 +15,7 @@ let pressedKey = '';
 let inputCount = 0;
 let isGameStopped = false;
 let currentSequence = [];
+let isShowingSequence = false;
 
 const repeatGameBtn = createElem({
   tag: 'button',
@@ -51,7 +52,7 @@ repeatGameBtn.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (key) => {
-  if (pressedKey || isGameStopped) {
+  if (pressedKey || isGameStopped || isShowingSequence) {
     return;
   }
   const keyValue = String.fromCharCode(key.keyCode);
@@ -63,7 +64,7 @@ keyboardContainer.addEventListener('click', (e) => {
     return;
   }
 
-  if (pressedKey || isGameStopped) {
+  if (pressedKey || isGameStopped || isShowingSequence) {
     return;
   }
 
@@ -88,13 +89,31 @@ function nextRound() {
   }
 }
 
-function showSequence(sequence) {
-  sequence.forEach((e, i) => showKey(e, i + 1, 1000));
+function delay(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 
-  function showKey(key, i, timeout) {
-    setTimeout(() => document.getElementById(key.toUpperCase()).classList.add('highlight'), timeout * i);
-    setTimeout(() => document.getElementById(key.toUpperCase()).classList.remove('highlight'), (timeout * i) + timeout - 300);
+async function showSequence(sequence) {
+
+  isShowingSequence = true;
+  keyboardContainer.childNodes.forEach((e) => disableButton(e));
+
+  for (const char of sequence) {
+    showKey(char);
+    await delay(700).then(() => stopShowing(char));
+    await delay(300);
   }
+
+  function showKey(key) {
+    document.getElementById(key.toUpperCase()).classList.add('highlight');
+  }
+
+  function stopShowing(key) {
+    document.getElementById(key.toUpperCase()).classList.remove('highlight');
+  }
+
+  keyboardContainer.childNodes.forEach((e) => enableButton(e));
+  isShowingSequence = false;
 }
 
 document.addEventListener('keyup', (key) => {
