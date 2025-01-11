@@ -205,6 +205,14 @@ html {
     height: 50px;
   }
 }
+.keyboard-btn.correct {
+  background-color: #46BA8B;
+  color: #fff;
+}
+.keyboard-btn.incorrect {
+  background-color: #CE347E;
+  color: #fff;
+}
 
 .keyboard-hover > :hover {
   cursor: pointer;

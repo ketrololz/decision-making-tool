@@ -9,6 +9,11 @@ const nextGameButton = createElem({
 })
 
 function endRound(result, input) {
+  if (result === 'total-win') {
+    changeButton(repeatGameBtn, nextGameButton);
+    input.textContent = 'UNSTOPPABLE!'
+  }
+
   if (result === 'win') {
     changeButton(repeatGameBtn, nextGameButton);
     input.textContent = 'YOU WIN!'

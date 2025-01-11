@@ -40,9 +40,6 @@ function startRound(roundNum, input) {
   input.textContent = '_'.repeat(sequenceLength);
   difficultyButtons.forEach((e) => { if (!e.classList.contains('active-difficulty')) disableButton(e) });
   disableButton(newGameButton);
-  
-  console.log('seq', sequence)
-  
 }
 
 repeatGameBtn.addEventListener('click', () => {
@@ -68,9 +65,11 @@ function clearData() {
 }
 
 function nextRound() {
-  round += 1;
-  rounds.textContent = `${round}/5`;
-  startRound(round, input);
+  if (round < 5) {
+    round += 1;
+    rounds.textContent = `${round}/5`;
+    startRound(round, input);
+  }
 }
 
 function showSequence(sequence) {
@@ -113,14 +112,23 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
     if (inputCount >= sequence.length) {
       return;
     }
+    if (pressedKey === sequence[inputCount] && inputCount === sequence.length - 1 && round === 5) {
+      updateInput(pressedKey);
+      congrats();
+      endRound('total-win', input);
+      showActiveKey(pressedKey, 'correct');
+    }
+
     if (pressedKey === sequence[inputCount] && inputCount === sequence.length - 1) {
       updateInput(pressedKey);
       congrats();
       endRound('win', input);
+      showActiveKey(pressedKey, 'correct');
     }
 
     if (pressedKey === sequence[inputCount]) {
       updateInput(pressedKey);
+      showActiveKey(pressedKey, 'correct');
     }
 
     if (!(pressedKey === sequence[inputCount])) {
@@ -129,10 +137,12 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
       changeAttempColor(attempIcons);
       isGameStopped = true;
       currentAttemp += 1;
+      showActiveKey(pressedKey, 'incorrect');
     }
 
     if(currentAttemp >= 2) {
       endRound('lose', input);
+      showActiveKey(pressedKey, 'incorrect');
     }
 
     inputCount += 1;
@@ -142,13 +152,11 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
 }
 
 function disableButton(button) { 
-  button.disabled = 'true';
+  button.disabled = true;
 }
 
 function enableButton(button) {
-  if (button.disabled) {
-    button.disabled = 'false';
-  }
+    button.disabled = false;
 }
 
 function updateInput(char) {
@@ -184,5 +192,17 @@ const input = createElem({
   text: '__',
   classes: ['input-text'],
 });
+
+function showActiveKey(key, status) {
+  const currentKey = document.getElementById(key);
+
+  if (status === 'incorrect') {
+    currentKey.classList.add('incorrect');
+    setTimeout(() => { currentKey.classList.remove('incorrect') }, 300);
+  }
+  
+  currentKey.classList.add('correct');
+  setTimeout(() => { currentKey.classList.remove('correct') }, 300);
+}
 
 export { startRound, disableButton, input, nextRound, repeatGameBtn };
