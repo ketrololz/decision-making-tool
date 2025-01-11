@@ -40,6 +40,7 @@ html {
   font-weight: 500;
   font-size: 30px;
   height: 100dvh;
+  overflow-x: hidden;
 
   @media screen and (max-width: 768px) {
     padding: 10px 5px;
@@ -59,6 +60,32 @@ html {
 
   @media screen and (max-width: 768px) {
     padding: 10px;
+  }
+
+  &.shake {
+    animation: shaking 0.2s ease-in;
+  }
+
+  @keyframes shaking {
+    0% {
+      transform: translateX(0);
+    }
+
+    20% {
+      transform: translateX(8px) translateY(6px) rotate(1deg);
+    }
+
+    40% {
+      transform: translateX(4px) translateY(1px) rotate(0.5deg);
+    }
+
+    60% {
+      transform: translateX(1px) translateY(5px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
   }
 }
 
@@ -80,7 +107,7 @@ html {
 .difficulty-button {
   background-color: $tab-light;
   color: $text;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 500;
   transition: background-color .2s ease;
   
@@ -137,6 +164,15 @@ html {
   gap: 10px;
 }
 
+.attemp {
+  fill: $disabled;
+  transition: fill .2s ease-in;
+}
+
+.spent {
+  fill: $magenta;
+}
+
 .rounds {
   font-size: 2.2rem;
 }
@@ -185,6 +221,7 @@ html {
 
 .start-game-btn {
   background-color: $green;
+  font-size: 2rem;
   color: $white;
   max-width: 400px;
   width: 100%;
@@ -206,6 +243,7 @@ html {
 
 .repeat-btn {
   background-color: $purple;
+  font-size: 2rem;
   color: $white;
   max-width: 400px;
   width: 100%;

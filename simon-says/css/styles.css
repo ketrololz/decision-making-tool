@@ -23,6 +23,7 @@ html {
   font-weight: 500;
   font-size: 30px;
   height: 100dvh;
+  overflow-x: hidden;
 }
 @media screen and (max-width: 768px) {
   .background {
@@ -46,6 +47,26 @@ html {
     padding: 10px;
   }
 }
+.game-field-container.shake {
+  animation: shaking 0.2s ease-in;
+}
+@keyframes shaking {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(8px) translateY(6px) rotate(1deg);
+  }
+  40% {
+    transform: translateX(4px) translateY(1px) rotate(0.5deg);
+  }
+  60% {
+    transform: translateX(1px) translateY(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
 .difficulty-container {
   display: flex;
@@ -65,7 +86,7 @@ html {
 .difficulty-button {
   background-color: #D4D4ED;
   color: #595986;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 500;
   transition: background-color 0.2s ease;
 }
@@ -115,6 +136,15 @@ html {
 .attemps-container {
   display: flex;
   gap: 10px;
+}
+
+.attemp {
+  fill: #BBBBCF;
+  transition: fill 0.2s ease-in;
+}
+
+.spent {
+  fill: #CE347E;
 }
 
 .rounds {
@@ -167,6 +197,7 @@ html {
 
 .start-game-btn {
   background-color: #46BA8B;
+  font-size: 2rem;
   color: #fff;
   max-width: 400px;
   width: 100%;
@@ -188,6 +219,7 @@ html {
 
 .repeat-btn {
   background-color: #927197;
+  font-size: 2rem;
   color: #fff;
   max-width: 400px;
   width: 100%;

@@ -6,8 +6,10 @@ import { gameFieldContainer } from "./init.js";
 import { title } from "./init.js";
 import { newGameButton } from "./new-game.js";
 import { createElem } from "./create-element.js";
+import { attempIcons } from "./top-bar.js";
 
 let roundNum = 1;
+let currentAttemp = 0;
 let pressedKey = '';
 let inputCount = 0;
 
@@ -17,7 +19,6 @@ function startRound(roundNum, input) {
 
   showSequence(sequence);
   switchTitleToInput();
-
   
   input.textContent = '_'.repeat(sequenceLength);
   difficultyButtons.forEach((e) => { if (!e.classList.contains('active-difficulty')) disableButton(e) });
@@ -37,7 +38,7 @@ function showSequence(sequence) {
 
   function showKey(key, i, timeout) {
     setTimeout(() => document.getElementById(key.toUpperCase()).classList.add('highlight'), timeout * i);
-    setTimeout(() => document.getElementById(key.toUpperCase()).classList.remove('highlight'), (timeout * i) + timeout);
+    setTimeout(() => document.getElementById(key.toUpperCase()).classList.remove('highlight'), (timeout * i) + timeout - 300);
   }
 }
 
@@ -68,13 +69,15 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
 
   if (keysArr.includes(String.fromCharCode(key.keyCode))) {
     pressedKey = String.fromCharCode(key.keyCode);
-    console.log(sequence)
-    console.log(pressedKey)
+    console.log(sequence);
+    console.log(pressedKey);
     
       if (pressedKey === sequence[inputCount]) {
-        console.log('ye')
+        updateInput(pressedKey);
       } else {
-        console.log('no')
+        updateInput('×');
+        shake();
+        changeAttempColor(attempIcons);
       }
 
     return key;
@@ -90,8 +93,28 @@ function enableButton(button) {
 }
 
 function switchTitleToInput() {
-  title.remove()
+  title.remove();
   gameFieldContainer.insertBefore(input, keyboardContainer);
+}
+
+function updateInput(char) {
+  const inputArr = input.textContent.split('');
+  inputArr[inputArr.indexOf('_')] = char;
+  input.textContent = inputArr.join('');
+}
+
+function shake() {
+  gameFieldContainer.classList.add('shake');
+  setTimeout(() => { gameFieldContainer.classList.remove('shake') }, 300);
+}
+
+function changeAttempColor(attempContainer, index = 0) {
+  if (!attempContainer[index].classList.contains('spent')) {
+    attempContainer[index].classList.add('spent');
+    return;
+  }
+
+  else changeAttempColor(attempContainer, index += 1);
 }
 
 const input = createElem({
