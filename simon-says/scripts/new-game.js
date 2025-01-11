@@ -12,6 +12,7 @@ function createInitialScreen() {
   newGameButton.remove();
   difficultyButtons.forEach((e) => e.disabled = false);
   keyboardContainer.childNodes.forEach((e) => e.classList.remove('keyboard-hover'));
+  gameFieldContainer.classList.remove('congratulations');
 
   gameFieldContainer.append(topBar);
   gameFieldContainer.append(title);
