@@ -9,14 +9,43 @@ const nextGameButton = createElem({
 })
 
 function endRound(result, input) {
-  if (result === 'total-win') {
-    changeButton(repeatGameBtn, nextGameButton);
-    input.textContent = 'UNSTOPPABLE!'
+  if (result === 'win') {
+    disableButton(repeatGameBtn);
+    input.textContent = 'YOU WIN!'
+    return;
   }
 
-  if (result === 'win') {
+  if (result === 'correct') {
     changeButton(repeatGameBtn, nextGameButton);
-    input.textContent = 'YOU WIN!'
+
+    let message = 'GOOD';
+    const randNum = Math.floor(Math.random() * 6);
+    console.log(randNum)
+
+    switch (randNum) {
+      case 0:
+        message = 'NICE';
+        break;
+      case 1:
+        message = 'GREAT';
+        break;
+      case 2:
+        message = 'FINE';
+        break;
+      case 3:
+        message = 'VERY GOOD';
+        break;
+      case 4:
+        message = 'PERFECT';
+        break;
+      case 5:
+        message = 'WELL DONE';
+        break;
+      default: 
+        message = 'GOOD';
+    }
+
+    input.textContent = message;
   }
 
   if (result === 'lose') {

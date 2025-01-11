@@ -37,6 +37,7 @@ function startRound(roundNum, input) {
   gameFieldContainer.classList.remove('congratulations');
   
   showSequence(sequence);
+  console.log(sequence);
   
   input.textContent = '_'.repeat(sequenceLength);
   difficultyButtons.forEach((e) => { if (!e.classList.contains('active-difficulty')) disableButton(e) });
@@ -59,7 +60,7 @@ document.addEventListener('keydown', (key) => {
   regUserInputByDifficulty(keyValue, keyboardContainer.dataset.diff, currentSequence);
 }); 
 
-keyboardContainer.addEventListener('click', (e) => {
+keyboardContainer.addEventListener('mousedown', (e) => {
   if (e.target.tagName !== 'BUTTON') {
     return;
   }
@@ -100,6 +101,7 @@ async function showSequence(sequence) {
   isShowingSequence = true;
   keyboardContainer.childNodes.forEach((e) => disableButton(e));
   disableButton(newGameButton);
+  disableButton(repeatGameBtn);
 
   for (const char of sequence) {
     showKey(char);
@@ -117,6 +119,7 @@ async function showSequence(sequence) {
 
   keyboardContainer.childNodes.forEach((e) => enableButton(e));
   enableButton(newGameButton);
+  enableButton(repeatGameBtn);
   isShowingSequence = false;
 }
 
@@ -151,17 +154,19 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
     if (inputCount >= sequence.length) {
       return;
     }
+
     if (pressedKey === sequence[inputCount] && inputCount === sequence.length - 1 && round === 5) {
       updateInput(pressedKey);
       congrats();
-      endRound('total-win', input);
+      endRound('win', input);
       showActiveKey(pressedKey, 'correct');
+      return;
     }
 
     if (pressedKey === sequence[inputCount] && inputCount === sequence.length - 1) {
       updateInput(pressedKey);
       congrats();
-      endRound('win', input);
+      endRound('correct', input);
       showActiveKey(pressedKey, 'correct');
     }
 
@@ -237,11 +242,11 @@ function showActiveKey(key, status) {
 
   if (status === 'incorrect') {
     currentKey.classList.add('incorrect');
-    setTimeout(() => { currentKey.classList.remove('incorrect') }, 300);
+    setTimeout(() => { currentKey.classList.remove('incorrect') }, 200);
   }
   
   currentKey.classList.add('correct');
-  setTimeout(() => { currentKey.classList.remove('correct') }, 300);
+  setTimeout(() => { currentKey.classList.remove('correct') }, 200);
 }
 
 const newGameButton = createElem({
