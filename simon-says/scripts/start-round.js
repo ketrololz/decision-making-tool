@@ -46,11 +46,11 @@ function startRound(roundNum, input) {
 }
 
 repeatGameBtn.addEventListener('click', () => {
+  disableButton(repeatGameBtn);
   showSequence(currentSequence);
   input.textContent = '_'.repeat(currentSequence.length);
   inputCount = 0;
   isGameStopped = false;
-  disableButton(repeatGameBtn);
 });
 
 document.addEventListener('keydown', (key) => {
@@ -100,6 +100,12 @@ function delay(time) {
 async function showSequence(sequence) {
 
   isShowingSequence = true;
+  let isDisabled = false;
+
+  if (repeatGameBtn.disabled) {
+    isDisabled = true;
+  }
+
   keyboardContainer.childNodes.forEach((e) => disableButton(e));
   disableButton(newGameButton);
   disableButton(repeatGameBtn);
@@ -121,7 +127,7 @@ async function showSequence(sequence) {
   keyboardContainer.childNodes.forEach((e) => enableButton(e));
   keyboardContainer.childNodes.forEach((e) => e.classList.add('keyboard-hover'));
   enableButton(newGameButton);
-  if (currentAttemp < 1) {
+  if (!isDisabled) {
     enableButton(repeatGameBtn);
   }
   isShowingSequence = false;
@@ -185,6 +191,7 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
       changeAttempColor(attempIcons);
       isGameStopped = true;
       currentAttemp += 1;
+      enableButton(repeatGameBtn);
       keyboardContainer.childNodes.forEach((e) => e.classList.remove('keyboard-hover'));
       showActiveKey(pressedKey, 'incorrect');
     }
