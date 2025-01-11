@@ -20,7 +20,6 @@ function endRound(result, input) {
 
     let message = 'GOOD';
     const randNum = Math.floor(Math.random() * 6);
-    console.log(randNum)
 
     switch (randNum) {
       case 0:
