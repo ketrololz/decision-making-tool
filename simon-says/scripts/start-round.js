@@ -30,6 +30,7 @@ function startRound(roundNum, input) {
   const sequence = generateSequence(keyboardContainer.dataset.diff, sequenceLength);
 
   sequence.forEach((e) => currentSequence.push(e));
+  keyboardContainer.childNodes.forEach((e) => e.classList.add('keyboard-hover'));
 
   enableButton(repeatGameBtn);
   clearData();
@@ -118,6 +119,7 @@ async function showSequence(sequence) {
   }
 
   keyboardContainer.childNodes.forEach((e) => enableButton(e));
+  keyboardContainer.childNodes.forEach((e) => e.classList.add('keyboard-hover'));
   enableButton(newGameButton);
   if (currentAttemp < 1) {
     enableButton(repeatGameBtn);
@@ -183,6 +185,7 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
       changeAttempColor(attempIcons);
       isGameStopped = true;
       currentAttemp += 1;
+      keyboardContainer.childNodes.forEach((e) => e.classList.remove('keyboard-hover'));
       showActiveKey(pressedKey, 'incorrect');
     }
 

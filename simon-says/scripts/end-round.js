@@ -1,4 +1,5 @@
 import { createElem } from "./create-element.js";
+import { keyboardContainer } from "./difficulty-selector.js";
 import { changeButton, repeatGameBtn } from "./start-game.js";
 import { disableButton, nextRound } from "./start-round.js";
 
@@ -50,7 +51,9 @@ function endRound(result, input) {
   if (result === 'lose') {
     disableButton(repeatGameBtn);
     input.textContent = 'YOU LOSE :('
-  }
+  } 
+
+  keyboardContainer.childNodes.forEach((e) => e.classList.remove('keyboard-hover'));
 }
 
 export { endRound, nextGameButton };
