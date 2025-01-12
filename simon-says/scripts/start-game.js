@@ -1,6 +1,6 @@
 import { gameFieldContainer } from "./init.js";
 import { createElem } from "./create-element.js";
-import { topBar, attempsContainer, attempIcons, rounds } from "./top-bar.js";
+import { topBar, attemptsContainer, attemptIcons, rounds } from "./top-bar.js";
 import { difficultyContainer, keyboardContainer } from "./difficulty-selector.js";
 import { bodyElem } from "./init.js";
 import { title } from "./init.js";
@@ -22,8 +22,8 @@ function startGame() {
 }
 
 function createGameField() {
-  topBar.append(attempsContainer);
-  attempIcons.forEach((e) => attempsContainer.append(e));
+  topBar.append(attemptsContainer);
+  attemptIcons.forEach((e) => attemptsContainer.append(e));
   topBar.append(rounds);
   difficultyContainer.append(newGameButton);
   changeButton(startGameBtn);

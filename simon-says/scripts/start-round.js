@@ -6,11 +6,11 @@ import { gameFieldContainer } from "./init.js";
 import { title } from "./init.js";
 import { createInitialScreen } from "./new-game.js";
 import { createElem } from "./create-element.js";
-import { attempIcons, rounds } from "./top-bar.js";
+import { attemptIcons, rounds } from "./top-bar.js";
 import { endRound, nextGameButton } from "./end-round.js";
 
 let round = 1;
-let currentAttemp = 0;
+let currentAttempt = 0;
 let pressedKey = '';
 let inputCount = 0;
 let isGameStopped = false;
@@ -79,11 +79,11 @@ keyboardContainer.addEventListener('mousedown', (e) => {
 nextGameButton.addEventListener('click', () => nextRound());
 
 function clearData() {
-  currentAttemp = 0;
+  currentAttempt = 0;
   inputCount = 0;
   isGameStopped = false;
   rounds.textContent = `${round}/5`;
-  attempIcons.forEach((e) => e.classList.remove('spent'));
+  attemptIcons.forEach((e) => e.classList.remove('spent'));
 }
 
 function nextRound() {
@@ -189,15 +189,15 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
     if (!(pressedKey === sequence[inputCount])) {
       updateInput('×');
       shake();
-      changeAttempColor(attempIcons);
+      changeAttemptColor(attemptIcons);
       isGameStopped = true;
-      currentAttemp += 1;
+      currentAttempt += 1;
       enableButton(repeatGameBtn);
       keyboardContainer.childNodes.forEach((e) => e.classList.remove('keyboard-hover'));
       showActiveKey(pressedKey, 'incorrect');
     }
 
-    if (currentAttemp >= 2) {
+    if (currentAttempt >= 2) {
       endRound('lose', input);
       showActiveKey(pressedKey, 'incorrect');
     }
@@ -231,17 +231,17 @@ function congrats() {
   gameFieldContainer.classList.add('congratulations');
 }
 
-function changeAttempColor(attempContainer, index = 0) {
-  if (!attempContainer[index]) {
+function changeAttemptColor(attemptContainer, index = 0) {
+  if (!attemptContainer[index]) {
     return;
   }
 
-  if (!attempContainer[index].classList.contains('spent')) {
-    attempContainer[index].classList.add('spent');
+  if (!attemptContainer[index].classList.contains('spent')) {
+    attemptContainer[index].classList.add('spent');
     return;
   }
 
-  else changeAttempColor(attempContainer, index += 1);
+  else changeAttemptColor(attemptContainer, index += 1);
 }
 
 const input = createElem({

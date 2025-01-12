@@ -187,12 +187,12 @@ html {
   height: 6dvh;
 }
 
-.attemps-container {
+.attempts-container {
   display: flex;
   gap: 10px;
 }
 
-.attemp {
+.attempt {
   fill: $disabled;
   transition: fill .2s ease-in;
 }
