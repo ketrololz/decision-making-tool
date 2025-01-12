@@ -49,6 +49,12 @@ function startRound(roundNum, input) {
 repeatGameBtn.addEventListener('click', () => {
   disableButton(repeatGameBtn);
   showSequence(currentSequence);
+
+  if (currentAttempt < 1) {
+    currentAttempt += 1;
+    changeAttemptColor(attemptIcons);
+  }
+
   input.textContent = '_'.repeat(currentSequence.length);
   inputCount = 0;
   isGameStopped = false;
