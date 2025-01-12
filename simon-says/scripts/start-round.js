@@ -8,6 +8,7 @@ import { createInitialScreen } from "./new-game.js";
 import { createElem } from "./create-element.js";
 import { attemptIcons, rounds } from "./top-bar.js";
 import { endRound, nextGameButton } from "./end-round.js";
+import { playSound, clickSound, wrongSound, correctSound } from "./sound.js";
 
 let round = 1;
 let currentAttempt = 0;
@@ -82,6 +83,7 @@ keyboardContainer.addEventListener('mousedown', (e) => {
   pressedKey = '';
 })
 
+nextGameButton.addEventListener('click', () => playSound(clickSound));
 nextGameButton.addEventListener('click', () => nextRound());
 
 function clearData() {
@@ -261,11 +263,13 @@ function showActiveKey(key, status) {
 
   if (status === 'incorrect') {
     currentKey.classList.add('incorrect');
+    playSound(wrongSound);
     setTimeout(() => { currentKey.classList.remove('incorrect') }, 200);
+  } else {
+    currentKey.classList.add('correct');
+    playSound(correctSound);
+    setTimeout(() => { currentKey.classList.remove('correct') }, 200);
   }
-
-  currentKey.classList.add('correct');
-  setTimeout(() => { currentKey.classList.remove('correct') }, 200);
 }
 
 const newGameButton = createElem({
@@ -274,11 +278,18 @@ const newGameButton = createElem({
   classes: ['new-game-button', 'button'],
 });
 
+// const click = new Audio('./sounds/click.wav');
+
+newGameButton.addEventListener('click', () => {
+  playSound(clickSound);
+})
+
 newGameButton.addEventListener('click', () => {
   clearData();
   createInitialScreen();
   isGameStopped = true;
   round = 1;
 })
+
 
 export { startRound, disableButton, input, nextRound, repeatGameBtn, clearData, newGameButton };
