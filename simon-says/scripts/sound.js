@@ -1,4 +1,4 @@
-import { difficultyButtons, keyboardContainer } from "./difficulty-selector.js";
+import { difficultyButtons } from "./difficulty-selector.js";
 import { startGameBtn, repeatGameBtn } from "./start-game.js";
 
 const clickSound = new Audio('./sounds/click.wav');
@@ -12,9 +12,8 @@ startGameBtn.addEventListener('mousedown', () => playSound(clickSound));
 repeatGameBtn.addEventListener('mousedown', () => playSound(clickSound));
 
 async function playSound(sound) {
+  sound.currentTime = 0;
   await sound.play();
 }
-
-
 
 export { playSound, clickSound, wrongSound, correctSound, winSound }

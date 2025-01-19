@@ -1,9 +1,8 @@
 import { generateSequence } from "./generate-sequence.js";
 import { keyboardContainer } from "./difficulty-selector.js";
-import { startGameBtn, changeButton } from "./start-game.js";
+import { changeButton } from "./start-game.js";
 import { difficultyButtons } from "./difficulty-selector.js";
 import { gameFieldContainer } from "./init.js";
-import { title } from "./init.js";
 import { createInitialScreen } from "./new-game.js";
 import { createElem } from "./create-element.js";
 import { attemptIcons, rounds } from "./top-bar.js";
@@ -179,7 +178,8 @@ function regUserInputByDifficulty(key, difficulty, sequence) {
       congrats();
       endRound('win', input);
       showActiveKey(pressedKey, 'correct');
-      return;
+      inputCount += 1;
+      return; 
     }
 
     if (pressedKey === sequence[inputCount] && inputCount === sequence.length - 1) {
@@ -277,8 +277,6 @@ const newGameButton = createElem({
   text: 'New game',
   classes: ['new-game-button', 'button'],
 });
-
-// const click = new Audio('./sounds/click.wav');
 
 newGameButton.addEventListener('click', () => {
   playSound(clickSound);

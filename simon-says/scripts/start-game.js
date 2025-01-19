@@ -2,7 +2,6 @@ import { gameFieldContainer } from "./init.js";
 import { createElem } from "./create-element.js";
 import { topBar, attemptsContainer, attemptIcons, rounds } from "./top-bar.js";
 import { difficultyContainer, keyboardContainer } from "./difficulty-selector.js";
-import { bodyElem } from "./init.js";
 import { title } from "./init.js";
 import { startRound, input, repeatGameBtn, newGameButton } from "./start-round.js";
 

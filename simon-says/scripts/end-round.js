@@ -1,7 +1,7 @@
 import { createElem } from "./create-element.js";
 import { keyboardContainer } from "./difficulty-selector.js";
 import { changeButton, repeatGameBtn } from "./start-game.js";
-import { disableButton, nextRound } from "./start-round.js";
+import { disableButton } from "./start-round.js";
 import { playSound, winSound } from "./sound.js";
 
 const nextGameButton = createElem({
@@ -15,7 +15,6 @@ function endRound(result, input) {
     disableButton(repeatGameBtn);
     playSound(winSound);
     input.textContent = 'YOU WIN!'
-    return;
   }
 
   if (result === 'correct') {

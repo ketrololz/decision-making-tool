@@ -1,5 +1,4 @@
-import { difficultyContainer, difficultyButtons } from "./difficulty-selector.js";
-import { createElem } from './create-element.js';
+import { difficultyButtons } from "./difficulty-selector.js";
 import { gameFieldContainer, title } from "./init.js";
 import { topBar } from './top-bar.js';
 import { startGameBtn } from "./start-game.js";
