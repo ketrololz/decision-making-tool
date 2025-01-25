@@ -1,16 +1,23 @@
 import { Cell } from "./cell";
+import { Hint } from "./hints";
 
 export class Field {
   #node = null;
-  #blockSize = 0;
+  #fieldSize = 0;
+  #cellSize = 0;
 
-  constructor(blockSize = 5, cellInterval) {
+  constructor(fieldSize = 5, cellSize = 20, cellInterval = 10, ...classList) {
     const grid = document.createElement('div');
-    grid.classList.add('game-field');
-    grid.style.gridTemplateColumns = `repeat(${blockSize}, ${cellInterval}px)`;
-    grid.style.gridTemplateRows = `repeat(${blockSize}, ${cellInterval}px)`;
+    if (classList) {
+      grid.classList.add(...classList);
+    }
 
-    this.#blockSize = blockSize;
+    grid.style.gridTemplateColumns = `repeat(${fieldSize + 1}, ${cellSize}px)`;
+    grid.style.gridTemplateRows = `repeat(${fieldSize + 1}, ${cellSize}px)`;
+    grid.style.gap = `${cellInterval}px`;
+
+    this.#fieldSize = fieldSize + 1;
+    this.#cellSize = cellSize;
     this.#node = grid;
   }
 
@@ -18,15 +25,20 @@ export class Field {
     parent.append(this.#node);
   }
 
-  createCells() {
-    const cellsCount = this.#blockSize * this.#blockSize;
+  createCells(style) {
+    const cellsCount = this.#fieldSize * this.#fieldSize;
 
     for (let i = 0; i < cellsCount; i += 1) {
-      const cell = new Cell(this.#node);
+      
+      if (i === 0) {
+        const cell = new Cell(this.#node, this.#cellSize, `empty-cell`);
+      } else if (i < this.#fieldSize || i % this.#fieldSize === 0) {
+        const cell = new Hint(this.#node, this.#cellSize, `hint`);
+      } else {
+        const cell = new Cell(this.#node, this.#cellSize, `${style}`);
+      }
     }
   }
 
-  createBlock(blockCount) {
-
-  }
+  
 }

@@ -1,7 +1,21 @@
 .game-field {
   display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.hints-field {
+  display: flex;
 }
 
 .cell {
   background-color: aqua;
+}
+
+.empty-cell {
+  background-color: red;
+}
+
+.hint {
+  background-color: grey;
 }/*# sourceMappingURL=style.css.map */

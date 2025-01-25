@@ -1,5 +1,6 @@
-export class Cell {
+import { Field } from "./field";
 
+export class Hint {
   #node = null;
 
   constructor(parent, size = 10, ...classList) {
