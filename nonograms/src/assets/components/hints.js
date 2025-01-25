@@ -1,7 +1,7 @@
 import { Field } from "./field";
 
 export class Hint {
-  #node = null;
+  element = null;
 
   constructor(parent, ...classList) {
     const cell = document.createElement('div');
@@ -14,6 +14,6 @@ export class Hint {
     
     parent.append(cell);
 
-    this.#node = cell;
+    this.element = cell;
   }
 }

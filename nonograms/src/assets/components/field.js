@@ -51,15 +51,80 @@ export class Field {
     this.currFieldElements.forEach((cell) => cell.element.addEventListener('click', () => {
       cell.paint();
       this.currFieldValue[cell.position] = cell.state;
-      console.log(this.currFieldValue);
-      console.log(this.currFieldValue.flat().join('') === this.pictures.cross.flat().join(''));
-      console.log(this.currHintElements);
     }));
-    
+  }
+
+  changeHints() {
+    const hints = this.#currImageArr;
+    const verticalHints = [];
+    const horizontalHints = [];
+
+    let streak = 0;
+
+    for (let i = 0; i < hints.length; i += 1) {
+      let chunk = [];
+
+      for (let j = 0; j < hints.length; j += 1) {
+        if (hints[i][j] === 1) {
+          streak += 1;
+        }
+
+        if (hints[i][j] === 0) {
+          if (streak !== 0) {
+            chunk.push(streak)
+          };
+          streak = 0;
+        }
+
+        if (j === hints.length - 1) {
+          if (streak !== 0) {
+            chunk.push(streak)
+          };
+          streak = 0;
+          horizontalHints.push(chunk);
+          chunk = [];
+        }
+      }
+    }
+
+    for (let i = 0; i < hints.length; i += 1) {
+      let chunk = [];
+
+      for (let j = 0; j < hints.length; j += 1) {
+        if (hints[j][i] === 1) {
+          streak += 1;
+        }
+
+        if (hints[j][i] === 0) {
+          if (streak !== 0) {
+            chunk.push(streak)
+          };
+          streak = 0;
+        }
+
+        if (j === hints.length - 1) {
+          if (streak !== 0) {
+            chunk.push(streak)
+          };
+          streak = 0;
+          verticalHints.push(chunk);
+          chunk = [];
+        }
+      }
+    }
+
+    for (let i = 0; i < this.currHintElements.length; i += 1) {
+      if (i < this.currHintElements.length / 2) {
+        this.currHintElements[i].element.textContent = verticalHints[i].join(' ');
+      } else {
+        this.currHintElements[i].element.textContent = horizontalHints[i - this.currHintElements.length / 2].join(' ');
+      }
+    }
   }
 
   updateState() {
-    console.log(this.currFieldElements);
+    this.#currImageArr = this.pictures.cross;
+    this.changeHints();
   }
 
   pictures = {
