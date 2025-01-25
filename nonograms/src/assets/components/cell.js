@@ -1,6 +1,7 @@
 export class Cell {
 
-  #node = null;
+  element = null;
+  state = 0;
 
   constructor(parent, size = 10, ...classList) {
     const cell = document.createElement('div');
@@ -13,6 +14,18 @@ export class Cell {
     cell.style.height = `${size}px`;
     parent.append(cell);
 
-    this.#node = cell;
+    this.element = cell;
+  }
+
+  paint() {
+    if (this.state === 1) {
+      this.style.backgroundColor = 'aqua';
+      this.state = 0;
+      console.log(this.state)
+      return;
+    }
+    this.style.backgroundColor = 'green';
+    this.state = 1;
+    console.log(this.state)
   }
 }

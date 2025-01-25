@@ -3,15 +3,15 @@ import { Field } from "./field";
 export class Hint {
   #node = null;
 
-  constructor(parent, size = 10, ...classList) {
+  constructor(parent, ...classList) {
     const cell = document.createElement('div');
 
     if (classList) {
       cell.classList.add(classList);
     }
 
-    cell.style.width = `${size}px`;
-    cell.style.height = `${size}px`;
+    cell.textContent = '1 2 3 4 5'
+    
     parent.append(cell);
 
     this.#node = cell;

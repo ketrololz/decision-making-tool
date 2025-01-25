@@ -12,8 +12,8 @@ export class Field {
       grid.classList.add(...classList);
     }
 
-    grid.style.gridTemplateColumns = `repeat(${fieldSize + 1}, ${cellSize}px)`;
-    grid.style.gridTemplateRows = `repeat(${fieldSize + 1}, ${cellSize}px)`;
+    grid.style.gridTemplateColumns = `${cellSize * 3}px repeat(${fieldSize}, ${cellSize}px)`;
+    grid.style.gridTemplateRows = `${cellSize * 3}px repeat(${fieldSize}, ${cellSize}px)`;
     grid.style.gap = `${cellInterval}px`;
 
     this.#fieldSize = fieldSize + 1;
@@ -29,16 +29,23 @@ export class Field {
     const cellsCount = this.#fieldSize * this.#fieldSize;
 
     for (let i = 0; i < cellsCount; i += 1) {
-      
+
       if (i === 0) {
         const cell = new Cell(this.#node, this.#cellSize, `empty-cell`);
       } else if (i < this.#fieldSize || i % this.#fieldSize === 0) {
-        const cell = new Hint(this.#node, this.#cellSize, `hint`);
+        const cell = new Hint(this.#node, `hint`);
       } else {
         const cell = new Cell(this.#node, this.#cellSize, `${style}`);
+        cell.element.addEventListener('click', cell.paint);
       }
     }
   }
 
-  
+  pictures = {
+    cross: [[1, 0, 0, 0, 1], [0, 1, 0, 1, 0], [0, 0, 1, 0, 0], [0, 1, 0, 1, 0], [1, 0, 0, 0, 1]],
+  }
+
+  checkInput() {
+
+  }
 }
