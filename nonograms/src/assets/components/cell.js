@@ -2,6 +2,7 @@ export class Cell {
 
   element = null;
   state = 0;
+  position = 0;
 
   constructor(parent, size = 10, ...classList) {
     const cell = document.createElement('div');
@@ -19,13 +20,12 @@ export class Cell {
 
   paint() {
     if (this.state === 1) {
-      this.style.backgroundColor = 'aqua';
+      this.element.style.backgroundColor = 'aqua';
       this.state = 0;
-      console.log(this.state)
-      return;
+      return this.state;
     }
-    this.style.backgroundColor = 'green';
+    this.element.style.backgroundColor = 'green';
     this.state = 1;
-    console.log(this.state)
+    return this.state;
   }
 }
