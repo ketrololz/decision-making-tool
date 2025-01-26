@@ -46,12 +46,20 @@ export class Field {
         this.currFieldElements.push(cell);
         this.currFieldValue.push(cell.state);
         position += 1;
+      } 
+    } 
+    this.currFieldElements.forEach((cell) => cell.element.addEventListener('mousedown', (event) => {
+      if (event.button === 0) {
+        cell.paint();
+        this.currFieldValue[cell.position] = cell.state;
       }
-    }
-    this.currFieldElements.forEach((cell) => cell.element.addEventListener('click', () => {
-      cell.paint();
-      this.currFieldValue[cell.position] = cell.state;
+
+      if (event.button === 2) {
+        cell.markWithCross();
+        this.currFieldValue[cell.position] = cell.state;
+      }
     }));
+    window.addEventListener('contextmenu', (event) => event.preventDefault(), false);
   }
 
   changeHints() {
@@ -113,13 +121,25 @@ export class Field {
       }
     }
 
-    for (let i = 0; i < this.currHintElements.length; i += 1) {
+          for (let i = 0; i < this.currHintElements.length; i += 1) {
       if (i < this.currHintElements.length / 2) {
-        this.currHintElements[i].element.textContent = verticalHints[i].join(' ');
+        verticalHints[i].forEach((hint) => {
+          this.createHintNum(hint, i);
+        });
+        this.currHintElements[i].element.classList.add('vertical');
       } else {
-        this.currHintElements[i].element.textContent = horizontalHints[i - this.currHintElements.length / 2].join(' ');
+        horizontalHints[i - this.currHintElements.length / 2].forEach((hint) => {
+          this.createHintNum(hint, i);
+        });
       }
     }
+  }
+
+  createHintNum(value, index) {
+    const num = document.createElement('span');
+    num.textContent = value;
+    num.classList.add('hint-value')
+    this.currHintElements[index].element.append(num);
   }
 
   updateState() {

@@ -19,11 +19,25 @@
 }
 
 .hint {
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 8px;
   background-color: grey;
   width: 100%;
   height: 100%;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.cross {
+  background-color: bisque;
+}
+
+.painted {
+  background-color: black;
 }

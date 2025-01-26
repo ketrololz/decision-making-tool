@@ -9,8 +9,6 @@ export class Hint {
     if (classList) {
       cell.classList.add(classList);
     }
-
-    cell.textContent = '1 2 3 4 5'
     
     parent.append(cell);
 

@@ -20,12 +20,23 @@ export class Cell {
 
   paint() {
     if (this.state === 1) {
-      this.element.style.backgroundColor = 'aqua';
+      this.element.classList.remove('painted');
       this.state = 0;
       return this.state;
     }
-    this.element.style.backgroundColor = 'green';
+    this.element.classList.add('painted');
+    this.element.classList.remove('cross');
     this.state = 1;
     return this.state;
+  }
+
+  markWithCross() {
+    this.element.classList.toggle('cross');
+
+    if (this.state === 1) {
+      this.element.classList.remove('painted');
+      this.state = 0;
+      return this.state;
+    }
   }
 }
