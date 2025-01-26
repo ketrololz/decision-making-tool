@@ -18,6 +18,7 @@
 }
 
 .hint {
+  position: relative;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -39,4 +40,26 @@
 
 .painted {
   background-color: black;
+}
+
+.test {
+  position: relative;
+}
+.test:not(.vertical)::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background-color: blueviolet;
+  bottom: -1px;
+  left: 0;
+}
+.test.vertical::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 100px;
+  background-color: blueviolet;
+  top: 0;
+  right: -1px;
 }/*# sourceMappingURL=style.css.map */

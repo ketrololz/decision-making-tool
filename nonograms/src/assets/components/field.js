@@ -39,6 +39,7 @@ export class Field {
         const emptyCell = new Cell(this.element, this.#cellSize, `empty-cell`);
       } else if (i < this.#fieldSize || i % this.#fieldSize === 0) {
         const hint = new Hint(this.element, `hint`);
+        if (i % 5 === 0) { hint.element.classList.add('test') };
         this.currHintElements.push((hint));
       } else {
         const cell = new Cell(this.element, this.#cellSize, `${style}`);
@@ -46,8 +47,8 @@ export class Field {
         this.currFieldElements.push(cell);
         this.currFieldValue.push(cell.state);
         position += 1;
-      } 
-    } 
+      }
+    }
     this.currFieldElements.forEach((cell) => cell.element.addEventListener('mousedown', (event) => {
       if (event.button === 0) {
         cell.paint();
@@ -121,7 +122,7 @@ export class Field {
       }
     }
 
-          for (let i = 0; i < this.currHintElements.length; i += 1) {
+    for (let i = 0; i < this.currHintElements.length; i += 1) {
       if (i < this.currHintElements.length / 2) {
         verticalHints[i].forEach((hint) => {
           this.createHintNum(hint, i);
@@ -149,6 +150,7 @@ export class Field {
 
   pictures = {
     cross: [[1, 0, 0, 0, 1], [0, 1, 0, 1, 0], [0, 0, 1, 0, 0], [0, 1, 0, 1, 0], [1, 0, 0, 0, 1]],
+    bigCross: [[1,0,0,0,0,0,0,0,0,1],[0,1,0,0,0,0,0,0,1,0],[0,0,1,0,0,0,0,1,0,0],[0,0,0,1,0,0,1,0,0,0],[0,0,0,0,1,1,0,0,0,0],[0,0,0,0,1,1,0,0,0,0],[0,0,0,1,0,0,1,0,0,0],[0,0,1,0,0,0,0,1,0,0],[0,1,0,0,0,0,0,0,1,0],[1,0,0,0,0,0,0,0,0,1]],
   }
 
   choosePicture(pic) {
