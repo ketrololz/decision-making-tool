@@ -1,11 +1,24 @@
 import { Field } from './field.js';
-
+import { Selector } from './selector.js';
 
 const body = document.body;
-const gameField = new Field(5, 30, 1, 'game-field');
+const wrapper = document.createElement('div');
+wrapper.classList.add('wrapper');
 
-gameField.appendNode(body);
-gameField.createCells('cell');
+const gameField = new Field();
 
-gameField.updateState();
-// gameField.changeHints();
+gameField.appendNode(wrapper);
+body.appendChild(wrapper);
+
+gameField.createField('easy', 5, 1, 'game-field');
+
+const difficultySelector = new Selector();
+
+difficultySelector.element.addEventListener('change', (e) => {
+  gameField.clear()
+  gameField.createField(e.target.value, 5, 1, 'game-field');
+})
+
+
+difficultySelector.appendNode(wrapper);
+difficultySelector.addOptions('easy', 'medium', 'hard');

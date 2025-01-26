@@ -1,27 +1,29 @@
 import { Cell } from "./cell";
 import { Hint } from "./hints";
+import { Selector } from "./selector";
 
 export class Field {
   element = null;
   #fieldSize = 0;
   #cellSize = 0;
   #currImageArr = [];
+  #currDifficulty = 'easy';
   currFieldElements = [];
   currFieldValue = [];
   currHintElements = [];
 
-  constructor(fieldSize = 5, cellSize = 20, cellInterval = 10, ...classList) {
+  constructor(fieldSize = 5, cellSize = 1, cellInterval = 10, ...classList) {
     const grid = document.createElement('div');
-    if (classList) {
-      grid.classList.add(...classList);
-    }
+    // if (classList) {
+    //   grid.classList.add(...classList);
+    // }
 
-    grid.style.gridTemplateColumns = `${cellSize * 3}px repeat(${fieldSize}, ${cellSize}px)`;
-    grid.style.gridTemplateRows = `${cellSize * 3}px repeat(${fieldSize}, ${cellSize}px)`;
-    grid.style.gap = `${cellInterval}px`;
+    // grid.style.gridTemplateColumns = `${cellSize * 3}vmin repeat(${fieldSize}, ${cellSize}vmin)`;
+    // grid.style.gridTemplateRows = `${cellSize * 3}vmin repeat(${fieldSize}, ${cellSize}vmin)`;
+    // grid.style.gap = `${cellInterval}px`;
 
-    this.#fieldSize = fieldSize + 1;
-    this.#cellSize = cellSize;
+    // this.#fieldSize = fieldSize + 1;
+    // this.#cellSize = cellSize;
     this.element = grid;
   }
 
@@ -29,7 +31,7 @@ export class Field {
     parent.append(this.element);
   }
 
-  createCells(style) {
+  createCells() {
     const cellsCount = this.#fieldSize * this.#fieldSize;
     let position = 0;
 
@@ -42,7 +44,7 @@ export class Field {
         if (i % 5 === 0) { hint.element.classList.add('test') };
         this.currHintElements.push((hint));
       } else {
-        const cell = new Cell(this.element, this.#cellSize, `${style}`);
+        const cell = new Cell(this.element, this.#cellSize, 'cell');
         cell.position = position;
         this.currFieldElements.push(cell);
         this.currFieldValue.push(cell.state);
@@ -145,19 +147,51 @@ export class Field {
 
   updateState() {
     this.#currImageArr = this.pictures.cross;
+    this.createCells();
     this.changeHints();
   }
 
   pictures = {
     cross: [[1, 0, 0, 0, 1], [0, 1, 0, 1, 0], [0, 0, 1, 0, 0], [0, 1, 0, 1, 0], [1, 0, 0, 0, 1]],
-    bigCross: [[1,0,0,0,0,0,0,0,0,1],[0,1,0,0,0,0,0,0,1,0],[0,0,1,0,0,0,0,1,0,0],[0,0,0,1,0,0,1,0,0,0],[0,0,0,0,1,1,0,0,0,0],[0,0,0,0,1,1,0,0,0,0],[0,0,0,1,0,0,1,0,0,0],[0,0,1,0,0,0,0,1,0,0],[0,1,0,0,0,0,0,0,1,0],[1,0,0,0,0,0,0,0,0,1]],
+    bigCross: [[1,0,0,0,0,0,0,0,0,1],[0,1,0,0,0,0,0,0,1,0],[0,0,1,0,0,0,0,1,0,0],[0,0,0,1,0,0,1,0,0,0],[0,0,0,0,1,1,0,0,0,0],[0,0,0,0,1,1,0,0,0,0],[0,0,0,1,0,0,1,0,0,0],[0,0,1,0,0,0,0,1,0,0],[0,1,0,0,0,0,0,0,1,0],[1,0,0,0,0,0,0,0,0,1]]
   }
 
   choosePicture(pic) {
     this.#currImageArr = this.pictures.pic;
   }
 
+  changeDifficulty(difficulty) {
+    this.#currDifficulty = difficulty;
+  }
+
+  createField(difficulty = this.#currDifficulty, cellSize = 1, cellInterval = 10, ...classList) {
+    const fieldSize = {
+      'easy': 5,
+      'medium': 10,
+      'hard': 15,
+    }
+    
+    if (classList) {
+      this.element.classList.add(...classList);
+    }
+
+    this.element.style.gridTemplateColumns = `${cellSize * 3}vmin repeat(${fieldSize[difficulty]}, ${cellSize}vmin)`;
+    this.element.style.gridTemplateRows = `${cellSize * 3}vmin repeat(${fieldSize[difficulty]}, ${cellSize}vmin)`;
+    this.element.style.gap = `${cellInterval}px`;
+
+    this.#fieldSize = fieldSize[difficulty] + 1;
+    this.#cellSize = cellSize;
+
+    this.updateState();
+  }
+
   checkInput() {
     console.log('t', this)
+  }
+
+  clear() {
+    while (this.element.childNodes.length > 0) {
+      this.element.lastChild.remove()
+    }
   }
 }

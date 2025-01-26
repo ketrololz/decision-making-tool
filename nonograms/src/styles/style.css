@@ -1,8 +1,19 @@
+body {
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+}
+
 .game-field {
   display: grid;
   align-items: center;
   justify-items: center;
-  height: 100dvh;
 }
 
 .hints-field {
@@ -23,6 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  font-size: 2.4vmin;
   gap: 4px;
   padding: 8px;
   background-color: grey;

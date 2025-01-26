@@ -4,15 +4,15 @@ export class Cell {
   state = 0;
   position = 0;
 
-  constructor(parent, size = 10, ...classList) {
+  constructor(parent, size = 1, ...classList) {
     const cell = document.createElement('div');
 
     if (classList) {
       cell.classList.add(classList);
     }
 
-    cell.style.width = `${size}px`;
-    cell.style.height = `${size}px`;
+    cell.style.width = `${size}vmin`;
+    cell.style.height = `${size}vmin`;
     parent.append(cell);
 
     this.element = cell;
