@@ -7,7 +7,7 @@ export class Field {
   element = null;
   #fieldSize = 0;
   #cellSize = 0;
-  #currImageArr = [];
+  #currImageArr = pictures.easy.cross;
   #currDifficulty = 'easy';
   currFieldElements = [];
   currFieldValue = [];
@@ -162,17 +162,17 @@ export class Field {
     this.currHintElements = [];
     this.createCells();
 
-    if (this.#currDifficulty === 'easy') {
-      this.#currImageArr = pictures.easy.cross;
-    }
+    // if (this.#currDifficulty === 'easy') {
+    //   this.#currImageArr = pictures.easy.cross;
+    // }
 
-    if (this.#currDifficulty === 'medium') {
-      this.#currImageArr = pictures.medium.bigCross;
-    }
+    // if (this.#currDifficulty === 'medium') {
+    //   this.#currImageArr = pictures.medium.bigCross;
+    // }
 
-    if (this.#currDifficulty === 'hard') {
-      this.#currImageArr = pictures.hard.ghostBusters;
-    }
+    // if (this.#currDifficulty === 'hard') {
+    //   this.#currImageArr = pictures.hard.ghostBusters;
+    // }
 
     this.changeHints();
   }
