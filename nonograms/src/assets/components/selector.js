@@ -17,6 +17,12 @@ export class Selector{
     }
   }
 
+  clear() {
+    while (this.element.childNodes.length > 0) {
+      this.element.lastChild.remove()
+    }
+  }
+
   appendNode(parent) {
     parent.append(this.element);
   }

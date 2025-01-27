@@ -32,7 +32,7 @@ export class Field {
     parent.append(this.element);
   }
 
-  createCells(difficulty) {
+  createCells() {
     const cellsCount = this.#fieldSize * this.#fieldSize;
     let position = 0;
 
@@ -43,15 +43,15 @@ export class Field {
       } else if (i < this.#fieldSize || i % this.#fieldSize === 0) {
         const hint = new Hint(this.element, `hint`);
         if (i % 5 === 0) {
-          if (difficulty === 'easy') {
+          if (this.#currDifficulty === 'easy') {
             i < 6 ? hint.element.classList.add('line', 'vertical') : hint.element.classList.add('line');
           }
 
-          if (difficulty === 'medium') {
+          if (this.#currDifficulty === 'medium') {
             i < 11 ? hint.element.classList.add('line', 'vertical', 'medium') : hint.element.classList.add('line', 'medium');
           }
 
-          if (difficulty === 'hard') {
+          if (this.#currDifficulty === 'hard') {
             i < 16 ? hint.element.classList.add('line', 'vertical', 'hard') : hint.element.classList.add('line', 'hard');
           }
         };
@@ -158,34 +158,38 @@ export class Field {
     this.currHintElements[index].element.append(num);
   }
 
-  updateState(difficulty) {
+  updateState() {
     this.currHintElements = [];
-    this.createCells(difficulty);
+    this.createCells();
 
-    if (difficulty === 'easy') {
+    if (this.#currDifficulty === 'easy') {
       this.#currImageArr = pictures.easy.cross;
     }
 
-    if (difficulty === 'medium') {
+    if (this.#currDifficulty === 'medium') {
       this.#currImageArr = pictures.medium.bigCross;
     }
 
-    if (difficulty === 'hard') {
+    if (this.#currDifficulty === 'hard') {
       this.#currImageArr = pictures.hard.ghostBusters;
     }
 
     this.changeHints();
   }
 
-  choosePicture(pic) {
-    // this.#currImageArr = this.pictures.pic;
+  changePicture(picture) {
+    this.#currImageArr = pictures[this.#currDifficulty][picture];
   }
 
   changeDifficulty(difficulty) {
     this.#currDifficulty = difficulty;
   }
 
-  createField(difficulty = this.#currDifficulty, cellSize = 1, cellInterval = 10, ...classList) {
+  getDifficulty() {
+    return this.#currDifficulty;
+  }
+
+  createField(cellSize = 1, cellInterval = 10, ...classList) {
     const fieldSize = {
       'easy': 5,
       'medium': 10,
@@ -196,14 +200,14 @@ export class Field {
       this.element.classList.add(...classList);
     }
 
-    this.element.style.gridTemplateColumns = `${cellSize * 3}vmin repeat(${fieldSize[difficulty]}, ${cellSize}vmin)`;
-    this.element.style.gridTemplateRows = `${cellSize * 3}vmin repeat(${fieldSize[difficulty]}, ${cellSize}vmin)`;
+    this.element.style.gridTemplateColumns = `${cellSize * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize}vmin)`;
+    this.element.style.gridTemplateRows = `${cellSize * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize}vmin)`;
     this.element.style.gap = `${cellInterval}px`;
 
-    this.#fieldSize = fieldSize[difficulty] + 1;
+    this.#fieldSize = fieldSize[this.#currDifficulty] + 1;
     this.#cellSize = cellSize;
 
-    this.updateState(difficulty);
+    this.updateState(this.#currDifficulty);
   }
 
   checkInput() {
