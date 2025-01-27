@@ -31,7 +31,7 @@ export class Field {
     parent.append(this.element);
   }
 
-  createCells() {
+  createCells(difficulty) {
     const cellsCount = this.#fieldSize * this.#fieldSize;
     let position = 0;
 
@@ -41,7 +41,19 @@ export class Field {
         const emptyCell = new Cell(this.element, this.#cellSize, `empty-cell`);
       } else if (i < this.#fieldSize || i % this.#fieldSize === 0) {
         const hint = new Hint(this.element, `hint`);
-        if (i % 5 === 0) { hint.element.classList.add('test') };
+        if (i % 5 === 0) { 
+          if (difficulty === 'easy') {
+            i < 6 ? hint.element.classList.add('line', 'vertical') : hint.element.classList.add('line');
+          }
+
+          if (difficulty === 'medium') {
+            i < 11 ? hint.element.classList.add('line', 'vertical', 'medium') : hint.element.classList.add('line', 'medium');
+          }
+
+          if (difficulty === 'hard') {
+            i < 16 ? hint.element.classList.add('line', 'vertical', 'hard') : hint.element.classList.add('line', 'hard');
+          }
+        };
         this.currHintElements.push((hint));
       } else {
         const cell = new Cell(this.element, this.#cellSize, 'cell');
@@ -129,7 +141,6 @@ export class Field {
         verticalHints[i].forEach((hint) => {
           this.createHintNum(hint, i);
         });
-        this.currHintElements[i].element.classList.add('vertical');
       } else {
         horizontalHints[i - this.currHintElements.length / 2].forEach((hint) => {
           this.createHintNum(hint, i);
@@ -145,9 +156,9 @@ export class Field {
     this.currHintElements[index].element.append(num);
   }
 
-  updateState() {
+  updateState(difficulty) {
     this.#currImageArr = this.pictures.cross;
-    this.createCells();
+    this.createCells(difficulty);
     this.changeHints();
   }
 
@@ -182,7 +193,7 @@ export class Field {
     this.#fieldSize = fieldSize[difficulty] + 1;
     this.#cellSize = cellSize;
 
-    this.updateState();
+    this.updateState(difficulty);
   }
 
   checkInput() {

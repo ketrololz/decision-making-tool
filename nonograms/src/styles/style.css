@@ -54,24 +54,36 @@ body {
   background-color: black;
 }
 
-.test {
+.line {
   position: relative;
 }
-.test:not(.vertical)::after {
+.line:not(.vertical)::after {
   content: "";
   position: absolute;
-  width: 100px;
+  width: calc(40vmin + 6px);
   height: 3px;
   background-color: blueviolet;
   bottom: -1px;
   left: 0;
 }
-.test.vertical::after {
+.line.vertical::after {
   content: "";
   position: absolute;
   width: 3px;
-  height: 100px;
+  height: calc(40vmin + 6px);
   background-color: blueviolet;
   top: 0;
   right: -1px;
+}
+.line.medium:not(.vertical)::after {
+  width: calc(65vmin + 11px);
+}
+.line.medium.vertical::after {
+  height: calc(65vmin + 11px);
+}
+.line.hard:not(.vertical)::after {
+  width: calc(90vmin + 16px);
+}
+.line.hard.vertical::after {
+  height: calc(90vmin + 16px);
 }/*# sourceMappingURL=style.css.map */
