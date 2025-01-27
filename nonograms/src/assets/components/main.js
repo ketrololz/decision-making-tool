@@ -22,3 +22,4 @@ difficultySelector.element.addEventListener('change', (e) => {
 
 difficultySelector.appendNode(wrapper);
 difficultySelector.addOptions('easy', 'medium', 'hard');
+

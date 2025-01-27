@@ -21,7 +21,7 @@ body {
 }
 
 .cell {
-  background-color: aqua;
+  background-color: #D9D9D9;
 }
 
 .empty-cell {
@@ -47,11 +47,33 @@ body {
 }
 
 .cross {
-  background-color: bisque;
+  position: relative;
+}
+.cross::after {
+  content: "";
+  position: absolute;
+  width: 3vmin;
+  height: 0.5vmin;
+  transform: rotate(45deg);
+  border-radius: 2vmin;
+  top: 2.25vmin;
+  left: 1vmin;
+  background-color: #A42B2B;
+}
+.cross::before {
+  content: "";
+  position: absolute;
+  width: 3vmin;
+  height: 0.5vmin;
+  transform: rotate(-45deg);
+  border-radius: 2vmin;
+  top: 2.25vmin;
+  left: 1vmin;
+  background-color: #A42B2B;
 }
 
 .painted {
-  background-color: black;
+  background-color: #EC5A5A;
 }
 
 .line {
@@ -61,19 +83,21 @@ body {
   content: "";
   position: absolute;
   width: calc(40vmin + 6px);
-  height: 3px;
-  background-color: blueviolet;
+  height: 2px;
+  background-color: #A42B2B;
   bottom: -1px;
   left: 0;
+  z-index: 2;
 }
 .line.vertical::after {
   content: "";
   position: absolute;
-  width: 3px;
+  width: 2px;
   height: calc(40vmin + 6px);
-  background-color: blueviolet;
+  background-color: #A42B2B;
   top: 0;
   right: -1px;
+  z-index: 2;
 }
 .line.medium:not(.vertical)::after {
   width: calc(65vmin + 11px);

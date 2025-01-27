@@ -1,6 +1,7 @@
 import { Cell } from "./cell";
 import { Hint } from "./hints";
 import { Selector } from "./selector";
+import pictures from "./../nonograms.json";
 
 export class Field {
   element = null;
@@ -41,7 +42,7 @@ export class Field {
         const emptyCell = new Cell(this.element, this.#cellSize, `empty-cell`);
       } else if (i < this.#fieldSize || i % this.#fieldSize === 0) {
         const hint = new Hint(this.element, `hint`);
-        if (i % 5 === 0) { 
+        if (i % 5 === 0) {
           if (difficulty === 'easy') {
             i < 6 ? hint.element.classList.add('line', 'vertical') : hint.element.classList.add('line');
           }
@@ -141,6 +142,7 @@ export class Field {
         verticalHints[i].forEach((hint) => {
           this.createHintNum(hint, i);
         });
+        this.currHintElements[i].element.classList.add('vertical');
       } else {
         horizontalHints[i - this.currHintElements.length / 2].forEach((hint) => {
           this.createHintNum(hint, i);
@@ -157,18 +159,26 @@ export class Field {
   }
 
   updateState(difficulty) {
-    this.#currImageArr = this.pictures.cross;
+    this.currHintElements = [];
     this.createCells(difficulty);
+
+    if (difficulty === 'easy') {
+      this.#currImageArr = pictures.easy.cross;
+    }
+
+    if (difficulty === 'medium') {
+      this.#currImageArr = pictures.medium.bigCross;
+    }
+
+    if (difficulty === 'hard') {
+      this.#currImageArr = pictures.hard.ghostBusters;
+    }
+
     this.changeHints();
   }
 
-  pictures = {
-    cross: [[1, 0, 0, 0, 1], [0, 1, 0, 1, 0], [0, 0, 1, 0, 0], [0, 1, 0, 1, 0], [1, 0, 0, 0, 1]],
-    bigCross: [[1,0,0,0,0,0,0,0,0,1],[0,1,0,0,0,0,0,0,1,0],[0,0,1,0,0,0,0,1,0,0],[0,0,0,1,0,0,1,0,0,0],[0,0,0,0,1,1,0,0,0,0],[0,0,0,0,1,1,0,0,0,0],[0,0,0,1,0,0,1,0,0,0],[0,0,1,0,0,0,0,1,0,0],[0,1,0,0,0,0,0,0,1,0],[1,0,0,0,0,0,0,0,0,1]]
-  }
-
   choosePicture(pic) {
-    this.#currImageArr = this.pictures.pic;
+    // this.#currImageArr = this.pictures.pic;
   }
 
   changeDifficulty(difficulty) {
@@ -181,7 +191,7 @@ export class Field {
       'medium': 10,
       'hard': 15,
     }
-    
+
     if (classList) {
       this.element.classList.add(...classList);
     }
