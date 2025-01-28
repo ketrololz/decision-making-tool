@@ -14,6 +14,7 @@ body {
 
 .game-field {
   display: grid;
+  gap: 1px;
   align-items: center;
   justify-items: center;
 }
@@ -24,6 +25,7 @@ body {
 
 .cell {
   background-color: #D9D9D9;
+  border: solid 1px black;
 }
 
 .empty-cell {
@@ -32,9 +34,9 @@ body {
 .empty-cell::before {
   content: "";
   position: absolute;
-  width: calc(48vmin + 6px);
+  width: calc(48vmin + 5px);
   height: 2px;
-  background-color: #A42B2B;
+  background-color: black;
   bottom: -1px;
   left: 0;
   z-index: 2;
@@ -43,8 +45,8 @@ body {
   content: "";
   position: absolute;
   width: 2px;
-  height: calc(48vmin + 6px);
-  background-color: #A42B2B;
+  height: calc(48vmin + 5px);
+  background-color: black;
   top: 0;
   right: -1px;
   z-index: 2;
@@ -64,7 +66,6 @@ body {
 
 .hint {
   position: relative;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -74,8 +75,9 @@ body {
        column-gap: 4px;
   padding: 8px;
   background-color: grey;
-  width: 100%;
-  height: 100%;
+  border: solid 1px black;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
 }
 
 .vertical {
@@ -84,6 +86,7 @@ body {
 
 .cross {
   position: relative;
+  border: solid 1px black;
 }
 .cross::after {
   content: "";
@@ -94,7 +97,7 @@ body {
   border-radius: 2vmin;
   top: 2.25vmin;
   left: 1vmin;
-  background-color: #A42B2B;
+  background-color: black;
 }
 .cross::before {
   content: "";
@@ -105,7 +108,7 @@ body {
   border-radius: 2vmin;
   top: 2.25vmin;
   left: 1vmin;
-  background-color: #A42B2B;
+  background-color: black;
 }
 
 .painted {
@@ -118,9 +121,9 @@ body {
 .line:not(.vertical)::after {
   content: "";
   position: absolute;
-  width: calc(48vmin + 6px);
+  width: calc(48vmin + 5px);
   height: 2px;
-  background-color: #A42B2B;
+  background-color: black;
   bottom: -1px;
   left: 0;
   z-index: 2;
@@ -129,8 +132,8 @@ body {
   content: "";
   position: absolute;
   width: 2px;
-  height: calc(48vmin + 6px);
-  background-color: #A42B2B;
+  height: calc(48vmin + 5px);
+  background-color: black;
   top: 0;
   right: -1px;
   z-index: 2;

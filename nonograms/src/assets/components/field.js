@@ -193,7 +193,7 @@ export class Field {
     return this.#currDifficulty;
   }
 
-  createField( cellInterval = 10, ...classList) {
+  createField(...classList) {
     const fieldSize = {
       'easy': 5,
       'medium': 10,
@@ -212,7 +212,6 @@ export class Field {
 
     this.element.style.gridTemplateColumns = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
     this.element.style.gridTemplateRows = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
-    this.element.style.gap = `${cellInterval}px`;
 
     this.#fieldSize = fieldSize[this.#currDifficulty] + 1;
     this.#cellSize = cellSize[this.#currDifficulty];
