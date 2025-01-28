@@ -8,11 +8,6 @@ wrapper.classList.add('wrapper');
 
 const gameField = new Field();
 
-// gameField.appendNode(wrapper);
-// body.appendChild(wrapper);
-
-// gameField.createField(5, 1, 'game-field');
-
 const difficultySelector = new Selector();
 
 difficultySelector.element.addEventListener('change', (e) => {
@@ -27,9 +22,6 @@ difficultySelector.element.addEventListener('change', (e) => {
   }
 })
 
-// difficultySelector.appendNode(wrapper);
-// difficultySelector.addOptions('easy', 'medium', 'hard');
-
 const pictureSelector = new Selector();
 
 pictureSelector.element.addEventListener('change', (e) => {
@@ -37,9 +29,6 @@ pictureSelector.element.addEventListener('change', (e) => {
   gameField.changePicture(e.target.value)
   gameField.createField(5, 1, 'game-field');
 })
-
-// pictureSelector.appendNode(wrapper);
-// pictureSelector.addOptions('test');
 
 function initGame() {
   gameField.appendNode(wrapper);

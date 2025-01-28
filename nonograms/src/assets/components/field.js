@@ -39,7 +39,13 @@ export class Field {
     for (let i = 0; i < cellsCount; i += 1) {
 
       if (i === 0) {
-        const emptyCell = new Cell(this.element, this.#cellSize, `empty-cell`);
+        const emptyCell = new Cell(this.element, this.#cellSize * 3, `empty-cell`);
+        if (this.#currDifficulty === 'medium') {
+          emptyCell.element.classList.add('medium');
+        }
+        if (this.#currDifficulty === 'hard') {
+          emptyCell.element.classList.add('hard');
+        }
       } else if (i < this.#fieldSize || i % this.#fieldSize === 0) {
         const hint = new Hint(this.element, `hint`);
         if (i % 5 === 0) {
@@ -161,19 +167,6 @@ export class Field {
   updateState() {
     this.currHintElements = [];
     this.createCells();
-
-    // if (this.#currDifficulty === 'easy') {
-    //   this.#currImageArr = pictures.easy.cross;
-    // }
-
-    // if (this.#currDifficulty === 'medium') {
-    //   this.#currImageArr = pictures.medium.bigCross;
-    // }
-
-    // if (this.#currDifficulty === 'hard') {
-    //   this.#currImageArr = pictures.hard.ghostBusters;
-    // }
-
     this.changeHints();
   }
 

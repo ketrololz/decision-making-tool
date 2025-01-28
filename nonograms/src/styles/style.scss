@@ -29,7 +29,47 @@ body {
 }
 
 .empty-cell {
-  background-color: red;
+  position: relative;
+  // background-color: red;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: calc(40vmin + 6px);
+    height: 2px;
+    background-color: $dark-red;
+    bottom: -1px;
+    left: 0;
+    z-index: 2;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: calc(40vmin + 6px);
+    background-color: $dark-red;
+    top: 0;
+    right: -1px;
+    z-index: 2;
+  }
+
+  &.medium::before {
+    width: calc(65vmin + 11px);
+  }
+
+  &.medium::after {
+    height: calc(65vmin + 11px);
+  }
+
+  &.hard::before {
+    width: calc(90vmin + 16px);
+  }
+
+  &.hard::after {
+    height: calc(90vmin + 16px);
+  }
+
 }
 
 .hint {

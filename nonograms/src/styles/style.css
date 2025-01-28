@@ -25,7 +25,39 @@ body {
 }
 
 .empty-cell {
-  background-color: red;
+  position: relative;
+}
+.empty-cell::before {
+  content: "";
+  position: absolute;
+  width: calc(40vmin + 6px);
+  height: 2px;
+  background-color: #A42B2B;
+  bottom: -1px;
+  left: 0;
+  z-index: 2;
+}
+.empty-cell::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: calc(40vmin + 6px);
+  background-color: #A42B2B;
+  top: 0;
+  right: -1px;
+  z-index: 2;
+}
+.empty-cell.medium::before {
+  width: calc(65vmin + 11px);
+}
+.empty-cell.medium::after {
+  height: calc(65vmin + 11px);
+}
+.empty-cell.hard::before {
+  width: calc(90vmin + 16px);
+}
+.empty-cell.hard::after {
+  height: calc(90vmin + 16px);
 }
 
 .hint {
