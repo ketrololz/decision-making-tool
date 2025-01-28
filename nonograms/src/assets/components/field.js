@@ -14,6 +14,7 @@ export class Field {
   #currDifficulty = 'easy';
   currFieldElements = [];
   currFieldValue = [];
+  currFieldCrosses = [];
   currHintElements = [];
   #modal = null;
   #timer = null;
@@ -83,6 +84,7 @@ export class Field {
         }
         cell.markWithCross();
         this.currFieldValue[cell.position] = cell.state;
+        this.currFieldCrosses[cell.position] = 2;
         if (!this.#timer.isTimerOn()) this.#timer.startTimer();
         this.checkInput();
       }
@@ -255,6 +257,36 @@ export class Field {
   resetGame() {
     this.clear();
     this.updateState();
+  }
+
+  saveGame() {
+    localStorage.setItem('time', this.#timer.currTime());
+    localStorage.setItem('difficulty', this.#currDifficulty);
+    localStorage.setItem('picture', JSON.stringify(this.#currImageArr));
+    localStorage.setItem('values', JSON.stringify(this.currFieldValue));
+    localStorage.setItem('crosses', JSON.stringify(this.currFieldCrosses));
+  }
+
+  loadGame() {
+    this.clear();
+    this.#currDifficulty = localStorage.getItem('difficulty');
+    this.#currImageArr = JSON.parse(localStorage.getItem('picture'));
+    this.createField()
+    this.#timer.setTime(JSON.parse(localStorage.getItem('time')));
+    this.currFieldValue = JSON.parse(localStorage.getItem('values'));
+    this.currFieldCrosses = JSON.parse(localStorage.getItem('crosses'));
+
+    this.currFieldElements.forEach((e, i) => {
+      // e.element.classList.remove('painted', 'cross');
+      if (this.currFieldValue[i] === 1) {
+        e.element.classList.add('painted');
+      }
+
+      if (this.currFieldCrosses[i] === 2) {
+        e.element.classList.add('cross');
+      }
+    })
+
   }
 
   clear() {

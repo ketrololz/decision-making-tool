@@ -46,6 +46,28 @@ resetButton.addEventListener('mousedown', () => {
   gameField.resetGame();
 })
 
+const saveGameButton = createElem({
+  tag: 'button',
+  parent: topContainer,
+  classes: ['save-button', 'button'],
+  text: 'save game'
+})
+
+saveGameButton.addEventListener('mousedown', () => {
+  gameField.saveGame();
+})
+
+const loadGameButton = createElem({
+  tag: 'button',
+  parent: topContainer,
+  classes: ['load-button', 'button'],
+  text: 'load game'
+})
+
+loadGameButton .addEventListener('mousedown', () => {
+  gameField.loadGame();
+})
+
 difficultySelector.element.addEventListener('change', (e) => {
   gameField.clear();
   gameField.changeDifficulty(e.target.value);

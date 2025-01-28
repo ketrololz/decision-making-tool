@@ -52,6 +52,11 @@ export class Timer {
     return this.time;
   }
 
+  setTime(time) {
+    this.time = time;
+    this.updateTime();
+  }
+
   isTimerOn() {
     return this.#isTimerOn;
   }
