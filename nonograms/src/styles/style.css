@@ -173,4 +173,8 @@ body {
   top: 0;
   left: 0;
   z-index: 4;
+}
+
+.timer {
+  font-size: 5vmin;
 }/*# sourceMappingURL=style.css.map */

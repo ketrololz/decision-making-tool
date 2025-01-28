@@ -34,7 +34,9 @@ pictureSelector.element.addEventListener('change', (e) => {
 function initGame() {
   gameField.appendNode(wrapper);
   body.appendChild(wrapper);
-  gameField.createModal();
+  gameField.createModal(body);
+  gameField.createTimer(wrapper);
+
 
   gameField.createField(5, 1, 'game-field');
   difficultySelector.appendNode(wrapper);

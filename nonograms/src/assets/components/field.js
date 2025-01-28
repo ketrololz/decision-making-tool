@@ -3,6 +3,8 @@ import { Hint } from "./hints";
 import { Selector } from "./selector";
 import pictures from "./../nonograms.json";
 import { Modal } from "./modal";
+import { Timer } from "./timer";
+
 
 export class Field {
   element = null;
@@ -14,6 +16,7 @@ export class Field {
   currFieldValue = [];
   currHintElements = [];
   #modal = null;
+  #timer = null;
 
   constructor(fieldSize = 5, cellSize = 1, cellInterval = 10, ...classList) {
     const grid = document.createElement('div');
@@ -201,20 +204,28 @@ export class Field {
   checkInput() {
     if (this.currFieldValue.join('') === this.#currImageArr.flat().join('')) {
       this.#modal.showWindow();
+      this.#timer.stopTimer();
     }
   }
 
-  createModal() {
-    const body = document.body;
+  createModal(parent) {
     const modal = new Modal();
-    modal.appendNode(body);
+    modal.appendNode(parent);
     modal.getElem().addEventListener('mousedown', (e) => {if (e.target === modal.getElem()) modal.closeWindow()});
     this.#modal = modal;
   }
 
+  createTimer(parent) {
+    const timer = new Timer();
+    timer.appendNode(parent);
+    timer.getElem().textContent = '00:00';
+    timer.startTimer();
+    this.#timer = timer;
+  }
+
   clear() {
     while (this.element.childNodes.length > 0) {
-      this.element.lastChild.remove()
+      this.element.lastChild.remove();
     }
   }
 }

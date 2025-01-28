@@ -4,7 +4,6 @@ export class Modal{
   constructor() {
     const modalContainer = document.createElement('dialog');
     modalContainer.classList.add('modal-container');
-    // modalContainer.showModal();
 
     const modal = document.createElement('div');
     modal.classList.add('modal');
