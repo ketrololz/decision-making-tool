@@ -35,6 +35,17 @@ solutionButton.addEventListener('mousedown', () => {
   gameField.showSolution();
 })
 
+const resetButton = createElem({
+  tag: 'button',
+  parent: topContainer,
+  classes: ['reset-button', 'button'],
+  text: 'reset'
+})
+
+resetButton.addEventListener('mousedown', () => {
+  gameField.resetGame();
+})
+
 difficultySelector.element.addEventListener('change', (e) => {
   gameField.clear();
   gameField.changeDifficulty(e.target.value);

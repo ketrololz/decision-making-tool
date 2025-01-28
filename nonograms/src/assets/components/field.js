@@ -17,6 +17,7 @@ export class Field {
   currHintElements = [];
   #modal = null;
   #timer = null;
+  #isGameStopped = false;
 
   constructor(fieldSize = 5, cellSize = 1, cellInterval = 10, ...classList) {
     const grid = document.createElement('div');
@@ -67,6 +68,9 @@ export class Field {
     }
     this.currFieldElements.forEach((cell) => cell.element.addEventListener('mousedown', (event) => {
       if (event.button === 0) {
+        if (this.#isGameStopped) {
+          return;
+        }
         cell.paint();
         this.currFieldValue[cell.position] = cell.state;
         if (!this.#timer.isTimerOn()) this.#timer.startTimer();
@@ -74,6 +78,9 @@ export class Field {
       }
 
       if (event.button === 2) {
+        if (this.#isGameStopped) {
+          return;
+        }
         cell.markWithCross();
         this.currFieldValue[cell.position] = cell.state;
         if (!this.#timer.isTimerOn()) this.#timer.startTimer();
@@ -171,6 +178,7 @@ export class Field {
     this.currFieldValue = [];
     this.createCells();
     this.changeHints();
+    this.#isGameStopped = false;
   }
 
   changePicture(picture) {
@@ -215,6 +223,7 @@ export class Field {
   checkInput() {
     if (this.currFieldValue.join('') === this.#currImageArr.flat().join('')) {
       this.#modal.showWindow(this.#timer);
+      this.#isGameStopped = true;
       this.#timer.stopTimer();
     }
   }
@@ -234,6 +243,7 @@ export class Field {
   }
 
   showSolution() {
+    this.#isGameStopped = true;
     this.#timer.stopTimer();
     this.currFieldElements.forEach((e, i) => {
       e.element.classList.remove('painted', 'cross');
@@ -241,6 +251,11 @@ export class Field {
         e.element.classList.add('painted');
       }
     })
+  }
+
+  resetGame() {
+    this.clear();
+    this.updateState();
   }
 
   clear() {
