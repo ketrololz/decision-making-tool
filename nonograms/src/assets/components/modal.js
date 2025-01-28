@@ -1,26 +1,35 @@
-export class Selector{
+export class Modal{
   element = null;
 
   constructor() {
-    const form = document.createElement('div');
-    form.classList.add('modal');
+    const modalContainer = document.createElement('dialog');
+    modalContainer.classList.add('modal-container');
+    // modalContainer.showModal();
 
-    this.element = form;
-  }
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
 
-  addOptions(...options) {
-    for(const value of options) {
-      const option = document.createElement('option');
-      option.value = value;
-      option.textContent = value;
-      this.element.appendChild(option);
-    }
+    modalContainer.appendChild(modal);
+
+    this.element = modalContainer;
   }
 
   clear() {
     while (this.element.childNodes.length > 0) {
-      this.element.lastChild.remove()
+      this.element.lastChild.remove();
     }
+  }
+  
+  showWindow() {
+    this.element.showModal();
+  }
+
+  closeWindow() {
+    this.element.close();
+  }
+
+  getElem() {
+    return this.element;
   }
 
   appendNode(parent) {

@@ -19,7 +19,7 @@ export class Selector{
 
   clear() {
     while (this.element.childNodes.length > 0) {
-      this.element.lastChild.remove()
+      this.element.lastChild.remove();
     }
   }
 

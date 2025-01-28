@@ -2,6 +2,7 @@ import { Cell } from "./cell";
 import { Hint } from "./hints";
 import { Selector } from "./selector";
 import pictures from "./../nonograms.json";
+import { Modal } from "./modal";
 
 export class Field {
   element = null;
@@ -12,19 +13,10 @@ export class Field {
   currFieldElements = [];
   currFieldValue = [];
   currHintElements = [];
+  #modal = null;
 
   constructor(fieldSize = 5, cellSize = 1, cellInterval = 10, ...classList) {
     const grid = document.createElement('div');
-    // if (classList) {
-    //   grid.classList.add(...classList);
-    // }
-
-    // grid.style.gridTemplateColumns = `${cellSize * 3}vmin repeat(${fieldSize}, ${cellSize}vmin)`;
-    // grid.style.gridTemplateRows = `${cellSize * 3}vmin repeat(${fieldSize}, ${cellSize}vmin)`;
-    // grid.style.gap = `${cellInterval}px`;
-
-    // this.#fieldSize = fieldSize + 1;
-    // this.#cellSize = cellSize;
     this.element = grid;
   }
 
@@ -74,11 +66,13 @@ export class Field {
       if (event.button === 0) {
         cell.paint();
         this.currFieldValue[cell.position] = cell.state;
+        this.checkInput();
       }
 
       if (event.button === 2) {
         cell.markWithCross();
         this.currFieldValue[cell.position] = cell.state;
+        this.checkInput();
       }
     }));
     window.addEventListener('contextmenu', (event) => event.preventDefault(), false);
@@ -166,6 +160,7 @@ export class Field {
 
   updateState() {
     this.currHintElements = [];
+    this.currFieldValue = [];
     this.createCells();
     this.changeHints();
   }
@@ -204,7 +199,17 @@ export class Field {
   }
 
   checkInput() {
-    console.log('t', this)
+    if (this.currFieldValue.join('') === this.#currImageArr.flat().join('')) {
+      this.#modal.showWindow();
+    }
+  }
+
+  createModal() {
+    const body = document.body;
+    const modal = new Modal();
+    modal.appendNode(body);
+    modal.getElem().addEventListener('mousedown', (e) => {if (e.target === modal.getElem()) modal.closeWindow()});
+    this.#modal = modal;
   }
 
   clear() {
