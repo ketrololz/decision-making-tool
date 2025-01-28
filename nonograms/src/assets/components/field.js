@@ -180,23 +180,29 @@ export class Field {
     return this.#currDifficulty;
   }
 
-  createField(cellSize = 1, cellInterval = 10, ...classList) {
+  createField( cellInterval = 10, ...classList) {
     const fieldSize = {
       'easy': 5,
       'medium': 10,
       'hard': 15,
     }
 
+    const cellSize = {
+      'easy': 6,
+      'medium': 5,
+      'hard': 4,
+    }
+
     if (classList) {
       this.element.classList.add(...classList);
     }
 
-    this.element.style.gridTemplateColumns = `${cellSize * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize}vmin)`;
-    this.element.style.gridTemplateRows = `${cellSize * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize}vmin)`;
+    this.element.style.gridTemplateColumns = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
+    this.element.style.gridTemplateRows = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
     this.element.style.gap = `${cellInterval}px`;
 
     this.#fieldSize = fieldSize[this.#currDifficulty] + 1;
-    this.#cellSize = cellSize;
+    this.#cellSize = cellSize[this.#currDifficulty];
 
     this.updateState(this.#currDifficulty);
   }

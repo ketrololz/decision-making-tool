@@ -31,7 +31,7 @@ body {
 .empty-cell::before {
   content: "";
   position: absolute;
-  width: calc(40vmin + 6px);
+  width: calc(48vmin + 6px);
   height: 2px;
   background-color: #A42B2B;
   bottom: -1px;
@@ -42,7 +42,7 @@ body {
   content: "";
   position: absolute;
   width: 2px;
-  height: calc(40vmin + 6px);
+  height: calc(48vmin + 6px);
   background-color: #A42B2B;
   top: 0;
   right: -1px;
@@ -55,10 +55,10 @@ body {
   height: calc(65vmin + 11px);
 }
 .empty-cell.hard::before {
-  width: calc(90vmin + 16px);
+  width: calc(72vmin + 16px);
 }
 .empty-cell.hard::after {
-  height: calc(90vmin + 16px);
+  height: calc(72vmin + 16px);
 }
 
 .hint {
@@ -68,7 +68,9 @@ body {
   align-items: center;
   justify-content: flex-end;
   font-size: 2.4vmin;
-  gap: 4px;
+  row-gap: 0;
+  -moz-column-gap: 4px;
+       column-gap: 4px;
   padding: 8px;
   background-color: grey;
   width: 100%;
@@ -115,7 +117,7 @@ body {
 .line:not(.vertical)::after {
   content: "";
   position: absolute;
-  width: calc(40vmin + 6px);
+  width: calc(48vmin + 6px);
   height: 2px;
   background-color: #A42B2B;
   bottom: -1px;
@@ -126,7 +128,7 @@ body {
   content: "";
   position: absolute;
   width: 2px;
-  height: calc(40vmin + 6px);
+  height: calc(48vmin + 6px);
   background-color: #A42B2B;
   top: 0;
   right: -1px;
@@ -139,10 +141,10 @@ body {
   height: calc(65vmin + 11px);
 }
 .line.hard:not(.vertical)::after {
-  width: calc(90vmin + 16px);
+  width: calc(72vmin + 16px);
 }
 .line.hard.vertical::after {
-  height: calc(90vmin + 16px);
+  height: calc(72vmin + 16px);
 }
 
 .modal-container {

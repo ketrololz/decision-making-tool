@@ -14,5 +14,4 @@ export class Hint {
 
     this.element = cell;
   }
-  
 }
