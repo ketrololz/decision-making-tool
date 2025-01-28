@@ -1,5 +1,5 @@
 export function createElem(options) {
-  const { tag = 'div', parent, classes } = options;
+  const { tag = 'div', parent, classes, text = ''} = options;
   const elem = document.createElement(tag);
 
   if (classes) {
@@ -9,6 +9,8 @@ export function createElem(options) {
   if (parent) {
     parent.appendChild(elem);
   }
+
+  elem.textContent = text;
 
   return elem;
 }

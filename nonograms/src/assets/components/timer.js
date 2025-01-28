@@ -43,6 +43,11 @@ export class Timer {
     this.#isTimerOn = false;
   }
 
+  clearTimer() {
+    this.time = 0;
+    this.#element.textContent = `00:00`;
+  }
+
   currTime() {
     return this.time;
   }

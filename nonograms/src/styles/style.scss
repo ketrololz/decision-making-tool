@@ -223,3 +223,12 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.button {
+  outline-style: none;
+  border: none;
+  width: 20vmin;
+  height: 5vmin;
+  border-radius: 1vmin;
+  background-color: #EC5A5A;
+}

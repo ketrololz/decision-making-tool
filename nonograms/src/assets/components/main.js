@@ -14,7 +14,6 @@ const gameField = new Field();
 
 const difficultySelector = new Selector();
 
-
 const topContainer = createElem({
   parent: wrapper,
   classes: ['top-container'],
@@ -23,6 +22,17 @@ const topContainer = createElem({
 const selectorContainer = createElem({
   parent: wrapper,
   classes: ['selectors-container'],
+})
+
+const solutionButton = createElem({
+  tag: 'button',
+  parent: topContainer,
+  classes: ['solution-button', 'button'],
+  text: 'solution'
+})
+
+solutionButton.addEventListener('mousedown', () => {
+  gameField.showSolution();
 })
 
 difficultySelector.element.addEventListener('change', (e) => {

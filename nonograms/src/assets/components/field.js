@@ -164,6 +164,9 @@ export class Field {
   }
 
   updateState() {
+    this.#timer.clearTimer();
+    this.#timer.stopTimer();
+    this.currFieldElements = [];
     this.currHintElements = [];
     this.currFieldValue = [];
     this.createCells();
@@ -228,6 +231,16 @@ export class Field {
     timer.appendNode(parent);
     timer.getElem().textContent = '00:00';
     this.#timer = timer;
+  }
+
+  showSolution() {
+    this.#timer.stopTimer();
+    this.currFieldElements.forEach((e, i) => {
+      e.element.classList.remove('painted', 'cross');
+      if (this.#currImageArr.flat()[i] === 1) {
+        e.element.classList.add('painted');
+      }
+    })
   }
 
   clear() {
