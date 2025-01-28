@@ -4,6 +4,7 @@ export class Timer {
   #interval = 1000;
   time = 0;
   #timer = null;
+  #isTimerOn = false;
 
   constructor() {
     const timer = document.createElement('div');
@@ -23,20 +24,31 @@ export class Timer {
   }
 
   startTimer() {
+    this.updateTime();
     this.#timer = setInterval(this.updateTime.bind(this), this.#interval);
+    this.#isTimerOn = true;
   }
 
   updateTime() {
     const second = 1000;
     const minute = second * 60
     const minutes = Math.trunc(this.time / minute);
-    const seconds = Math.trunc((this.time % minute) / second)
+    const seconds = Math.trunc((this.time % minute) / second);
     this.time += this.#interval;
     this.#element.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   }
 
   stopTimer() {
     clearInterval(this.#timer);
+    this.#isTimerOn = false;
+  }
+
+  currTime() {
+    return this.time;
+  }
+
+  isTimerOn() {
+    return this.#isTimerOn;
   }
 
   appendNode(parent) {

@@ -1,3 +1,5 @@
+import { Timer } from "./timer";
+
 export class Modal{
   element = null;
 
@@ -19,8 +21,10 @@ export class Modal{
     }
   }
   
-  showWindow() {
+  showWindow(timer) {
     this.element.showModal();
+    console.log(timer.currTime())
+    this.element.textContent = `Great! You have solved the nonogram in ${(timer.currTime() - 1000) / 1000} seconds!`
   }
 
   closeWindow() {

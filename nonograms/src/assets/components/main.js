@@ -2,14 +2,28 @@ import { Field } from './field.js';
 import { Selector } from './selector.js';
 import pictures from "./../nonograms.json";
 import { Modal } from './modal.js';
+import { createElem } from './create-element.js';
 
 const body = document.body;
-const wrapper = document.createElement('div');
-wrapper.classList.add('wrapper');
+const wrapper = createElem({
+  parent: body,
+  classes: ['wrapper'],
+})
 
 const gameField = new Field();
 
 const difficultySelector = new Selector();
+
+
+const topContainer = createElem({
+  parent: wrapper,
+  classes: ['top-container'],
+})
+
+const selectorContainer = createElem({
+  parent: wrapper,
+  classes: ['selectors-container'],
+})
 
 difficultySelector.element.addEventListener('change', (e) => {
   gameField.clear();
@@ -33,15 +47,15 @@ pictureSelector.element.addEventListener('change', (e) => {
 
 function initGame() {
   gameField.appendNode(wrapper);
-  body.appendChild(wrapper);
+  gameField.createTimer(topContainer);
   gameField.createModal(body);
-  gameField.createTimer(wrapper);
 
 
   gameField.createField(1, 'game-field');
-  difficultySelector.appendNode(wrapper);
+
+  difficultySelector.appendNode(selectorContainer);
   difficultySelector.addOptions('easy', 'medium', 'hard');
-  pictureSelector.appendNode(wrapper);
+  pictureSelector.appendNode(selectorContainer);
   for (const picture in pictures['easy']) {
     pictureSelector.addOptions(picture);
   }

@@ -13,6 +13,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100dvh;
+  gap: 10px;
 }
 
 .game-field {
@@ -200,4 +201,25 @@ body {
 
 .timer {
   font-size: 5vmin;
+}
+
+.selectors-container {
+  display: flex;
+  justify-content: center;
+  gap: 1vmin;
+}
+
+.selector {
+  outline-style: none;
+  border: none;
+  width: 20vmin;
+  height: 5vmin;
+  border-radius: 1vmin;
+  background-color: #EC5A5A;
+}
+
+.top-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

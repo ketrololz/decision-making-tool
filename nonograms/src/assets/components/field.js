@@ -69,12 +69,14 @@ export class Field {
       if (event.button === 0) {
         cell.paint();
         this.currFieldValue[cell.position] = cell.state;
+        if (!this.#timer.isTimerOn()) this.#timer.startTimer();
         this.checkInput();
       }
 
       if (event.button === 2) {
         cell.markWithCross();
         this.currFieldValue[cell.position] = cell.state;
+        if (!this.#timer.isTimerOn()) this.#timer.startTimer();
         this.checkInput();
       }
     }));
@@ -209,7 +211,7 @@ export class Field {
 
   checkInput() {
     if (this.currFieldValue.join('') === this.#currImageArr.flat().join('')) {
-      this.#modal.showWindow();
+      this.#modal.showWindow(this.#timer);
       this.#timer.stopTimer();
     }
   }
@@ -225,7 +227,6 @@ export class Field {
     const timer = new Timer();
     timer.appendNode(parent);
     timer.getElem().textContent = '00:00';
-    timer.startTimer();
     this.#timer = timer;
   }
 
