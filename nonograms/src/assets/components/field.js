@@ -206,6 +206,22 @@ export class Field {
     return this.#currDifficulty;
   }
 
+  getRandomImage() {
+    const randomDiffNum = Math.floor(Math.random() * 3)
+    const randomPicNum = Math.floor(Math.random() * 5)
+    const difficulty = {
+      0: 'easy',
+      1: 'medium',
+      2: 'hard',
+    }
+    this.changeDifficulty(difficulty[randomDiffNum]);
+    const picture = Object.keys(pictures[this.#currDifficulty])[randomPicNum]
+    this.changePicture(picture);
+
+    this.#difficultySelectorIndex = randomDiffNum;
+    this.#pictureSelectorIndex = randomPicNum;
+  }
+
   createField(resultsWindow, difficultySelector, pictureSelector) {
     const fieldSize = {
       'easy': 5,

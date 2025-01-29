@@ -90,6 +90,18 @@ loadGameButton .addEventListener('mousedown', () => {
   gameField.loadGame();
 })
 
+const randomGameButton = createElem({
+  tag: 'button',
+  parent: menuWindow.getElem(),
+  classes: ['random-button', 'button'],
+  text: 'random game'
+})
+
+randomGameButton .addEventListener('mousedown', () => {
+  gameField.clear();
+  gameField.getRandomImage();
+  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
+})
 
 const bestResultsWindow = new Records();
 
