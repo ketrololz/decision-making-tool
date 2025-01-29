@@ -11,6 +11,7 @@ export class Field {
   #fieldSize = 0;
   #cellSize = 0;
   #currImageArr = pictures.easy.cross;
+  #currImageName = 'cross';
   #currDifficulty = 'easy';
   currFieldElements = [];
   currFieldValue = [];
@@ -188,6 +189,7 @@ export class Field {
 
   changePicture(picture) {
     this.#currImageArr = pictures[this.#currDifficulty][picture];
+    this.#currImageName = picture;
   }
 
   changeDifficulty(difficulty) {
@@ -228,7 +230,7 @@ export class Field {
       this.#modal.showWindow(this.#timer);
       this.#isGameStopped = true;
       this.#timer.stopTimer();
-      this.#resultsWindow.saveResult(this.#timer.currTime() - 1000, this.#currDifficulty);
+      this.#resultsWindow.saveResult(this.#timer.currTime() - 1000, this.#currDifficulty, this.#currImageName);
     }
   }
 

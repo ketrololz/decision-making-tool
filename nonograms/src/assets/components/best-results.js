@@ -9,7 +9,8 @@ export class Records {
     for (let i = 0; i < 5; i += 1) {
       const result = {
         time: '---',
-        difficulty: '----',
+        difficulty: '---',
+        picture: '---'
       }
       this.#resultsArr.push(result);
     }
@@ -37,7 +38,6 @@ export class Records {
   }
 
   loadResults() {
-    console.log(localStorage.getItem('results'))
     if (localStorage.getItem('results')) {
       this.#resultsArr = (JSON.parse(localStorage.getItem('results')));
     }
@@ -45,6 +45,7 @@ export class Records {
 
   renderResults() {
     this.loadResults()
+
     for (let i = 0; i < this.#resultsArr.length; i += 1) {
       const second = 1000;
       const minute = second * 60
@@ -55,26 +56,28 @@ export class Records {
       resultElem.classList.add('result');
 
       if(this.#resultsArr[i].time === '---') {
-        resultElem.textContent = `difficulty: ${this.#resultsArr[i].difficulty} time: ${'--'}:${'--'}`;
+        resultElem.textContent = `picture: ${this.#resultsArr[i].picture} difficulty: ${this.#resultsArr[i].difficulty} time: ${'--'}:${'--'}`;
       } else {
-        resultElem.textContent = `difficulty: ${this.#resultsArr[i].difficulty} time: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        resultElem.textContent = `picture: ${this.#resultsArr[i].picture} difficulty: ${this.#resultsArr[i].difficulty} time: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
       }
 
         this.#element.appendChild(resultElem);
       }
   }
 
-  saveResult(time, difficulty) {
+  saveResult(time, difficulty, picture) {
     for (const result of this.#resultsArr.sort((a, b) => b.time - a.time)) {
       this.clear();
       if (result.time === '---') {
         result.time = time;
         result.difficulty = difficulty;
+        result.picture = picture;
         break;
       }
       if (!this.#resultsArr.some((obj) => Object.values(obj).includes('---')) && time < result.time) {
         result.time = time;
         result.difficulty = difficulty;
+        result.picture = picture;
         break;
       }
     }
