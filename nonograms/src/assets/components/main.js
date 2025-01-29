@@ -53,8 +53,8 @@ menuButton.addEventListener('mousedown', () => {
 })
 
 wrapper.addEventListener('mousedown', (e) => {
-  console.log(e.target)
   if (e.target !== menuWindow.getElem() && e.target !== menuButton) { menuWindow.hideWindow() }
+  if (e.target !== bestResultsWindow.getElem() && e.target !== bestResultsButton) { bestResultsWindow.hideWindow() }
 });
 
 const resetButton = createElem({
@@ -110,7 +110,7 @@ difficultySelector.element.addEventListener('change', (e) => {
   gameField.clear();
   gameField.changeDifficulty(e.target.value);
   gameField.changePicture(Object.keys(pictures[e.target.value])[0])
-  gameField.createField('game-field');
+  gameField.createField(bestResultsWindow);
 
   pictureSelector.clear();
   for (const picture in pictures[e.target.value]) {
@@ -123,7 +123,7 @@ const pictureSelector = new Selector();
 pictureSelector.element.addEventListener('change', (e) => {
   gameField.clear();
   gameField.changePicture(e.target.value);
-  gameField.createField('game-field');
+  gameField.createField(bestResultsWindow);
 })
 
 function initGame() {
@@ -132,7 +132,7 @@ function initGame() {
   gameField.createModal(body);
 
 
-  gameField.createField('game-field');
+  gameField.createField(bestResultsWindow);
 
   difficultySelector.appendNode(selectorContainer);
   difficultySelector.addOptions('easy', 'medium', 'hard');

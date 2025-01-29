@@ -19,10 +19,13 @@ export class Field {
   #modal = null;
   #timer = null;
   #isGameStopped = false;
+  #resultsWindow = null;
 
-  constructor(fieldSize = 5, cellSize = 1, cellInterval = 10, ...classList) {
+  constructor(resultsWindow) {
     const grid = document.createElement('div');
+    grid.classList.add('game-field')
     this.element = grid;
+    this.#resultsWindow = resultsWindow;
   }
 
   appendNode(parent) {
@@ -195,7 +198,7 @@ export class Field {
     return this.#currDifficulty;
   }
 
-  createField(...classList) {
+  createField(resultsWindow) {
     const fieldSize = {
       'easy': 5,
       'medium': 10,
@@ -208,9 +211,8 @@ export class Field {
       'hard': 4,
     }
 
-    if (classList) {
-      this.element.classList.add(...classList);
-    }
+    this.#resultsWindow = resultsWindow;
+    this.element.classList.add('game-field');
 
     this.element.style.gridTemplateColumns = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
     this.element.style.gridTemplateRows = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
@@ -226,6 +228,7 @@ export class Field {
       this.#modal.showWindow(this.#timer);
       this.#isGameStopped = true;
       this.#timer.stopTimer();
+      this.#resultsWindow.saveResult(this.#timer.currTime() - 1000, this.#currDifficulty);
     }
   }
 
@@ -273,15 +276,15 @@ export class Field {
     this.clear();
     this.#currDifficulty = localStorage.getItem('difficulty');
     this.#currImageArr = JSON.parse(localStorage.getItem('picture'));
-    this.createField()
+    this.createField(this.#resultsWindow);
     this.#timer.setTime(JSON.parse(localStorage.getItem('time')));
     this.currFieldValue = JSON.parse(localStorage.getItem('values'));
     this.currFieldCrosses = JSON.parse(localStorage.getItem('crosses'));
 
     this.currFieldElements.forEach((e, i) => {
-      // e.element.classList.remove('painted', 'cross');
       if (this.currFieldValue[i] === 1) {
         e.element.classList.add('painted');
+        e.state = 1;
       }
 
       if (this.currFieldCrosses[i] === 2) {
