@@ -13,7 +13,7 @@ export class Records {
       }
       this.#resultsArr.push(result);
     }
-    
+
     this.#element = bestResults;
     this.renderResults();
   }
@@ -36,7 +36,15 @@ export class Records {
     this.#element.classList.remove('open');
   }
 
+  loadResults() {
+    console.log(localStorage.getItem('results'))
+    if (localStorage.getItem('results')) {
+      this.#resultsArr = (JSON.parse(localStorage.getItem('results')));
+    }
+  }
+
   renderResults() {
+    this.loadResults()
     for (let i = 0; i < this.#resultsArr.length; i += 1) {
       const second = 1000;
       const minute = second * 60
@@ -71,6 +79,8 @@ export class Records {
       }
     }
     this.#resultsArr.sort((a, b) => a.time - b.time);
+
+    localStorage.setItem('results', JSON.stringify(this.#resultsArr.sort((a, b) => a.time - b.time)));
     this.renderResults();
   }
 
