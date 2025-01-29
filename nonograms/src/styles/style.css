@@ -1,4 +1,5 @@
 body {
+  overflow-x: hidden;
   position: relative;
   margin: 0;
 }
@@ -213,4 +214,44 @@ body {
   height: 5vmin;
   border-radius: 1vmin;
   background-color: #EC5A5A;
+}
+
+.best-results {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 40vmin;
+  transform: translateX(100%);
+  background-color: grey;
+  transition: transform 0.1s ease-in;
+  z-index: 4;
+}
+.best-results.open {
+  transform: translateX(0);
+}
+
+.menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40vmin;
+  transform: translateX(-100%);
+  background-color: grey;
+  transition: transform 0.1s ease-in;
+  z-index: 4;
+}
+.menu.open {
+  transform: translateX(0);
 }/*# sourceMappingURL=style.css.map */

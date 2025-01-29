@@ -32,9 +32,9 @@ export class Cell {
 
   markWithCross() {
     this.element.classList.toggle('cross');
+    this.element.classList.remove('painted');
 
     if (this.state === 1) {
-      this.element.classList.remove('painted');
       this.state = 0;
       return this.state;
     }

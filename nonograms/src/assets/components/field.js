@@ -260,11 +260,13 @@ export class Field {
   }
 
   saveGame() {
-    localStorage.setItem('time', this.#timer.currTime());
-    localStorage.setItem('difficulty', this.#currDifficulty);
-    localStorage.setItem('picture', JSON.stringify(this.#currImageArr));
-    localStorage.setItem('values', JSON.stringify(this.currFieldValue));
-    localStorage.setItem('crosses', JSON.stringify(this.currFieldCrosses));
+    if (!this.#isGameStopped) {
+      localStorage.setItem('time', this.#timer.currTime());
+      localStorage.setItem('difficulty', this.#currDifficulty);
+      localStorage.setItem('picture', JSON.stringify(this.#currImageArr));
+      localStorage.setItem('values', JSON.stringify(this.currFieldValue));
+      localStorage.setItem('crosses', JSON.stringify(this.currFieldCrosses));
+    }
   }
 
   loadGame() {

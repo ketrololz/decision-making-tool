@@ -1,5 +1,3 @@
-import { Timer } from "./timer";
-
 export class Modal{
   element = null;
 

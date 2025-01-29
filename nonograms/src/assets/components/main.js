@@ -3,6 +3,8 @@ import { Selector } from './selector.js';
 import pictures from "./../nonograms.json";
 import { Modal } from './modal.js';
 import { createElem } from './create-element.js';
+import { Records } from './best-results.js';
+import { Menu } from './menu.js';
 
 const body = document.body;
 const wrapper = createElem({
@@ -35,9 +37,29 @@ solutionButton.addEventListener('mousedown', () => {
   gameField.showSolution();
 })
 
-const resetButton = createElem({
+const menuWindow = new Menu();
+
+menuWindow.appendNode(wrapper);
+
+const menuButton = createElem({
   tag: 'button',
   parent: topContainer,
+  classes: ['menu-button', 'button'],
+  text: 'menu'
+})
+
+menuButton.addEventListener('mousedown', () => {
+  menuWindow.showWindow();
+})
+
+wrapper.addEventListener('mousedown', (e) => {
+  console.log(e.target)
+  if (e.target !== menuWindow.getElem() && e.target !== menuButton) { menuWindow.hideWindow() }
+});
+
+const resetButton = createElem({
+  tag: 'button',
+  parent: menuWindow.getElem(),
   classes: ['reset-button', 'button'],
   text: 'reset'
 })
@@ -48,7 +70,7 @@ resetButton.addEventListener('mousedown', () => {
 
 const saveGameButton = createElem({
   tag: 'button',
-  parent: topContainer,
+  parent: menuWindow.getElem(),
   classes: ['save-button', 'button'],
   text: 'save game'
 })
@@ -59,13 +81,29 @@ saveGameButton.addEventListener('mousedown', () => {
 
 const loadGameButton = createElem({
   tag: 'button',
-  parent: topContainer,
+  parent: menuWindow.getElem(),
   classes: ['load-button', 'button'],
   text: 'load game'
 })
 
 loadGameButton .addEventListener('mousedown', () => {
   gameField.loadGame();
+})
+
+
+const bestResultsWindow = new Records();
+
+bestResultsWindow.appendNode(wrapper);
+
+const bestResultsButton = createElem({
+  tag: 'button',
+  parent: topContainer,
+  classes: ['best-results-button', 'button'],
+  text: 'best'
+})
+
+bestResultsButton .addEventListener('mousedown', () => {
+  bestResultsWindow.showWindow();
 })
 
 difficultySelector.element.addEventListener('change', (e) => {
