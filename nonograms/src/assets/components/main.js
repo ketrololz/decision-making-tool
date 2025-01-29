@@ -110,8 +110,9 @@ difficultySelector.element.addEventListener('change', (e) => {
   gameField.clear();
   gameField.changeDifficulty(e.target.value);
   gameField.changePicture(Object.keys(pictures[e.target.value])[0])
-  gameField.createField(bestResultsWindow);
-
+  gameField.updateSelectors(difficultySelector, pictureSelector)
+  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
+  
   pictureSelector.clear();
   for (const picture in pictures[e.target.value]) {
     pictureSelector.addOptions(picture);
@@ -123,7 +124,8 @@ const pictureSelector = new Selector();
 pictureSelector.element.addEventListener('change', (e) => {
   gameField.clear();
   gameField.changePicture(e.target.value);
-  gameField.createField(bestResultsWindow);
+  gameField.updateSelectors(difficultySelector, pictureSelector)
+  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
 })
 
 function initGame() {
@@ -132,7 +134,7 @@ function initGame() {
   gameField.createModal(body);
 
 
-  gameField.createField(bestResultsWindow);
+  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
 
   difficultySelector.appendNode(selectorContainer);
   difficultySelector.addOptions('easy', 'medium', 'hard');

@@ -21,12 +21,16 @@ export class Field {
   #timer = null;
   #isGameStopped = false;
   #resultsWindow = null;
+  #difficultySelectorIndex = null;
+  #pictureSelectorIndex = null;
+  #diffSelector = null;
+  #picSelector = null;
 
-  constructor(resultsWindow) {
+  constructor() {
     const grid = document.createElement('div');
     grid.classList.add('game-field')
     this.element = grid;
-    this.#resultsWindow = resultsWindow;
+
   }
 
   appendNode(parent) {
@@ -78,6 +82,7 @@ export class Field {
         }
         cell.paint();
         this.currFieldValue[cell.position] = cell.state;
+        this.currFieldCrosses[cell.position] = 0;
         if (!this.#timer.isTimerOn()) this.#timer.startTimer();
         this.checkInput();
       }
@@ -182,6 +187,7 @@ export class Field {
     this.currFieldElements = [];
     this.currHintElements = [];
     this.currFieldValue = [];
+    this.currFieldCrosses = [];
     this.createCells();
     this.changeHints();
     this.#isGameStopped = false;
@@ -200,20 +206,33 @@ export class Field {
     return this.#currDifficulty;
   }
 
-  createField(resultsWindow) {
+  createField(resultsWindow, difficultySelector, pictureSelector) {
     const fieldSize = {
       'easy': 5,
       'medium': 10,
       'hard': 15,
     }
-
+    
     const cellSize = {
       'easy': 6,
       'medium': 5,
       'hard': 4,
     }
-
+    
     this.#resultsWindow = resultsWindow;
+
+    this.#diffSelector = difficultySelector;
+    this.#picSelector = pictureSelector;
+
+    this.#picSelector.clear();
+
+    for (const picture in pictures[this.#currDifficulty]) {
+      this.#picSelector.addOptions(picture);
+    }
+    
+    difficultySelector.element.selectedIndex = this.#difficultySelectorIndex;
+    pictureSelector.element.selectedIndex = this.#pictureSelectorIndex;
+
     this.element.classList.add('game-field');
 
     this.element.style.gridTemplateColumns = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
@@ -222,8 +241,13 @@ export class Field {
     this.#fieldSize = fieldSize[this.#currDifficulty] + 1;
     this.#cellSize = cellSize[this.#currDifficulty];
 
-    this.updateState(this.#currDifficulty);
+    this.updateState();
   }
+
+  updateSelectors(dif, pic) {
+    this.#difficultySelectorIndex = dif.element.selectedIndex;
+    this.#pictureSelectorIndex = pic.element.selectedIndex;
+  } 
 
   checkInput() {
     if (this.currFieldValue.join('') === this.#currImageArr.flat().join('')) {
@@ -270,7 +294,12 @@ export class Field {
       localStorage.setItem('difficulty', this.#currDifficulty);
       localStorage.setItem('picture', JSON.stringify(this.#currImageArr));
       localStorage.setItem('values', JSON.stringify(this.currFieldValue));
+      localStorage.setItem('name', JSON.stringify(this.currFielname));
       localStorage.setItem('crosses', JSON.stringify(this.currFieldCrosses));
+
+
+      localStorage.setItem('diffSelectorIndex', JSON.stringify(this.#difficultySelectorIndex));
+      localStorage.setItem('picSelectorIndex', JSON.stringify(this.#pictureSelectorIndex));
     }
   }
 
@@ -278,10 +307,17 @@ export class Field {
     this.clear();
     this.#currDifficulty = localStorage.getItem('difficulty');
     this.#currImageArr = JSON.parse(localStorage.getItem('picture'));
-    this.createField(this.#resultsWindow);
+    this.#currImageName = localStorage.getItem('name');
+
+    this.#difficultySelectorIndex = JSON.parse(localStorage.getItem('diffSelectorIndex'));
+    this.#pictureSelectorIndex = JSON.parse(localStorage.getItem('picSelectorIndex'));
+
+    this.createField(this.#resultsWindow, this.#diffSelector, this.#picSelector);
+
     this.#timer.setTime(JSON.parse(localStorage.getItem('time')));
     this.currFieldValue = JSON.parse(localStorage.getItem('values'));
     this.currFieldCrosses = JSON.parse(localStorage.getItem('crosses'));
+
 
     this.currFieldElements.forEach((e, i) => {
       if (this.currFieldValue[i] === 1) {
