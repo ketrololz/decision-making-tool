@@ -30,6 +30,7 @@ export class Records {
   }
 
   showWindow() {
+    // localStorage.clear('results')
     this.#element.classList.toggle('open');
   }
 
@@ -52,14 +53,33 @@ export class Records {
       const minutes = Math.trunc(this.#resultsArr[i].time / minute);
       const seconds = Math.trunc((this.#resultsArr[i].time % minute) / second);
 
-      const resultElem = document.createElement('span');
+
+      const resultElem = document.createElement('div');
       resultElem.classList.add('result');
 
-      if(this.#resultsArr[i].time === '---') {
-        resultElem.textContent = `picture: ${this.#resultsArr[i].picture} difficulty: ${this.#resultsArr[i].difficulty} time: ${'--'}:${'--'}`;
-      } else {
-        resultElem.textContent = `picture: ${this.#resultsArr[i].picture} difficulty: ${this.#resultsArr[i].difficulty} time: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      for (let k = 0; k < 3; k += 1 ) {
+        const param = {
+          0: this.#resultsArr[i].picture,
+          1: this.#resultsArr[i].difficulty,
+          2: `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+        }
+
+        const textChunk = document.createElement('p');
+        textChunk.classList.add('result-text');
+        if(this.#resultsArr[i].time === '---') {
+          textChunk.textContent = '--:--';
+        } else {   
+          textChunk.textContent = param[k];
+        }
+
+        resultElem.appendChild(textChunk);
       }
+
+      // if(this.#resultsArr[i].time === '---') {
+      //   resultElem.textContent = `${this.#resultsArr[i].picture} ${this.#resultsArr[i].difficulty} ${'--'}:${'--'}`;
+      // } else {
+      //   resultElem.textContent = `${this.#resultsArr[i].picture} ${this.#resultsArr[i].difficulty} ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      // }
 
         this.#element.appendChild(resultElem);
       }

@@ -97,7 +97,7 @@ const randomGameButton = createElem({
   text: 'random game'
 })
 
-randomGameButton .addEventListener('mousedown', () => {
+randomGameButton.addEventListener('mousedown', () => {
   gameField.clear();
   gameField.getRandomImage();
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
@@ -114,7 +114,7 @@ const bestResultsButton = createElem({
   text: 'best'
 })
 
-bestResultsButton .addEventListener('mousedown', () => {
+bestResultsButton.addEventListener('mousedown', () => {
   bestResultsWindow.showWindow();
 })
 
@@ -144,9 +144,8 @@ function initGame() {
   gameField.appendNode(wrapper);
   gameField.createModal(body);
   
-  // gameField.createTimer();
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector); 
-  // gameField.getEmptyCell().element.appendChild(gameField.getTimer().getElem());
+
 
   difficultySelector.appendNode(selectorContainer);
   difficultySelector.addOptions('easy', 'medium', 'hard');

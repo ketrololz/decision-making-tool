@@ -33,7 +33,6 @@ body {
 }
 
 .cell {
-  // background-color: #fff;
   border: solid 1px darken($lime, 20%);
   cursor: pointer;
 }
@@ -50,7 +49,7 @@ body {
     content: '';
     position: absolute;
     width: calc(42vmin + 5px);
-    height: 2px;
+    height: 3px;
     background-color: darken($lime, 20%);
     bottom: -1px;
     left: 0;
@@ -60,7 +59,7 @@ body {
   &::after {
     content: '';
     position: absolute;
-    width: 2px;
+    width: 3px;
     height: calc(42vmin + 5px);
     background-color: darken($lime, 20%);
     top: 0;
@@ -96,6 +95,7 @@ body {
   column-gap: 5px;
   padding: 8px;
   background-color: lighten($lime, 15%);
+  color: darken($lime, 25%);
   border: solid 1px darken($lime, 20%);
   width: calc(100% - 16px);
   height: calc(100% - 16px);
@@ -218,7 +218,7 @@ body {
     content: '';
     position: absolute;
     width: calc(42vmin + 5px);
-    height: 2px;
+    height: 3px;
     background-color: darken($lime, 20%);
     bottom: -1px;
     left: 0;
@@ -228,7 +228,7 @@ body {
   &.vertical::after {
     content: '';
     position: absolute;
-    width: 2px;
+    width: 3px;
     height: calc(42vmin + 5px);
     background-color: darken($lime, 20%);
     top: 0;
@@ -253,45 +253,60 @@ body {
   }
 }
 
-.modal-container {
+.modal-container[open] {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 4vmin;
+  align-items: center;
+  justify-content: center;
   top: 0;
   left: 0;
-  width: 100px;
-  height: 100px;
-  background-color: #EC5A5A;
+  width: 70vmin;
+  height: 25vmin;
+
+  font-size: 4vmin;
+  text-align: center;
+  font-weight: 600;
+  color: darken($lime, 35%);
+  background-color: $lime;
+  border: solid 2px darken($lime, 20%);
+  border-radius: 4vmin;
   z-index: 3;
 }
 
-.modal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #EC5A5A;
-  z-index: 3;
 
-  &::after {
-    position: relative;
-    content: '';
-    width: 20vmin;
-    height: 20vmin;
-    background-color: #A42B2B;
-    top: 0;
-    left: 0;
-    z-index: 4;
-  }
-}
+
+// .modal {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: #EC5A5A;
+//   z-index: 3;
+// }
+
+//   &::after {
+//     position: relative;
+//     content: '';
+//     width: 20vmin;
+//     height: 20vmin;
+//     background-color: #A42B2B;
+//     top: 0;
+//     left: 0;
+//     z-index: 4;
+//   }
+// }
 
 .timer {
   font-size: 3vmin;
+  color: darken($lime, 25%);
 }
 
 .selectors-container {
   display: flex;
   justify-content: center;
-  // width: 100%;
   gap: 1vmin;
 }
 
@@ -343,8 +358,14 @@ body {
   }
 }
 
+.close-button {
+  background-color: lighten($lime, 10%);
+}
+
 .best-results {
+  box-sizing: border-box;
   position: absolute;
+  padding: 0 5vmin;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -353,15 +374,26 @@ body {
   top: 0;
   right: 0;
   height: 100%;
-  width: 40vmin;
+  width: 50vmin;
   transform: translateX(100%);
-  background-color: grey;
+  background-color: lighten($lime, 20%);
+  box-shadow: 0px 5px 10px darken($lime, 8%);
   transition: transform .1s ease-in;
   z-index: 4;
 
   &.open {
     transform: translateX(0);
   }
+}
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 2.2vmin;
+  gap: 10px;
+  text-align: justify;
+  width: 100%;
 }
 
 .menu {
@@ -374,9 +406,10 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 40vmin;
+  width: 50vmin;
   transform: translateX(-100%);
-  background-color: grey;
+  background-color: lighten($lime, 20%);
+  box-shadow: 0px 5px 10px darken($lime, 8%);
   transition: transform .1s ease-in;
   z-index: 4;
 

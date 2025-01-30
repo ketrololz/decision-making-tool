@@ -4,14 +4,15 @@ import { Selector } from "./selector";
 import pictures from "./../nonograms.json";
 import { Modal } from "./modal";
 import { Timer } from "./timer";
+import { createElem } from "./create-element";
 
 
 export class Field {
   element = null;
   #fieldSize = 0;
   #cellSize = 0;
-  #currImageArr = pictures.easy.cross;
-  #currImageName = 'cross';
+  #currImageArr = pictures.easy.cockerel;
+  #currImageName = 'cockerel';
   #currDifficulty = 'easy';
   currFieldElements = [];
   currFieldValue = [];
@@ -137,7 +138,7 @@ export class Field {
     }));
 
     function wait() {
-      return new Promise(resolve => setTimeout(resolve, 1000))
+      return new Promise(resolve => setTimeout(resolve, 600))
     }
 
     this.currFieldElements.forEach((cell) => cell.element.addEventListener('touchend', (event) => {
