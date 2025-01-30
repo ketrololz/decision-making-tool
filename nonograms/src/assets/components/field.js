@@ -84,6 +84,7 @@ export class Field {
         position += 1;
       }
     }
+
     this.currFieldElements.forEach((cell) => cell.element.addEventListener('mousedown', (event) => {
       if (event.button === 0) {
         if (this.#isGameStopped) {
@@ -107,6 +108,44 @@ export class Field {
         this.checkInput();
       }
     }));
+
+
+    let pressed = false;
+    let target = null;
+
+    this.currFieldElements.forEach((cell) => cell.element.addEventListener('touchstart', async (event) => {
+      if (target === null) {
+        target = event.target
+      }
+
+      pressed = true;
+
+      await wait()
+      if (pressed && target === event.target) {
+        pressed = false;
+
+        if (this.#isGameStopped) {
+          return;
+        }
+        
+        cell.markWithCross();
+        this.currFieldValue[cell.position] = cell.state;
+        this.currFieldCrosses[cell.position] = 2;
+        if (!this.#timer.isTimerOn()) this.#timer.startTimer();
+        this.checkInput();
+      }
+    }));
+
+    function wait() {
+      return new Promise(resolve => setTimeout(resolve, 1000))
+    }
+
+    this.currFieldElements.forEach((cell) => cell.element.addEventListener('touchend', (event) => {
+      pressed = false;
+      target = null;
+    }));
+
+
     window.addEventListener('contextmenu', (event) => event.preventDefault(), false);
   }
 
@@ -242,24 +281,24 @@ export class Field {
       'medium': 10,
       'hard': 15,
     }
-    
+
     const cellSize = {
       'easy': 6,
       'medium': 5,
       'hard': 4,
     }
-    
+
     this.#resultsWindow = resultsWindow;
 
     this.#diffSelector = difficultySelector;
     this.#picSelector = pictureSelector;
 
-    this.#picSelector.clear(); 
-    
+    this.#picSelector.clear();
+
     for (const picture in pictures[this.#currDifficulty]) {
       this.#picSelector.addOptions(picture);
     }
-    
+
     difficultySelector.element.selectedIndex = this.#difficultySelectorIndex;
     pictureSelector.element.selectedIndex = this.#pictureSelectorIndex;
 
@@ -277,7 +316,7 @@ export class Field {
   updateSelectors(dif, pic) {
     this.#difficultySelectorIndex = dif.element.selectedIndex;
     this.#pictureSelectorIndex = pic.element.selectedIndex;
-  } 
+  }
 
   checkInput() {
     if (this.currFieldValue.join('') === this.#currImageArr.flat().join('')) {
@@ -291,7 +330,7 @@ export class Field {
   createModal(parent) {
     const modal = new Modal();
     modal.appendNode(parent);
-    modal.getElem().addEventListener('mousedown', (e) => {if (e.target === modal.getElem()) modal.closeWindow()});
+    modal.getElem().addEventListener('mousedown', (e) => { if (e.target === modal.getElem()) modal.closeWindow() });
     this.#modal = modal;
   }
 
