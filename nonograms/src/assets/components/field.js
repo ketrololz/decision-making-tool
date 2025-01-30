@@ -25,6 +25,13 @@ export class Field {
   #pictureSelectorIndex = null;
   #diffSelector = null;
   #picSelector = null;
+  #emptyCell = null;
+
+  hintSize = {
+    'easy': 2,
+    'medium': 3,
+    'hard': 5,
+  }
 
   constructor() {
     const grid = document.createElement('div');
@@ -41,10 +48,12 @@ export class Field {
     const cellsCount = this.#fieldSize * this.#fieldSize;
     let position = 0;
 
+
     for (let i = 0; i < cellsCount; i += 1) {
 
       if (i === 0) {
-        const emptyCell = new Cell(this.element, this.#cellSize * 3, `empty-cell`);
+        const emptyCell = new Cell(this.element, this.#cellSize * this.hintSize[this.#currDifficulty], `empty-cell`);
+        this.#emptyCell = emptyCell;
         if (this.#currDifficulty === 'medium') {
           emptyCell.element.classList.add('medium');
         }
@@ -99,6 +108,10 @@ export class Field {
       }
     }));
     window.addEventListener('contextmenu', (event) => event.preventDefault(), false);
+  }
+
+  getEmptyCell() {
+    return this.#emptyCell;
   }
 
   changeHints() {
@@ -182,13 +195,14 @@ export class Field {
   }
 
   updateState() {
-    this.#timer.clearTimer();
-    this.#timer.stopTimer();
     this.currFieldElements = [];
     this.currHintElements = [];
     this.currFieldValue = [];
     this.currFieldCrosses = [];
     this.createCells();
+    this.createTimer();
+    this.#timer.clearTimer();
+    this.#timer.stopTimer();
     this.changeHints();
     this.#isGameStopped = false;
   }
@@ -240,8 +254,8 @@ export class Field {
     this.#diffSelector = difficultySelector;
     this.#picSelector = pictureSelector;
 
-    this.#picSelector.clear();
-
+    this.#picSelector.clear(); 
+    
     for (const picture in pictures[this.#currDifficulty]) {
       this.#picSelector.addOptions(picture);
     }
@@ -251,8 +265,8 @@ export class Field {
 
     this.element.classList.add('game-field');
 
-    this.element.style.gridTemplateColumns = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
-    this.element.style.gridTemplateRows = `${cellSize[this.#currDifficulty] * 3}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
+    this.element.style.gridTemplateColumns = `${cellSize[this.#currDifficulty] * this.hintSize[this.#currDifficulty]}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
+    this.element.style.gridTemplateRows = `${cellSize[this.#currDifficulty] * this.hintSize[this.#currDifficulty]}vmin repeat(${fieldSize[this.#currDifficulty]}, ${cellSize[this.#currDifficulty]}vmin)`;
 
     this.#fieldSize = fieldSize[this.#currDifficulty] + 1;
     this.#cellSize = cellSize[this.#currDifficulty];
@@ -281,11 +295,15 @@ export class Field {
     this.#modal = modal;
   }
 
-  createTimer(parent) {
+  createTimer() {
     const timer = new Timer();
-    timer.appendNode(parent);
     timer.getElem().textContent = '00:00';
     this.#timer = timer;
+    timer.appendNode(this.#emptyCell.element)
+  }
+
+  getTimer() {
+    return this.#timer;
   }
 
   showSolution() {

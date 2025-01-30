@@ -1,11 +1,15 @@
+@import url(../assets/fonts/fonts.css);
+
 $grey: #D9D9D9;
 $red: #EC5A5A;
+$lime: #bee72a;
 $dark-red: #A42B2B;
 
 body {
   overflow-x: hidden;
   position: relative;
   margin: 0;
+  font-family: "Rubik", sans-serif;
 }
 
 .wrapper {
@@ -29,20 +33,25 @@ body {
 }
 
 .cell {
-  background-color: $grey;
-  border: solid 1px black;
+  // background-color: #fff;
+  border: solid 1px darken($lime, 20%);
+  cursor: pointer;
 }
 
 .empty-cell {
   position: relative;
-  // background-color: red;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px darken($lime, 20%);
+  background-color: lighten($lime, 15%);
+
   &::before {
     content: '';
     position: absolute;
-    width: calc(48vmin + 5px);
+    width: calc(42vmin + 5px);
     height: 2px;
-    background-color: black;
+    background-color: darken($lime, 20%);
     bottom: -1px;
     left: 0;
     z-index: 2;
@@ -52,43 +61,42 @@ body {
     content: '';
     position: absolute;
     width: 2px;
-    height: calc(48vmin + 5px);
-    background-color: black;
+    height: calc(42vmin + 5px);
+    background-color: darken($lime, 20%);
     top: 0;
     right: -1px;
     z-index: 2;
   }
 
   &.medium::before {
-    width: calc(65vmin + 11px);
+    width: calc(65vmin + 10px);
   }
 
   &.medium::after {
-    height: calc(65vmin + 11px);
+    height: calc(65vmin + 10px);
   }
 
   &.hard::before {
-    width: calc(72vmin  + 16px);
+    width: calc(80vmin + 16px);
   }
 
   &.hard::after {
-    height: calc(72vmin  + 16px);
+    height: calc(80vmin + 16px);
   }
 
 }
 
 .hint {
   position: relative;
-  // box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  font-size: 2.4vmin;
+  font-size: 2vmin;
   row-gap: 0;
-  column-gap: 4px;
+  column-gap: 5px;
   padding: 8px;
-  background-color: grey;
-  border:solid 1px black;
+  background-color: lighten($lime, 15%);
+  border: solid 1px darken($lime, 20%);
   width: calc(100% - 16px);
   height: calc(100% - 16px);
 }
@@ -99,36 +107,108 @@ body {
 
 .cross {
   position: relative;
-  border: solid 1px black;
+  animation: rotate .2s ease-in;
 
-  // background-color: bisque;
+  &.hide {
+    animation: hide .2s ease-in;
+  }
+
   &::after {
     content: '';
     position: absolute;
-    width: 3vmin;
-    height: 0.5vmin;
+    width: 100%;
+    height: 2%;
     transform: rotate(45deg);
     border-radius: 2vmin;
-    top: 2.25vmin;
-    left: 1vmin;
-    background-color: black;
+    top: 50%;
+    left: 0%;
+    background-color: darken($lime, 35%);
   }
 
   &::before {
     content: '';
     position: absolute;
-    width: 3vmin;
-    height: 0.5vmin;
+    width: 100%;
+    height: 2%;
     transform: rotate(-45deg);
     border-radius: 2vmin;
-    top: 2.25vmin;
-    left: 1vmin;
-    background-color: black;
+    top: 50%;
+    left: 00%;
+    background-color: darken($lime, 35%);
+  }
+}
+
+@keyframes rotate {
+  0%{
+    opacity: 0;
+    transform: rotate(-90deg);
+    border: solid 0px darken($lime, 20%);
+    transform: scale(0);
+  }
+
+  50%{
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100%{
+    transform: scale(0.6);
+    transform: rotate(90deg);
+    border: solid 0px darken($lime, 20%);
   }
 }
 
 .painted {
-  background-color: $red;
+  background-color: darken($lime, 15%);
+  transition: background-color .2s ease-in;
+  animation: rotate-box .2s ease-in;
+
+  &.hide {
+    animation: hide .2s ease-in;
+  }
+
+  &.cross{
+    animation-name: rotate-box .2s ease-in;
+  }
+}
+
+@keyframes rotate-box {
+  0%{
+    opacity: 0;
+    transform: rotate(-90deg);
+    border: solid 0px darken($lime, 20%);
+    transform: scale(0);
+  }
+
+  50%{
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100%{
+    transform: scale(0.6);
+    transform: rotate(90deg);
+    border: solid 0px darken($lime, 20%);
+  }
+}
+
+@keyframes hide {
+  0%{
+    border: solid 0px darken($lime, 20%);
+    transform: rotate(90deg);
+    opacity: 1;
+  }
+
+  50%{
+    transform: scale(1.1);
+  }
+
+  100%{
+    border: solid 0px darken($lime, 20%);
+    transform: rotate(0);
+    opacity: 0;
+    transform: scale(0.6);
+  }
 }
 
 .line {
@@ -137,9 +217,9 @@ body {
   &:not(.vertical)::after {
     content: '';
     position: absolute;
-    width: calc(48vmin + 5px);
+    width: calc(42vmin + 5px);
     height: 2px;
-    background-color: black;
+    background-color: darken($lime, 20%);
     bottom: -1px;
     left: 0;
     z-index: 2;
@@ -149,27 +229,27 @@ body {
     content: '';
     position: absolute;
     width: 2px;
-    height: calc(48vmin + 5px);
-    background-color: black;
+    height: calc(42vmin + 5px);
+    background-color: darken($lime, 20%);
     top: 0;
     right: -1px;
     z-index: 2;
   }
 
   &.medium:not(.vertical)::after {
-    width: calc(65vmin + 11px);
+    width: calc(65vmin + 10px);
   }
 
   &.medium.vertical::after {
-    height: calc(65vmin + 11px);
+    height: calc(65vmin + 10px);
   }
 
   &.hard:not(.vertical)::after {
-    width: calc(72vmin + 16px);
+    width: calc(80vmin + 16px);
   }
 
   &.hard.vertical::after {
-    height: calc(72vmin + 16px);
+    height: calc(80vmin + 16px);
   }
 }
 
@@ -205,22 +285,30 @@ body {
 }
 
 .timer {
-  font-size: 5vmin;
+  font-size: 3vmin;
 }
 
 .selectors-container {
   display: flex;
   justify-content: center;
+  // width: 100%;
   gap: 1vmin;
 }
 
 .selector {
-  outline-style: none;
-  border: none;
-  width: 20vmin;
+  padding: 0 10px;
+  width: 30.4vmin;
   height: 5vmin;
+  font-family: "Rubik", sans-serif;
+  font-size: 2vmin;
+  font-weight: 600;
+  outline-style: none;
   border-radius: 1vmin;
-  background-color: #EC5A5A;
+  color: darken($lime, 25%);
+  background-color: #fff;
+  border: 1px solid darken($lime, 5%);
+  transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
+  cursor: pointer;
 }
 
 .top-container {
@@ -231,12 +319,28 @@ body {
 }
 
 .button {
+  font-family: "Rubik", sans-serif;
+  font-weight: 600;
+  font-size: 2vmin;
   outline-style: none;
   border: none;
   width: 20vmin;
   height: 5vmin;
   border-radius: 1vmin;
-  background-color: #EC5A5A;
+  color: darken($lime, 25%);
+  background-color: lighten($lime, 3%);
+  border: 1px solid darken($lime, 5%);
+  box-shadow: inset 0px 0px 0px darken($lime, 0), 0px 2px 0px darken($lime, 5%), 0px 3px 5px darken($lime, 5%);
+  transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($lime, 5%);
+    border: 1px solid rgba(#000, 0.1);
+    box-shadow: inset 1px 2px 2px darken($lime, 12%);
+    color: darken($lime, 18%);
+    transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
+  }
 }
 
 .best-results {

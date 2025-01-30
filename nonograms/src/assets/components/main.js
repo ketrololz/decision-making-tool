@@ -142,26 +142,15 @@ pictureSelector.element.addEventListener('change', (e) => {
 
 function initGame() {
   gameField.appendNode(wrapper);
-  gameField.createTimer(topContainer);
   gameField.createModal(body);
-
-
-  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
+  
+  // gameField.createTimer();
+  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector); 
+  // gameField.getEmptyCell().element.appendChild(gameField.getTimer().getElem());
 
   difficultySelector.appendNode(selectorContainer);
   difficultySelector.addOptions('easy', 'medium', 'hard');
   pictureSelector.appendNode(selectorContainer);
-  for (const picture in pictures['easy']) {
-    pictureSelector.addOptions(picture);
-  }
 }
 
 initGame();
-
-// const modal = new Modal();
-// modal.appendNode(body);
-// modal.showWindow();
-
-// modal.getElem().addEventListener('mousedown', (e) => {if (e.target === modal.getElem()) modal.closeWindow()});
-
-
