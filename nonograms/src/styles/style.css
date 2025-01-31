@@ -1,9 +1,70 @@
 @import url(../assets/fonts/fonts.css);
+:root {
+  --lime: #bee72a;
+  --lime-lighten-15: #d3ef6f;
+  --lime-lighten-20: #daf186;
+  --lime-darken-5: #b4de19;
+  --lime-darken-15: #8fb114;
+  --lime-darken-20: #7c9a11;
+  --lime-darken-20: #7c9a11;
+  --lime-darken-35: #45550a;
+  --orange: #f09f0a;
+  --orange-lighten-3: #f5a614;
+  --orange-darken-3: #e19509;
+  --orange-darken-5: #d88f09;
+  --orange-darken-12: #b57808;
+  --orange-darken-16: #a26b07;
+  --orange-darken-20: #8e5e06;
+  --red: #ec571c;
+  --red-lighten-3: #ed612a;
+  --red-darken-3: #e54f13;
+  --red-darken-5: #dc4c12;
+  --red-darken-12: #bb4010;
+  --red-darken-16: #a83a0e;
+  --red-darken-20: #95330d;
+  --grey: #b5b6b4;
+  --grey-lighten-3: #bdbebc;
+  --grey-darken-5: #a8a9a7;
+  --grey-darken-20: #828480;
+  --background: #fff;
+}
+
 body {
   overflow-x: hidden;
   position: relative;
   margin: 0;
+  background-color: var(--background);
   font-family: "Rubik", sans-serif;
+}
+body.dark {
+  --lime: #82ca30;
+  --lime-lighten-15: #9bd756;
+  --lime-lighten-20: #b3e17f;
+  --lime-darken-5: #75b52b;
+  --lime-darken-15: #75b52b;
+  --lime-darken-20: #4d781c;
+  --lime-darken-20: #4d781c;
+  --lime-darken-35: #8ed242;
+  --orange: var(#cf8a0a);
+  --orange-lighten-3: #de940b;
+  --orange-darken-3: #c08009;
+  --orange-darken-5: #b77a09;
+  --orange-darken-12: #956307;
+  --orange-darken-16: #815606;
+  --orange-darken-20: #6e4905;
+  --red: #ca430d;
+  --red-lighten-3: #d8480e;
+  --red-darken-3: #bc3e0c;
+  --red-darken-5: #b23b0b;
+  --red-darken-12: #913009;
+  --red-darken-16: #7d2a08;
+  --red-darken-20: #6a2307;
+  --grey: #9b9c99;
+  --grey-lighten-3: #a3a4a1;
+  --grey-darken-5: #8e8f8c;
+  --grey-darken-20: #686966;
+  --background: #273328;
+  --background-lighten-20: #b0d8b3;
 }
 
 .wrapper {
@@ -27,7 +88,7 @@ body {
 }
 
 .cell {
-  border: solid 1px #7c9a11;
+  border: solid 1px var(--lime-darken-20);
   cursor: pointer;
 }
 
@@ -36,15 +97,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid 1px #7c9a11;
-  background-color: #d3ef6f;
+  border: solid 1px var(--lime-darken-20);
+  background-color: var(--lime);
 }
 .empty-cell::before {
   content: "";
   position: absolute;
   width: calc(42vmin + 5px);
   height: 3px;
-  background-color: #7c9a11;
+  background-color: var(--lime-darken-20);
   bottom: -1px;
   left: 0;
   z-index: 2;
@@ -54,7 +115,7 @@ body {
   position: absolute;
   width: 3px;
   height: calc(42vmin + 5px);
-  background-color: #7c9a11;
+  background-color: var(--lime-darken-20);
   top: 0;
   right: -1px;
   z-index: 2;
@@ -82,9 +143,9 @@ body {
   -moz-column-gap: 5px;
        column-gap: 5px;
   padding: 8px;
-  background-color: #d3ef6f;
-  color: #6a830f;
-  border: solid 1px #7c9a11;
+  background-color: var(--lime-lighten-15);
+  color: var(--lime-darken-20);
+  border: solid 1px var(--lime-darken-20);
   width: calc(100% - 16px);
   height: calc(100% - 16px);
 }
@@ -109,7 +170,7 @@ body {
   border-radius: 2vmin;
   top: 50%;
   left: 0%;
-  background-color: #45550a;
+  background-color: var(--lime-darken-35);
 }
 .cross::before {
   content: "";
@@ -120,14 +181,14 @@ body {
   border-radius: 2vmin;
   top: 50%;
   left: 0%;
-  background-color: #45550a;
+  background-color: var(--lime-darken-35);
 }
 
 @keyframes rotate {
   0% {
     opacity: 0;
     transform: rotate(-90deg);
-    border: solid 0px #7c9a11;
+    border: solid 0px var(--lime-darken-20);
     transform: scale(0);
   }
   50% {
@@ -137,11 +198,11 @@ body {
   100% {
     transform: scale(0.6);
     transform: rotate(90deg);
-    border: solid 0px #7c9a11;
+    border: solid 0px var(--lime-darken-20);
   }
 }
 .painted {
-  background-color: #8fb114;
+  background-color: var(--lime-darken-15);
   transition: background-color 0.2s ease-in;
   animation: rotate-box 0.2s ease-in;
 }
@@ -156,7 +217,7 @@ body {
   0% {
     opacity: 0;
     transform: rotate(-90deg);
-    border: solid 0px #7c9a11;
+    border: solid 0px var(--lime-darken-20);
     transform: scale(0);
   }
   50% {
@@ -166,12 +227,12 @@ body {
   100% {
     transform: scale(0.6);
     transform: rotate(90deg);
-    border: solid 0px #7c9a11;
+    border: solid 0px var(--lime-darken-20);
   }
 }
 @keyframes hide {
   0% {
-    border: solid 0px #7c9a11;
+    border: solid 0px var(--lime-darken-20);
     transform: rotate(90deg);
     opacity: 1;
   }
@@ -179,7 +240,7 @@ body {
     transform: scale(1.1);
   }
   100% {
-    border: solid 0px #7c9a11;
+    border: solid 0px var(--lime-darken-20);
     transform: rotate(0);
     opacity: 0;
     transform: scale(0.6);
@@ -193,7 +254,7 @@ body {
   position: absolute;
   width: calc(42vmin + 5px);
   height: 3px;
-  background-color: #7c9a11;
+  background-color: var(--lime-darken-20);
   bottom: -1px;
   left: 0;
   z-index: 2;
@@ -203,7 +264,7 @@ body {
   position: absolute;
   width: 3px;
   height: calc(42vmin + 5px);
-  background-color: #7c9a11;
+  background-color: var(--lime-darken-20);
   top: 0;
   right: -1px;
   z-index: 2;
@@ -235,16 +296,16 @@ body {
   font-size: 4vmin;
   text-align: center;
   font-weight: 600;
-  color: #45550a;
-  background-color: #bee72a;
-  border: solid 2px #7c9a11;
+  color: var(--lime-darken-35);
+  background-color: var(--lime);
+  border: solid 2px var(--lime-darken-20);
   border-radius: 4vmin;
   z-index: 3;
 }
 
 .timer {
   font-size: 3vmin;
-  color: #6a830f;
+  color: var(--lime-darken-20);
 }
 
 .selectors-container {
@@ -262,9 +323,9 @@ body {
   font-weight: 600;
   outline-style: none;
   border-radius: 1vmin;
-  color: #6a830f;
-  background-color: #fff;
-  border: 1px solid #b4de19;
+  color: var(--lime-darken-20);
+  background-color: var(--background-lighten-20);
+  border: 1px solid var(--lime-darken-5);
   transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
   cursor: pointer;
 }
@@ -291,10 +352,10 @@ body {
   width: 40vmin;
   height: 8vmin;
   border-radius: 1vmin;
-  color: #6a830f;
-  background-color: #c2e938;
-  border: 1px solid #b4de19;
-  box-shadow: 0px 5px 10px #a9d118;
+  color: var(--lime-darken-20);
+  background-color: var(--lime);
+  border: 1px solid var(--lime-darken-5);
+  box-shadow: 0px 5px 10px var(--lime-darken-5);
   z-index: 5;
 }
 .save-plate.active {
@@ -324,55 +385,67 @@ body {
   width: 20vmin;
   height: 5vmin;
   border-radius: 1vmin;
-  color: #6a830f;
-  background-color: #c2e938;
-  border: 1px solid #b4de19;
-  box-shadow: inset 0px 0px 0px #bee72a, 0px 2px 0px #b4de19, 0px 3px 5px #b4de19;
+  color: var(--lime-darken-20);
+  background-color: var(--lime);
+  border: 1px solid var(--lime-darken-5);
+  box-shadow: inset 0px 0px 0px var(--lime), 0px 2px 0px var(--lime-darken-5), 0px 3px 5px var(--lime-darken-5);
   transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
   cursor: pointer;
 }
 .button:hover {
-  background-color: #b4de19;
+  background-color: var(--lime-darken-5);
   border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: inset 1px 2px 2px #9abe15;
-  color: #84a312;
+  box-shadow: inset 1px 2px 2px var(--lime-darken-15);
+  color: var(--lime-darken-20);
   transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
 }
 
 .solution-button {
-  color: #8e5e06;
-  background-color: #f5a614;
-  border: 1px solid #d88f09;
-  box-shadow: inset 0px 0px 0px #f09f0a, 0px 2px 0px #d88f09, 0px 3px 5px #d88f09;
+  color: var(--orange-darken-20);
+  background-color: var(--orange-lighten-3);
+  border: 1px solid var(--orange-darken-5);
+  box-shadow: inset 0px 0px 0px var(--orange), 0px 2px 0px var(--orange-darken-5), 0px 3px 5px var(--orange-darken-5);
 }
 .solution-button:hover {
-  background-color: #e19509;
-  box-shadow: inset 1px 2px 2px #b57808;
-  color: #a26b07;
+  background-color: var(--orange-darken-3);
+  box-shadow: inset 1px 2px 2px var(--orange-darken-12);
+  color: var(--orange-darken-16);
+}
+
+.switch-button {
+  color: var(--orange-darken-20);
+  background-color: var(--orange-lighten-3);
+  border: 1px solid var(--orange-darken-5);
+  box-shadow: inset 0px 0px 0px var(--orange), 0px 2px 0px var(--orange-darken-5), 0px 3px 5px var(--orange-darken-5);
+}
+.switch-button:hover {
+  background-color: var(--orange-darken-3);
+  box-shadow: inset 1px 2px 2px var(--orange-darken-12);
+  color: var(--orange-darken-16);
 }
 
 .load-button:disabled {
-  color: #828480;
-  background-color: #bdbebc;
-  border: 1px solid #a8a9a7;
-  box-shadow: inset 0px 0px 0px #b5b6b4, 0px 2px 0px #a8a9a7, 0px 3px 5px #a8a9a7;
+  color: var(--grey-darken-20);
+  background-color: var(--grey-lighten-3);
+  border: 1px solid var(--grey-darken-5);
+  box-shadow: inset 0px 0px 0px var(--grey), 0px 2px 0px var(--grey-darken-5), 0px 3px 5px var(--grey-darken-5);
   cursor: default;
 }
 
 .reset-button {
-  color: #872f0b;
-  background-color: #ed612a;
-  border: 1px solid #dc4c12;
-  box-shadow: inset 0px 0px 0px #ec571c, 0px 2px 0px #dc4c12, 0px 3px 5px #dc4c12;
+  color: var(--red-darken-20);
+  background-color: var(--red-lighten-3);
+  border: 1px solid var(--red-darken-5);
+  box-shadow: inset 0px 0px 0px var(--red), 0px 2px 0px var(--red-darken-5), 0px 3px 5px var(--red-darken-5);
 }
 .reset-button:hover {
-  background-color: #e54f13;
-  box-shadow: inset 1px 2px 2px #bb4010;
-  color: #a83a0e;
+  background-color: var(--red-darken-3);
+  box-shadow: inset 1px 2px 2px var(--red-darken-12);
+  color: var(--red-darken-16);
 }
 
 .close-button {
-  background-color: #ccec58;
+  background-color: var(--lime-lighten-15);
 }
 
 .best-results {
@@ -389,9 +462,9 @@ body {
   height: 100%;
   width: 50vmin;
   transform: translateX(120%);
-  background-color: #daf186;
-  color: #84a312;
-  box-shadow: 0px 5px 10px #a9d118;
+  background-color: var(--lime-lighten-20);
+  color: var(--lime-darken-20);
+  box-shadow: 0px 5px 10px var(--lime-darken-5);
   transition: transform 0.15s ease-in;
   z-index: 4;
 }
@@ -421,8 +494,8 @@ body {
   height: 100%;
   width: 50vmin;
   transform: translateX(-120%);
-  background-color: #daf186;
-  box-shadow: 0px 5px 10px #a9d118;
+  background-color: var(--lime-lighten-20);
+  box-shadow: 0px 5px 10px var(--lime-darken-5);
   transition: transform 0.15s ease-in;
   z-index: 4;
 }

@@ -1,17 +1,93 @@
 @import url(../assets/fonts/fonts.css);
 
 $grey: #b5b6b4;
-$red: #EC5A5A;
 $lime: #bee72a;
-$dark-red: #A42B2B;
 $orange: #f09f0a;
 $red: #ec571c;
+$background: #fff;
+
+$grey-dark: #9b9c99;
+$lime-dark: #82ca30;
+$orange-dark: #cf8a0a;
+$red-dark: #ca430d;
+$background-dark: #273328;
+$selector: #6cb672;
+
+@mixin light-theme {
+  --lime: #{$lime};
+  --lime-lighten-15: #{lighten($lime, 15%)};
+  --lime-lighten-20: #{lighten($lime, 20%)};
+  --lime-darken-5: #{darken($lime, 5%)};
+  --lime-darken-15: #{darken($lime, 15%)};
+  --lime-darken-20: #{darken($lime, 20%)};
+  --lime-darken-20: #{darken($lime, 20%)};
+  --lime-darken-35: #{darken($lime, 35%)};
+  --orange: #{$orange};
+  --orange-lighten-3: #{lighten($orange, 3%)};
+  --orange-darken-3: #{darken($orange, 3%)};
+  --orange-darken-5: #{darken($orange, 5%)};
+  --orange-darken-12: #{darken($orange, 12%)};
+  --orange-darken-16: #{darken($orange, 16%)};
+  --orange-darken-20: #{darken($orange, 20%)};
+  --red: #{$red};
+  --red-lighten-3: #{lighten($red, 3%)};
+  --red-darken-3: #{darken($red, 3%)};
+  --red-darken-5: #{darken($red, 5%)};
+  --red-darken-12: #{darken($red, 12%)};
+  --red-darken-16: #{darken($red, 16%)};
+  --red-darken-20: #{darken($red, 20%)};
+  --grey: #{$grey};
+  --grey-lighten-3: #{lighten($grey, 3%)};
+  --grey-darken-5: #{darken($grey, 5%)};
+  --grey-darken-20: #{darken($grey, 20%)};
+  --background: #{$background};
+}
+
+@mixin dark-theme {
+  --lime: #{$lime-dark};
+  --lime-lighten-15: #{lighten($lime-dark, 10%)};
+  --lime-lighten-20: #{lighten($lime-dark, 20%)};
+  --lime-darken-5: #{darken($lime-dark, 5%)};
+  --lime-darken-15: #{darken($lime-dark, 5%)};
+  --lime-darken-20: #{darken($lime-dark, 20%)};
+  --lime-darken-20: #{darken($lime-dark, 20%)};
+  --lime-darken-35: #{lighten($lime-dark, 5%)};
+  --orange: #{var($orange-dark)};
+  --orange-lighten-3: #{lighten($orange-dark, 3%)};
+  --orange-darken-3: #{darken($orange-dark, 3%)};
+  --orange-darken-5: #{darken($orange-dark, 5%)};
+  --orange-darken-12: #{darken($orange-dark, 12%)};
+  --orange-darken-16: #{darken($orange-dark, 16%)};
+  --orange-darken-20: #{darken($orange-dark, 20%)};
+  --red: #{$red-dark};
+  --red-lighten-3: #{lighten($red-dark, 3%)};
+  --red-darken-3: #{darken($red-dark, 3%)};
+  --red-darken-5: #{darken($red-dark, 5%)};
+  --red-darken-12: #{darken($red-dark, 12%)};
+  --red-darken-16: #{darken($red-dark, 16%)};
+  --red-darken-20: #{darken($red-dark, 20%)};
+  --grey: #{$grey-dark};
+  --grey-lighten-3: #{lighten($grey-dark, 3%)};
+  --grey-darken-5: #{darken($grey-dark, 5%)};
+  --grey-darken-20: #{darken($grey-dark, 20%)};
+  --background: #{$background-dark};
+  --background-lighten-20: #{lighten($selector, 20%)};
+}
+
+:root {
+  @include light-theme;
+}
 
 body {
   overflow-x: hidden;
   position: relative;
   margin: 0;
+  background-color: var(--background);
   font-family: "Rubik", sans-serif;
+
+  &.dark {
+    @include dark-theme;
+  }
 }
 
 .wrapper {
@@ -35,8 +111,9 @@ body {
 }
 
 .cell {
-  border: solid 1px darken($lime, 20%);
+  border: solid 1px var(--lime-darken-20);
   cursor: pointer;
+  
 }
 
 .empty-cell {
@@ -44,15 +121,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid 1px darken($lime, 20%);
-  background-color: lighten($lime, 15%);
+  border: solid 1px var(--lime-darken-20);
+  background-color: var(--lime);
 
   &::before {
     content: '';
     position: absolute;
     width: calc(42vmin + 5px);
     height: 3px;
-    background-color: darken($lime, 20%);
+    background-color: var(--lime-darken-20);
     bottom: -1px;
     left: 0;
     z-index: 2;
@@ -63,7 +140,7 @@ body {
     position: absolute;
     width: 3px;
     height: calc(42vmin + 5px);
-    background-color: darken($lime, 20%);
+    background-color: var(--lime-darken-20);
     top: 0;
     right: -1px;
     z-index: 2;
@@ -96,9 +173,9 @@ body {
   row-gap: 0;
   column-gap: 5px;
   padding: 8px;
-  background-color: lighten($lime, 15%);
-  color: darken($lime, 25%);
-  border: solid 1px darken($lime, 20%);
+  background-color: var(--lime-lighten-15);
+  color: var(--lime-darken-20);
+  border: solid 1px var(--lime-darken-20);
   width: calc(100% - 16px);
   height: calc(100% - 16px);
 }
@@ -124,7 +201,7 @@ body {
     border-radius: 2vmin;
     top: 50%;
     left: 0%;
-    background-color: darken($lime, 35%);
+    background-color: var(--lime-darken-35);
   }
 
   &::before {
@@ -136,7 +213,7 @@ body {
     border-radius: 2vmin;
     top: 50%;
     left: 00%;
-    background-color: darken($lime, 35%);
+    background-color: var(--lime-darken-35);
   }
 }
 
@@ -144,7 +221,7 @@ body {
   0%{
     opacity: 0;
     transform: rotate(-90deg);
-    border: solid 0px darken($lime, 20%);
+    border: solid 0px var(--lime-darken-20);
     transform: scale(0);
   }
 
@@ -156,12 +233,12 @@ body {
   100%{
     transform: scale(0.6);
     transform: rotate(90deg);
-    border: solid 0px darken($lime, 20%);
+    border: solid 0px var(--lime-darken-20);
   }
 }
 
 .painted {
-  background-color: darken($lime, 15%);
+  background-color: var(--lime-darken-15);
   transition: background-color .2s ease-in;
   animation: rotate-box .2s ease-in;
 
@@ -178,7 +255,7 @@ body {
   0%{
     opacity: 0;
     transform: rotate(-90deg);
-    border: solid 0px darken($lime, 20%);
+    border: solid 0px var(--lime-darken-20);
     transform: scale(0);
   }
 
@@ -190,13 +267,13 @@ body {
   100%{
     transform: scale(0.6);
     transform: rotate(90deg);
-    border: solid 0px darken($lime, 20%);
+    border: solid 0px var(--lime-darken-20);
   }
 }
 
 @keyframes hide {
   0%{
-    border: solid 0px darken($lime, 20%);
+    border: solid 0px var(--lime-darken-20);
     transform: rotate(90deg);
     opacity: 1;
   }
@@ -206,7 +283,7 @@ body {
   }
 
   100%{
-    border: solid 0px darken($lime, 20%);
+    border: solid 0px var(--lime-darken-20);
     transform: rotate(0);
     opacity: 0;
     transform: scale(0.6);
@@ -221,7 +298,7 @@ body {
     position: absolute;
     width: calc(42vmin + 5px);
     height: 3px;
-    background-color: darken($lime, 20%);
+    background-color: var(--lime-darken-20);
     bottom: -1px;
     left: 0;
     z-index: 2;
@@ -232,7 +309,7 @@ body {
     position: absolute;
     width: 3px;
     height: calc(42vmin + 5px);
-    background-color: darken($lime, 20%);
+    background-color: var(--lime-darken-20);
     top: 0;
     right: -1px;
     z-index: 2;
@@ -270,9 +347,9 @@ body {
   font-size: 4vmin;
   text-align: center;
   font-weight: 600;
-  color: darken($lime, 35%);
-  background-color: $lime;
-  border: solid 2px darken($lime, 20%);
+  color: var(--lime-darken-35);
+  background-color: var(--lime);
+  border: solid 2px var(--lime-darken-20);
   border-radius: 4vmin;
   z-index: 3;
 }
@@ -303,7 +380,7 @@ body {
 
 .timer {
   font-size: 3vmin;
-  color: darken($lime, 25%);
+  color: var(--lime-darken-20);
 }
 
 .selectors-container {
@@ -321,9 +398,9 @@ body {
   font-weight: 600;
   outline-style: none;
   border-radius: 1vmin;
-  color: darken($lime, 25%);
-  background-color: #fff;
-  border: 1px solid darken($lime, 5%);
+  color: var(--lime-darken-20);
+  background-color: var(--background-lighten-20);
+  border: 1px solid var(--lime-darken-5);
   transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
   cursor: pointer;
 }
@@ -350,10 +427,10 @@ body {
   width: 40vmin;
   height: 8vmin;
   border-radius: 1vmin;
-  color: darken($lime, 25%);
-  background-color: lighten($lime, 3%);
-  border: 1px solid darken($lime, 5%);
-  box-shadow: 0px 5px 10px darken($lime, 8%);
+  color: var(--lime-darken-20);
+  background-color: var(--lime);
+  border: 1px solid var(--lime-darken-5);
+  box-shadow: 0px 5px 10px var(--lime-darken-5);
   z-index: 5;
   
   &.active {
@@ -388,59 +465,73 @@ body {
   width: 20vmin;
   height: 5vmin;
   border-radius: 1vmin;
-  color: darken($lime, 25%);
-  background-color: lighten($lime, 3%);
-  border: 1px solid darken($lime, 5%);
-  box-shadow: inset 0px 0px 0px darken($lime, 0), 0px 2px 0px darken($lime, 5%), 0px 3px 5px darken($lime, 5%);
+  color: var(--lime-darken-20);
+  background-color: var(--lime);
+  border: 1px solid var(--lime-darken-5);
+  box-shadow: inset 0px 0px 0px var(--lime), 0px 2px 0px var(--lime-darken-5), 0px 3px 5px var(--lime-darken-5);
   transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
   cursor: pointer;
 
   &:hover {
-    background-color: darken($lime, 5%);
+    background-color: var(--lime-darken-5);
     border: 1px solid rgba(#000, 0.1);
-    box-shadow: inset 1px 2px 2px darken($lime, 12%);
-    color: darken($lime, 18%);
+    box-shadow: inset 1px 2px 2px var(--lime-darken-15);
+    color: var(--lime-darken-20);
     transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
   }
 }
 
 .solution-button {
-  color: darken($orange, 20%);
-  background-color: lighten($orange, 3%);
-  border: 1px solid darken($orange, 5%);
-  box-shadow: inset 0px 0px 0px darken($orange, 0), 0px 2px 0px darken($orange, 5%), 0px 3px 5px darken($orange, 5%);
+  color: var(--orange-darken-20);
+  background-color: var(--orange-lighten-3);
+  border: 1px solid var(--orange-darken-5);
+  box-shadow: inset 0px 0px 0px var(--orange), 0px 2px 0px var(--orange-darken-5), 0px 3px 5px var(--orange-darken-5);
 
   &:hover {
-    background-color: darken($orange, 3%);
-    box-shadow: inset 1px 2px 2px darken($orange, 12%);
-    color: darken($orange, 16%);
+    background-color: var(--orange-darken-3);
+    box-shadow: inset 1px 2px 2px var(--orange-darken-12);
+    color: var(--orange-darken-16);
+  }
+}
+
+.switch-button {
+  color: var(--orange-darken-20);
+  background-color: var(--orange-lighten-3);
+  border: 1px solid var(--orange-darken-5);
+  box-shadow: inset 0px 0px 0px var(--orange), 0px 2px 0px var(--orange-darken-5), 0px 3px 5px var(--orange-darken-5);
+
+  &:hover {
+    background-color: var(--orange-darken-3);
+    box-shadow: inset 1px 2px 2px var(--orange-darken-12);
+    color: var(--orange-darken-16);
   }
 }
 
 .load-button {
   &:disabled {
-    color: darken($grey, 20%);
-    background-color: lighten($grey, 3%);
-    border: 1px solid darken($grey, 5%);
-    box-shadow: inset 0px 0px 0px darken($grey, 0), 0px 2px 0px darken($grey, 5%), 0px 3px 5px darken($grey, 5%);
+    color: var(--grey-darken-20);
+    background-color: var(--grey-lighten-3);
+    border: 1px solid var(--grey-darken-5);
+    box-shadow: inset 0px 0px 0px var(--grey), 0px 2px 0px var(--grey-darken-5), 0px 3px 5px var(--grey-darken-5);
     cursor: default;
   }
 }
 
 .reset-button {
-  color: darken($red, 23%);
-  background-color: lighten($red, 3%);
-  border: 1px solid darken($red, 5%);
-  box-shadow: inset 0px 0px 0px darken($red, 0), 0px 2px 0px darken($red, 5%), 0px 3px 5px darken($red, 5%);
+  color: var(--red-darken-20);
+  background-color: var(--red-lighten-3);
+  border: 1px solid var(--red-darken-5);
+  box-shadow: inset 0px 0px 0px var(--red), 0px 2px 0px var(--red-darken-5), 0px 3px 5px var(--red-darken-5);
 
   &:hover {
-    background-color: darken($red, 3%);
-    box-shadow: inset 1px 2px 2px darken($red, 12%);
-    color: darken($red, 16%);
+    background-color: var(--red-darken-3);
+    box-shadow: inset 1px 2px 2px var(--red-darken-12);
+    color: var(--red-darken-16);
   }
 }
+
 .close-button {
-  background-color: lighten($lime, 10%);
+  background-color: var(--lime-lighten-15);
 }
 
 .best-results {
@@ -457,9 +548,9 @@ body {
   height: 100%;
   width: 50vmin;
   transform: translateX(120%);
-  background-color: lighten($lime, 20%);
-  color: darken($lime, 18%);
-  box-shadow: 0px 5px 10px darken($lime, 8%);
+  background-color: var(--lime-lighten-20);
+  color: var(--lime-darken-20);
+  box-shadow: 0px 5px 10px var(--lime-darken-5);
   transition: transform .15s ease-in;
   z-index: 4;
 
@@ -490,8 +581,8 @@ body {
   height: 100%;
   width: 50vmin;
   transform: translateX(-120%);
-  background-color: lighten($lime, 20%);
-  box-shadow: 0px 5px 10px darken($lime, 8%);
+  background-color: var(--lime-lighten-20);
+  box-shadow: 0px 5px 10px var(--lime-darken-5);
   transition: transform .15s ease-in;
   z-index: 4;
 

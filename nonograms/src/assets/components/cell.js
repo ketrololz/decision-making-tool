@@ -45,7 +45,7 @@ export class Cell {
     if (this.element.classList.contains('cross')) this.element.classList.add('hide');
     
     this.element.addEventListener('animationend', (e) => {
-      if(e.animationName === 'hide') {
+      if(e.animationName === 'hide' || e.animationName === 'hide-dark') {
         this.element.classList.remove('hide');
         this.element.classList.remove('cross');
       }

@@ -132,6 +132,17 @@ bestResultsButton.addEventListener('mousedown', () => {
   bestResultsWindow.showWindow();
 })
 
+const switchThemeButton  = createElem({
+  tag: 'button',
+  parent: menuWindow.getElem(),
+  classes: ['switch-button', 'button'],
+  text: 'switch theme'
+})
+
+switchThemeButton.addEventListener('mousedown', () => {
+  body.classList.toggle('dark');
+})
+
 difficultySelector.element.addEventListener('change', (e) => {
   gameField.clear();
   gameField.changeDifficulty(e.target.value);
