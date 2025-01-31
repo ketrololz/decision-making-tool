@@ -75,8 +75,20 @@ const saveGameButton = createElem({
   text: 'save game'
 })
 
+const savePlate = createElem({
+  tag: 'div',
+  parent: wrapper,
+  classes: ['save-plate'],
+  text: 'saved successfully'
+})
+
+savePlate.addEventListener('animationend', () => {
+    savePlate.classList.remove('active');
+})
+
 saveGameButton.addEventListener('mousedown', () => {
   gameField.saveGame();
+  savePlate.classList.add('active');
 })
 
 const loadGameButton = createElem({
@@ -85,6 +97,8 @@ const loadGameButton = createElem({
   classes: ['load-button', 'button'],
   text: 'load game'
 })
+
+gameField.setLoadButton(loadGameButton);
 
 loadGameButton .addEventListener('mousedown', () => {
   gameField.loadGame();
@@ -141,6 +155,7 @@ pictureSelector.element.addEventListener('change', (e) => {
 })
 
 function initGame() {
+  loadGameButton.disabled = true;
   gameField.appendNode(wrapper);
   gameField.createModal(body);
   

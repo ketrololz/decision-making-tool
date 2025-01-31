@@ -27,6 +27,8 @@ export class Field {
   #diffSelector = null;
   #picSelector = null;
   #emptyCell = null;
+  #canLoad = false;
+  #loadButton = null;
 
   hintSize = {
     'easy': 2,
@@ -289,6 +291,9 @@ export class Field {
       'hard': 4,
     }
 
+    this.#canLoad = JSON.parse(localStorage.getItem('canLoad'));
+    // if (this.#canLoad) this.#loadButton.disabled = false;
+
     this.#resultsWindow = resultsWindow;
 
     this.#diffSelector = difficultySelector;
@@ -363,6 +368,9 @@ export class Field {
   }
 
   saveGame() {
+    this.#canLoad = true;
+    this.#loadButton.disabled = false;
+
     if (!this.#isGameStopped) {
       localStorage.setItem('time', this.#timer.currTime());
       localStorage.setItem('difficulty', this.#currDifficulty);
@@ -370,6 +378,7 @@ export class Field {
       localStorage.setItem('values', JSON.stringify(this.currFieldValue));
       localStorage.setItem('name', JSON.stringify(this.currFielname));
       localStorage.setItem('crosses', JSON.stringify(this.currFieldCrosses));
+      localStorage.setItem('canLoad', JSON.stringify(this.#canLoad));
 
 
       localStorage.setItem('diffSelectorIndex', JSON.stringify(this.#difficultySelectorIndex));
@@ -377,7 +386,15 @@ export class Field {
     }
   }
 
+  setLoadButton(button) {
+    this.#loadButton = button;
+  }
+
   loadGame() {
+    if (!this.#canLoad) {
+      return;
+    }
+
     this.clear();
     this.#currDifficulty = localStorage.getItem('difficulty');
     this.#currImageArr = JSON.parse(localStorage.getItem('picture'));
@@ -391,7 +408,6 @@ export class Field {
     this.#timer.setTime(JSON.parse(localStorage.getItem('time')));
     this.currFieldValue = JSON.parse(localStorage.getItem('values'));
     this.currFieldCrosses = JSON.parse(localStorage.getItem('crosses'));
-
 
     this.currFieldElements.forEach((e, i) => {
       if (this.currFieldValue[i] === 1) {

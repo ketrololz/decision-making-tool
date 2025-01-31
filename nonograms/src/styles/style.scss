@@ -1,9 +1,11 @@
 @import url(../assets/fonts/fonts.css);
 
-$grey: #D9D9D9;
+$grey: #b5b6b4;
 $red: #EC5A5A;
 $lime: #bee72a;
 $dark-red: #A42B2B;
+$orange: #f09f0a;
+$red: #ec571c;
 
 body {
   overflow-x: hidden;
@@ -333,6 +335,50 @@ body {
   gap: 1vmin;
 }
 
+.save-plate {
+  position: absolute;
+  top: 4vmin;
+  transform: translateY(calc(-200% - 4vmin));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Rubik", sans-serif;
+  font-weight: 600;
+  font-size: 2vmin;
+  outline-style: none;
+  border: none;
+  width: 40vmin;
+  height: 8vmin;
+  border-radius: 1vmin;
+  color: darken($lime, 25%);
+  background-color: lighten($lime, 3%);
+  border: 1px solid darken($lime, 5%);
+  box-shadow: 0px 5px 10px darken($lime, 8%);
+  z-index: 5;
+  
+  &.active {
+    animation: plate 1s ease-in-out
+  }
+}
+
+@keyframes plate {
+  0%{
+    transform: translateY(calc(-200% - 4vmin));
+  }
+
+  30%{
+    transform: translateY(0);
+  }
+  
+  70%{
+    transform: translateY(0);
+  }
+  
+  100%{
+    transform: translateY(calc(-200% - 4vmin));
+  }
+}
+
 .button {
   font-family: "Rubik", sans-serif;
   font-weight: 600;
@@ -358,6 +404,41 @@ body {
   }
 }
 
+.solution-button {
+  color: darken($orange, 20%);
+  background-color: lighten($orange, 3%);
+  border: 1px solid darken($orange, 5%);
+  box-shadow: inset 0px 0px 0px darken($orange, 0), 0px 2px 0px darken($orange, 5%), 0px 3px 5px darken($orange, 5%);
+
+  &:hover {
+    background-color: darken($orange, 3%);
+    box-shadow: inset 1px 2px 2px darken($orange, 12%);
+    color: darken($orange, 16%);
+  }
+}
+
+.load-button {
+  &:disabled {
+    color: darken($grey, 20%);
+    background-color: lighten($grey, 3%);
+    border: 1px solid darken($grey, 5%);
+    box-shadow: inset 0px 0px 0px darken($grey, 0), 0px 2px 0px darken($grey, 5%), 0px 3px 5px darken($grey, 5%);
+    cursor: default;
+  }
+}
+
+.reset-button {
+  color: darken($red, 23%);
+  background-color: lighten($red, 3%);
+  border: 1px solid darken($red, 5%);
+  box-shadow: inset 0px 0px 0px darken($red, 0), 0px 2px 0px darken($red, 5%), 0px 3px 5px darken($red, 5%);
+
+  &:hover {
+    background-color: darken($red, 3%);
+    box-shadow: inset 1px 2px 2px darken($red, 12%);
+    color: darken($red, 16%);
+  }
+}
 .close-button {
   background-color: lighten($lime, 10%);
 }
@@ -365,7 +446,7 @@ body {
 .best-results {
   box-sizing: border-box;
   position: absolute;
-  padding: 0 5vmin;
+  padding: 0 6vmin;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -375,10 +456,11 @@ body {
   right: 0;
   height: 100%;
   width: 50vmin;
-  transform: translateX(100%);
+  transform: translateX(120%);
   background-color: lighten($lime, 20%);
+  color: darken($lime, 18%);
   box-shadow: 0px 5px 10px darken($lime, 8%);
-  transition: transform .1s ease-in;
+  transition: transform .15s ease-in;
   z-index: 4;
 
   &.open {
@@ -407,10 +489,10 @@ body {
   left: 0;
   height: 100%;
   width: 50vmin;
-  transform: translateX(-100%);
+  transform: translateX(-120%);
   background-color: lighten($lime, 20%);
   box-shadow: 0px 5px 10px darken($lime, 8%);
-  transition: transform .1s ease-in;
+  transition: transform .15s ease-in;
   z-index: 4;
 
   &.open {
