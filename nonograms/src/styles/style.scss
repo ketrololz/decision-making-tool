@@ -12,6 +12,7 @@ $orange-dark: #cf8a0a;
 $red-dark: #ca430d;
 $background-dark: #273328;
 $selector: #6cb672;
+$shadow : rgba(32, 32, 32, 0.1);
 
 @mixin light-theme {
   --lime: #{$lime};
@@ -41,6 +42,7 @@ $selector: #6cb672;
   --grey-darken-5: #{darken($grey, 5%)};
   --grey-darken-20: #{darken($grey, 20%)};
   --background: #{$background};
+  --shadow: #{$shadow};
 }
 
 @mixin dark-theme {
@@ -72,6 +74,7 @@ $selector: #6cb672;
   --grey-darken-20: #{darken($grey-dark, 20%)};
   --background: #{$background-dark};
   --background-lighten-20: #{lighten($selector, 20%)};
+  --shadow: #{$shadow};
 }
 
 :root {
@@ -430,11 +433,18 @@ body {
   color: var(--lime-darken-20);
   background-color: var(--lime);
   border: 1px solid var(--lime-darken-5);
-  box-shadow: 0px 5px 10px var(--lime-darken-5);
+  box-shadow: 0px 5px 10px var(--shadow);
   z-index: 5;
   
   &.active {
     animation: plate 1s ease-in-out
+  }
+
+  &.error {
+    color: var(--red-darken-20);
+    background-color: var(--red);
+    border: 1px solid var(--red-darken-5);
+    box-shadow: 0px 5px 10px var(--shadow);
   }
 }
 
@@ -468,7 +478,7 @@ body {
   color: var(--lime-darken-20);
   background-color: var(--lime);
   border: 1px solid var(--lime-darken-5);
-  box-shadow: inset 0px 0px 0px var(--lime), 0px 2px 0px var(--lime-darken-5), 0px 3px 5px var(--lime-darken-5);
+  box-shadow: inset 0px 0px 0px var(--lime), 0px 2px 0px var(--lime-darken-5), 0px 3px 2px var(--shadow);
   transition: background-color 0.2s ease-in, border 0.2s ease-in, box-shadow 0.2s ease-in, color 0.2s ease-in;
   cursor: pointer;
 
@@ -485,7 +495,7 @@ body {
   color: var(--orange-darken-20);
   background-color: var(--orange-lighten-3);
   border: 1px solid var(--orange-darken-5);
-  box-shadow: inset 0px 0px 0px var(--orange), 0px 2px 0px var(--orange-darken-5), 0px 3px 5px var(--orange-darken-5);
+  box-shadow: inset 0px 0px 0px var(--orange), 0px 2px 0px var(--orange-darken-5), 0px 3px 2px var(--shadow);
 
   &:hover {
     background-color: var(--orange-darken-3);
@@ -498,7 +508,7 @@ body {
   color: var(--orange-darken-20);
   background-color: var(--orange-lighten-3);
   border: 1px solid var(--orange-darken-5);
-  box-shadow: inset 0px 0px 0px var(--orange), 0px 2px 0px var(--orange-darken-5), 0px 3px 5px var(--orange-darken-5);
+  box-shadow: inset 0px 0px 0px var(--orange), 0px 2px 0px var(--orange-darken-5), 0px 3px 2px var(--shadow);
 
   &:hover {
     background-color: var(--orange-darken-3);
@@ -512,7 +522,7 @@ body {
     color: var(--grey-darken-20);
     background-color: var(--grey-lighten-3);
     border: 1px solid var(--grey-darken-5);
-    box-shadow: inset 0px 0px 0px var(--grey), 0px 2px 0px var(--grey-darken-5), 0px 3px 5px var(--grey-darken-5);
+    box-shadow: inset 0px 0px 0px var(--grey), 0px 2px 0px var(--grey-darken-5), 0px 3px 2px var(--shadow);
     cursor: default;
   }
 }
@@ -521,7 +531,7 @@ body {
   color: var(--red-darken-20);
   background-color: var(--red-lighten-3);
   border: 1px solid var(--red-darken-5);
-  box-shadow: inset 0px 0px 0px var(--red), 0px 2px 0px var(--red-darken-5), 0px 3px 5px var(--red-darken-5);
+  box-shadow: inset 0px 0px 0px var(--red), 0px 2px 0px var(--red-darken-5), 0px 3px 2px var(--shadow);
 
   &:hover {
     background-color: var(--red-darken-3);
@@ -550,7 +560,7 @@ body {
   transform: translateX(120%);
   background-color: var(--lime-lighten-20);
   color: var(--lime-darken-20);
-  box-shadow: 0px 5px 10px var(--lime-darken-5);
+  box-shadow: 0px 5px 10px var(--shadow);
   transition: transform .15s ease-in;
   z-index: 4;
 
@@ -582,7 +592,7 @@ body {
   width: 50vmin;
   transform: translateX(-120%);
   background-color: var(--lime-lighten-20);
-  box-shadow: 0px 5px 10px var(--lime-darken-5);
+  box-shadow: 0px 5px 10px var(--shadow);
   transition: transform .15s ease-in;
   z-index: 4;
 
@@ -590,3 +600,47 @@ body {
     transform: translateX(0);
   }
 }
+
+.switcher-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5vmin;
+}
+
+.switcher-text {
+  font-family: "Rubik", sans-serif;
+  font-weight: 600;
+  font-size: 2vmin;
+  color: var(--lime-darken-20);
+  margin: 0;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 7vmin;
+  height: 3.5vmin;
+  border-radius: 5vmin;
+  background-color: var(--lime-darken-5);
+  transition: background-color .2s ease-in-out;
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    content: "";
+    width: 3.5vmin;
+    height: 3.5vmin;
+    background-color: var(--lime-darken-15);
+    border-radius: 5vmin;
+    transition: transform .2s ease-in-out;
+  }
+
+  &.active::before {
+    background-color: var(--lime);
+    transform: translateX(3.7vmin);
+  }
+
+  &.active {
+    background-color: var(--lime-darken-15);
+  }
+}
+

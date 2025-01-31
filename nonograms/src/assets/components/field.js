@@ -292,7 +292,7 @@ export class Field {
     }
 
     this.#canLoad = JSON.parse(localStorage.getItem('canLoad'));
-    // if (this.#canLoad) this.#loadButton.disabled = false;
+    if (this.#canLoad) this.#loadButton.disabled = false;
 
     this.#resultsWindow = resultsWindow;
 
@@ -336,7 +336,7 @@ export class Field {
   createModal(parent) {
     const modal = new Modal();
     modal.appendNode(parent);
-    modal.getElem().addEventListener('mousedown', (e) => { if (e.target === modal.getElem()) modal.closeWindow() });
+    modal.getElem().addEventListener('mousedown', (e) => { if (e.target !== modal.getElem()) modal.closeWindow() });
     this.#modal = modal;
   }
 
@@ -384,6 +384,10 @@ export class Field {
       localStorage.setItem('diffSelectorIndex', JSON.stringify(this.#difficultySelectorIndex));
       localStorage.setItem('picSelectorIndex', JSON.stringify(this.#pictureSelectorIndex));
     }
+  }
+
+  canSave() {
+    return this.#isGameStopped ? false : true;
   }
 
   setLoadButton(button) {

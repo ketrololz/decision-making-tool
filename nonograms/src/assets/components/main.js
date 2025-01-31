@@ -5,6 +5,9 @@ import { Modal } from './modal.js';
 import { createElem } from './create-element.js';
 import { Records } from './best-results.js';
 import { Menu } from './menu.js';
+import './sounds.js';
+import { Switcher } from './switcher.js';
+import { audio } from './sounds.js';
 
 const body = document.body;
 const wrapper = createElem({
@@ -53,9 +56,23 @@ menuButton.addEventListener('mousedown', () => {
 })
 
 wrapper.addEventListener('mousedown', (e) => {
-  if (e.target !== menuWindow.getElem() && e.target !== menuButton) { menuWindow.hideWindow() }
-  if (e.target !== bestResultsWindow.getElem() && e.target !== bestResultsButton) { bestResultsWindow.hideWindow() }
+
+  if (e.target === muteSwitcher.getSlider()) {
+    wrapper.addEventListener('transitionend', hideMenu);
+  } else {
+    hideMenu(e);
+  }
 });
+
+function hideMenu(element) {
+  try {
+    if (element.target !== menuWindow.getElem() && element.target !== menuButton) { menuWindow.hideWindow() }
+    if (element.target !== bestResultsWindow.getElem() && element.target !== bestResultsButton) { bestResultsWindow.hideWindow() }
+    this.removeEventListener('transitionend', hideMenu);
+  } catch (e) {
+    // console.log(e)
+  }
+}
 
 const resetButton = createElem({
   tag: 'button',
@@ -83,12 +100,19 @@ const savePlate = createElem({
 })
 
 savePlate.addEventListener('animationend', () => {
-    savePlate.classList.remove('active');
+  savePlate.classList.remove('active');
 })
 
 saveGameButton.addEventListener('mousedown', () => {
-  gameField.saveGame();
-  savePlate.classList.add('active');
+  if (gameField.canSave()) {
+    gameField.saveGame();
+    savePlate.textContent = 'saved successfully'
+    savePlate.classList.remove('error');
+    savePlate.classList.add('active');
+  } else {
+    savePlate.textContent = 'nothing to save'
+    savePlate.classList.add('active', 'error');
+  }
 })
 
 const loadGameButton = createElem({
@@ -100,7 +124,7 @@ const loadGameButton = createElem({
 
 gameField.setLoadButton(loadGameButton);
 
-loadGameButton .addEventListener('mousedown', () => {
+loadGameButton.addEventListener('mousedown', () => {
   gameField.loadGame();
 })
 
@@ -132,7 +156,7 @@ bestResultsButton.addEventListener('mousedown', () => {
   bestResultsWindow.showWindow();
 })
 
-const switchThemeButton  = createElem({
+const switchThemeButton = createElem({
   tag: 'button',
   parent: menuWindow.getElem(),
   classes: ['switch-button', 'button'],
@@ -143,13 +167,16 @@ switchThemeButton.addEventListener('mousedown', () => {
   body.classList.toggle('dark');
 })
 
+const muteSwitcher = new Switcher;
+muteSwitcher.appendNode(menuWindow.getElem());
+
 difficultySelector.element.addEventListener('change', (e) => {
   gameField.clear();
   gameField.changeDifficulty(e.target.value);
   gameField.changePicture(Object.keys(pictures[e.target.value])[0])
   gameField.updateSelectors(difficultySelector, pictureSelector)
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
-  
+
   pictureSelector.clear();
   for (const picture in pictures[e.target.value]) {
     pictureSelector.addOptions(picture);
@@ -169,8 +196,8 @@ function initGame() {
   loadGameButton.disabled = true;
   gameField.appendNode(wrapper);
   gameField.createModal(body);
-  
-  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector); 
+
+  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
 
 
   difficultySelector.appendNode(selectorContainer);
@@ -179,3 +206,12 @@ function initGame() {
 }
 
 initGame();
+
+muteSwitcher.getElem().addEventListener('mousedown', () => {
+  muteSwitcher.getSlider().classList.toggle("active")
+  if (muteSwitcher.getSlider().classList.contains("active")) {
+    audio.muted = false;
+  } else {
+    audio.muted = true;
+  }
+})
