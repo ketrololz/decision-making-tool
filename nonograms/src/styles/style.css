@@ -419,6 +419,13 @@ body.dark {
   box-shadow: inset 1px 2px 2px var(--orange-darken-12);
   color: var(--orange-darken-16);
 }
+.solution-button:disabled {
+  color: var(--grey-darken-20);
+  background-color: var(--grey-lighten-3);
+  border: 1px solid var(--grey-darken-5);
+  box-shadow: inset 0px 0px 0px var(--grey), 0px 2px 0px var(--grey-darken-5), 0px 3px 2px var(--shadow);
+  cursor: default;
+}
 
 .switch-button {
   color: var(--orange-darken-20);
@@ -453,7 +460,15 @@ body.dark {
 }
 
 .close-button {
-  background-color: var(--lime-lighten-15);
+  color: var(--red-darken-20);
+  background-color: var(--red);
+  border: 1px solid var(--red-darken-5);
+  box-shadow: 0px 5px 10px var(--shadow);
+}
+.close-button:hover {
+  background-color: var(--red-darken-3);
+  box-shadow: inset 1px 2px 2px var(--red-darken-12);
+  color: var(--red-darken-16);
 }
 
 .best-results {

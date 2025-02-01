@@ -48,6 +48,7 @@ const solutionButton = createElem({
 solutionButton.addEventListener('mousedown', () => {
   gameField.showSolution();
   sound.playSound('click');
+  solutionButton.disabled = true;
 })
 
 // function playSound(soundName) {
@@ -100,6 +101,7 @@ const resetButton = createElem({
 resetButton.addEventListener('mousedown', () => {
   gameField.resetGame();
   sound.playSound('click');
+  solutionButton.disabled = false;
 })
 
 const saveGameButton = createElem({
@@ -145,6 +147,7 @@ gameField.setLoadButton(loadGameButton);
 loadGameButton.addEventListener('mousedown', () => {
   gameField.loadGame();
   sound.playSound('click');
+  solutionButton.disabled = false;
 })
 
 const randomGameButton = createElem({
@@ -159,6 +162,7 @@ randomGameButton.addEventListener('mousedown', () => {
   gameField.getRandomImage();
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
   sound.playSound('click');
+  solutionButton.disabled = false;
 })
 
 const randomPlate = createElem({
@@ -178,7 +182,7 @@ randomGameButton.addEventListener('mousedown', () => {
     0: 'You are lucky!',
     1: 'Try to solve it!',
     2: 'Do you like it?',
-    3: 'You can try again',
+    3: 'So cool image!',
     4: 'I hope you like it'
   }
     randomPlate.textContent = phrases[randomNum];
@@ -246,10 +250,14 @@ pictureSelector.getElem().addEventListener('mousedown', () => {
 
 const audio = new Sounds();
 
-document.addEventListener('DOMContentLoaded', () => {
-  audio.setMusic(audio.getTracksList().theme)
+audio.getMusicObj().volume = 0;
+
+document.addEventListener('mousedown', () => {
   audio.getMusicObj().volume = 0.1;
-  audio.getMusicObj().play()
+  if (audio.getMusicObj().paused) {
+    audio.setMusic(audio.getTracksList().theme)
+    audio.getMusicObj().play()
+  }
 });
 
 function initGame() {
@@ -269,8 +277,10 @@ initGame();
 muteSwitcher.getElem().addEventListener('mousedown', () => {
   muteSwitcher.getSlider().classList.toggle("active")
   if (muteSwitcher.getSlider().classList.contains("active")) {
+    sound.getSoundsObj().muted = false;
     audio.getMusicObj().muted = false;
   } else {
+    sound.getSoundsObj().muted = true;
     audio.getMusicObj().muted = true;
   }
   sound.playSound('click');

@@ -5,6 +5,7 @@ import pictures from "./../nonograms.json";
 import { Modal } from "./modal";
 import { Timer } from "./timer";
 import { createElem } from "./create-element";
+import { Sounds } from "./sounds";
 
 
 export class Field {
@@ -334,11 +335,12 @@ export class Field {
 
   checkInput() {
     if (this.currFieldValue.join('') === this.#currImageArr.flat().join('')) {
+      const winSound = new Sounds();
       this.#modal.showWindow(this.#timer);
       this.#isGameStopped = true;
       this.#timer.stopTimer();
       this.#resultsWindow.saveResult(this.#timer.currTime() - 1000, this.#currDifficulty, this.#currImageName);
-      this.#audio.playSound('win');
+      winSound.playSound('win');
     }
   }
 
