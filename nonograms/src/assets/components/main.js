@@ -8,6 +8,7 @@ import { Menu } from './menu.js';
 import './sounds.js';
 import { Switcher } from './switcher.js';
 import { Sounds } from './sounds.js';
+import './canvas.js';
 
 const body = document.body;
 const wrapper = createElem({

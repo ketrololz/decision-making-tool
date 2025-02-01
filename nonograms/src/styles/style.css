@@ -564,4 +564,9 @@ body.dark {
 }
 .toggle-slider.active {
   background-color: var(--lime-darken-15);
+}
+
+.background {
+  position: absolute;
+  z-index: -1;
 }/*# sourceMappingURL=style.css.map */

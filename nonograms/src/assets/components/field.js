@@ -422,7 +422,6 @@ export class Field {
 
   setSoundState(state, switcher) {
     this.#soundState = state;
-    console.log(switcher)
     if (state === 'on') { switcher.getSlider().classList.add('active') }; 
     if (state === 'off') { switcher.getSlider().classList.remove('active') }; 
   }
