@@ -31,6 +31,8 @@ export class Field {
   #canLoad = false;
   #loadButton = null;
   #audio = null;
+  #currentTheme = 'light';
+  #soundState = 'on';
 
   hintSize = {
     'easy': 2,
@@ -391,7 +393,8 @@ export class Field {
       localStorage.setItem('name', JSON.stringify(this.currFielname));
       localStorage.setItem('crosses', JSON.stringify(this.currFieldCrosses));
       localStorage.setItem('canLoad', JSON.stringify(this.#canLoad));
-
+      // localStorage.setItem('theme', JSON.stringify(this.#currentTheme));
+      localStorage.setItem('soundState', JSON.stringify(this.#soundState));
 
       localStorage.setItem('diffSelectorIndex', JSON.stringify(this.#difficultySelectorIndex));
       localStorage.setItem('picSelectorIndex', JSON.stringify(this.#pictureSelectorIndex));
@@ -408,6 +411,28 @@ export class Field {
 
   setAudio(audioElement) {
     this.#audio = audioElement;
+    
+  }
+
+  setTheme(theme) {
+    if (theme === 'dark') {document.body.classList.add('dark')}
+    if (theme === 'light') {document.body.classList.add('light')}
+    this.#currentTheme = theme;
+  }
+
+  setSoundState(state, switcher) {
+    this.#soundState = state;
+    console.log(switcher)
+    if (state === 'on') { switcher.getSlider().classList.add('active') }; 
+    if (state === 'off') { switcher.getSlider().classList.remove('active') }; 
+  }
+
+  getTheme() {
+    return this.#currentTheme;
+  }
+
+  getSoundState() {
+    return this.#soundState;
   }
 
   loadGame() {
@@ -428,6 +453,9 @@ export class Field {
     this.#timer.setTime(JSON.parse(localStorage.getItem('time')));
     this.currFieldValue = JSON.parse(localStorage.getItem('values'));
     this.currFieldCrosses = JSON.parse(localStorage.getItem('crosses'));
+    
+    // this.#currentTheme = JSON.parse(localStorage.getItem('theme'));
+    this.#soundState = JSON.parse(localStorage.getItem('soundState'));
 
     this.currFieldElements.forEach((e, i) => {
       if (this.currFieldValue[i] === 1) {

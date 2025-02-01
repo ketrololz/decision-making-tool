@@ -215,6 +215,12 @@ const switchThemeButton = createElem({
 switchThemeButton.addEventListener('mousedown', () => {
   body.classList.toggle('dark');
   sound.playSound('click');
+  if (body.classList.contains('dark')) {
+    gameField.setTheme('dark');
+  } else {
+    gameField.setTheme('light');
+  }
+  localStorage.setItem('theme', JSON.stringify(gameField.getTheme()));
 })
 
 const muteSwitcher = new Switcher;
@@ -260,7 +266,20 @@ document.addEventListener('mousedown', () => {
   }
 });
 
+// document.addEventListener('DOMContentLoaded', () => localStorage.setItem('theme', gameField.getTheme()));
+
 function initGame() {
+  gameField.setTheme(JSON.parse(localStorage.getItem('theme')))
+  gameField.setSoundState(JSON.parse(localStorage.getItem('soundState')), muteSwitcher);
+
+  if (gameField.getSoundState() === 'on') {
+    sound.getSoundsObj().muted = false;
+    audio.getMusicObj().muted = false;
+  } else {
+    sound.getSoundsObj().muted = true;
+    audio.getMusicObj().muted = true;
+  }
+
   loadGameButton.disabled = true;
   gameField.appendNode(wrapper);
   gameField.createModal(body);
@@ -276,12 +295,19 @@ initGame();
 
 muteSwitcher.getElem().addEventListener('mousedown', () => {
   muteSwitcher.getSlider().classList.toggle("active")
+  // gameField.setSoundState()
+  // if (gameField.getSoundState() === 'on') {muteSwitcher.getSlider().classList.add('active')};
+  
   if (muteSwitcher.getSlider().classList.contains("active")) {
     sound.getSoundsObj().muted = false;
     audio.getMusicObj().muted = false;
+    gameField.setSoundState('on', muteSwitcher);
   } else {
     sound.getSoundsObj().muted = true;
     audio.getMusicObj().muted = true;
+    gameField.setSoundState('off', muteSwitcher);
   }
+  
+  localStorage.setItem('soundState', JSON.stringify(gameField.getSoundState()));
   sound.playSound('click');
 })

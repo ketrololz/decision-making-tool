@@ -50,7 +50,7 @@ $shadow : rgba(32, 32, 32, 0.1);
   --lime-lighten-15: #{lighten($lime-dark, 10%)};
   --lime-lighten-20: #{lighten($lime-dark, 20%)};
   --lime-darken-5: #{darken($lime-dark, 5%)};
-  --lime-darken-15: #{darken($lime-dark, 5%)};
+  --lime-darken-15: #{darken($lime-dark, 10%)};
   --lime-darken-20: #{darken($lime-dark, 20%)};
   --lime-darken-20: #{darken($lime-dark, 20%)};
   --lime-darken-35: #{lighten($lime-dark, 5%)};
@@ -639,7 +639,7 @@ body {
   width: 7vmin;
   height: 3.5vmin;
   border-radius: 5vmin;
-  background-color: var(--lime-darken-5);
+  background-color: var(--lime);
   transition: background-color .2s ease-in-out;
   cursor: pointer;
 

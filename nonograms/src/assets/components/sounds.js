@@ -47,6 +47,4 @@ export class Sounds {
     this.setSound(this.getTracksList()[soundName]);
     this.getSoundsObj().play();
   }
-
-  
 }

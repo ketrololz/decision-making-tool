@@ -42,7 +42,7 @@ body.dark {
   --lime-lighten-15: #9bd756;
   --lime-lighten-20: #b3e17f;
   --lime-darken-5: #75b52b;
-  --lime-darken-15: #75b52b;
+  --lime-darken-15: #67a126;
   --lime-darken-20: #4d781c;
   --lime-darken-20: #4d781c;
   --lime-darken-35: #8ed242;
@@ -545,7 +545,7 @@ body.dark {
   width: 7vmin;
   height: 3.5vmin;
   border-radius: 5vmin;
-  background-color: var(--lime-darken-5);
+  background-color: var(--lime);
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
 }
