@@ -7,7 +7,7 @@ import { Records } from './best-results.js';
 import { Menu } from './menu.js';
 import './sounds.js';
 import { Switcher } from './switcher.js';
-import { audio } from './sounds.js';
+import { Sounds } from './sounds.js';
 
 const body = document.body;
 const wrapper = createElem({
@@ -29,6 +29,15 @@ const selectorContainer = createElem({
   classes: ['selectors-container'],
 })
 
+const sound = new Sounds;
+sound.getSoundsObj().volume = 0.5;
+
+gameField.setAudio(sound);
+
+difficultySelector.getElem().addEventListener('mousedown', () => {
+  sound.playSound('click');
+})
+
 const solutionButton = createElem({
   tag: 'button',
   parent: topContainer,
@@ -38,7 +47,13 @@ const solutionButton = createElem({
 
 solutionButton.addEventListener('mousedown', () => {
   gameField.showSolution();
+  sound.playSound('click');
 })
+
+// function playSound(soundName) {
+//   sound.setSound(audio.getTracksList()[soundName]);
+//   sound.getSoundsObj().play();
+// }
 
 const menuWindow = new Menu();
 
@@ -53,6 +68,7 @@ const menuButton = createElem({
 
 menuButton.addEventListener('mousedown', () => {
   menuWindow.showWindow();
+  sound.playSound('click');
 })
 
 wrapper.addEventListener('mousedown', (e) => {
@@ -83,6 +99,7 @@ const resetButton = createElem({
 
 resetButton.addEventListener('mousedown', () => {
   gameField.resetGame();
+  sound.playSound('click');
 })
 
 const saveGameButton = createElem({
@@ -113,6 +130,7 @@ saveGameButton.addEventListener('mousedown', () => {
     savePlate.textContent = 'nothing to save'
     savePlate.classList.add('active', 'error');
   }
+  sound.playSound('click');
 })
 
 const loadGameButton = createElem({
@@ -126,6 +144,7 @@ gameField.setLoadButton(loadGameButton);
 
 loadGameButton.addEventListener('mousedown', () => {
   gameField.loadGame();
+  sound.playSound('click');
 })
 
 const randomGameButton = createElem({
@@ -139,6 +158,7 @@ randomGameButton.addEventListener('mousedown', () => {
   gameField.clear();
   gameField.getRandomImage();
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
+  sound.playSound('click');
 })
 
 const bestResultsWindow = new Records();
@@ -154,6 +174,7 @@ const bestResultsButton = createElem({
 
 bestResultsButton.addEventListener('mousedown', () => {
   bestResultsWindow.showWindow();
+  sound.playSound('click');
 })
 
 const switchThemeButton = createElem({
@@ -165,6 +186,7 @@ const switchThemeButton = createElem({
 
 switchThemeButton.addEventListener('mousedown', () => {
   body.classList.toggle('dark');
+  sound.playSound('click');
 })
 
 const muteSwitcher = new Switcher;
@@ -176,11 +198,12 @@ difficultySelector.element.addEventListener('change', (e) => {
   gameField.changePicture(Object.keys(pictures[e.target.value])[0])
   gameField.updateSelectors(difficultySelector, pictureSelector)
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
-
+  
   pictureSelector.clear();
   for (const picture in pictures[e.target.value]) {
     pictureSelector.addOptions(picture);
   }
+  sound.playSound('click');
 })
 
 const pictureSelector = new Selector();
@@ -190,7 +213,20 @@ pictureSelector.element.addEventListener('change', (e) => {
   gameField.changePicture(e.target.value);
   gameField.updateSelectors(difficultySelector, pictureSelector)
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
+  sound.playSound('click');
 })
+
+pictureSelector.getElem().addEventListener('mousedown', () => {
+  sound.playSound('click');
+})
+
+const audio = new Sounds();
+
+document.addEventListener('DOMContentLoaded', () => {
+  // audio.setMusic(audio.getTracksList().theme)
+  audio.getMusicObj().volume = 0.1;
+  // audio.getMusicObj().play()
+});
 
 function initGame() {
   loadGameButton.disabled = true;
@@ -198,7 +234,6 @@ function initGame() {
   gameField.createModal(body);
 
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
-
 
   difficultySelector.appendNode(selectorContainer);
   difficultySelector.addOptions('easy', 'medium', 'hard');
@@ -210,8 +245,9 @@ initGame();
 muteSwitcher.getElem().addEventListener('mousedown', () => {
   muteSwitcher.getSlider().classList.toggle("active")
   if (muteSwitcher.getSlider().classList.contains("active")) {
-    audio.muted = false;
+    audio.getMusicObj().muted = false;
   } else {
-    audio.muted = true;
+    audio.getMusicObj().muted = true;
   }
+  sound.playSound('click');
 })

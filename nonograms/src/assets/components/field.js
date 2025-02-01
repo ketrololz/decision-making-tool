@@ -29,6 +29,7 @@ export class Field {
   #emptyCell = null;
   #canLoad = false;
   #loadButton = null;
+  #audio = null;
 
   hintSize = {
     'easy': 2,
@@ -94,6 +95,7 @@ export class Field {
           return;
         }
         cell.paint();
+        this.#audio.playSound('paint');
         this.currFieldValue[cell.position] = cell.state;
         this.currFieldCrosses[cell.position] = 0;
         if (!this.#timer.isTimerOn()) this.#timer.startTimer();
@@ -105,6 +107,7 @@ export class Field {
           return;
         }
         cell.markWithCross();
+        this.#audio.playSound('cross');
         this.currFieldValue[cell.position] = cell.state;
         this.currFieldCrosses[cell.position] = 2;
         if (!this.#timer.isTimerOn()) this.#timer.startTimer();
@@ -337,6 +340,7 @@ export class Field {
     const modal = new Modal();
     modal.appendNode(parent);
     modal.getElem().addEventListener('mousedown', (e) => { if (e.target !== modal.getElem()) modal.closeWindow() });
+    modal.setAudio(this.#audio);
     this.#modal = modal;
   }
 
@@ -392,6 +396,10 @@ export class Field {
 
   setLoadButton(button) {
     this.#loadButton = button;
+  }
+
+  setAudio(audioElement) {
+    this.#audio = audioElement;
   }
 
   loadGame() {

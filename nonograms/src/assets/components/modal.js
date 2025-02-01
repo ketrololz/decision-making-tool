@@ -1,8 +1,8 @@
 import { createElem } from "./create-element";
 
-createElem
 export class Modal{
   element = null;
+  #audio = null;
 
   constructor() {
     const modalContainer = document.createElement('dialog');
@@ -28,6 +28,7 @@ export class Modal{
     
     closeButton.addEventListener('mousedown', () => {
       this.closeWindow();
+      this.#audio.playSound('click');
     })
     this.element.appendChild(closeButton)
   }
@@ -38,6 +39,10 @@ export class Modal{
 
   getElem() {
     return this.element;
+  }
+
+  setAudio(audioElement) {
+    this.#audio = audioElement;
   }
 
   appendNode(parent) {

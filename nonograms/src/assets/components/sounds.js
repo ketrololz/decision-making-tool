@@ -1,16 +1,50 @@
-const audio = document.createElement('Audio')
 
 import theme from '../sounds/Gludio.mp3';
+import click from '../sounds/click.wav';
+import cross from '../sounds/cross.wav';
+import paint from '../sounds/paint.wav';
 
-audio.setAttribute('autoplay', true);
-audio.setAttribute('src', theme);
-audio.loop = true;
+export class Sounds {
+  #music = null;
+  #sounds = null;
 
-document.body.appendChild(audio);
-audio.volume = 0;
+  constructor() {
+    this.#music = new Audio();
+    this.#sounds = new Audio();
 
-document.addEventListener('mousedown', () => {
-  audio.volume = 0.1;
-});
+    this.#music.setAttribute('autoplay', true);
+    this.#music.loop = true;
+  }
 
-export { audio };
+  getSoundsObj() {
+    return this.#sounds;
+  }
+
+  getTracksList() {
+    return {
+      theme,
+      click,
+      cross,
+      paint,
+    }
+  }
+
+  setSound(sound) {
+    this.#sounds.src = sound;
+  }
+
+  setMusic(music) {
+    this.#music.src = music;
+  }
+
+  getMusicObj() {
+    return this.#music;
+  }
+
+  playSound(soundName) {
+    this.setSound(this.getTracksList()[soundName]);
+    this.getSoundsObj().play();
+  }
+
+  
+}

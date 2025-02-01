@@ -23,6 +23,14 @@ export class Selector{
     }
   }
 
+  getElem() {
+    return this.element;
+  }
+
+  getChilds() {
+    return this.element.childNodes;
+  }
+
   appendNode(parent) {
     parent.append(this.element);
   }
