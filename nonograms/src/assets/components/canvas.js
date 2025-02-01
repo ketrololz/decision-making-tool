@@ -85,7 +85,6 @@ export class CanvasBackground {
     }
   }
 
-
   dropLeaves() {
     this.ctx.clearRect(0, 0, this.#width, this.#height)
     this.createLeaves('green');

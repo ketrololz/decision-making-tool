@@ -33,7 +33,6 @@ export class Records {
   }
 
   showWindow() {
-    // localStorage.clear('results')
     this.#element.classList.toggle('open');
   }
 
@@ -77,12 +76,6 @@ export class Records {
 
         resultElem.appendChild(textChunk);
       }
-
-      // if(this.#resultsArr[i].time === '---') {
-      //   resultElem.textContent = `${this.#resultsArr[i].picture} ${this.#resultsArr[i].difficulty} ${'--'}:${'--'}`;
-      // } else {
-      //   resultElem.textContent = `${this.#resultsArr[i].picture} ${this.#resultsArr[i].difficulty} ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-      // }
 
         this.#element.appendChild(resultElem);
       }

@@ -1,10 +1,8 @@
 import { Cell } from "./cell";
 import { Hint } from "./hints";
-import { Selector } from "./selector";
 import pictures from "./../nonograms.json";
 import { Modal } from "./modal";
 import { Timer } from "./timer";
-import { createElem } from "./create-element";
 import { Sounds } from "./sounds";
 
 
@@ -393,7 +391,6 @@ export class Field {
       localStorage.setItem('name', JSON.stringify(this.currFielname));
       localStorage.setItem('crosses', JSON.stringify(this.currFieldCrosses));
       localStorage.setItem('canLoad', JSON.stringify(this.#canLoad));
-      // localStorage.setItem('theme', JSON.stringify(this.#currentTheme));
       localStorage.setItem('soundState', JSON.stringify(this.#soundState));
 
       localStorage.setItem('diffSelectorIndex', JSON.stringify(this.#difficultySelectorIndex));
@@ -452,8 +449,7 @@ export class Field {
     this.#timer.setTime(JSON.parse(localStorage.getItem('time')));
     this.currFieldValue = JSON.parse(localStorage.getItem('values'));
     this.currFieldCrosses = JSON.parse(localStorage.getItem('crosses'));
-    
-    // this.#currentTheme = JSON.parse(localStorage.getItem('theme'));
+
     this.#soundState = JSON.parse(localStorage.getItem('soundState'));
 
     this.currFieldElements.forEach((e, i) => {

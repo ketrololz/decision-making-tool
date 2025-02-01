@@ -1,7 +1,6 @@
 import { Field } from './field.js';
 import { Selector } from './selector.js';
 import pictures from "./../nonograms.json";
-import { Modal } from './modal.js';
 import { createElem } from './create-element.js';
 import { Records } from './best-results.js';
 import { Menu } from './menu.js';
@@ -52,11 +51,6 @@ solutionButton.addEventListener('mousedown', () => {
   solutionButton.disabled = true;
 })
 
-// function playSound(soundName) {
-//   sound.setSound(audio.getTracksList()[soundName]);
-//   sound.getSoundsObj().play();
-// }
-
 const menuWindow = new Menu();
 
 menuWindow.appendNode(wrapper);
@@ -88,7 +82,6 @@ function hideMenu(element) {
     if (element.target !== bestResultsWindow.getElem() && element.target !== bestResultsButton) { bestResultsWindow.hideWindow() }
     this.removeEventListener('transitionend', hideMenu);
   } catch (e) {
-    // console.log(e)
   }
 }
 
@@ -267,8 +260,6 @@ document.addEventListener('mousedown', () => {
   }
 });
 
-// document.addEventListener('DOMContentLoaded', () => localStorage.setItem('theme', gameField.getTheme()));
-
 function initGame() {
   gameField.setTheme(JSON.parse(localStorage.getItem('theme')))
   gameField.setSoundState(JSON.parse(localStorage.getItem('soundState')), muteSwitcher);
@@ -296,8 +287,6 @@ initGame();
 
 muteSwitcher.getElem().addEventListener('mousedown', () => {
   muteSwitcher.getSlider().classList.toggle("active")
-  // gameField.setSoundState()
-  // if (gameField.getSoundState() === 'on') {muteSwitcher.getSlider().classList.add('active')};
   
   if (muteSwitcher.getSlider().classList.contains("active")) {
     sound.getSoundsObj().muted = false;
