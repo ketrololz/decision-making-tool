@@ -266,6 +266,9 @@ export class Field {
   }
 
   getRandomImage() {
+    const oldDifficulty = this.#currDifficulty;
+    const oldPicture = this.#currImageName;
+
     const randomDiffNum = Math.floor(Math.random() * 3)
     const randomPicNum = Math.floor(Math.random() * 5)
     const difficulty = {
@@ -276,7 +279,9 @@ export class Field {
     this.changeDifficulty(difficulty[randomDiffNum]);
     const picture = Object.keys(pictures[this.#currDifficulty])[randomPicNum]
     this.changePicture(picture);
-
+    if(oldDifficulty === difficulty[randomDiffNum] && oldPicture === Object.keys(pictures[this.#currDifficulty])[randomPicNum]) {
+      this.getRandomImage();
+    }
     this.#difficultySelectorIndex = randomDiffNum;
     this.#pictureSelectorIndex = randomPicNum;
   }
@@ -333,6 +338,7 @@ export class Field {
       this.#isGameStopped = true;
       this.#timer.stopTimer();
       this.#resultsWindow.saveResult(this.#timer.currTime() - 1000, this.#currDifficulty, this.#currImageName);
+      this.#audio.playSound('win');
     }
   }
 

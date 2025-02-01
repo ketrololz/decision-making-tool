@@ -361,7 +361,7 @@ body.dark {
   z-index: 5;
 }
 .save-plate.active {
-  animation: plate 1s ease-in-out;
+  animation: plate 1.2s ease-in-out;
 }
 .save-plate.error {
   color: var(--red-darken-20);
@@ -374,10 +374,10 @@ body.dark {
   0% {
     transform: translateY(calc(-200% - 4vmin));
   }
-  30% {
+  20% {
     transform: translateY(0);
   }
-  70% {
+  80% {
     transform: translateY(0);
   }
   100% {

@@ -3,6 +3,7 @@ import theme from '../sounds/Gludio.mp3';
 import click from '../sounds/click.wav';
 import cross from '../sounds/cross.wav';
 import paint from '../sounds/paint.wav';
+import win from '../sounds/win.wav';
 
 export class Sounds {
   #music = null;
@@ -26,6 +27,7 @@ export class Sounds {
       click,
       cross,
       paint,
+      win,
     }
   }
 

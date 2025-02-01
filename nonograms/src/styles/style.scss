@@ -437,7 +437,7 @@ body {
   z-index: 5;
   
   &.active {
-    animation: plate 1s ease-in-out
+    animation: plate 1.2s ease-in-out
   }
 
   &.error {
@@ -453,11 +453,11 @@ body {
     transform: translateY(calc(-200% - 4vmin));
   }
 
-  30%{
+  20%{
     transform: translateY(0);
   }
   
-  70%{
+  80%{
     transform: translateY(0);
   }
   

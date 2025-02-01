@@ -161,6 +161,30 @@ randomGameButton.addEventListener('mousedown', () => {
   sound.playSound('click');
 })
 
+const randomPlate = createElem({
+  tag: 'div',
+  parent: wrapper,
+  classes: ['save-plate'],
+  text: 'saved successfully'
+})
+
+randomPlate.addEventListener('animationend', () => {
+  randomPlate.classList.remove('active');
+})
+
+randomGameButton.addEventListener('mousedown', () => {
+  const randomNum = Math.floor(Math.random() * 4)
+  const phrases = {
+    0: 'You are lucky!',
+    1: 'Try to solve it!',
+    2: 'Do you like it?',
+    3: 'You can try again',
+    4: 'I hope you like it'
+  }
+    randomPlate.textContent = phrases[randomNum];
+    randomPlate.classList.add('active');
+})
+
 const bestResultsWindow = new Records();
 
 bestResultsWindow.appendNode(wrapper);
@@ -223,9 +247,9 @@ pictureSelector.getElem().addEventListener('mousedown', () => {
 const audio = new Sounds();
 
 document.addEventListener('DOMContentLoaded', () => {
-  // audio.setMusic(audio.getTracksList().theme)
+  audio.setMusic(audio.getTracksList().theme)
   audio.getMusicObj().volume = 0.1;
-  // audio.getMusicObj().play()
+  audio.getMusicObj().play()
 });
 
 function initGame() {
