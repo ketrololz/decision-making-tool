@@ -289,7 +289,7 @@ document.addEventListener('mousedown', () => {
   audio.getMusicObj().volume = 0.1;
   if (audio.getMusicObj().paused) {
     audio.setMusic(audio.getTracksList().theme);
-    audio.getMusicObj().time = 0;
+    audio.getMusicObj().currentTime = 0;
     audio.getMusicObj().play();
   }
 });
