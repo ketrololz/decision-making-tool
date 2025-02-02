@@ -1,4 +1,4 @@
-export class Selector{
+export class Selector {
   element = null;
 
   constructor() {
@@ -9,7 +9,7 @@ export class Selector{
   }
 
   addOptions(...options) {
-    for(const value of options) {
+    for (const value of options) {
       const option = document.createElement('option');
       option.value = value;
       option.textContent = value;

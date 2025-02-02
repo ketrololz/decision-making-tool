@@ -1,7 +1,8 @@
-import { createElem } from "./create-element";
+import { createElem } from './create-element';
 
-export class Modal{
+export class Modal {
   element = null;
+
   #audio = null;
 
   constructor() {
@@ -16,7 +17,7 @@ export class Modal{
       this.element.lastChild.remove();
     }
   }
-  
+
   showWindow(timer) {
     this.element.showModal();
     this.element.textContent = `Great! You have solved the nonogram in ${(timer.currTime() - 1000) / 1000} seconds!`;
@@ -24,13 +25,13 @@ export class Modal{
       tag: 'button',
       classes: ['close-button', 'button'],
       text: 'close'
-    })
-    
+    });
+
     closeButton.addEventListener('mousedown', () => {
       this.closeWindow();
       this.#audio.playSound('click');
-    })
-    this.element.appendChild(closeButton)
+    });
+    this.element.appendChild(closeButton);
   }
 
   closeWindow() {

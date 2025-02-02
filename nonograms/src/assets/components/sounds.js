@@ -1,4 +1,3 @@
-
 import theme from '../sounds/Gludio.mp3';
 import click from '../sounds/click.wav';
 import cross from '../sounds/cross.wav';
@@ -7,6 +6,7 @@ import win from '../sounds/win.wav';
 
 export class Sounds {
   #music = null;
+
   #sounds = null;
 
   constructor() {
@@ -27,8 +27,8 @@ export class Sounds {
       click,
       cross,
       paint,
-      win,
-    }
+      win
+    };
   }
 
   setSound(sound) {

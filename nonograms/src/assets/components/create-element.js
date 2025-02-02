@@ -1,5 +1,7 @@
 export function createElem(options) {
-  const { tag = 'div', parent, classes, text = ''} = options;
+  const {
+    tag = 'div', parent, classes, text = ''
+  } = options;
   const elem = document.createElement(tag);
 
   if (classes) {

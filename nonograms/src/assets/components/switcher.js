@@ -1,27 +1,28 @@
-import { createElem } from "./create-element";
+import { createElem } from './create-element';
 
 export class Switcher {
   #element = null;
+
   #switcherSlider = null;
 
   constructor() {
-    const switcherContainer  = createElem({
+    const switcherContainer = createElem({
       tag: 'div',
-      classes: ['switcher-container'],
-    })
+      classes: ['switcher-container']
+    });
 
-    const switcherText  = createElem({
+    createElem({
       tag: 'p',
       parent: switcherContainer,
       classes: ['switcher-text'],
       text: 'sound'
-    })
+    });
 
-    const switcherSlider  = createElem({
+    const switcherSlider = createElem({
       tag: 'div',
       parent: switcherContainer,
-      classes: ['toggle-slider', 'active'],
-    })
+      classes: ['toggle-slider', 'active']
+    });
 
     this.#element = switcherContainer;
     this.#switcherSlider = switcherSlider;

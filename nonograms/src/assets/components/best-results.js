@@ -1,12 +1,13 @@
 export class Records {
   #element = null;
+
   #resultsArr = [];
 
   constructor() {
     const bestResults = document.createElement('div');
     bestResults.classList.add('best-results');
     const title = document.createElement('h2');
-    title.textContent = 'Best results'
+    title.textContent = 'Best results';
     bestResults.appendChild(title);
 
     for (let i = 0; i < 5; i += 1) {
@@ -14,7 +15,7 @@ export class Records {
         time: '---',
         difficulty: '---',
         picture: '---'
-      }
+      };
       this.#resultsArr.push(result);
     }
 
@@ -47,38 +48,37 @@ export class Records {
   }
 
   renderResults() {
-    this.loadResults()
+    this.loadResults();
 
     for (let i = 0; i < this.#resultsArr.length; i += 1) {
       const second = 1000;
-      const minute = second * 60
+      const minute = second * 60;
       const minutes = Math.trunc(this.#resultsArr[i].time / minute);
       const seconds = Math.trunc((this.#resultsArr[i].time % minute) / second);
-
 
       const resultElem = document.createElement('div');
       resultElem.classList.add('result');
 
-      for (let k = 0; k < 3; k += 1 ) {
+      for (let k = 0; k < 3; k += 1) {
         const param = {
           0: this.#resultsArr[i].picture,
           1: this.#resultsArr[i].difficulty,
           2: `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
-        }
+        };
 
         const textChunk = document.createElement('p');
         textChunk.classList.add('result-text');
-        if(this.#resultsArr[i].time === '---') {
+        if (this.#resultsArr[i].time === '---') {
           textChunk.textContent = '--:--';
-        } else {   
+        } else {
           textChunk.textContent = param[k];
         }
 
         resultElem.appendChild(textChunk);
       }
 
-        this.#element.appendChild(resultElem);
-      }
+      this.#element.appendChild(resultElem);
+    }
   }
 
   saveResult(time, difficulty, picture) {
@@ -101,12 +101,6 @@ export class Records {
 
     localStorage.setItem('results', JSON.stringify(this.#resultsArr.sort((a, b) => a.time - b.time)));
     this.renderResults();
-  }
-
-  clear() {
-    while (this.#element.childNodes.length > 0) {
-      this.#element.lastChild.remove();
-    }
   }
 
   appendNode(parent) {

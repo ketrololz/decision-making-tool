@@ -1,48 +1,69 @@
-import { Cell } from "./cell";
-import { Hint } from "./hints";
-import pictures from "./../nonograms.json";
-import { Modal } from "./modal";
-import { Timer } from "./timer";
-import { Sounds } from "./sounds";
-
+import { Cell } from './cell';
+import { Hint } from './hints';
+import pictures from './../nonograms.json';
+import { Modal } from './modal';
+import { Timer } from './timer';
+import { Sounds } from './sounds';
 
 export class Field {
   element = null;
+
   #fieldSize = 0;
+
   #cellSize = 0;
+
   #currImageArr = pictures.easy.cockerel;
+
   #currImageName = 'cockerel';
+
   #currDifficulty = 'easy';
+
   currFieldElements = [];
+
   currFieldValue = [];
+
   currFieldCrosses = [];
+
   currHintElements = [];
+
   #modal = null;
+
   #timer = null;
+
   #isGameStopped = false;
+
   #resultsWindow = null;
+
   #difficultySelectorIndex = null;
+
   #pictureSelectorIndex = null;
+
   #diffSelector = null;
+
   #picSelector = null;
+
   #emptyCell = null;
+
   #canLoad = false;
+
   #loadButton = null;
+
   #audio = null;
+
   #currentTheme = 'light';
+
   #soundState = 'on';
 
   hintSize = {
-    'easy': 2,
-    'medium': 3,
-    'hard': 5,
-  }
+    easy: 2,
+    medium: 3,
+    hard: 5
+  };
 
   constructor() {
     const grid = document.createElement('div');
-    grid.classList.add('game-field')
+    grid.classList.add('game-field');
     this.element = grid;
-
   }
 
   appendNode(parent) {
@@ -53,11 +74,9 @@ export class Field {
     const cellsCount = this.#fieldSize * this.#fieldSize;
     let position = 0;
 
-
     for (let i = 0; i < cellsCount; i += 1) {
-
       if (i === 0) {
-        const emptyCell = new Cell(this.element, this.#cellSize * this.hintSize[this.#currDifficulty], `empty-cell`);
+        const emptyCell = new Cell(this.element, this.#cellSize * this.hintSize[this.#currDifficulty], 'empty-cell');
         this.#emptyCell = emptyCell;
         if (this.#currDifficulty === 'medium') {
           emptyCell.element.classList.add('medium');
@@ -66,7 +85,7 @@ export class Field {
           emptyCell.element.classList.add('hard');
         }
       } else if (i < this.#fieldSize || i % this.#fieldSize === 0) {
-        const hint = new Hint(this.element, `hint`);
+        const hint = new Hint(this.element, 'hint');
         if (i % 5 === 0) {
           if (this.#currDifficulty === 'easy') {
             i < 6 ? hint.element.classList.add('line', 'vertical') : hint.element.classList.add('line');
@@ -79,7 +98,7 @@ export class Field {
           if (this.#currDifficulty === 'hard') {
             i < 16 ? hint.element.classList.add('line', 'vertical', 'hard') : hint.element.classList.add('line', 'hard');
           }
-        };
+        }
         this.currHintElements.push((hint));
       } else {
         const cell = new Cell(this.element, this.#cellSize, 'cell');
@@ -116,25 +135,24 @@ export class Field {
       }
     }));
 
-
     let pressed = false;
     let target = null;
 
     this.currFieldElements.forEach((cell) => cell.element.addEventListener('touchstart', async (event) => {
       if (target === null) {
-        target = event.target
+        target = event.target;
       }
 
       pressed = true;
 
-      await wait()
+      await wait();
       if (pressed && target === event.target) {
         pressed = false;
 
         if (this.#isGameStopped) {
           return;
         }
-        
+
         cell.markWithCross();
         this.currFieldValue[cell.position] = cell.state;
         this.currFieldCrosses[cell.position] = 2;
@@ -144,14 +162,13 @@ export class Field {
     }));
 
     function wait() {
-      return new Promise(resolve => setTimeout(resolve, 600))
+      return new Promise(resolve => setTimeout(resolve, 600));
     }
 
-    this.currFieldElements.forEach((cell) => cell.element.addEventListener('touchend', (event) => {
+    this.currFieldElements.forEach((cell) => cell.element.addEventListener('touchend', () => {
       pressed = false;
       target = null;
     }));
-
 
     window.addEventListener('contextmenu', (event) => event.preventDefault(), false);
   }
@@ -177,15 +194,15 @@ export class Field {
 
         if (hints[i][j] === 0) {
           if (streak !== 0) {
-            chunk.push(streak)
-          };
+            chunk.push(streak);
+          }
           streak = 0;
         }
 
         if (j === hints.length - 1) {
           if (streak !== 0) {
-            chunk.push(streak)
-          };
+            chunk.push(streak);
+          }
           streak = 0;
           horizontalHints.push(chunk);
           chunk = [];
@@ -203,15 +220,15 @@ export class Field {
 
         if (hints[j][i] === 0) {
           if (streak !== 0) {
-            chunk.push(streak)
-          };
+            chunk.push(streak);
+          }
           streak = 0;
         }
 
         if (j === hints.length - 1) {
           if (streak !== 0) {
-            chunk.push(streak)
-          };
+            chunk.push(streak);
+          }
           streak = 0;
           verticalHints.push(chunk);
           chunk = [];
@@ -236,7 +253,7 @@ export class Field {
   createHintNum(value, index) {
     const num = document.createElement('span');
     num.textContent = value;
-    num.classList.add('hint-value')
+    num.classList.add('hint-value');
     this.currHintElements[index].element.append(num);
   }
 
@@ -270,17 +287,17 @@ export class Field {
     const oldDifficulty = this.#currDifficulty;
     const oldPicture = this.#currImageName;
 
-    const randomDiffNum = Math.floor(Math.random() * 3)
-    const randomPicNum = Math.floor(Math.random() * 5)
+    const randomDiffNum = Math.floor(Math.random() * 3);
+    const randomPicNum = Math.floor(Math.random() * 5);
     const difficulty = {
       0: 'easy',
       1: 'medium',
-      2: 'hard',
-    }
+      2: 'hard'
+    };
     this.changeDifficulty(difficulty[randomDiffNum]);
-    const picture = Object.keys(pictures[this.#currDifficulty])[randomPicNum]
+    const picture = Object.keys(pictures[this.#currDifficulty])[randomPicNum];
     this.changePicture(picture);
-    if(oldDifficulty === difficulty[randomDiffNum] && oldPicture === Object.keys(pictures[this.#currDifficulty])[randomPicNum]) {
+    if (oldDifficulty === difficulty[randomDiffNum] && oldPicture === Object.keys(pictures[this.#currDifficulty])[randomPicNum]) {
       this.getRandomImage();
     }
     this.#difficultySelectorIndex = randomDiffNum;
@@ -289,16 +306,16 @@ export class Field {
 
   createField(resultsWindow, difficultySelector, pictureSelector) {
     const fieldSize = {
-      'easy': 5,
-      'medium': 10,
-      'hard': 15,
-    }
+      easy: 5,
+      medium: 10,
+      hard: 15
+    };
 
     const cellSize = {
-      'easy': 6,
-      'medium': 5,
-      'hard': 4,
-    }
+      easy: 6,
+      medium: 5,
+      hard: 4
+    };
 
     this.#canLoad = JSON.parse(localStorage.getItem('canLoad'));
     if (this.#canLoad) this.#loadButton.disabled = false;
@@ -347,7 +364,7 @@ export class Field {
   createModal(parent) {
     const modal = new Modal();
     modal.appendNode(parent);
-    modal.getElem().addEventListener('mousedown', (e) => { if (e.target !== modal.getElem()) modal.closeWindow() });
+    modal.getElem().addEventListener('mousedown', (e) => { if (e.target !== modal.getElem()) modal.closeWindow(); });
     modal.setAudio(this.#audio);
     this.#modal = modal;
   }
@@ -356,7 +373,7 @@ export class Field {
     const timer = new Timer();
     timer.getElem().textContent = '00:00';
     this.#timer = timer;
-    timer.appendNode(this.#emptyCell.element)
+    timer.appendNode(this.#emptyCell.element);
   }
 
   getTimer() {
@@ -371,7 +388,7 @@ export class Field {
       if (this.#currImageArr.flat()[i] === 1) {
         e.element.classList.add('painted');
       }
-    })
+    });
   }
 
   resetGame() {
@@ -399,7 +416,7 @@ export class Field {
   }
 
   canSave() {
-    return this.#isGameStopped ? false : true;
+    return !this.#isGameStopped;
   }
 
   setLoadButton(button) {
@@ -408,19 +425,18 @@ export class Field {
 
   setAudio(audioElement) {
     this.#audio = audioElement;
-    
   }
 
   setTheme(theme) {
-    if (theme === 'dark') {document.body.classList.add('dark')}
-    if (theme === 'light') {document.body.classList.add('light')}
+    if (theme === 'dark') { document.body.classList.add('dark'); }
+    if (theme === 'light') { document.body.classList.add('light'); }
     this.#currentTheme = theme;
   }
 
   setSoundState(state, switcher) {
     this.#soundState = state;
-    if (state === 'on') { switcher.getSlider().classList.add('active') }; 
-    if (state === 'off') { switcher.getSlider().classList.remove('active') }; 
+    if (state === 'on') { switcher.getSlider().classList.add('active'); }
+    if (state === 'off') { switcher.getSlider().classList.remove('active'); }
   }
 
   getTheme() {
@@ -461,8 +477,7 @@ export class Field {
       if (this.currFieldCrosses[i] === 2) {
         e.element.classList.add('cross');
       }
-    })
-
+    });
   }
 
   clear() {

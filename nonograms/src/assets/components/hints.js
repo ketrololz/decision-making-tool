@@ -7,7 +7,7 @@ export class Hint {
     if (classList) {
       cell.classList.add(classList);
     }
-    
+
     parent.append(cell);
 
     this.element = cell;

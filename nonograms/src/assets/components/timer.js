@@ -1,9 +1,12 @@
 export class Timer {
   #element = null;
-  #currentTime = 0;
+
   #interval = 1000;
+
   time = 0;
+
   #timer = null;
+
   #isTimerOn = false;
 
   constructor() {
@@ -31,7 +34,7 @@ export class Timer {
 
   updateTime() {
     const second = 1000;
-    const minute = second * 60
+    const minute = second * 60;
     const minutes = Math.trunc(this.time / minute);
     const seconds = Math.trunc((this.time % minute) / second);
     this.time += this.#interval;
@@ -45,7 +48,7 @@ export class Timer {
 
   clearTimer() {
     this.time = 0;
-    this.#element.textContent = `00:00`;
+    this.#element.textContent = '00:00';
   }
 
   currTime() {
