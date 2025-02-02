@@ -26,7 +26,7 @@
   --grey-lighten-3: #bdbebc;
   --grey-darken-5: #a8a9a7;
   --grey-darken-20: #828480;
-  --background: #fff;
+  --background: linear-gradient(#CBF0FD, #F5D6E1);
   --shadow: rgba(32, 32, 32, 0.1);
 }
 
@@ -34,7 +34,7 @@ body {
   overflow-x: hidden;
   position: relative;
   margin: 0;
-  background-color: var(--background);
+  background: var(--background);
   font-family: "Rubik", sans-serif;
 }
 body.dark {
@@ -64,7 +64,7 @@ body.dark {
   --grey-lighten-3: #a3a4a1;
   --grey-darken-5: #8e8f8c;
   --grey-darken-20: #686966;
-  --background: #273328;
+  --background: linear-gradient(#B6434F, 24%, #032328);
   --background-lighten-20: #b0d8b3;
   --shadow: rgba(32, 32, 32, 0.1);
 }

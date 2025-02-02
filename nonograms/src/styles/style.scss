@@ -4,13 +4,13 @@ $grey: #b5b6b4;
 $lime: #bee72a;
 $orange: #f09f0a;
 $red: #ec571c;
-$background: #fff;
+$background: linear-gradient(#CBF0FD, #F5D6E1);
 
 $grey-dark: #9b9c99;
 $lime-dark: #82ca30;
 $orange-dark: #cf8a0a;
 $red-dark: #ca430d;
-$background-dark: #273328;
+$background-dark: linear-gradient(#B6434F, 24%, #032328);;
 $selector: #6cb672;
 $shadow : rgba(32, 32, 32, 0.1);
 
@@ -85,7 +85,7 @@ body {
   overflow-x: hidden;
   position: relative;
   margin: 0;
-  background-color: var(--background);
+  background: var(--background);
   font-family: "Rubik", sans-serif;
 
   &.dark {
