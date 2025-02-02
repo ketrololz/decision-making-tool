@@ -114,7 +114,7 @@ body {
 }
 
 .cell {
-  border: solid 1px var(--lime-darken-20);
+  border: solid 0.2vmin var(--lime-darken-20);
   cursor: pointer;
   
 }
@@ -124,29 +124,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid 1px var(--lime-darken-20);
+  border: solid 0.2vmin var(--lime-darken-20);
   background-color: var(--lime);
 
   &::before {
     content: '';
     position: absolute;
     width: calc(42vmin + 5px);
-    height: 3px;
+    height: 0.5vmin;
     background-color: var(--lime-darken-20);
     bottom: -1px;
     left: 0;
-    z-index: 2;
+    z-index: 5;
   }
 
   &::after {
     content: '';
     position: absolute;
-    width: 3px;
+    width: 0.5vmin;
     height: calc(42vmin + 5px);
     background-color: var(--lime-darken-20);
     top: 0;
     right: -1px;
-    z-index: 2;
+    z-index: 5;
   }
 
   &.medium::before {
@@ -178,7 +178,7 @@ body {
   padding: 8px;
   background-color: var(--lime-lighten-15);
   color: var(--lime-darken-20);
-  border: solid 1px var(--lime-darken-20);
+  border: solid 0.2vmin var(--lime-darken-20);
   width: calc(100% - 16px);
   height: calc(100% - 16px);
 }
@@ -300,7 +300,7 @@ body {
     content: '';
     position: absolute;
     width: calc(42vmin + 5px);
-    height: 3px;
+    height: 0.5vmin;
     background-color: var(--lime-darken-20);
     bottom: -1px;
     left: 0;
@@ -310,7 +310,7 @@ body {
   &.vertical::after {
     content: '';
     position: absolute;
-    width: 3px;
+    width: 0.5vmin;
     height: calc(42vmin + 5px);
     background-color: var(--lime-darken-20);
     top: 0;
@@ -556,7 +556,7 @@ body {
   color: var(--lime-darken-20);
   box-shadow: 0px 5px 10px var(--shadow);
   transition: transform .15s ease-in;
-  z-index: 4;
+  z-index: 30;
 
   &.open {
     transform: translateX(0);
@@ -588,7 +588,7 @@ body {
   background-color: var(--lime-lighten-20);
   box-shadow: 0px 5px 10px var(--shadow);
   transition: transform .15s ease-in;
-  z-index: 4;
+  z-index: 30;
 
   &.open {
     transform: translateX(0);

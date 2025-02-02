@@ -90,7 +90,7 @@ body.dark {
 }
 
 .cell {
-  border: solid 1px var(--lime-darken-20);
+  border: solid 0.2vmin var(--lime-darken-20);
   cursor: pointer;
 }
 
@@ -99,28 +99,28 @@ body.dark {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid 1px var(--lime-darken-20);
+  border: solid 0.2vmin var(--lime-darken-20);
   background-color: var(--lime);
 }
 .empty-cell::before {
   content: "";
   position: absolute;
   width: calc(42vmin + 5px);
-  height: 3px;
+  height: 0.5vmin;
   background-color: var(--lime-darken-20);
   bottom: -1px;
   left: 0;
-  z-index: 2;
+  z-index: 5;
 }
 .empty-cell::after {
   content: "";
   position: absolute;
-  width: 3px;
+  width: 0.5vmin;
   height: calc(42vmin + 5px);
   background-color: var(--lime-darken-20);
   top: 0;
   right: -1px;
-  z-index: 2;
+  z-index: 5;
 }
 .empty-cell.medium::before {
   width: calc(65vmin + 10px);
@@ -147,7 +147,7 @@ body.dark {
   padding: 8px;
   background-color: var(--lime-lighten-15);
   color: var(--lime-darken-20);
-  border: solid 1px var(--lime-darken-20);
+  border: solid 0.2vmin var(--lime-darken-20);
   width: calc(100% - 16px);
   height: calc(100% - 16px);
 }
@@ -255,7 +255,7 @@ body.dark {
   content: "";
   position: absolute;
   width: calc(42vmin + 5px);
-  height: 3px;
+  height: 0.5vmin;
   background-color: var(--lime-darken-20);
   bottom: -1px;
   left: 0;
@@ -264,7 +264,7 @@ body.dark {
 .line.vertical::after {
   content: "";
   position: absolute;
-  width: 3px;
+  width: 0.5vmin;
   height: calc(42vmin + 5px);
   background-color: var(--lime-darken-20);
   top: 0;
@@ -489,7 +489,7 @@ body.dark {
   color: var(--lime-darken-20);
   box-shadow: 0px 5px 10px var(--shadow);
   transition: transform 0.15s ease-in;
-  z-index: 4;
+  z-index: 30;
 }
 .best-results.open {
   transform: translateX(0);
@@ -520,7 +520,7 @@ body.dark {
   background-color: var(--lime-lighten-20);
   box-shadow: 0px 5px 10px var(--shadow);
   transition: transform 0.15s ease-in;
-  z-index: 4;
+  z-index: 30;
 }
 .menu.open {
   transform: translateX(0);
