@@ -67,6 +67,19 @@ menuButton.addEventListener('mousedown', () => {
   sound.playSound('click');
 });
 
+function hideMenu(element) {
+  try {
+    if (element.target !== menuWindow.getElem() && element.target !== menuButton) {
+      menuWindow.hideWindow();
+    }
+    if (element.target !== bestResultsWindow.getElem() && element.target !== bestResultsButton) {
+      bestResultsWindow.hideWindow();
+    }
+    this.removeEventListener('transitionend', hideMenu);
+  } catch (e) {
+  }
+}
+
 wrapper.addEventListener('mousedown', (e) => {
   if (e.target === muteSwitcher.getSlider()) {
     wrapper.addEventListener('transitionend', hideMenu);
@@ -74,15 +87,6 @@ wrapper.addEventListener('mousedown', (e) => {
     hideMenu(e);
   }
 });
-
-function hideMenu(element) {
-  try {
-    if (element.target !== menuWindow.getElem() && element.target !== menuButton) { menuWindow.hideWindow(); }
-    if (element.target !== bestResultsWindow.getElem() && element.target !== bestResultsButton) { bestResultsWindow.hideWindow(); }
-    this.removeEventListener('transitionend', hideMenu);
-  } catch (e) {
-  }
-}
 
 const resetButton = createElem({
   tag: 'button',
@@ -150,14 +154,6 @@ const randomGameButton = createElem({
   text: 'random game'
 });
 
-randomGameButton.addEventListener('mousedown', () => {
-  gameField.clear();
-  gameField.getRandomImage();
-  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
-  sound.playSound('click');
-  solutionButton.disabled = false;
-});
-
 const randomPlate = createElem({
   tag: 'div',
   parent: wrapper,
@@ -218,6 +214,7 @@ switchThemeButton.addEventListener('mousedown', () => {
 
 const muteSwitcher = new Switcher();
 muteSwitcher.appendNode(menuWindow.getElem());
+const pictureSelector = new Selector();
 
 difficultySelector.element.addEventListener('change', (e) => {
   gameField.clear();
@@ -225,15 +222,13 @@ difficultySelector.element.addEventListener('change', (e) => {
   gameField.changePicture(Object.keys(pictures[e.target.value])[0]);
   gameField.updateSelectors(difficultySelector, pictureSelector);
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
-
   pictureSelector.clear();
+  solutionButton.disabled = false;
   for (const picture in pictures[e.target.value]) {
     pictureSelector.addOptions(picture);
   }
   sound.playSound('click');
 });
-
-const pictureSelector = new Selector();
 
 pictureSelector.element.addEventListener('change', (e) => {
   gameField.clear();
@@ -241,6 +236,15 @@ pictureSelector.element.addEventListener('change', (e) => {
   gameField.updateSelectors(difficultySelector, pictureSelector);
   gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
   sound.playSound('click');
+  solutionButton.disabled = false;
+});
+
+randomGameButton.addEventListener('mousedown', () => {
+  gameField.clear();
+  gameField.getRandomImage();
+  gameField.createField(bestResultsWindow, difficultySelector, pictureSelector);
+  sound.playSound('click');
+  solutionButton.disabled = false;
 });
 
 pictureSelector.getElem().addEventListener('mousedown', () => {
