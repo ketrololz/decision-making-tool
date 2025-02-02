@@ -81,7 +81,6 @@ function hideMenu(element) {
     if (element.target !== bestResultsWindow.getElem() && element.target !== bestResultsButton) { bestResultsWindow.hideWindow(); }
     this.removeEventListener('transitionend', hideMenu);
   } catch (e) {
-    console.log(e);
   }
 }
 
