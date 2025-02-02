@@ -154,6 +154,7 @@ export class Field {
         }
 
         cell.markWithCross();
+        this.#audio.playSound('cross');
         this.currFieldValue[cell.position] = cell.state;
         this.currFieldCrosses[cell.position] = 2;
         if (!this.#timer.isTimerOn()) this.#timer.startTimer();
