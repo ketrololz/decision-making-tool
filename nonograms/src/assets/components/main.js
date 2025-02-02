@@ -255,17 +255,14 @@ const audio = new Sounds();
 
 audio.getMusicObj().volume = 0;
 
-document.addEventListener('mousedown', () => {
-  audio.getMusicObj().volume = 0.1;
-  if (audio.getMusicObj().paused) {
-    audio.setMusic(audio.getTracksList().theme);
-    audio.getMusicObj().play();
-  }
-});
-
 function initGame() {
   gameField.setTheme(JSON.parse(localStorage.getItem('theme')));
-  gameField.setSoundState(JSON.parse(localStorage.getItem('soundState')), muteSwitcher);
+
+  if (JSON.parse(localStorage.getItem('soundState')) === null) {
+    gameField.setSoundState('on', muteSwitcher);
+  } else {
+    gameField.setSoundState(JSON.parse(localStorage.getItem('soundState')), muteSwitcher);
+  }
 
   if (gameField.getSoundState() === 'on') {
     sound.getSoundsObj().muted = false;
@@ -287,6 +284,15 @@ function initGame() {
 }
 
 initGame();
+
+document.addEventListener('mousedown', () => {
+  audio.getMusicObj().volume = 0.1;
+  if (audio.getMusicObj().paused) {
+    audio.setMusic(audio.getTracksList().theme);
+    audio.getMusicObj().time = 0;
+    audio.getMusicObj().play();
+  }
+});
 
 muteSwitcher.getElem().addEventListener('mousedown', () => {
   muteSwitcher.getSlider().classList.toggle('active');

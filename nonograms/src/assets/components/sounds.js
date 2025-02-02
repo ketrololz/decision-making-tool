@@ -45,6 +45,7 @@ export class Sounds {
 
   playSound(soundName) {
     this.setSound(this.getTracksList()[soundName]);
+    this.getSoundsObj().time = 0;
     this.getSoundsObj().play();
   }
 }

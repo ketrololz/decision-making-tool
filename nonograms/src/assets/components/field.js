@@ -439,6 +439,10 @@ export class Field {
     if (state === 'off') { switcher.getSlider().classList.remove('active'); }
   }
 
+  getSoundState() {
+    return this.#soundState;
+  }
+
   getTheme() {
     return this.#currentTheme;
   }
