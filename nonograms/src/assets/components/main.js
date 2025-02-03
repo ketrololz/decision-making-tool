@@ -140,6 +140,7 @@ const loadGameButton = createElem({
 });
 
 gameField.setLoadButton(loadGameButton);
+gameField.setSolutionButton(solutionButton);
 
 loadGameButton.addEventListener('mousedown', () => {
   gameField.loadGame();
@@ -209,7 +210,7 @@ switchThemeButton.addEventListener('mousedown', () => {
   } else {
     gameField.setTheme('light');
   }
-  localStorage.setItem('theme', JSON.stringify(gameField.getTheme()));
+  localStorage.setItem('ketrololz-theme', JSON.stringify(gameField.getTheme()));
 });
 
 const muteSwitcher = new Switcher();
@@ -256,12 +257,12 @@ const audio = new Sounds();
 audio.getMusicObj().volume = 0;
 
 function initGame() {
-  gameField.setTheme(JSON.parse(localStorage.getItem('theme')));
+  gameField.setTheme(JSON.parse(localStorage.getItem('ketrololz-theme')));
 
-  if (JSON.parse(localStorage.getItem('soundState')) === null) {
+  if (JSON.parse(localStorage.getItem('ketrololz-soundState')) === null) {
     gameField.setSoundState('on', muteSwitcher);
   } else {
-    gameField.setSoundState(JSON.parse(localStorage.getItem('soundState')), muteSwitcher);
+    gameField.setSoundState(JSON.parse(localStorage.getItem('ketrololz-soundState')), muteSwitcher);
   }
 
   if (gameField.getSoundState() === 'on') {
@@ -307,6 +308,6 @@ muteSwitcher.getElem().addEventListener('mousedown', () => {
     gameField.setSoundState('off', muteSwitcher);
   }
 
-  localStorage.setItem('soundState', JSON.stringify(gameField.getSoundState()));
+  localStorage.setItem('ketrololz-soundState', JSON.stringify(gameField.getSoundState()));
   sound.playSound('click');
 });

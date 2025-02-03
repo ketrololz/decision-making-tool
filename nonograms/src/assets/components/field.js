@@ -48,6 +48,8 @@ export class Field {
 
   #loadButton = null;
 
+  #solutionButton = null;
+
   #audio = null;
 
   #currentTheme = 'light';
@@ -318,7 +320,7 @@ export class Field {
       hard: 4
     };
 
-    this.#canLoad = JSON.parse(localStorage.getItem('canLoad'));
+    this.#canLoad = JSON.parse(localStorage.getItem('ketrololz-canLoad'));
     if (this.#canLoad) this.#loadButton.disabled = false;
 
     this.#resultsWindow = resultsWindow;
@@ -359,6 +361,7 @@ export class Field {
       this.#timer.stopTimer();
       this.#resultsWindow.saveResult(this.#timer.currTime() - 1000, this.#currDifficulty, this.#currImageName);
       winSound.playSound('win');
+      this.#solutionButton.disabled = true;
     }
   }
 
@@ -402,17 +405,17 @@ export class Field {
     this.#loadButton.disabled = false;
 
     if (!this.#isGameStopped) {
-      localStorage.setItem('time', this.#timer.currTime());
-      localStorage.setItem('difficulty', this.#currDifficulty);
-      localStorage.setItem('picture', JSON.stringify(this.#currImageArr));
-      localStorage.setItem('values', JSON.stringify(this.currFieldValue));
-      localStorage.setItem('name', JSON.stringify(this.currFielname));
-      localStorage.setItem('crosses', JSON.stringify(this.currFieldCrosses));
-      localStorage.setItem('canLoad', JSON.stringify(this.#canLoad));
-      localStorage.setItem('soundState', JSON.stringify(this.#soundState));
+      localStorage.setItem('ketrololz-time', this.#timer.currTime());
+      localStorage.setItem('ketrololz-difficulty', this.#currDifficulty);
+      localStorage.setItem('ketrololz-picture', JSON.stringify(this.#currImageArr));
+      localStorage.setItem('ketrololz-values', JSON.stringify(this.currFieldValue));
+      localStorage.setItem('ketrololz-name', JSON.stringify(this.currFielname));
+      localStorage.setItem('ketrololz-crosses', JSON.stringify(this.currFieldCrosses));
+      localStorage.setItem('ketrololz-canLoad', JSON.stringify(this.#canLoad));
+      localStorage.setItem('ketrololz-soundState', JSON.stringify(this.#soundState));
 
-      localStorage.setItem('diffSelectorIndex', JSON.stringify(this.#difficultySelectorIndex));
-      localStorage.setItem('picSelectorIndex', JSON.stringify(this.#pictureSelectorIndex));
+      localStorage.setItem('ketrololz-diffSelectorIndex', JSON.stringify(this.#difficultySelectorIndex));
+      localStorage.setItem('ketrololz-picSelectorIndex', JSON.stringify(this.#pictureSelectorIndex));
     }
   }
 
@@ -422,6 +425,10 @@ export class Field {
 
   setLoadButton(button) {
     this.#loadButton = button;
+  }
+
+  setSolutionButton(button) {
+    this.#solutionButton = button;
   }
 
   setAudio(audioElement) {
@@ -458,20 +465,20 @@ export class Field {
     }
 
     this.clear();
-    this.#currDifficulty = localStorage.getItem('difficulty');
-    this.#currImageArr = JSON.parse(localStorage.getItem('picture'));
-    this.#currImageName = localStorage.getItem('name');
+    this.#currDifficulty = localStorage.getItem('ketrololz-difficulty');
+    this.#currImageArr = JSON.parse(localStorage.getItem('ketrololz-picture'));
+    this.#currImageName = localStorage.getItem('ketrololz-name');
 
-    this.#difficultySelectorIndex = JSON.parse(localStorage.getItem('diffSelectorIndex'));
-    this.#pictureSelectorIndex = JSON.parse(localStorage.getItem('picSelectorIndex'));
+    this.#difficultySelectorIndex = JSON.parse(localStorage.getItem('ketrololz-diffSelectorIndex'));
+    this.#pictureSelectorIndex = JSON.parse(localStorage.getItem('ketrololz-picSelectorIndex'));
 
     this.createField(this.#resultsWindow, this.#diffSelector, this.#picSelector);
 
-    this.#timer.setTime(JSON.parse(localStorage.getItem('time')));
-    this.currFieldValue = JSON.parse(localStorage.getItem('values'));
-    this.currFieldCrosses = JSON.parse(localStorage.getItem('crosses'));
+    this.#timer.setTime(JSON.parse(localStorage.getItem('ketrololz-time')));
+    this.currFieldValue = JSON.parse(localStorage.getItem('ketrololz-values'));
+    this.currFieldCrosses = JSON.parse(localStorage.getItem('ketrololz-crosses'));
 
-    this.#soundState = JSON.parse(localStorage.getItem('soundState'));
+    this.#soundState = JSON.parse(localStorage.getItem('ketrololz-soundState'));
 
     this.currFieldElements.forEach((e, i) => {
       if (this.currFieldValue[i] === 1) {

@@ -42,8 +42,8 @@ export class Records {
   }
 
   loadResults() {
-    if (localStorage.getItem('results')) {
-      this.#resultsArr = (JSON.parse(localStorage.getItem('results')));
+    if (localStorage.getItem('ketrololz-results')) {
+      this.#resultsArr = (JSON.parse(localStorage.getItem('ketrololz-results')));
     }
   }
 
@@ -99,7 +99,7 @@ export class Records {
     }
     this.#resultsArr.sort((a, b) => a.time - b.time);
 
-    localStorage.setItem('results', JSON.stringify(this.#resultsArr.sort((a, b) => a.time - b.time)));
+    localStorage.setItem('ketrololz-results', JSON.stringify(this.#resultsArr.sort((a, b) => a.time - b.time)));
     this.renderResults();
   }
 

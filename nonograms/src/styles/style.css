@@ -8,6 +8,7 @@
   --lime-darken-20: #7c9a11;
   --lime-darken-20: #7c9a11;
   --lime-darken-35: #45550a;
+  --lime-darken-35-text: #6a830f;
   --orange: #f09f0a;
   --orange-lighten-3: #f5a614;
   --orange-darken-3: #e19509;
@@ -46,6 +47,7 @@ body.dark {
   --lime-darken-20: #4d781c;
   --lime-darken-20: #4d781c;
   --lime-darken-35: #8ed242;
+  --lime-darken-35-text: #406318;
   --orange: var(#cf8a0a);
   --orange-lighten-3: #de940b;
   --orange-darken-3: #c08009;
@@ -298,7 +300,7 @@ body.dark {
   font-size: 4vmin;
   text-align: center;
   font-weight: 600;
-  color: var(--lime-darken-35);
+  color: var(--lime-darken-35-text);
   background-color: var(--lime);
   border: solid 2px var(--lime-darken-20);
   border-radius: 4vmin;
