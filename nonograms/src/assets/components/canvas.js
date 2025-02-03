@@ -36,14 +36,14 @@ export class CanvasBackground {
 
   createLeaf() {
     return {
-      angle: Math.random() * Math.PI * 2,
-      x: Math.random() * this.#width,
-      y: Math.random() * this.#height - 1000,
+      angle: Math.floor(Math.random() * Math.PI * 2),
+      x: Math.floor(Math.random() * this.#width),
+      y: Math.floor(Math.random() * this.#height - 1000),
       size: Math.floor(Math.random() * (30 - 10)) + 10,
       speedY: Math.floor(Math.random() * (3 - 1)) + 1,
       rotateSpeed: Math.random() * Math.PI,
       color: this.#colors[Math.floor(Math.random() * 3)],
-      blur: Math.floor(Math.random() * (3 - 1)) + 1,
+      // blur: Math.floor(Math.random() * (3 - 1)) + 1,
       opacity: Math.random() * (0.95 - 0.1) + 0.1
     };
   }
