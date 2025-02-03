@@ -187,7 +187,7 @@ const bestResultsButton = createElem({
   tag: 'button',
   parent: topContainer,
   classes: ['best-results-button', 'button'],
-  text: 'best'
+  text: 'recent games'
 });
 
 bestResultsButton.addEventListener('mousedown', () => {
@@ -257,6 +257,11 @@ const audio = new Sounds();
 audio.getMusicObj().volume = 0;
 
 function initGame() {
+  if (JSON.parse(localStorage.getItem('ketrololz-win-rounds-count')) === null) {
+    bestResultsWindow.setCount(0);
+  } else {
+    bestResultsWindow.setCount(JSON.parse(localStorage.getItem('ketrololz-win-rounds-count')));
+  }
   gameField.setTheme(JSON.parse(localStorage.getItem('ketrololz-theme')));
 
   if (JSON.parse(localStorage.getItem('ketrololz-soundState')) === null) {
@@ -296,6 +301,8 @@ document.addEventListener('mousedown', () => {
     audio.getMusicObj().play();
   }
 });
+
+// localStorage.clear()
 
 muteSwitcher.getElem().addEventListener('mousedown', () => {
   muteSwitcher.getSlider().classList.toggle('active');

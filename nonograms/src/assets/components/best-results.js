@@ -3,6 +3,10 @@ export class Records {
 
   #resultsArr = [];
 
+  #winRoundsCount = 0;
+
+  #lastSavedName = null;
+
   constructor() {
     const bestResults = document.createElement('div');
     bestResults.classList.add('best-results');
@@ -47,7 +51,7 @@ export class Records {
   renderResults() {
     this.loadResults();
     const title = document.createElement('h2');
-    title.textContent = 'Best results';
+    title.textContent = 'Recent games';
     this.#element.appendChild(title);
 
     for (let i = 0; i < this.#resultsArr.length; i += 1) {
@@ -81,26 +85,41 @@ export class Records {
     }
   }
 
+
   saveResult(time, difficulty, picture) {
     for (const result of this.#resultsArr.sort((a, b) => b.time - a.time)) {
       this.clear();
       if (result.time === '---') {
         result.time = time;
         result.difficulty = difficulty;
-        result.picture = picture;
+        result.picture = picture || this.#lastSavedName;
+        result.queuePosition = this.#winRoundsCount;
         break;
       }
-      if (!this.#resultsArr.some((obj) => Object.values(obj).includes('---')) && time < result.time) {
+      if (!this.#resultsArr.some((obj) => Object.values(obj).includes('---')) && result.queuePosition === this.#winRoundsCount - 5) {
+        result.queuePosition = this.#winRoundsCount;
         result.time = time;
+        
         result.difficulty = difficulty;
         result.picture = picture;
         break;
       }
     }
-    this.#resultsArr.sort((a, b) => a.time - b.time);
 
+    this.#winRoundsCount += 1;
+    this.#resultsArr.sort((a, b) => a.time - b.time);
+    
     localStorage.setItem('ketrololz-results', JSON.stringify(this.#resultsArr.sort((a, b) => a.time - b.time)));
+    localStorage.setItem('ketrololz-win-rounds-count', this.#winRoundsCount);
     this.renderResults();
+  }
+
+  setLastName(name) {
+    this.#lastSavedName = name;
+  }
+
+  setCount(value) {
+    this.#winRoundsCount = value;
   }
 
   appendNode(parent) {

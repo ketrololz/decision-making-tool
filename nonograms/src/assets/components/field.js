@@ -413,7 +413,7 @@ export class Field {
       localStorage.setItem('ketrololz-difficulty', this.#currDifficulty);
       localStorage.setItem('ketrololz-picture', JSON.stringify(this.#currImageArr));
       localStorage.setItem('ketrololz-values', JSON.stringify(this.currFieldValue));
-      localStorage.setItem('ketrololz-name', JSON.stringify(this.currFielname));
+      localStorage.setItem('ketrololz-name', this.#currImageName);
       localStorage.setItem('ketrololz-crosses', JSON.stringify(this.currFieldCrosses));
       localStorage.setItem('ketrololz-canLoad', JSON.stringify(this.#canLoad));
       localStorage.setItem('ketrololz-soundState', JSON.stringify(this.#soundState));
@@ -476,6 +476,7 @@ export class Field {
     this.#currDifficulty = localStorage.getItem('ketrololz-difficulty');
     this.#currImageArr = JSON.parse(localStorage.getItem('ketrololz-picture'));
     this.#currImageName = localStorage.getItem('ketrololz-name');
+    this.#resultsWindow.setLastName(this.#currImageName);
 
     this.#difficultySelectorIndex = JSON.parse(localStorage.getItem('ketrololz-diffSelectorIndex'));
     this.#pictureSelectorIndex = JSON.parse(localStorage.getItem('ketrololz-picSelectorIndex'));
