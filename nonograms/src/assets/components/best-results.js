@@ -6,9 +6,6 @@ export class Records {
   constructor() {
     const bestResults = document.createElement('div');
     bestResults.classList.add('best-results');
-    const title = document.createElement('h2');
-    title.textContent = 'Best results';
-    bestResults.appendChild(title);
 
     for (let i = 0; i < 5; i += 1) {
       const result = {
@@ -49,6 +46,9 @@ export class Records {
 
   renderResults() {
     this.loadResults();
+    const title = document.createElement('h2');
+    title.textContent = 'Best results';
+    this.#element.appendChild(title);
 
     for (let i = 0; i < this.#resultsArr.length; i += 1) {
       const second = 1000;
