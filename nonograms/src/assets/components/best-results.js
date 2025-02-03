@@ -85,7 +85,6 @@ export class Records {
     }
   }
 
-
   saveResult(time, difficulty, picture) {
     for (const result of this.#resultsArr.sort((a, b) => b.time - a.time)) {
       this.clear();
@@ -99,7 +98,7 @@ export class Records {
       if (!this.#resultsArr.some((obj) => Object.values(obj).includes('---')) && result.queuePosition === this.#winRoundsCount - 5) {
         result.queuePosition = this.#winRoundsCount;
         result.time = time;
-        
+
         result.difficulty = difficulty;
         result.picture = picture;
         break;
@@ -108,7 +107,7 @@ export class Records {
 
     this.#winRoundsCount += 1;
     this.#resultsArr.sort((a, b) => a.time - b.time);
-    
+
     localStorage.setItem('ketrololz-results', JSON.stringify(this.#resultsArr.sort((a, b) => a.time - b.time)));
     localStorage.setItem('ketrololz-win-rounds-count', this.#winRoundsCount);
     this.renderResults();

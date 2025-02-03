@@ -302,8 +302,6 @@ document.addEventListener('mousedown', () => {
   }
 });
 
-// localStorage.clear()
-
 muteSwitcher.getElem().addEventListener('mousedown', () => {
   muteSwitcher.getSlider().classList.toggle('active');
 

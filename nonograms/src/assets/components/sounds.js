@@ -44,8 +44,12 @@ export class Sounds {
   }
 
   playSound(soundName) {
-    this.setSound(this.getTracksList()[soundName]);
-    this.getSoundsObj().currentTime = 0;
-    this.getSoundsObj().play();
+    if (this.#sounds.paused) {
+      this.setSound(this.getTracksList()[soundName]);
+      this.#sounds.currentTime = 0;
+      this.#sounds.play().catch((error) => {
+        return error;
+      });
+    }
   }
 }
