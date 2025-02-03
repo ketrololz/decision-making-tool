@@ -69,7 +69,7 @@ menuButton.addEventListener('mousedown', () => {
 
 function hideMenu(element) {
   try {
-    if (element.target !== menuWindow.getElem() && element.target !== menuButton) {
+    if (element.target !== menuWindow.getElem() && element.target !== menuButton && element.target !== switchThemeButton && element.target !== muteSwitcher.getSlider()) {
       menuWindow.hideWindow();
     }
     if (element.target !== bestResultsWindow.getElem() && element.target !== bestResultsButton) {
