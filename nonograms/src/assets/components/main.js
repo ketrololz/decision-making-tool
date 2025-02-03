@@ -268,9 +268,11 @@ function initGame() {
   if (gameField.getSoundState() === 'on') {
     sound.getSoundsObj().muted = false;
     audio.getMusicObj().muted = false;
+    gameField.muteVolume(false);
   } else {
     sound.getSoundsObj().muted = true;
     audio.getMusicObj().muted = true;
+    gameField.muteVolume(true);
   }
 
   loadGameButton.disabled = true;
@@ -301,10 +303,12 @@ muteSwitcher.getElem().addEventListener('mousedown', () => {
   if (muteSwitcher.getSlider().classList.contains('active')) {
     sound.getSoundsObj().muted = false;
     audio.getMusicObj().muted = false;
+    gameField.muteVolume(false);
     gameField.setSoundState('on', muteSwitcher);
   } else {
     sound.getSoundsObj().muted = true;
     audio.getMusicObj().muted = true;
+    gameField.muteVolume(true);
     gameField.setSoundState('off', muteSwitcher);
   }
 

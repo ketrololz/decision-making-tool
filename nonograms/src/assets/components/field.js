@@ -52,6 +52,8 @@ export class Field {
 
   #audio = null;
 
+  #isMuted = false;
+
   #currentTheme = 'light';
 
   #soundState = 'on';
@@ -356,6 +358,8 @@ export class Field {
   checkInput() {
     if (this.currFieldValue.join('') === this.#currImageArr.flat().join('')) {
       const winSound = new Sounds();
+      winSound.getSoundsObj().volume = 0.2;
+      winSound.getSoundsObj().muted = this.#isMuted;
       this.#modal.showWindow(this.#timer);
       this.#isGameStopped = true;
       this.#timer.stopTimer();
@@ -433,6 +437,10 @@ export class Field {
 
   setAudio(audioElement) {
     this.#audio = audioElement;
+  }
+
+  muteVolume(boolean) {
+    this.#isMuted = boolean;
   }
 
   setTheme(theme) {
