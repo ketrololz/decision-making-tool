@@ -1,0 +1,296 @@
+@import url(../css/fonts/fonts.css);
+html {
+  font-size: 14px;
+}
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 360px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+.background {
+  box-sizing: border-box;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  background-color: #F1F1F8;
+  color: #595986;
+  padding: 40px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 30px;
+  height: 100dvh;
+  overflow-x: hidden;
+}
+@media screen and (max-width: 768px) {
+  .background {
+    padding: 10px 5px;
+  }
+}
+
+.game-field-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  max-width: 716px;
+  width: 100%;
+  height: 80dvh;
+  border-radius: 26px;
+  background-color: #E5E5F1;
+}
+@media screen and (max-width: 768px) {
+  .game-field-container {
+    padding: 10px;
+  }
+}
+.game-field-container.shake {
+  animation: shaking 0.2s ease-in;
+}
+@keyframes shaking {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(8px) translateY(6px) rotate(1deg);
+  }
+  40% {
+    transform: translateX(4px) translateY(1px) rotate(0.5deg);
+  }
+  60% {
+    transform: translateX(1px) translateY(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.game-field-container.congratulations {
+  animation: congrats 2s ease-in-out;
+  animation-iteration-count: infinite;
+  box-shadow: 0 0 20px #46BA8B;
+}
+@keyframes congrats {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.difficulty-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 716px;
+  width: 100%;
+}
+
+.button {
+  border-style: none;
+  padding: 6px 32px;
+  border-radius: 30px;
+}
+
+.difficulty-button {
+  background-color: #D4D4ED;
+  color: #595986;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.difficulty-button:hover {
+  cursor: pointer;
+  background-color: #E3E3FF;
+}
+.difficulty-button:disabled {
+  background-color: #BBBBCF;
+  cursor: default;
+  color: #fff;
+}
+
+.active-difficulty {
+  background-color: #595986;
+  color: #fff;
+}
+.active-difficulty:hover {
+  cursor: default;
+  background-color: #595986;
+}
+
+.new-game-button {
+  background-color: #F5B253;
+  color: #fff;
+  font-size: 1.8rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+.new-game-button:hover {
+  background-color: #FFC446;
+}
+.new-game-button:disabled {
+  background-color: #BBBBCF;
+  cursor: default;
+  color: #fff;
+}
+
+.top-bar {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  width: 100%;
+  height: 6dvh;
+}
+
+.attempts-container {
+  display: flex;
+  gap: 10px;
+}
+
+.attempt {
+  fill: #BBBBCF;
+  transition: fill 0.2s ease-in;
+}
+
+.spent {
+  fill: #CE347E;
+}
+
+.rounds {
+  font-size: 2.2rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 4rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: default;
+}
+
+.keyboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+}
+@media screen and (max-width: 768px) {
+  .keyboard-container {
+    gap: 4px;
+  }
+}
+
+.keyboard-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  padding: 0;
+  font-size: 2rem;
+  background-color: #F8F8FA;
+  color: #595986;
+  font-weight: 500;
+  transition: background-color 0.1s ease-in, color 0.1s ease-in;
+}
+@media screen and (max-width: 768px) {
+  .keyboard-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+.keyboard-btn.correct {
+  background-color: #46BA8B;
+  color: #fff;
+}
+.keyboard-btn.incorrect {
+  background-color: #CE347E;
+  color: #fff;
+}
+.keyboard-btn:disabled:not(.highlight) {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.keyboard-hover:not(.highlight, .blocked, :disabled, .correct, .incorrect):hover {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.start-game-btn {
+  background-color: #46BA8B;
+  font-size: 2rem;
+  color: #fff;
+  max-width: 400px;
+  width: 100%;
+  height: 70px;
+  border-radius: 26px;
+  margin-bottom: 40px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .start-game-btn {
+    margin-bottom: 20px;
+    height: 60px;
+  }
+}
+.start-game-btn:hover {
+  background-color: #42C691;
+}
+
+.repeat-btn {
+  background-color: #927197;
+  font-size: 2rem;
+  color: #fff;
+  max-width: 400px;
+  width: 100%;
+  height: 70px;
+  border-radius: 26px;
+  margin-bottom: 40px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .repeat-btn {
+    margin-bottom: 20px;
+    height: 60px;
+  }
+}
+.repeat-btn:hover {
+  background-color: #AB82B1;
+}
+.repeat-btn:disabled {
+  background-color: #BBBBCF;
+  cursor: default;
+  color: #fff;
+}
+
+.input-text {
+  margin: 0;
+  color: #595986;
+  font-size: 4rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: default;
+}
+
+.highlight {
+  background-color: #F5B253;
+  color: #fff;
+}/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,327 @@
+@import url(../css/fonts/fonts.css);
+
+$body: #F1F1F8;
+$text: #595986;
+$background: #E5E5F1;
+$tab-light: #D4D4ED;
+$tab-dark: #595986;
+$tab-hover: #E3E3FF;
+$disabled: #BBBBCF;
+$white: #fff;
+$orange: #F5B253;
+$orange-hover: #FFC446;
+$green: #46BA8B;
+$green-hover: #42C691;
+$magenta: #CE347E;
+$purple: #927197;
+$purple-hover: #AB82B1;
+$keys: #F8F8FA;
+
+html {
+  font-size: 14px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 360px) {
+    font-size: 10px;
+  }
+}
+
+.background {
+  box-sizing: border-box;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  background-color: $body;
+  color: $text;
+  padding: 40px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 30px;
+  height: 100dvh;
+  overflow-x: hidden;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px 5px;
+  }
+}
+
+.game-field-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  max-width: 716px;
+  width: 100%;
+  height: 80dvh;
+  border-radius: 26px;
+  background-color: $background;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+  }
+
+  &.shake {
+    animation: shaking 0.2s ease-in;
+  }
+
+  @keyframes shaking {
+    0% {
+      transform: translateX(0);
+    }
+
+    20% {
+      transform: translateX(8px) translateY(6px) rotate(1deg);
+    }
+
+    40% {
+      transform: translateX(4px) translateY(1px) rotate(0.5deg);
+    }
+
+    60% {
+      transform: translateX(1px) translateY(5px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  &.congratulations {
+    animation: congrats 2s ease-in-out;
+    animation-iteration-count: infinite;
+    box-shadow: 0 0 20px $green;
+  }
+
+  @keyframes congrats {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(0.98);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+.difficulty-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 716px;
+  width: 100%;
+}
+
+.button {
+  border-style: none;
+  padding: 6px 32px;
+  border-radius: 30px;
+}
+
+.difficulty-button {
+  background-color: $tab-light;
+  color: $text;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transition: background-color .2s ease;
+  
+  &:hover {
+    cursor: pointer;
+    background-color: $tab-hover;
+  }
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: default;
+    color: $white;
+  }
+}
+
+.active-difficulty {
+  background-color: $tab-dark;
+  color: $white;
+
+  &:hover {
+    cursor: default;
+    background-color: #595986;
+  }
+}
+
+.new-game-button {
+  background-color: $orange;
+  color: $white;
+  font-size: 1.8rem;
+  transition: background-color .2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orange-hover;
+  }
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: default;
+    color: $white;
+  }
+}
+
+.top-bar {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  width: 100%;
+  height: 6dvh;
+}
+
+.attempts-container {
+  display: flex;
+  gap: 10px;
+}
+
+.attempt {
+  fill: $disabled;
+  transition: fill .2s ease-in;
+}
+
+.spent {
+  fill: $magenta;
+}
+
+.rounds {
+  font-size: 2.2rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 4rem;
+  font-weight: 500;
+  text-align: center; 
+  cursor: default;
+}
+
+.keyboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+
+  @media screen and (max-width: 768px) {
+    gap: 4px;
+  }
+}
+
+.keyboard-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  padding: 0;
+  font-size: 2rem;
+  background-color: $keys;
+  color: $text;
+  font-weight: 500;
+  transition: background-color .1s ease-in, color .1s ease-in;
+
+  @media screen and (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  &.correct {
+    background-color: $green;
+    color: $white;
+  }
+
+  &.incorrect {
+    background-color: $magenta;
+    color: $white;
+  }
+
+  &:disabled:not(.highlight) {
+    cursor: default;
+    opacity: 0.7;
+  }
+}
+
+.keyboard-hover:not(.highlight, .blocked, :disabled, .correct, .incorrect):hover {
+  cursor: pointer;
+  background-color: $white;
+}
+
+.start-game-btn {
+  background-color: $green;
+  font-size: 2rem;
+  color: $white;
+  max-width: 400px;
+  width: 100%;
+  height: 70px;
+  border-radius: 26px;
+  margin-bottom: 40px;
+  transition: background-color .2s ease;
+  cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 20px;
+    height: 60px;
+  }
+
+  &:hover {
+    background-color: $green-hover;
+  }
+}
+
+.repeat-btn {
+  background-color: $purple;
+  font-size: 2rem;
+  color: $white;
+  max-width: 400px;
+  width: 100%;
+  height: 70px;
+  border-radius: 26px;
+  margin-bottom: 40px;
+  transition: background-color .2s ease;
+  cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 20px;
+    height: 60px;
+  }
+
+  &:hover {
+    background-color: $purple-hover;
+  }
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: default;
+    color: $white;
+  }
+}
+
+.input-text {
+  margin: 0;
+  color: $text;
+  font-size: 4rem;
+  font-weight: 500;
+  text-align: center; 
+  cursor: default;
+}
+
+.highlight {
+  background-color: $orange;
+  color: $white;
+}
