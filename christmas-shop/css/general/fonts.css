@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url(../../fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url(../../fonts/Montserrat-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Allura";
+  src: url(../../fonts/Allura-Regular.ttf);
+}
+
+@font-face {
+  font-family: "SFPro";
+  src: url(../../fonts/SFProDisplay-Regular.ttf);
+}
+
+@font-face {
+  font-family: "SFPro";
+  src: url(../../fonts/SFProDisplay-Bold.ttf);
+  font-weight: 700;
+}

@@ -1,0 +1,148 @@
+@import url(../general/fonts.css);
+@import url(../general/header.css);
+@import url(../general/gift-cards.css);
+@import url(../general/footer.css);
+@import url(../general/modal-card.css);
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  background-color: #ff4646;
+  border-radius: 20px;
+}
+
+.wrapper {
+  max-width: 1440px;
+  width: 100%;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+/* -------------- GIFTS SECTION -------------- */
+#gifts-section {
+  display: flex;
+  padding: 60px 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: top url(../../images/bg-garland.png), #ff4646;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+}
+#gifts-section .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#gifts-section h1 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 150%;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  max-width: 426px;
+  margin-bottom: 4px;
+  transition: all 0.2s;
+}
+#gifts-section .tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  margin-bottom: 13px;
+  cursor: pointer;
+  transition: column-gap 0.2s ease-in-out;
+  transition: column-gap 0.2s ease-in-out, -moz-column-gap 0.2s ease-in-out;
+}
+#gifts-section .tabs .tabs__item {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  transition: background-color 0.2s ease-in-out, padding 0.2s ease-in-out;
+}
+@media (hover: hover) {
+  #gifts-section .tabs .tabs__item:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+#gifts-section .tabs .active {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: default;
+}
+
+#scroll-to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  background-color: #fff;
+  border: 1px solid #ff4646;
+  border-radius: 50px;
+  z-index: 2;
+  bottom: 8px;
+  right: 8px;
+  animation: scroll-btn 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out, display 0.2s ease-in-out allow-discrete;
+  opacity: 1;
+}
+#scroll-to-top.hidden {
+  transform: scale(0.2);
+  opacity: 0;
+  display: none;
+}
+
+@keyframes scroll-btn {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  85% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@container (max-width: 500px) {
+  #gifts-section h1 {
+    max-width: 370px;
+  }
+  #gifts-section .tabs .tabs__item {
+    padding: 12px 8px;
+  }
+}
+@container (max-width: 420px) {
+  #gifts-section h1 {
+    max-width: 370px;
+  }
+  #gifts-section .tabs {
+    -moz-column-gap: 0;
+         column-gap: 0;
+  }
+}/*# sourceMappingURL=styles.css.map */
