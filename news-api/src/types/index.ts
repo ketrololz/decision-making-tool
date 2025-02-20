@@ -20,13 +20,15 @@ export interface Articles {
 
 export interface Source {
     status: string;
-    sources: {
-        id: string;
-        name: string;
-        description: string;
-        url: string;
-        category: string;
-        language: string;
-        country: string;
-    }[];
+    sources: SourceItem[];
+}
+
+export interface SourceItem {
+    id: string;
+    name: string;
+    description: string;
+    url: string;
+    category: string;
+    language: string;
+    country: string;
 }
