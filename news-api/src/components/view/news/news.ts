@@ -22,28 +22,66 @@ class News {
                 return;
             }
 
+            const author = newsClone.querySelector('.news__meta-author');
+
+            if (!isValueInstanceOf(author, HTMLCollection)) {
+                return;
+            }
+
+            const metaDate = newsClone.querySelector('.news__meta-date');
+
+            if (!isValueInstanceOf(metaDate, HTMLCollection)) {
+                return;
+            }
+
+            const title = newsClone.querySelector('.news__description-title');
+
+            if (!isValueInstanceOf(title, HTMLTitleElement)) {
+                return;
+            }
+
+            const source = newsClone.querySelector('.news__description-source');
+
+            if (!isValueInstanceOf(source, HTMLTitleElement)) {
+                return;
+            }
+
+            const content = newsClone.querySelector('.news__description-content');
+
+            if (!isValueInstanceOf(content, HTMLParagraphElement)) {
+                return;
+            }
+
+            const link = newsClone.querySelector('.news__read-more a');
+
+            if (!isValueInstanceOf(link, HTMLParagraphElement)) {
+                return;
+            }
+
             if (idx % 2) {
                 newsClone.querySelector('.news__item')?.classList.add('alt');
             }
 
             photo.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
-            newsClone.querySelector('.news__meta-author').textContent = item.author || item.source.name;
-            newsClone.querySelector('.news__meta-date').textContent = item.publishedAt
-                .slice(0, 10)
-                .split('-')
-                .reverse()
-                .join('-');
+            author.textContent = item.author || item.source.name;
+            metaDate.textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
 
-            newsClone.querySelector('.news__description-title').textContent = item.title;
-            newsClone.querySelector('.news__description-source').textContent = item.source.name;
-            newsClone.querySelector('.news__description-content').textContent = item.description;
-            newsClone.querySelector('.news__read-more a').setAttribute('href', item.url);
+            title.textContent = item.title;
+            source.textContent = item.source.name;
+            content.textContent = item.description;
+            link.setAttribute('href', item.url);
 
             fragment.append(newsClone);
         });
 
-        document.querySelector('.news').innerHTML = '';
-        document.querySelector('.news').appendChild(fragment);
+        const newsBlock = document.querySelector('.news');
+
+        if (!isValueInstanceOf(newsBlock, HTMLDivElement)) {
+            return;
+        }
+
+        newsBlock.innerHTML = '';
+        newsBlock.appendChild(fragment);
     }
 }
 
