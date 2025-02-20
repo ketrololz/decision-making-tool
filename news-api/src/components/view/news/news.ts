@@ -1,10 +1,9 @@
-import { Everything } from '../../../types/index';
-import { isNotNullable } from '../../../utils/assertIsNotNullable';
+import { Articles } from '../../../types/index';
 import { isValueInstanceOf } from '../../../utils/isValueInstanceOf';
 import './news.css';
 
 class News {
-    draw(data: Everything) {
+    draw(data: Articles[]) {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
