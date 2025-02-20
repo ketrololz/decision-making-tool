@@ -1,12 +1,17 @@
-export interface IHeadlines {
+export interface Everything {
     status: string;
-    sources: {
-        id: string;
-        name: string;
+    totalResults: number;
+    articles: {
+        source: {
+            id: null;
+            name: string;
+        };
+        author: string;
+        title: string;
         description: string;
         url: string;
-        category: string;
-        language: string;
-        country: string;
+        urlToImage: string;
+        publishedAt: string;
+        content: string;
     }[];
 }
