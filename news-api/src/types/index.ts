@@ -17,3 +17,16 @@ export interface Articles {
     publishedAt: string;
     content: string;
 }
+
+export interface Source {
+    status: string;
+    sources: {
+        id: string;
+        name: string;
+        description: string;
+        url: string;
+        category: string;
+        language: string;
+        country: string;
+    }[];
+}
