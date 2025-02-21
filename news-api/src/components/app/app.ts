@@ -8,9 +8,18 @@ class App {
 
     start() {
         document.querySelector('.sources')?.addEventListener('click', (e) => {
-            this.controller.getNews(e, (data: Everything) => this.view.drawNews(data));
+            this.controller.getNews(e, (data?: Everything) => {
+                if (data === undefined) {
+                    return;
+                }
+
+                this.view.drawNews(data);
+            });
         });
-        this.controller.getSources((data: Source) => {
+        this.controller.getSources((data?: Source) => {
+            if (data === undefined) {
+                return;
+            }
             this.view.drawSources(data);
         });
     }

@@ -2,11 +2,12 @@ import { Source } from '../../types/index';
 
 type apiKey = {
     apiKey?: string;
+    sources?: string;
 };
 
 type Resp = {
     endpoint: string;
-    options: apiKey;
+    options?: apiKey;
 };
 
 class Loader {
