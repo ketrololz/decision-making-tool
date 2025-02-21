@@ -32,3 +32,17 @@ export interface SourceItem {
     language: string;
     country: string;
 }
+
+export interface Response {
+    body: string;
+    bodyUsed: boolean;
+    headers?: {
+        header: string;
+    };
+    ok: boolean;
+    redirected: boolean;
+    status: number;
+    statusText: string;
+    type: string;
+    url: string;
+}
