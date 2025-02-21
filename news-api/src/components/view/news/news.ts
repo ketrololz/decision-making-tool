@@ -12,49 +12,29 @@ class News {
         news.forEach((item, idx) => {
             const newsClone = newsItemTemp?.content.cloneNode(true);
 
-            if (!isValueInstanceOf(newsClone, HTMLElement)) {
+            if (!isValueInstanceOf(newsClone, DocumentFragment)) {
                 return;
             }
 
             const photo = newsClone.querySelector('.news__meta-photo');
-
-            if (!isValueInstanceOf(photo, HTMLDivElement)) {
-                return;
-            }
-
             const author = newsClone.querySelector('.news__meta-author');
-
-            if (!isValueInstanceOf(author, HTMLCollection)) {
-                return;
-            }
-
             const metaDate = newsClone.querySelector('.news__meta-date');
-
-            if (!isValueInstanceOf(metaDate, HTMLCollection)) {
-                return;
-            }
-
             const title = newsClone.querySelector('.news__description-title');
-
-            if (!isValueInstanceOf(title, HTMLTitleElement)) {
-                return;
-            }
-
             const source = newsClone.querySelector('.news__description-source');
-
-            if (!isValueInstanceOf(source, HTMLTitleElement)) {
-                return;
-            }
-
             const content = newsClone.querySelector('.news__description-content');
-
-            if (!isValueInstanceOf(content, HTMLParagraphElement)) {
-                return;
-            }
-
             const link = newsClone.querySelector('.news__read-more a');
 
-            if (!isValueInstanceOf(link, HTMLParagraphElement)) {
+            if (
+                !(
+                    isValueInstanceOf(photo, HTMLElement) &&
+                    isValueInstanceOf(author, HTMLElement) &&
+                    isValueInstanceOf(metaDate, HTMLElement) &&
+                    isValueInstanceOf(title, HTMLElement) &&
+                    isValueInstanceOf(source, HTMLElement) &&
+                    isValueInstanceOf(content, HTMLElement) &&
+                    isValueInstanceOf(link, HTMLElement)
+                )
+            ) {
                 return;
             }
 
@@ -76,7 +56,7 @@ class News {
 
         const newsBlock = document.querySelector('.news');
 
-        if (!isValueInstanceOf(newsBlock, HTMLDivElement)) {
+        if (!isValueInstanceOf(newsBlock, HTMLElement)) {
             return;
         }
 
