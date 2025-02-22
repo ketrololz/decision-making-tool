@@ -3,7 +3,6 @@
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     margin-top: 20px;
     gap: 15px;
-
 }
 
 .news__item {
@@ -127,7 +126,7 @@
     left: 0%;
 }
 
-@media (min-width: 640px) {
+@media (max-width: 640px) {
     .news__item {
         flex-direction: row;
         max-width: 700px;
@@ -168,5 +167,11 @@
 
     .news__item.alt .news__meta-details {
         padding-left: 25px;
+    }
+}
+
+@media (max-width: 440px) {
+    .news {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
 }
