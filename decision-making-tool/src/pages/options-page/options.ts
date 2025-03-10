@@ -13,7 +13,12 @@ export default class Options extends BaseComponent {
     this.container = this;
     const optionsList = new BaseComponent({ tag: 'ul', className: 'options' });
     this.optionsList = optionsList;
-    
+
+    const buttonsContainer = new BaseComponent({
+      tag: 'div',
+      className: 'buttons-container',
+    });
+
     const addButton = new ButtonComponent({
       className: 'options-button',
       text: 'add option',
@@ -27,9 +32,24 @@ export default class Options extends BaseComponent {
       event: 'click',
       listener: (): void => this.clearOptions(),
     });
-    
-    this.container.appendChildren([optionsList.getNode(), addButton.getNode(), clearButton.getNode()]);
 
+    const startButton = new ButtonComponent({
+      className: 'options-button start-button',
+      text: 'to the Wheel',
+      event: 'click',
+      listener: (): void => this.clearOptions(),
+    });
+
+    buttonsContainer.appendChildren([
+      addButton.getNode(),
+      clearButton.getNode(),
+    ]);
+
+    this.container.appendChildren([
+      optionsList.getNode(),
+      buttonsContainer.getNode(),
+      startButton.getNode(),
+    ]);
   }
 
   public addOption(): void {

@@ -3,16 +3,19 @@ $white: #fff;
 $input: #2A2B38;
 $container: #3E4050;
 $buttons: #727FAA;
+$green: #73CF52;
 
 body {
   background-color: $body;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   background-color: $container;
   padding: 30px;
   border-radius: 15px;
-  align-items: center;
 }
 
 .options {
@@ -43,10 +46,22 @@ body {
   }
 }
 
+.buttons-container {
+  display: flex;
+  gap: 10px;
+}
+
 button {
   border: none;
   border-radius: 5px;
   padding: 4px 8px;
   background-color: $buttons;
   color: $white;
+  max-width: 200px;
+
+  &.start-button {
+    margin: auto;
+    background-color: $green;
+    padding: 4px 12px;
+  }
 }
