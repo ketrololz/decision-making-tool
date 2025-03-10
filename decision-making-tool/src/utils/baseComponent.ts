@@ -1,11 +1,11 @@
 type Element = {
   tag: string;
-  className: string;
-  text: string;
+  className?: string;
+  text?: string;
 };
 
-export class BaseComponent {
-  private _node;
+export default class BaseComponent {
+  protected _node;
 
   constructor(
     { tag = 'div', className = '', text = '' }: Element,
