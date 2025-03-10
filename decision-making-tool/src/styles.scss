@@ -1,5 +1,52 @@
 $body: #232532;
+$white: #fff;
+$input: #2A2B38;
+$container: #3E4050;
+$buttons: #727FAA;
 
 body {
   background-color: $body;
+}
+
+.container {
+  background-color: $container;
+  padding: 30px;
+  border-radius: 15px;
+  align-items: center;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style-type: none;
+  padding: 0;
+
+  .options-item {
+    display: flex;
+    gap: 10px;
+    height: 30px;
+    align-items: center;
+
+    input {
+      background-color: $input;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      padding: 4px 8px;
+      color: $white;
+    }
+  }
+
+  label {
+    color: $white;
+  }
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px;
+  background-color: $buttons;
+  color: $white;
 }

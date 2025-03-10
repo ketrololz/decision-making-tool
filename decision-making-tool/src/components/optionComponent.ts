@@ -3,7 +3,7 @@ import BaseComponent from '../utils/baseComponent';
 
 export default class OptionComponent extends BaseComponent {
   constructor(state: State) {
-    super({ tag: 'li', className: 'option-item' });
+    super({ tag: 'li', className: 'options-item' });
 
     const position = String(state.id);
   
@@ -53,6 +53,7 @@ export default class OptionComponent extends BaseComponent {
       const crossButton = new BaseComponent({
         tag: 'button',
         className: 'cross-btn',
+        text: 'delete',
       });
   
       crossButton.addListener('click', () => {
