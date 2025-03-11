@@ -1,18 +1,22 @@
-import ButtonComponent from '../../components/buttonComponent';
-import OptionComponent from '../../components/optionComponent';
-import OptionsState from '../../state/optionsState';
-import BaseComponent from '../../utils/baseComponent';
+import ButtonComponent from '../components/buttonComponent';
+import OptionComponent from '../components/optionComponent';
+import type Router from '../router/router';
+import OptionsState from '../state/optionsState';
+import BaseComponent from '../utils/baseComponent';
 
-export default class Options extends BaseComponent {
+export class Options extends BaseComponent {
   private container;
   private optionsList: BaseComponent;
   private state = new OptionsState();
+  private router: Router;
 
-  constructor() {
+  constructor(router: Router) {
     super({ tag: 'div', className: 'container' });
     this.container = this;
     const optionsList = new BaseComponent({ tag: 'ul', className: 'options' });
     this.optionsList = optionsList;
+
+    this.router = router;
 
     const buttonsContainer = new BaseComponent({
       tag: 'div',
@@ -37,7 +41,7 @@ export default class Options extends BaseComponent {
       className: 'options-button start-button',
       text: 'to the Wheel',
       event: 'click',
-      listener: (): void => this.clearOptions(),
+      listener: (): void => this.router.navigate('/wheel'),
     });
 
     buttonsContainer.appendChildren([

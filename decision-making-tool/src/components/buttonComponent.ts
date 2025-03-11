@@ -1,4 +1,4 @@
-import type { Button } from '../types/buttonType';
+import type { Button } from '../types/button';
 import BaseComponent from '../utils/baseComponent';
 
 export default class ButtonComponent extends BaseComponent {
