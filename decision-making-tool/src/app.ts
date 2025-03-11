@@ -6,23 +6,15 @@ import { ROUTES } from './constants/constants';
 
 export default class App extends BaseComponent {
   private body = document.body;
-  // private app;
   private router: Router;
-
 
   constructor() {
     super({ tag: 'div', className: 'app' });
-    // this.app = this;
     this.body.appendChild(this.getNode());
     this.router = new Router(ROUTES, this);
-  }
-
-  public createApp(): void {
-    // const wrapper = new BaseComponent({ tag: 'div', className: 'wrapper' });
     const optionsPage = new Options(this.router);
-
     this.appendChildren([optionsPage.getNode()]);
+
   }
 
-  
 }

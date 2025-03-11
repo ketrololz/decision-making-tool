@@ -1,20 +1,24 @@
 import ButtonComponent from '../components/buttonComponent';
 import OptionComponent from '../components/optionComponent';
 import type Router from '../router/router';
-import OptionsState from '../state/optionsState';
+import { optionsState } from '../state/optionsState';
+import type { State } from '../types/state';
 import BaseComponent from '../utils/baseComponent';
 
 export class Options extends BaseComponent {
-  private container;
   private optionsList: BaseComponent;
-  private state = new OptionsState();
+  private state = optionsState;
   private router: Router;
 
   constructor(router: Router) {
     super({ tag: 'div', className: 'container' });
-    this.container = this;
+    this.destroyChildren();
+    this.state.setState(localStorage.getItem('ketrololz-state'));
+
     const optionsList = new BaseComponent({ tag: 'ul', className: 'options' });
     this.optionsList = optionsList;
+    this.loadOptions(); 
+
 
     this.router = router;
 
@@ -27,7 +31,7 @@ export class Options extends BaseComponent {
       className: 'options-button',
       text: 'add option',
       event: 'click',
-      listener: (): void => this.addOption(),
+      listener: (): void => this.addOption({ id: this.state.getId() }),
     });
 
     const clearButton = new ButtonComponent({
@@ -49,21 +53,44 @@ export class Options extends BaseComponent {
       clearButton.getNode(),
     ]);
 
-    this.container.appendChildren([
+    this.appendChildren([
       optionsList.getNode(),
       buttonsContainer.getNode(),
       startButton.getNode(),
     ]);
   }
 
-  public addOption(): void {
-    const option = new OptionComponent({ id: this.state.getNextId() });
-    this.state.add({ id: this.state.getNextId() });
+  public addOption(state: State, isLoaded: boolean = false): void {
+    const option = new OptionComponent({
+      id: state.id,
+      title: state.title,
+      weight: state.weight,
+    }, this.state.updateOptionState);
+    const removeButton = new ButtonComponent({
+      text: 'delete',
+      className: 'remove-btn',
+      event: 'click',
+      listener: (): void => {
+        option.destroyNode();
+        this.state.remove(state.id);
+      },
+    });
+
+    option.appendChildren([removeButton.getNode()]);
+    if (!isLoaded) {
+      this.state.add({ id: this.state.getId() });
+    }
     this.optionsList.appendChildren([option.getNode()]);
   }
 
   public clearOptions(): void {
     this.state.clear();
     this.optionsList.destroyChildren();
+  }
+
+  private loadOptions(): void {
+      for (const elem of this.state.getOptions()) {
+        this.addOption(elem, true);
+    }
   }
 }

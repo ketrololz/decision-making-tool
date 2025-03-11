@@ -1,5 +1,4 @@
 import ButtonComponent from '../components/buttonComponent';
-// import { ROUTES } from '../constants/constants';
 import type Router from '../router/router';
 import BaseComponent from '../utils/baseComponent';
 
