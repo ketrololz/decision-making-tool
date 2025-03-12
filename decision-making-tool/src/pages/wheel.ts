@@ -49,7 +49,7 @@ export class Wheel extends BaseComponent<'div'> {
       listener: (): void => console.log(this.state.getOptions(), this.getSectorOptions()),
     });
 
-    const wheelElement = new WheelComponent();
+    const wheelElement = new WheelComponent(this.getSectorOptions());
 
     buttonsContainer.appendChildren([
       backButton.getNode(),
@@ -63,6 +63,6 @@ export class Wheel extends BaseComponent<'div'> {
   public getSectorOptions(): State[] {
     return this.state
       .getOptions()
-      .filter((elem) => elem.id && elem.weight);
+      .filter((elem) => elem.title && elem.weight);
   }
 }
