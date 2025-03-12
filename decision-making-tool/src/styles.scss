@@ -9,6 +9,13 @@ body {
   background-color: $body;
 }
 
+.app {
+  display: flex;
+  justify-content: center;
+  height: 100dvh;
+  align-items: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -16,6 +23,16 @@ body {
   background-color: $container;
   padding: 30px;
   border-radius: 15px;
+  max-width: 800px;
+}
+
+input {
+  background-color: $input;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px;
+  color: $white;
 }
 
 .options {
@@ -30,15 +47,6 @@ body {
     gap: 10px;
     height: 30px;
     align-items: center;
-
-    input {
-      background-color: $input;
-      width: 100%;
-      border: none;
-      border-radius: 5px;
-      padding: 4px 8px;
-      color: $white;
-    }
   }
 
   label {

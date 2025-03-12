@@ -3,7 +3,10 @@ import type { State } from '../types/state';
 import BaseComponent from '../utils/baseComponent';
 
 export default class OptionComponent extends BaseComponent {
-  constructor(state: State, onUpdate: (newState: State, dataType: DataType) => void) {
+  constructor(
+    state: State,
+    onUpdate: (newState: State, dataType: DataType) => void,
+  ) {
     super({ tag: 'li', className: 'options-item' });
     const position = String(state.id);
 
@@ -29,7 +32,7 @@ export default class OptionComponent extends BaseComponent {
     optionTitle.setAttribute('placeholder', 'title');
     optionTitle.addListener('input', (e) => {
       if (e.target instanceof HTMLInputElement) {
-        onUpdate({ id: state.id, title: e.target.value}, DataType.title);
+        onUpdate({ id: state.id, title: e.target.value }, DataType.title);
       }
     });
 
@@ -43,7 +46,10 @@ export default class OptionComponent extends BaseComponent {
     optionWeight.setAttribute('placeholder', 'weight');
     optionWeight.addListener('input', (e) => {
       if (e.target instanceof HTMLInputElement) {
-        onUpdate({ id: state.id, title: state.title, weight: Number(e.target.value) }, DataType.weight);
+        onUpdate(
+          { id: state.id, title: state.title, weight: Number(e.target.value) },
+          DataType.weight,
+        );
       }
     });
 

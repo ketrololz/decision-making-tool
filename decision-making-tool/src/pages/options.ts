@@ -19,7 +19,6 @@ export class Options extends BaseComponent {
     this.optionsList = optionsList;
     this.loadOptions(); 
 
-
     this.router = router;
 
     const buttonsContainer = new BaseComponent({
@@ -66,6 +65,7 @@ export class Options extends BaseComponent {
       title: state.title,
       weight: state.weight,
     }, this.state.updateOptionState);
+
     const removeButton = new ButtonComponent({
       text: 'delete',
       className: 'remove-btn',

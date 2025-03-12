@@ -6,6 +6,11 @@ export const DEFAULT_ID = 1;
 
 export const ROUTES = [
   {
+    path: '/',
+    page: (router: Router): Promise<Options> =>
+      import('../pages/options.ts').then((module) => new module.Options(router)),
+  },
+  {
     path: '/options',
     page: (router: Router): Promise<Options> =>
       import('../pages/options.ts').then((module) => new module.Options(router)),

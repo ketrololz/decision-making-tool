@@ -9,10 +9,8 @@ export default class Router {
     this.routes = routes;
     this.outlet = outlet;
 
-    window.addEventListener('DOMContentLoaded', () => 
-      this.createPage(window.location.pathname),
-    )
-
+    this.createPage(window.location.pathname)
+    
     window.addEventListener('popstate', () =>
       this.createPage(window.location.pathname),
     );
