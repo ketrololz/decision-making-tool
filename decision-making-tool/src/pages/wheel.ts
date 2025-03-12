@@ -15,7 +15,7 @@ export class Wheel extends BaseComponent<'div'> {
     this.router = router;
 
     if (this.state.getOptions().length < 1) {
-      this.state.setState(localStorage.getItem('ketrololz-state'));
+      this.state.setState();
     }
 
     const buttonsContainer = new BaseComponent<'div'>({

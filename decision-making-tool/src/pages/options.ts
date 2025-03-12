@@ -13,7 +13,7 @@ export class Options extends BaseComponent<'div'> {
   constructor(router: Router) {
     super({ tag: 'div', className: 'container' });
     this.destroyChildren();
-    this.state.setState(localStorage.getItem('ketrololz-state'));
+    this.state.setState();
 
     const optionsList = new BaseComponent({ tag: 'ul', className: 'options' });
     this.optionsList = optionsList;

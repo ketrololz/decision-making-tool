@@ -14,6 +14,9 @@ export default class OptionsState {
 
   public remove(id: number): void {
     this.stateItems = this.stateItems.filter((item) => item.id !== id);
+    if (this.stateItems.length < 1) {
+      this.id = DEFAULT_ID;
+    }
     this.updateLocalStorage();
   }
 
@@ -46,19 +49,20 @@ export default class OptionsState {
     }
   };
 
-  public setState(stateString: string | null): void {
+  public setState(): void {
+    const stateString: string | null = localStorage.getItem('ketrololz-state');
+    const lastId: string | null = localStorage.getItem('ketrololz-last-id');
     if (stateString) {
-      const state: State[] = JSON.parse(stateString);
-      this.stateItems = state;
-      const objectsId = state.map((elem) => elem.id);
-      if (objectsId.length > 0) {
-        this.id = Math.max(...objectsId) + 1;
-      }
+      this.stateItems = JSON.parse(stateString);
+    }
+    if (lastId) {
+      this.id = JSON.parse(lastId);
     }
   }
 
   private updateLocalStorage(): void {
     localStorage.setItem('ketrololz-state', JSON.stringify(this.stateItems));
+    localStorage.setItem('ketrololz-last-id', JSON.stringify(this.id));
   }
 }
 
