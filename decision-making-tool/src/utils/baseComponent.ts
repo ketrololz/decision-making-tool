@@ -1,14 +1,14 @@
-type Element = {
-  tag: string;
+type Element<T extends keyof HTMLElementTagNameMap = keyof HTMLElementTagNameMap> = {
+  tag: T;
   className?: string;
   text?: string;
 };
 
-export default class BaseComponent {
-  protected _node;
+export default class BaseComponent<T extends keyof HTMLElementTagNameMap> {
+  protected _node: HTMLElementTagNameMap[T];
 
   constructor(
-    { tag = 'div', className = '', text = '' }: Element,
+    { tag, className = '', text = '' }: Element<T>,
     ...children: HTMLElement[]
   ) {
     const node = document.createElement(tag);
@@ -25,7 +25,7 @@ export default class BaseComponent {
     children.forEach((child) => this._node.appendChild(child));
   }
 
-  public getNode(): HTMLElement {
+  public getNode(): HTMLElementTagNameMap[T] {
     return this._node;
   }
 

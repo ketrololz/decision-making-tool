@@ -3,9 +3,9 @@ import type BaseComponent from '../utils/baseComponent';
 
 export default class Router {
   private routes: Route[] = [];
-  private outlet: BaseComponent;
+  private outlet: BaseComponent<'div'>;
 
-  constructor(routes: Route[], outlet: BaseComponent) {
+  constructor(routes: Route[], outlet: BaseComponent<'div'>) {
     this.routes = routes;
     this.outlet = outlet;
 

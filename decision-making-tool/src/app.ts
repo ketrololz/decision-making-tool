@@ -4,7 +4,7 @@ import './pages/options';
 import Router from './router/router';
 import { ROUTES } from './constants/constants';
 
-export default class App extends BaseComponent {
+export default class App extends BaseComponent<'div'> {
   private body = document.body;
 
   constructor() {

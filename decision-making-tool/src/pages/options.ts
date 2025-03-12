@@ -5,8 +5,8 @@ import { optionsState } from '../state/optionsState';
 import type { State } from '../types/state';
 import BaseComponent from '../utils/baseComponent';
 
-export class Options extends BaseComponent {
-  private optionsList: BaseComponent;
+export class Options extends BaseComponent<'div'> {
+  private optionsList: BaseComponent<'ul'>;
   private state = optionsState;
   private router: Router;
 

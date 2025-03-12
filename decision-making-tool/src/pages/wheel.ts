@@ -1,10 +1,11 @@
 import ButtonComponent from '../components/buttonComponent';
+import { WheelComponent } from '../components/wheelComponent';
 import type Router from '../router/router';
 import { optionsState } from '../state/optionsState';
 import type { State } from '../types/state';
 import BaseComponent from '../utils/baseComponent';
 
-export class Wheel extends BaseComponent {
+export class Wheel extends BaseComponent<'div'> {
   private router: Router;
   private state = optionsState;
 
@@ -17,12 +18,12 @@ export class Wheel extends BaseComponent {
       this.state.setState(localStorage.getItem('ketrololz-state'));
     }
 
-    const buttonsContainer = new BaseComponent({
+    const buttonsContainer = new BaseComponent<'div'>({
       tag: 'div',
       className: 'buttons-container',
     });
 
-    const timerInput = new BaseComponent({
+    const timerInput = new BaseComponent<'input'>({
       tag: 'input',
       className: 'timer',
       // text: state.title,
@@ -48,13 +49,15 @@ export class Wheel extends BaseComponent {
       listener: (): void => console.log(this.state.getOptions(), this.getSectorOptions()),
     });
 
+    const wheelElement = new WheelComponent();
+
     buttonsContainer.appendChildren([
       backButton.getNode(),
       timerInput.getNode(),
       startButton.getNode(),
     ]);
 
-    this.appendChildren([buttonsContainer.getNode()]);
+    this.appendChildren([buttonsContainer.getNode(), wheelElement.getNode()]);
   }
 
   public getSectorOptions(): State[] {

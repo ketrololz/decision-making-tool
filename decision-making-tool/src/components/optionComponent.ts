@@ -2,7 +2,7 @@ import { DataType } from '../types/dataType';
 import type { State } from '../types/state';
 import BaseComponent from '../utils/baseComponent';
 
-export default class OptionComponent extends BaseComponent {
+export default class OptionComponent extends BaseComponent<'li'> {
   constructor(
     state: State,
     onUpdate: (newState: State, dataType: DataType) => void,
@@ -57,22 +57,22 @@ export default class OptionComponent extends BaseComponent {
       optionWeight.setAttribute('value', String(state.weight));
     }
 
-    const crossIconLink = new BaseComponent({
-      tag: 'use',
-    });
+    // const crossIconLink = new BaseComponent({
+    //   tag: 'use',
+    // });
 
-    crossIconLink.setAttribute('href', './../../svg/cross.svg#cross');
+    // crossIconLink.setAttribute('href', './../../svg/cross.svg#cross');
 
-    const crossIcon = new BaseComponent(
-      {
-        tag: 'svg',
-        className: 'cross-btn',
-      },
-      crossIconLink.getNode(),
-    );
+    // const crossIcon = new BaseComponent<'svg'>(
+    //   {
+    //     tag: 'svg',
+    //     className: 'cross-btn',
+    //   },
+    //   crossIconLink.getNode(),
+    // );
 
-    crossIcon.setAttribute('height', '50');
-    crossIcon.setAttribute('width', '50');
+    // crossIcon.setAttribute('height', '50');
+    // crossIcon.setAttribute('width', '50');
 
     this.appendChildren([
       optionPosition.getNode(),
