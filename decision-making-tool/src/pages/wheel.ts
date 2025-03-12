@@ -46,10 +46,12 @@ export class Wheel extends BaseComponent<'div'> {
       className: 'options-button',
       text: 'start',
       event: 'click',
-      listener: (): void => console.log(this.state.getOptions(), this.getSectorOptions()),
+      listener: (): void => wheelElement.rotate(4),
     });
 
     const wheelElement = new WheelComponent(this.getSectorOptions());
+
+    window.addEventListener('resize', () => wheelElement.updateSize());
 
     buttonsContainer.appendChildren([
       backButton.getNode(),
