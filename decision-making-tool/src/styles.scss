@@ -8,6 +8,7 @@ $disabled: #676D7E;
 
 body {
   background-color: $body;
+  margin: 0;
 }
 
 .wheel {
@@ -89,7 +90,7 @@ button {
       background-color: $green;
     }
   }
-  
+
   &:disabled {
     background-color: $disabled;
   }

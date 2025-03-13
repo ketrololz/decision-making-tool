@@ -49,15 +49,37 @@ export default class OptionsState {
     }
   };
 
-  public setState(): void {
-    const stateString: string | null = localStorage.getItem('ketrololz-state');
-    const lastId: string | null = localStorage.getItem('ketrololz-last-id');
-    if (stateString) {
-      this.stateItems = JSON.parse(stateString);
+  public loadState(): void {
+    try {
+      const stateString: string | null =
+        localStorage.getItem('ketrololz-state');
+      const lastId: string | null = localStorage.getItem('ketrololz-last-id');
+      if (stateString) {
+        this.stateItems = JSON.parse(stateString);
+      }
+      if (lastId) {
+        this.id = JSON.parse(lastId);
+      }
+    } catch {
+      this.stateItems = [];
     }
-    if (lastId) {
-      this.id = JSON.parse(lastId);
-    }
+  }
+
+  public setState(state: State[]): void {
+    this.stateItems = state.map((el) => {
+      if (el.id.toString().startsWith('#')) {
+        el.id = Number(el.id.toString().substring(1));
+      }
+      if (el.id >= this.id) {
+        this.id = el.id + 1;
+      }
+      if (typeof el.weight === 'string') {
+        el.weight = Number(el.weight);
+      }
+      return el;
+    });
+    console.log(this.stateItems);
+    this.updateLocalStorage();
   }
 
   private updateLocalStorage(): void {

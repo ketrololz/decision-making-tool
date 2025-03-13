@@ -19,7 +19,7 @@ export class Wheel extends BaseComponent<'div'> {
     this.router = router;
 
     if (this.state.getOptions().length < 1) {
-      this.state.setState();
+      this.state.loadState();
     }
 
     const buttonsContainer = new BaseComponent<'div'>({
@@ -97,10 +97,8 @@ export class Wheel extends BaseComponent<'div'> {
       this.getSectorOptions(),
       this.showCurrentTitle,
     );
-    // wheelElement.showCurrentTitle(segmentTitle.getNode());
 
     window.addEventListener('resize', () => wheelElement.updateSize());
-    // requestAnimationFrame(wheelElement.isWheelRotate);
 
     buttonsContainer.appendChildren([
       backButton.getNode(),

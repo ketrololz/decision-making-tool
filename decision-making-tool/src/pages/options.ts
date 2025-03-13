@@ -13,11 +13,11 @@ export class Options extends BaseComponent<'div'> {
   constructor(router: Router) {
     super({ tag: 'div', className: 'container' });
     this.destroyChildren();
-    this.state.setState();
+    this.state.loadState();
 
     const optionsList = new BaseComponent({ tag: 'ul', className: 'options' });
     this.optionsList = optionsList;
-    this.loadOptions(); 
+    this.loadOptions();
 
     this.router = router;
 
@@ -40,6 +40,41 @@ export class Options extends BaseComponent<'div'> {
       listener: (): void => this.clearOptions(),
     });
 
+    const saveButton = new ButtonComponent({
+      className: 'options-button',
+      text: 'save',
+      event: 'click',
+      // listener: (): void => this.clearOptions(),
+    });
+
+    const loadButton = new ButtonComponent({
+      className: 'options-button',
+      text: 'load',
+      event: 'click',
+      listener: (): void => {
+        loadInput.getNode().click();
+      },
+    });
+
+    const loadInput = new BaseComponent({
+      tag: 'input',
+    });
+
+    loadInput.setAttribute('type', 'file');
+    loadInput.setAttribute('accept', '.json');
+
+    loadInput.addListener('change', (e) => {
+      return new Promise((resolve) => {
+        if (e.target instanceof HTMLInputElement) {
+          e.target.files?.item(0)?.text().then(resolve);
+        }
+      }).then((data) => {
+        this.clearOptions();
+        this.state.setState(JSON.parse(String(data)).list);
+        this.loadOptions();
+      });
+    });
+
     const startButton = new ButtonComponent({
       className: 'options-button start-button',
       text: 'to the Wheel',
@@ -50,6 +85,8 @@ export class Options extends BaseComponent<'div'> {
     buttonsContainer.appendChildren([
       addButton.getNode(),
       clearButton.getNode(),
+      saveButton.getNode(),
+      loadButton.getNode(),
     ]);
 
     this.appendChildren([
@@ -60,11 +97,14 @@ export class Options extends BaseComponent<'div'> {
   }
 
   public addOption(state: State, isLoaded: boolean = false): void {
-    const option = new OptionComponent({
-      id: state.id,
-      title: state.title,
-      weight: state.weight,
-    }, this.state.updateOptionState);
+    const option = new OptionComponent(
+      {
+        id: state.id,
+        title: state.title,
+        weight: state.weight,
+      },
+      this.state.updateOptionState,
+    );
 
     const removeButton = new ButtonComponent({
       text: 'delete',
@@ -89,8 +129,8 @@ export class Options extends BaseComponent<'div'> {
   }
 
   private loadOptions(): void {
-      for (const elem of this.state.getOptions()) {
-        this.addOption(elem, true);
+    for (const elem of this.state.getOptions()) {
+      this.addOption(elem, true);
     }
   }
 }
