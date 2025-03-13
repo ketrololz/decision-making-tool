@@ -22,8 +22,8 @@ export default class OptionsState {
 
   public clear(): void {
     this.stateItems = [];
-    this.updateLocalStorage();
     this.id = DEFAULT_ID;
+    this.updateLocalStorage();
   }
 
   public getId(): number {

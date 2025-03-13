@@ -8,6 +8,7 @@ import BaseComponent from '../utils/baseComponent';
 export class Wheel extends BaseComponent<'div'> {
   private router: Router;
   private state = optionsState;
+  private rotationDuration = 0;
 
   constructor(router: Router) {
     super({ tag: 'div', className: 'container' });
@@ -29,8 +30,14 @@ export class Wheel extends BaseComponent<'div'> {
       // text: state.title,
     });
 
+    timerInput.setAttribute('type', 'number');
     timerInput.setAttribute('placeholder', 'seconds');
 
+    timerInput.addListener('input', (e) => {
+      if (e.target instanceof HTMLInputElement) {
+        this.rotationDuration = Number(e.target.value);
+      }
+    });
     // if (state.title) {
     //   optionTitle.setAttribute('value', state.title);
     // }
@@ -46,7 +53,13 @@ export class Wheel extends BaseComponent<'div'> {
       className: 'options-button',
       text: 'start',
       event: 'click',
-      listener: (): void => wheelElement.rotate(4),
+      listener: (): void => {
+        if (this.rotationDuration < 2) {
+          alert('invalid input');
+          return;
+        }
+        wheelElement.rotate(this.rotationDuration)
+      }
     });
 
     const wheelElement = new WheelComponent(this.getSectorOptions());
@@ -63,8 +76,6 @@ export class Wheel extends BaseComponent<'div'> {
   }
 
   public getSectorOptions(): State[] {
-    return this.state
-      .getOptions()
-      .filter((elem) => elem.title && elem.weight);
+    return this.state.getOptions().filter((elem) => elem.title && elem.weight);
   }
 }
