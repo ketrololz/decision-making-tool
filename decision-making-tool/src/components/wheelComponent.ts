@@ -3,6 +3,7 @@ import { CIRCLE, RADIAN } from '../constants/constants';
 import type { SegmentAngle } from '../types/segmentAngle';
 import type { State } from '../types/state';
 import BaseComponent from '../utils/baseComponent';
+import { timeStamp } from 'console';
 
 export class WheelComponent extends BaseComponent<'canvas'> {
   private width = 0;
@@ -21,7 +22,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   constructor(stateOptions: State[]) {
     super({ tag: 'canvas', className: 'wheel' });
 
-    this.initAngle = 0;
+    this.initAngle = Math.random() * 10;
     console.log((this.initAngle * 180) / Math.PI);
     console.log(this.segmentsAngles);
 
@@ -46,7 +47,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
         title: '',
         startAngle: 0,
         endAngle: 0,
-      }
+      };
       if (el.weight && el.title) {
         obj.id = el.id;
         obj.title = el.title;
@@ -55,7 +56,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
         initAngle = obj.endAngle;
       }
       return obj;
-    })
+    });
     this.segmentsAngles = angles;
     console.log(this.segmentsAngles);
   }
@@ -69,41 +70,94 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   }
 
   public rotate(durationInSec: number): void {
-    const initTime = performance.now();
-    const rotationsCount = (Math.random() * (5 * durationInSec - 1) + 2);
-    this.resultAngle =
-      ((rotationsCount * CIRCLE)) % CIRCLE;
-    this.rotateAnimation(durationInSec, initTime, rotationsCount);
+    const rotationsCount = Math.random() * (5 * durationInSec - 1) + 2;
+    this.resultAngle = (rotationsCount * CIRCLE) % CIRCLE;
+    this.rotateAnimation(durationInSec, rotationsCount);
   }
 
-  private rotateAnimation(
-    durationInSec: number,
-    initTime: number,
-    rotationsCount: number,
-  ): void {
-    const rotationTime = performance.now() - initTime;
-    if (rotationTime >= durationInSec * 1000) {
-      // console.log('res', CIRCLE - this.resultAngle % CIRCLE);
-      return;
-    }
+  private rotateAnimation(durationInSec: number, rotationsCount: number): void {
+    let start: number;
 
-    const angle =
-    ((rotationTime / durationInSec) * CIRCLE * rotationsCount) / 1000;
-    this.ctx.clearRect(0, 0, this.width, this.height);
-    this.resultAngle = CIRCLE - angle % CIRCLE;
-    this.showCurrentSegment(this.resultAngle);
-    this.drawWheel(angle);
+    const rotate = (timeStamp: number): void => {
+      if (!start) {
+        start = timeStamp;
+      }
 
-    window.requestAnimationFrame(() => {
-      this.rotateAnimation(durationInSec, initTime, rotationsCount);
-    });
+      let timeFraction = (timeStamp - start) / durationInSec / 1000;
+      console.log(timeFraction);
+      if (timeFraction > 1) timeFraction = 1;
+
+      const progress = easeInOutCubic(timeFraction);
+
+      function easeInOutCubic(x: number): number {
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      }
+
+      // function easeOutBack(x: number): number {
+      //   const c1 = 1.70158;
+      //   const c3 = c1 + 1;
+
+      //   return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+      //   }
+
+      const angle = progress * CIRCLE * rotationsCount + this.initAngle;
+      this.ctx.clearRect(0, 0, this.width, this.height);
+      this.resultAngle = CIRCLE - (angle % CIRCLE);
+      this.showCurrentSegment(this.resultAngle);
+      this.drawWheel(angle);
+
+      if (timeFraction < 1) {
+        requestAnimationFrame(rotate);
+      } else {
+        this.initAngle = angle;
+      }
+    };
+
+    requestAnimationFrame(rotate);
   }
+
+  // private rotateAnimation(
+  //   durationInSec: number,
+  //   rotationsCount: number,
+  // ): void {
+  //   let start: number;
+
+  //   const rotate = (timeStamp: number): void => {
+  //     if (!start) {
+  //       start = timeStamp;
+  //     }
+
+  //     let timeFraction = (timeStamp - start) / durationInSec;
+  //     if (timeFraction > 1) timeFraction = 1
+
+  //     let progress = timeFraction;
+  //     const elapsedTime = timeStamp - start;
+
+  //     const angle =
+  //     ((elapsedTime / durationInSec) * CIRCLE * rotationsCount) / 1000;
+  //     this.ctx.clearRect(0, 0, this.width, this.height);
+  //     this.resultAngle = CIRCLE - angle % CIRCLE;
+  //     this.showCurrentSegment(this.resultAngle);
+  //     this.drawWheel(angle);
+
+  //     if (elapsedTime < durationInSec * 1000) {
+  //       requestAnimationFrame(rotate);
+  //     }
+  //   }
+
+  //   requestAnimationFrame(rotate);
+  // }
 
   private drawWheel(startPosition: number): void {
     const colors = ['red', 'green', 'blue', 'purple', 'cyan', 'lime', 'yellow'];
 
     this.segmentsAngles.forEach((segment, index) => {
-      this.drawSegment(segment.startAngle + startPosition, segment.endAngle + startPosition, colors[index], segment.title);
+      this.drawSegment(
+        segment.startAngle + startPosition,
+        segment.endAngle + startPosition,
+        colors[index],
+        segment.title,
+      );
     });
 
     this.drawArrow();
@@ -134,24 +188,25 @@ export class WheelComponent extends BaseComponent<'canvas'> {
 
   private drawArrow(): void {
     this.ctx.beginPath();
-    this.ctx.moveTo(this.width - (this.width / 5), this.width / 2);
-    this.ctx.lineTo(this.width - (this.width / 5) + this.width / 20, this.width / 2 + (this.width / 50));
-    this.ctx.lineTo(this.width - (this.width / 5) + this.width / 20, this.width / 2 - (this.width / 50));
+    this.ctx.moveTo(this.width - this.width / 5, this.width / 2);
+    this.ctx.lineTo(
+      this.width - this.width / 5 + this.width / 20,
+      this.width / 2 + this.width / 50,
+    );
+    this.ctx.lineTo(
+      this.width - this.width / 5 + this.width / 20,
+      this.width / 2 - this.width / 50,
+    );
     this.ctx.closePath();
     this.ctx.fillStyle = 'white';
     this.ctx.fill();
   }
 
   private showCurrentSegment(angle: number): void {
-    console.log(this.segmentsAngles.find((el) => el.startAngle < angle && angle < el.endAngle)?.title);
+    console.log(
+      this.segmentsAngles.find(
+        (el) => el.startAngle < angle && angle < el.endAngle,
+      )?.title,
+    );
   }
-  // private drawArrow(): void {
-  //   this.ctx.beginPath();
-  //   this.ctx.moveTo(this.width / 2, this.width / 5);
-  //   this.ctx.lineTo(this.width / 2 - this.width / 40, this.width / 7);
-  //   this.ctx.lineTo(this.width / 2 + this.width / 40, this.width / 7);
-  //   this.ctx.closePath();
-  //   this.ctx.fillStyle = 'white';
-  //   this.ctx.fill();
-  // }
 }
