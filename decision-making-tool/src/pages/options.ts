@@ -1,3 +1,4 @@
+import { title } from 'process';
 import ButtonComponent from '../components/buttonComponent';
 import OptionComponent from '../components/optionComponent';
 import type Router from '../router/router';
@@ -45,17 +46,19 @@ export class Options extends BaseComponent<'div'> {
       text: 'save',
       event: 'click',
       listener: (): void => {
-        saveLink.getNode().href = URL.createObjectURL(new Blob([JSON.stringify({ list: this.state.getOptions() })]));
-        console.log(JSON.stringify(this.state.getOptions()))
+        saveLink.getNode().href = URL.createObjectURL(
+          new Blob([JSON.stringify({ list: this.state.getOptions() })]),
+        );
+        console.log(JSON.stringify(this.state.getOptions()));
         saveLink.getNode().click();
       },
     });
 
     const saveLink = new BaseComponent({
       tag: 'a',
-    })
+    });
 
-    saveLink.setAttribute("download", "data.json");
+    saveLink.setAttribute('download', 'data.json');
 
     const loadButton = new ButtonComponent({
       className: 'options-button',
@@ -92,17 +95,79 @@ export class Options extends BaseComponent<'div'> {
       listener: (): void => this.router.navigate('/wheel'),
     });
 
+    const pasteListDialog = new BaseComponent({
+      tag: 'dialog',
+      className: 'list-dialog',
+    });
+
+    const pasteButton = new ButtonComponent({
+      text: 'paste list',
+      event: 'click',
+      listener: (): void => pasteListDialog.getNode().showModal(),
+    });
+
+    const pasteListContainer = new BaseComponent({
+      tag: 'form',
+      className: 'list-container',
+    });
+
+    const pasteListArea = new BaseComponent({
+      tag: 'textarea',
+      className: 'list-area',
+    });
+
+    pasteListArea.setAttribute('cols', '40');
+    pasteListArea.setAttribute('rows', '10');
+
+    pasteListContainer.addListener('submit', (e) => {
+      e.preventDefault()
+    })
+
+    const pasteListCancel = new ButtonComponent({
+      text: 'cancel',
+    });
+
+    const pasteListConfirm = new ButtonComponent({
+      text: 'confirm',
+    });
+
+    pasteListCancel.addListener('click', () => {
+      pasteListArea.getNode().value = '';
+      pasteListDialog.getNode().close()
+    })
+
+    pasteListConfirm.addListener('click', () => {
+      const options = this.createOptionsFromList(pasteListArea.getNode().value);
+      if (options.length > 0) {
+        this.clearOptions();
+        this.state.setState(options);
+        this.loadOptions();
+      }
+      pasteListDialog.getNode().close()
+      pasteListArea.getNode().value = '';
+    })
+
+    pasteListContainer.appendChildren([
+      pasteListArea.getNode(),
+      pasteListCancel.getNode(),
+      pasteListConfirm.getNode(),
+    ]);
+
+    pasteListDialog.appendChildren([pasteListContainer.getNode()]);
+
     buttonsContainer.appendChildren([
       addButton.getNode(),
       clearButton.getNode(),
       saveButton.getNode(),
       loadButton.getNode(),
+      pasteButton.getNode(),
     ]);
 
     this.appendChildren([
       optionsList.getNode(),
       buttonsContainer.getNode(),
       startButton.getNode(),
+      pasteListDialog.getNode(),
     ]);
   }
 
@@ -142,5 +207,25 @@ export class Options extends BaseComponent<'div'> {
     for (const elem of this.state.getOptions()) {
       this.addOption(elem, true);
     }
+  }
+
+  private createOptionsFromList(text: string): State[] {
+    const lines = text.split('\n');
+    const splitedLines = lines.map((line) => line.split(','));
+    const options: State[] = [];
+    splitedLines.forEach((line) => {
+      if (line.length > 1) {
+        const weight = parseInt(line.pop()!, 10);
+        if (!Number.isNaN(weight)) {
+          const option = {
+            id: options.length + 1,
+            weight: weight,
+            title: line.join(','),
+          }
+          options.push(option);
+        }
+      }
+    })
+    return options;
   }
 }

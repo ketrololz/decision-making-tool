@@ -101,3 +101,25 @@ h2 {
   text-align: center;
   font-size: 34px;
 }
+
+dialog {
+  flex-direction: column;
+  gap: 20px;
+  background-color: $container;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 800px;
+  border: none;
+}
+
+.list-area {
+  background-color: $input;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px;
+  min-height: 20px;
+  color: $white;
+  resize: none;
+  border: none;
+}
