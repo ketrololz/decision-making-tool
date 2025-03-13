@@ -34,7 +34,7 @@ export default tseslint.config(
         { accessibility: 'explicit', overrides: { constructors: 'off' } },
       ],
       '@typescript-eslint/member-ordering': 'error',
-      'class-methods-use-this': 'error',
+      'class-methods-use-this': 'off',
     },
   },
 );

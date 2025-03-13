@@ -2,13 +2,16 @@ import ButtonComponent from '../components/buttonComponent';
 import { WheelComponent } from '../components/wheelComponent';
 import type Router from '../router/router';
 import { optionsState } from '../state/optionsState';
-import type { State } from '../types/state';
+import type { WheelItem } from '../types/wheelItem';
 import BaseComponent from '../utils/baseComponent';
+import { isWheelItem } from '../utils/itemIsWheelItem';
 
 export class Wheel extends BaseComponent<'div'> {
   private router: Router;
   private state = optionsState;
   private rotationDuration = 0;
+
+  private title;
 
   constructor(router: Router) {
     super({ tag: 'div', className: 'container' });
@@ -27,7 +30,6 @@ export class Wheel extends BaseComponent<'div'> {
     const timerInput = new BaseComponent<'input'>({
       tag: 'input',
       className: 'timer',
-      // text: state.title,
     });
 
     timerInput.setAttribute('type', 'number');
@@ -38,9 +40,6 @@ export class Wheel extends BaseComponent<'div'> {
         this.rotationDuration = Number(e.target.value);
       }
     });
-    // if (state.title) {
-    //   optionTitle.setAttribute('value', state.title);
-    // }
 
     const backButton = new ButtonComponent({
       className: 'options-button start-button',
@@ -58,11 +57,23 @@ export class Wheel extends BaseComponent<'div'> {
           alert('invalid input');
           return;
         }
-        wheelElement.rotate(this.rotationDuration)
-      }
+        wheelElement.rotate(this.rotationDuration);
+      },
     });
 
-    const wheelElement = new WheelComponent(this.getSectorOptions());
+    const segmentTitle = new BaseComponent({
+      tag: 'h2',
+      className: 'segment-title',
+      text: 'press start',
+    });
+
+    this.title = segmentTitle;
+
+    const wheelElement = new WheelComponent(
+      this.getSectorOptions(),
+      this.showCurrentTitle,
+    );
+    // wheelElement.showCurrentTitle(segmentTitle.getNode());
 
     window.addEventListener('resize', () => wheelElement.updateSize());
 
@@ -72,10 +83,18 @@ export class Wheel extends BaseComponent<'div'> {
       startButton.getNode(),
     ]);
 
-    this.appendChildren([buttonsContainer.getNode(), wheelElement.getNode()]);
+    this.appendChildren([
+      buttonsContainer.getNode(),
+      segmentTitle.getNode(),
+      wheelElement.getNode(),
+    ]);
   }
 
-  public getSectorOptions(): State[] {
-    return this.state.getOptions().filter((elem) => elem.title && elem.weight);
+  public showCurrentTitle = (text: string): void => {
+    this.title.setText(text);
+  }
+
+  public getSectorOptions(): WheelItem[] {
+    return this.state.getOptions().filter(isWheelItem);
   }
 }
