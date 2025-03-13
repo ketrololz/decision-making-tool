@@ -48,16 +48,40 @@ export class Wheel extends BaseComponent<'div'> {
       listener: (): void => this.router.navigate('/options'),
     });
 
+    const russianRouletteModeBtn = new ButtonComponent({
+      className: 'russian-roulette-btn',
+      text: 'russian roulette mode',
+      event: 'click',
+      listener: (): void => {
+        wheelElement.toggleRusRouletteMode();
+        russianRouletteModeBtn.toggleClass('active');
+      },
+    });
+
     const startButton = new ButtonComponent({
       className: 'options-button',
       text: 'start',
       event: 'click',
-      listener: (): void => {
+      listener: async (): Promise<void> => {
         if (this.rotationDuration < 2) {
-          alert('invalid input');
+          alert('The rotation time should be from 2 to 500 seconds');
           return;
         }
-        wheelElement.rotate(this.rotationDuration);
+        if (this.rotationDuration > 500) {
+          alert('The rotation time should be from 2 to 500 seconds');
+          return;
+        }
+        startButton.getNode().disabled = true;
+        timerInput.getNode().disabled = true;
+        backButton.getNode().disabled = true;
+        russianRouletteModeBtn.getNode().disabled = true;
+
+        wheelElement.rotate(this.rotationDuration).then(() => {
+          startButton.getNode().disabled = false;
+          timerInput.getNode().disabled = false;
+          backButton.getNode().disabled = false;
+          russianRouletteModeBtn.getNode().disabled = false;
+        });
       },
     });
 
@@ -76,10 +100,12 @@ export class Wheel extends BaseComponent<'div'> {
     // wheelElement.showCurrentTitle(segmentTitle.getNode());
 
     window.addEventListener('resize', () => wheelElement.updateSize());
+    // requestAnimationFrame(wheelElement.isWheelRotate);
 
     buttonsContainer.appendChildren([
       backButton.getNode(),
       timerInput.getNode(),
+      russianRouletteModeBtn.getNode(),
       startButton.getNode(),
     ]);
 
@@ -92,7 +118,7 @@ export class Wheel extends BaseComponent<'div'> {
 
   public showCurrentTitle = (text: string): void => {
     this.title.setText(text);
-  }
+  };
 
   public getSectorOptions(): WheelItem[] {
     return this.state.getOptions().filter(isWheelItem);

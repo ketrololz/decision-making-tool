@@ -4,9 +4,14 @@ $input: #2A2B38;
 $container: #3E4050;
 $buttons: #727FAA;
 $green: #73CF52;
+$disabled: #676D7E;
 
 body {
   background-color: $body;
+}
+
+.wheel {
+  transform: rotate(-90deg);
 }
 
 .app {
@@ -32,6 +37,7 @@ input {
   border: none;
   border-radius: 5px;
   padding: 4px 8px;
+  min-height: 20px;
   color: $white;
 }
 
@@ -62,18 +68,35 @@ input {
 button {
   border: none;
   border-radius: 5px;
-  padding: 4px 8px;
+  padding: 4px 16px;
   background-color: $buttons;
   color: $white;
   max-width: 200px;
+  min-height: 20px;
 
+  
   &.start-button {
-    margin: auto;
+    margin: 0;
     background-color: $green;
-    padding: 4px 12px;
+  }
+  
+  &.remove-btn {
+    margin: 0;
+  }
+  
+  &.russian-roulette-btn {
+    &.active {
+      background-color: $green;
+    }
+  }
+  
+  &:disabled {
+    background-color: $disabled;
   }
 }
 
 h2 {
   color: white;
+  text-align: center;
+  font-size: 34px;
 }
