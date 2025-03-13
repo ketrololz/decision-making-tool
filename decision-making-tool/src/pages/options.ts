@@ -44,8 +44,18 @@ export class Options extends BaseComponent<'div'> {
       className: 'options-button',
       text: 'save',
       event: 'click',
-      // listener: (): void => this.clearOptions(),
+      listener: (): void => {
+        saveLink.getNode().href = URL.createObjectURL(new Blob([JSON.stringify({ list: this.state.getOptions() })]));
+        console.log(JSON.stringify(this.state.getOptions()))
+        saveLink.getNode().click();
+      },
     });
+
+    const saveLink = new BaseComponent({
+      tag: 'a',
+    })
+
+    saveLink.setAttribute("download", "data.json");
 
     const loadButton = new ButtonComponent({
       className: 'options-button',
