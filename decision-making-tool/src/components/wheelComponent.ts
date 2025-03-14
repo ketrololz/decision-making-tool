@@ -1,4 +1,4 @@
-import { CIRCLE } from '../constants/constants';
+import { CIRCLE, MAX_TITLE_LENGTH } from '../constants/constants';
 import BaseComponent from '../utils/baseComponent';
 import type { WheelItem } from '../types/wheelItem';
 
@@ -189,15 +189,20 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     this.ctx.stroke();
     // this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
     // this.ctx.shadowBlur = 10;
+    const trimmedTitle = title.trim();
+    let shortTitle = trimmedTitle 
+    if(trimmedTitle .length > MAX_TITLE_LENGTH) {
+      shortTitle = trimmedTitle .slice(-MAX_TITLE_LENGTH).concat('...');
+    }
 
     this.ctx.save();
     this.ctx.translate(this.width / 2, this.height / 2);
     this.ctx.rotate((start + end) / 2);
     this.ctx.fillStyle = 'black';
-    this.ctx.font = `${this.width / 30}px Montserrat`;
-    this.ctx.textAlign = 'center';
+    this.ctx.font = `${this.width / 34}px Montserrat`;
+    this.ctx.textAlign = 'left';
     this.ctx.textBaseline = 'middle';
-    this.ctx.fillText(title, this.radius / 1.5, 0);
+    this.ctx.fillText(shortTitle, this.radius / 4, 0);
     this.ctx.restore();
   }
 

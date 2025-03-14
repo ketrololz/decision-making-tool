@@ -3,8 +3,8 @@ import type { Wheel } from '../pages/wheel.ts';
 import type Router from '../router/router.ts';
 
 export const DEFAULT_ID = 1;
-export const RADIAN = 180 / Math.PI;
 export const CIRCLE = Math.PI * 2;
+export const MAX_TITLE_LENGTH = 10;
 
 export const PULSE_ANIMATION_MS = 200;
 
