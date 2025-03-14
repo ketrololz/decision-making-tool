@@ -6,6 +6,12 @@ export default class OptionsState {
   private id = DEFAULT_ID;
   private stateItems: State[] = [];
 
+  constructor() {
+    if (localStorage.getItem('ketrololz-state') === null) {
+      this.add({id: 1});
+    }
+  }
+
   public add(item: State): void {
     this.stateItems.push(item);
     this.id += 1;
