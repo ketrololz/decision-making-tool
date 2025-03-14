@@ -132,6 +132,12 @@ h2 {
   font-size: 34px;
 }
 
+h3 {
+  color: white;
+  text-align: center;
+  font-size: 24px;
+}
+
 dialog {
   flex-direction: column;
   gap: 20px;
@@ -152,6 +158,10 @@ dialog {
   color: $white;
   resize: none;
   border: none;
+}
+
+.not-found {
+  align-items: center;
 }
 
 @keyframes pulse {

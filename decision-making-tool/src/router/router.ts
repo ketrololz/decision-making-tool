@@ -9,8 +9,8 @@ export default class Router {
     this.routes = routes;
     this.outlet = outlet;
 
-    this.createPage(window.location.pathname)
-    
+    this.createPage(window.location.pathname);
+
     window.addEventListener('popstate', () =>
       this.createPage(window.location.pathname),
     );
@@ -23,6 +23,11 @@ export default class Router {
       this.outlet.destroyChildren();
       route
         .page(this)
+        .then((page) => this.outlet.appendChildren([page.getNode()]));
+    } else {
+      this.outlet.destroyChildren();
+      import('../pages/notFound.ts')
+        .then((module) => new module.NotFound(this))
         .then((page) => this.outlet.appendChildren([page.getNode()]));
     }
   }
