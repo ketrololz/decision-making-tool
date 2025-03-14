@@ -20,7 +20,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   private thisCurrentTitle: string | undefined;
 
   private resultAngle: number = 0;
-  private isRusRoulleteMode = false;
+  private isEliminationMode = false;
 
   constructor(
     stateOptions: WheelItem[],
@@ -76,9 +76,9 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     }
   }
 
-  public toggleRusRouletteMode(): boolean {
-    return (this.isRusRoulleteMode =
-      this.isRusRoulleteMode === false ? true : false);
+  public toggleEliminationMode(): boolean {
+    return (this.isEliminationMode =
+      this.isEliminationMode === false ? true : false);
   }
 
   private rotateAnimation(
@@ -119,8 +119,8 @@ export class WheelComponent extends BaseComponent<'canvas'> {
           requestAnimationFrame(rotate);
         } else {
           this.initAngle = angle;
-          
-          if (this.isRusRoulleteMode) {
+
+          if (this.isEliminationMode && Object.keys(this.segments).length > 2) {
             if (winnerSegment) {
               delete this.segments[winnerSegment.id];
             }

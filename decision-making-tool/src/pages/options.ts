@@ -3,7 +3,9 @@ import OptionComponent from '../components/optionComponent';
 import type Router from '../router/router';
 import { optionsState } from '../state/optionsState';
 import type { State } from '../types/state';
+import type { WheelItem } from '../types/wheelItem';
 import BaseComponent from '../utils/baseComponent';
+import { isWheelItem } from '../utils/itemIsWheelItem';
 
 export class Options extends BaseComponent<'div'> {
   private optionsList: BaseComponent<'ul'>;
@@ -21,7 +23,12 @@ export class Options extends BaseComponent<'div'> {
 
     this.router = router;
 
-    const buttonsContainer = new BaseComponent({
+    const optionButtonsContainer = new BaseComponent({
+      tag: 'div',
+      className: 'buttons-container',
+    });
+
+    const listButtonsContainer = new BaseComponent({
       tag: 'div',
       className: 'buttons-container',
     });
@@ -90,7 +97,13 @@ export class Options extends BaseComponent<'div'> {
       className: 'options-button start-button',
       text: 'to the Wheel',
       event: 'click',
-      listener: (): void => this.router.navigate('/wheel'),
+      listener: (): void => {
+        if (this.getSectorOptions().length < 2) {
+          alert('YOU SHELL NOT PASS')
+          return;
+        }
+        this.router.navigate('/wheel')
+      },
     });
 
     const pasteListDialog = new BaseComponent({
@@ -153,9 +166,12 @@ export class Options extends BaseComponent<'div'> {
 
     pasteListDialog.appendChildren([pasteListContainer.getNode()]);
 
-    buttonsContainer.appendChildren([
+    optionButtonsContainer.appendChildren([
       addButton.getNode(),
       clearButton.getNode(),
+    ]);
+
+    listButtonsContainer.appendChildren([
       saveButton.getNode(),
       loadButton.getNode(),
       pasteButton.getNode(),
@@ -163,7 +179,8 @@ export class Options extends BaseComponent<'div'> {
 
     this.appendChildren([
       optionsList.getNode(),
-      buttonsContainer.getNode(),
+      optionButtonsContainer.getNode(),
+      listButtonsContainer.getNode(),
       startButton.getNode(),
       pasteListDialog.getNode(),
     ]);
@@ -224,5 +241,9 @@ export class Options extends BaseComponent<'div'> {
       }
     })
     return options;
+  }
+  
+  private getSectorOptions(): WheelItem[] {
+      return this.state.getOptions().filter(isWheelItem);
   }
 }

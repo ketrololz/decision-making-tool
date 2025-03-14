@@ -48,13 +48,13 @@ export class Wheel extends BaseComponent<'div'> {
       listener: (): void => this.router.navigate('/options'),
     });
 
-    const russianRouletteModeBtn = new ButtonComponent({
-      className: 'russian-roulette-btn',
-      text: 'russian roulette mode',
+    const eliminationModeBtn = new ButtonComponent({
+      className: 'elimination-btn',
+      text: 'elimination mode',
       event: 'click',
       listener: (): void => {
-        wheelElement.toggleRusRouletteMode();
-        russianRouletteModeBtn.toggleClass('active');
+        wheelElement.toggleEliminationMode();
+        eliminationModeBtn.toggleClass('active');
       },
     });
 
@@ -74,16 +74,18 @@ export class Wheel extends BaseComponent<'div'> {
         startButton.getNode().disabled = true;
         timerInput.getNode().disabled = true;
         backButton.getNode().disabled = true;
-        russianRouletteModeBtn.getNode().disabled = true;
+        eliminationModeBtn.getNode().disabled = true;
 
         wheelElement.rotate(this.rotationDuration).then(() => {
           startButton.getNode().disabled = false;
           timerInput.getNode().disabled = false;
           backButton.getNode().disabled = false;
-          russianRouletteModeBtn.getNode().disabled = false;
+          eliminationModeBtn.getNode().disabled = false;
         });
       },
     });
+
+    this.enableButtonIfCanPlay(startButton);
 
     const segmentTitle = new BaseComponent({
       tag: 'h2',
@@ -103,7 +105,7 @@ export class Wheel extends BaseComponent<'div'> {
     buttonsContainer.appendChildren([
       backButton.getNode(),
       timerInput.getNode(),
-      russianRouletteModeBtn.getNode(),
+      eliminationModeBtn.getNode(),
       startButton.getNode(),
     ]);
 
@@ -120,5 +122,10 @@ export class Wheel extends BaseComponent<'div'> {
 
   public getSectorOptions(): WheelItem[] {
     return this.state.getOptions().filter(isWheelItem);
+  }
+
+  private enableButtonIfCanPlay(button: ButtonComponent): void {
+    const buttonStatus = this.getSectorOptions().length < 2 ? true : false;
+    button.getNode().disabled = buttonStatus;
   }
 }

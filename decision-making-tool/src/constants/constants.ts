@@ -21,7 +21,6 @@ export const ROUTES = [
   },
   {
     path: '/wheel',
-    page: (router: Router): Promise<Wheel> =>
-      import('../pages/wheel.ts').then((module) => new module.Wheel(router)),
+    page: (router: Router): Promise<Wheel> => import('../pages/wheel.ts').then((module) => new module.Wheel(router)),
   },
 ];
