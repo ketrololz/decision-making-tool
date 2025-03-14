@@ -138,16 +138,37 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   }
 
   private drawWheel(startPosition: number): void {
-    const colors = ['red', 'green', 'blue', 'purple', 'cyan', 'lime', 'yellow'];
-
-    Object.values(this.segments).forEach((segment, index) => {
+    const colors = ['#e25e52', '#73cf52', '#dbcb33', '#35bad8', '#9459c6'];
+    let colorNum = 0;
+    Object.values(this.segments).forEach((segment) => {
       this.drawSegment(
         segment.startAngle + startPosition,
         segment.endAngle + startPosition,
-        colors[index],
+        colors[colorNum],
         segment.title,
       );
+      if (colorNum >= 4) {
+        colorNum = 1;
+      }
+      colorNum += 1;
     });
+
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.width - this.width / 22, this.height / 2);
+    this.ctx.arc(this.width / 2, this.height / 2, this.radius, 0, CIRCLE);
+    this.ctx.save();
+    this.ctx.clip();
+    this.ctx.lineWidth = this.width / 15;
+    this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+    this.ctx.stroke();
+    this.ctx.restore();
+
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.width - this.width / 22, this.height / 2);
+    this.ctx.arc(this.width / 2, this.height / 2, this.radius / 30, 0, CIRCLE);
+    this.ctx.fillStyle = 'white';
+    this.ctx.fill();
+    this.ctx.restore();
 
     this.drawArrow();
   }
@@ -163,6 +184,11 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     this.ctx.arc(this.width / 2, this.height / 2, this.radius, start, end);
     this.ctx.fillStyle = color;
     this.ctx.fill();
+    // this.ctx.lineWidth = 3;
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+    // this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+    // this.ctx.shadowBlur = 10;
 
     this.ctx.save();
     this.ctx.translate(this.width / 2, this.height / 2);

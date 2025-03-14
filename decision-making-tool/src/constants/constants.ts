@@ -6,6 +6,8 @@ export const DEFAULT_ID = 1;
 export const RADIAN = 180 / Math.PI;
 export const CIRCLE = Math.PI * 2;
 
+export const PULSE_ANIMATION_MS = 200;
+
 export const ROUTES = [
   {
     path: '/',

@@ -1,4 +1,3 @@
-import { title } from 'process';
 import ButtonComponent from '../components/buttonComponent';
 import OptionComponent from '../components/optionComponent';
 import type Router from '../router/router';
@@ -49,7 +48,6 @@ export class Options extends BaseComponent<'div'> {
         saveLink.getNode().href = URL.createObjectURL(
           new Blob([JSON.stringify({ list: this.state.getOptions() })]),
         );
-        console.log(JSON.stringify(this.state.getOptions()));
         saveLink.getNode().click();
       },
     });
@@ -182,7 +180,6 @@ export class Options extends BaseComponent<'div'> {
     );
 
     const removeButton = new ButtonComponent({
-      text: 'delete',
       className: 'remove-btn',
       event: 'click',
       listener: (): void => {

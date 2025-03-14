@@ -5,9 +5,11 @@ $container: #3E4050;
 $buttons: #727FAA;
 $green: #73CF52;
 $disabled: #676D7E;
+$red: #E25E52;
 
 body {
   background-color: $body;
+  font-family: 'Montserrat';
   margin: 0;
 }
 
@@ -30,9 +32,12 @@ body {
   padding: 30px;
   border-radius: 15px;
   max-width: 800px;
+  transition: all .5s ease-in-out;
 }
 
 input {
+  font-family: 'Montserrat';
+  font-weight: 500;
   background-color: $input;
   width: 100%;
   border: none;
@@ -48,6 +53,15 @@ input {
   gap: 6px;
   list-style-type: none;
   padding: 0;
+
+  .position-num {
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .position-weight {
+    max-width: 80px;
+  }
 
   .options-item {
     display: flex;
@@ -67,6 +81,8 @@ input {
 }
 
 button {
+  font-family: 'Montserrat';
+  font-weight: 500;
   border: none;
   border-radius: 5px;
   padding: 4px 16px;
@@ -74,6 +90,7 @@ button {
   color: $white;
   max-width: 200px;
   min-height: 20px;
+  cursor: pointer;
 
   
   &.start-button {
@@ -83,6 +100,19 @@ button {
   
   &.remove-btn {
     margin: 0;
+    padding: 0;
+    min-width: 15px;
+    height: 15px;
+    background: url(../src/svg/cross.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    align-items: center;
+    opacity: 0.5;
+    transition: opacity ease-in .2s;
+
+    &:hover {
+      opacity: 1;
+    }
   }
   
   &.russian-roulette-btn {
@@ -122,4 +152,22 @@ dialog {
   color: $white;
   resize: none;
   border: none;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation: pulse .2s forwards;
 }

@@ -78,7 +78,6 @@ export default class OptionsState {
       }
       return el;
     });
-    console.log(this.stateItems);
     this.updateLocalStorage();
   }
 

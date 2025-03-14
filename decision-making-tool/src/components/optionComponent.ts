@@ -1,3 +1,4 @@
+import { PULSE_ANIMATION_MS } from '../constants/constants';
 import { DataType } from '../types/dataType';
 import type { State } from '../types/state';
 import BaseComponent from '../utils/baseComponent';
@@ -57,27 +58,17 @@ export default class OptionComponent extends BaseComponent<'li'> {
       optionWeight.setAttribute('value', String(state.weight));
     }
 
-    // const crossIconLink = new BaseComponent({
-    //   tag: 'use',
-    // });
-
-    // crossIconLink.setAttribute('href', './../../svg/cross.svg#cross');
-
-    // const crossIcon = new BaseComponent<'svg'>(
-    //   {
-    //     tag: 'svg',
-    //     className: 'cross-btn',
-    //   },
-    //   crossIconLink.getNode(),
-    // );
-
-    // crossIcon.setAttribute('height', '50');
-    // crossIcon.setAttribute('width', '50');
+    this.pulse()
 
     this.appendChildren([
       optionPosition.getNode(),
       optionTitle.getNode(),
       optionWeight.getNode(),
     ]);
+  }
+
+  private pulse(): void {
+    this.toggleClass('pulse');
+    setTimeout(() => this.toggleClass('pulse'), PULSE_ANIMATION_MS);
   }
 }
