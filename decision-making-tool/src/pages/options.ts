@@ -17,34 +17,62 @@ export class Options extends BaseComponent<'div'> {
     this.destroyChildren();
     this.state.loadState();
 
+    const optionsTitle = new BaseComponent({
+      tag: 'h3',
+      className: 'options-title',
+      text: 'Options',
+    });
+
     const optionsList = new BaseComponent({ tag: 'ul', className: 'options' });
     this.optionsList = optionsList;
     this.loadOptions();
 
     this.router = router;
 
-    const optionButtonsContainer = new BaseComponent({
+    const optionsContainer = new BaseComponent({
       tag: 'div',
-      className: 'buttons-container',
+      className: 'options-container',
     });
 
-    const listButtonsContainer = new BaseComponent({
+    const optionButtonsContainer = new BaseComponent({
       tag: 'div',
-      className: 'buttons-container',
+      className: 'buttons-container options-btn-container',
     });
 
     const addButton = new ButtonComponent({
-      className: 'options-button',
+      className: 'options-button add-btn',
       text: 'add option',
       event: 'click',
       listener: (): void => this.addOption({ id: this.state.getId() }),
     });
 
     const clearButton = new ButtonComponent({
-      className: 'options-button',
+      className: 'options-button clear-btn',
       text: 'clear options',
       event: 'click',
       listener: (): void => this.clearOptions(),
+    });
+
+    optionsContainer.appendChildren([
+      optionsTitle.getNode(),
+      optionsList.getNode(),
+      optionButtonsContainer.getNode(),
+    ]);
+
+    const listContainer = new BaseComponent({
+      tag: 'div',
+      className: 'list-container',
+    });
+
+    const listTitle = new BaseComponent({
+      tag: 'h3',
+      className: 'list-title',
+      text: 'List',
+    });
+
+    const listButtonsContainer = new BaseComponent({
+      tag: 'div',
+      className: 'buttons-container list-btn-container',
     });
 
     const saveButton = new ButtonComponent({
@@ -99,10 +127,10 @@ export class Options extends BaseComponent<'div'> {
       event: 'click',
       listener: (): void => {
         if (this.getSectorOptions().length < 2) {
-          alert('YOU SHELL NOT PASS')
+          alert('YOU SHELL NOT PASS');
           return;
         }
-        this.router.navigate('/wheel')
+        this.router.navigate('/wheel');
       },
     });
 
@@ -127,25 +155,54 @@ export class Options extends BaseComponent<'div'> {
       className: 'list-area',
     });
 
-    pasteListArea.setAttribute('cols', '40');
+    const pasteListTitle = new BaseComponent({
+      tag: 'h3',
+      className: 'paste-list-title',
+      text: 'Paste a list of new options in a CSV-like format:',
+    });
+
+    const pasteListSubtitle = new BaseComponent({
+      tag: 'h4',
+      className: 'paste-list-subtitle',
+      text: 'Write the name and its weight after the last comma. Each option is indicated on a new line.',
+    });
+
+    pasteListArea.setAttribute('cols', '60');
     pasteListArea.setAttribute('rows', '10');
+    pasteListArea.setAttribute('autocomplete', 'off');
+    pasteListArea.setAttribute(
+      'placeholder',
+      'example_1, 2   >   example_1 | 2 example_2, \nwith comma, 1   >   example_2, with comma | 1',
+    );
 
     pasteListContainer.addListener('submit', (e) => {
-      e.preventDefault()
-    })
+      e.preventDefault();
+    });
 
     const pasteListCancel = new ButtonComponent({
       text: 'cancel',
+      className: 'cancel-btn',
     });
 
     const pasteListConfirm = new ButtonComponent({
       text: 'confirm',
+      className: 'confirm-btn',
     });
+
+    const pasteListButtonsContainer = new BaseComponent({
+      tag: 'div',
+      className: 'buttons-container paste-list-buttons-container',
+    });
+
+    pasteListButtonsContainer.appendChildren([
+      pasteListCancel.getNode(),
+      pasteListConfirm.getNode(),
+    ]);
 
     pasteListCancel.addListener('click', () => {
       pasteListArea.getNode().value = '';
-      pasteListDialog.getNode().close()
-    })
+      pasteListDialog.getNode().close();
+    });
 
     pasteListConfirm.addListener('click', () => {
       const options = this.createOptionsFromList(pasteListArea.getNode().value);
@@ -154,14 +211,15 @@ export class Options extends BaseComponent<'div'> {
         this.state.setState(options);
         this.loadOptions();
       }
-      pasteListDialog.getNode().close()
+      pasteListDialog.getNode().close();
       pasteListArea.getNode().value = '';
-    })
+    });
 
     pasteListContainer.appendChildren([
+      pasteListTitle.getNode(),
+      pasteListSubtitle.getNode(),
       pasteListArea.getNode(),
-      pasteListCancel.getNode(),
-      pasteListConfirm.getNode(),
+      pasteListButtonsContainer.getNode(),
     ]);
 
     pasteListDialog.appendChildren([pasteListContainer.getNode()]);
@@ -177,10 +235,14 @@ export class Options extends BaseComponent<'div'> {
       pasteButton.getNode(),
     ]);
 
-    this.appendChildren([
-      optionsList.getNode(),
-      optionButtonsContainer.getNode(),
+    listContainer.appendChildren([
+      listTitle.getNode(),
       listButtonsContainer.getNode(),
+    ]);
+
+    this.appendChildren([
+      optionsContainer.getNode(),
+      listContainer.getNode(),
       startButton.getNode(),
       pasteListDialog.getNode(),
     ]);
@@ -235,15 +297,15 @@ export class Options extends BaseComponent<'div'> {
             id: options.length + 1,
             weight: weight,
             title: line.join(','),
-          }
+          };
           options.push(option);
         }
       }
-    })
+    });
     return options;
   }
-  
+
   private getSectorOptions(): WheelItem[] {
-      return this.state.getOptions().filter(isWheelItem);
+    return this.state.getOptions().filter(isWheelItem);
   }
 }

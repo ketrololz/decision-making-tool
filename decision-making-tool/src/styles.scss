@@ -6,15 +6,26 @@ $buttons: #727FAA;
 $green: #73CF52;
 $disabled: #676D7E;
 $red: #E25E52;
+$blue: #3BB1E3;
 
 body {
   background-color: $body;
   font-family: 'Montserrat';
+  font-size: 18px;
   margin: 0;
 }
 
 .wheel {
-  // transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.options-btn-container {
+  justify-content: space-between;
+  margin: 0 26px 0 30px;
+}
+
+.list-btn-container {
+  margin-left: 30px;
 }
 
 .app {
@@ -27,32 +38,86 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  gap: 30px;
   background-color: $container;
   padding: 30px;
   border-radius: 15px;
   max-width: 800px;
-  transition: all .5s ease-in-out;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
 }
 
 input {
+  box-sizing: border-box;
   font-family: 'Montserrat';
   font-weight: 500;
   background-color: $input;
+  font-size: 16px;
   width: 100%;
   border: none;
   border-radius: 5px;
-  padding: 4px 8px;
+  padding: 6px 12px;
   min-height: 20px;
   color: $white;
+  // margin: 2px;
+
+  &:focus {
+    border: none;
+    box-shadow: #3BB1E3 0 0 4px 0;
+    outline: none;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 }
+
+// textarea {
+//   box-sizing: border-box;
+//   font-family: 'Montserrat';
+//   font-weight: 500;
+//   background-color: $input;
+//   font-size: 16px;
+//   width: 100%;
+//   border: none;
+//   border-radius: 5px;
+//   min-height: 20px;
+//   color: $white;
+//   line-height: 1.6;
+
+//   &:focus {
+//     border: none;
+//     box-shadow: #3BB1E3 0 0 4px 0;
+//     outline: none;
+//   }
+
+//   &::-webkit-outer-spin-button,
+//   &::-webkit-inner-spin-button {
+//     -webkit-appearance: none;
+//   }
+// }
+
 
 .options {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   list-style-type: none;
   padding: 0;
+  margin: 0;
 
   .position-num {
     min-width: 20px;
@@ -85,19 +150,19 @@ button {
   font-weight: 500;
   border: none;
   border-radius: 5px;
-  padding: 4px 16px;
+  padding: 8px 20px;
   background-color: $buttons;
   color: $white;
   max-width: 200px;
   min-height: 20px;
   cursor: pointer;
 
-  
+
   &.start-button {
     margin: 0;
     background-color: $green;
   }
-  
+
   &.remove-btn {
     margin: 0;
     padding: 0;
@@ -113,8 +178,19 @@ button {
     &:hover {
       opacity: 1;
     }
+
   }
-  
+
+  &.add-btn,
+  &.confirm-btn {
+    background-color: $blue;
+  }
+
+  &.clear-btn,
+  &.cancel-btn {
+    background-color: $red;
+  }
+
   &.elimination-btn {
     &.active {
       background-color: $green;
@@ -135,7 +211,30 @@ h2 {
 h3 {
   color: white;
   text-align: center;
-  font-size: 24px;
+  font-size: 22px;
+  font-weight: 400;
+
+  &.options-title {
+    text-align: left;
+    margin: 0 0 0 30px;
+  }
+
+  &.list-title {
+    text-align: left;
+    margin: 0 0 0 30px;
+  }
+
+  &.paste-list-title {
+    text-align: left;
+    margin: 0;
+  }
+}
+
+h4 {
+  color: white;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0;
 }
 
 dialog {
@@ -149,15 +248,31 @@ dialog {
 }
 
 .list-area {
+  box-sizing: border-box;
   background-color: $input;
   width: 100%;
   border: none;
   border-radius: 5px;
-  padding: 4px 8px;
+  padding: 6px 12px;
   min-height: 20px;
   color: $white;
   resize: none;
   border: none;
+
+  font-family: 'Montserrat';
+  font-weight: 500;
+  line-height: 1.6;
+
+  &:focus {
+    border: none;
+    box-shadow: #3BB1E3 0 0 4px 0;
+    outline: none;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 }
 
 .not-found {

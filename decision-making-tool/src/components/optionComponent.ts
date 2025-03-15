@@ -31,6 +31,7 @@ export default class OptionComponent extends BaseComponent<'li'> {
 
     optionTitle.setAttribute('id', `option-${position}`);
     optionTitle.setAttribute('placeholder', 'title');
+    optionTitle.setAttribute('autocomplete', 'off');
     optionTitle.addListener('input', (e) => {
       if (e.target instanceof HTMLInputElement) {
         onUpdate({ id: state.id, title: e.target.value }, DataType.title);
@@ -45,6 +46,7 @@ export default class OptionComponent extends BaseComponent<'li'> {
 
     optionWeight.setAttribute('type', 'number');
     optionWeight.setAttribute('placeholder', 'weight');
+    optionWeight.setAttribute('autocomplete', 'off');
     optionWeight.addListener('input', (e) => {
       if (e.target instanceof HTMLInputElement) {
         onUpdate(
