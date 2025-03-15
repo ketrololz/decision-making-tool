@@ -11,6 +11,8 @@ export class Wheel extends BaseComponent<'div'> {
   private state = optionsState;
   private rotationDuration = 0;
 
+  private isShowingAttention = false;
+
   private title;
 
   constructor(router: Router) {
@@ -74,11 +76,11 @@ export class Wheel extends BaseComponent<'div'> {
       event: 'click',
       listener: async (): Promise<void> => {
         if (this.rotationDuration < 2) {
-          alert('The rotation time should be from 2 to 500 seconds');
+          this.showAttention('The rotation time should be from 2 to 500 seconds');
           return;
         }
         if (this.rotationDuration > 500) {
-          alert('The rotation time should be from 2 to 500 seconds');
+          this.showAttention('The rotation time should be from 2 to 500 seconds');
           return;
         }
         startButton.getNode().disabled = true;
@@ -144,4 +146,22 @@ export class Wheel extends BaseComponent<'div'> {
     const buttonStatus = this.getSectorOptions().length < 2 ? true : false;
     button.getNode().disabled = buttonStatus;
   }
+
+    private showAttention(text: string): void {
+      if (!this.isShowingAttention) {
+        const plate = new BaseComponent({
+          tag: 'div',
+          className: 'attention-plate slide',
+          text: text,
+        });
+  
+        this.appendChildren([plate.getNode()]);
+        this.isShowingAttention = true;
+  
+        setTimeout(() => {
+          plate.destroyNode();
+          this.isShowingAttention = false;
+        }, 2500);
+      }
+    }
 }

@@ -12,6 +12,8 @@ export class Options extends BaseComponent<'div'> {
   private state = optionsState;
   private router: Router;
 
+  private isShowingAttention = false;
+
   constructor(router: Router) {
     super({ tag: 'div', className: 'container' });
     this.destroyChildren();
@@ -127,7 +129,7 @@ export class Options extends BaseComponent<'div'> {
       event: 'click',
       listener: (): void => {
         if (this.getSectorOptions().length < 2) {
-          alert('YOU SHELL NOT PASS');
+          this.showAttention('Please add at least 2 valid options');
           return;
         }
         this.router.navigate('/wheel');
@@ -300,9 +302,9 @@ export class Options extends BaseComponent<'div'> {
 
   private createOptionsFromList(text: string): State[] {
     const lines = text.split('\n');
-    const splitedLines = lines.map((line) => line.split(','));
+    const splittedLines = lines.map((line) => line.split(','));
     const options: State[] = [];
-    splitedLines.forEach((line) => {
+    splittedLines.forEach((line) => {
       if (line.length > 1) {
         const weight = parseInt(line.pop()!, 10);
         if (!Number.isNaN(weight)) {
@@ -320,5 +322,23 @@ export class Options extends BaseComponent<'div'> {
 
   private getSectorOptions(): WheelItem[] {
     return this.state.getOptions().filter(isWheelItem);
+  }
+
+  private showAttention(text: string): void {
+    if (!this.isShowingAttention) {
+      const plate = new BaseComponent({
+        tag: 'div',
+        className: 'attention-plate slide',
+        text: text,
+      });
+
+      this.appendChildren([plate.getNode()]);
+      this.isShowingAttention = true;
+
+      setTimeout(() => {
+        plate.destroyNode();
+        this.isShowingAttention = false;
+      }, 2500);
+    }
   }
 }
