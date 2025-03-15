@@ -11,7 +11,8 @@ $blue: #3BB1E3;
 body {
   background-color: $body;
   font-family: 'Montserrat';
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -26,6 +27,10 @@ body {
 
 .list-btn-container {
   margin-left: 30px;
+}
+
+.position-num {
+  opacity: 0.4;
 }
 
 .app {
@@ -59,6 +64,26 @@ body {
   gap: 10px;
 }
 
+.timer-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    position: absolute;
+    content: " ";
+    top: 20%;
+    left: 5%;
+    width: 20px;
+    height: 20px;
+    background: url(../src/svg/timer.svg);
+    // background-color: #3BB1E3;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 10;
+  }
+}
+
 input {
   box-sizing: border-box;
   font-family: 'Montserrat';
@@ -71,7 +96,6 @@ input {
   padding: 6px 12px;
   min-height: 20px;
   color: $white;
-  // margin: 2px;
 
   &:focus {
     border: none;
@@ -83,216 +107,235 @@ input {
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
+
+  &.timer {
+    position: relative;
+    max-width: 100px;
+    padding-left: 30px;
+
+  }
 }
 
-// textarea {
-//   box-sizing: border-box;
-//   font-family: 'Montserrat';
-//   font-weight: 500;
-//   background-color: $input;
-//   font-size: 16px;
-//   width: 100%;
-//   border: none;
-//   border-radius: 5px;
-//   min-height: 20px;
-//   color: $white;
-//   line-height: 1.6;
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 
-//   &:focus {
-//     border: none;
-//     box-shadow: #3BB1E3 0 0 4px 0;
-//     outline: none;
-//   }
+    .position-num {
+      min-width: 20px;
+      text-align: center;
+    }
 
-//   &::-webkit-outer-spin-button,
-//   &::-webkit-inner-spin-button {
-//     -webkit-appearance: none;
-//   }
-// }
+    .position-weight {
+      max-width: 100px;
+    }
 
+    .options-item {
+      display: flex;
+      gap: 10px;
+      height: 30px;
+      align-items: center;
+    }
 
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-
-  .position-num {
-    min-width: 20px;
-    text-align: center;
+    label {
+      color: $white;
+    }
   }
 
-  .position-weight {
-    max-width: 80px;
-  }
-
-  .options-item {
+  .buttons-container {
     display: flex;
     gap: 10px;
-    height: 30px;
-    align-items: center;
   }
 
-  label {
+  .wheel-buttons-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .settings-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 20px;
+    background-color: $buttons;
     color: $white;
-  }
-}
-
-.buttons-container {
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  font-family: 'Montserrat';
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 20px;
-  background-color: $buttons;
-  color: $white;
-  max-width: 200px;
-  min-height: 20px;
-  cursor: pointer;
+    max-width: 200px;
+    min-height: 20px;
+    cursor: pointer;
 
 
-  &.start-button {
-    margin: 0;
-    background-color: $green;
-  }
-
-  &.remove-btn {
-    margin: 0;
-    padding: 0;
-    min-width: 15px;
-    height: 15px;
-    background: url(../src/svg/cross.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    align-items: center;
-    opacity: 0.5;
-    transition: opacity ease-in .2s;
-
-    &:hover {
-      opacity: 1;
-    }
-
-  }
-
-  &.add-btn,
-  &.confirm-btn {
-    background-color: $blue;
-  }
-
-  &.clear-btn,
-  &.cancel-btn {
-    background-color: $red;
-  }
-
-  &.elimination-btn {
-    &.active {
+    &.start-button {
+      margin: 0;
+      font-size: 18px;
       background-color: $green;
     }
+
+    &.remove-btn {
+      margin: 0;
+      padding: 0;
+      min-width: 15px;
+      height: 15px;
+      background: url(../src/svg/cross.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      align-items: center;
+      opacity: 0.5;
+      transition: opacity ease-in .2s;
+
+      &:hover {
+        opacity: 1;
+      }
+
+    }
+
+    &.add-btn,
+    &.confirm-btn {
+      background-color: $blue;
+    }
+
+    &.clear-btn,
+    &.cancel-btn,
+    &.back-btn {
+      background-color: $red;
+    }
+
+    &.elimination-btn {
+      &.active {
+        background-color: $green;
+      }
+    }
+
+    &:disabled {
+      background-color: $disabled;
+    }
   }
 
-  &:disabled {
-    background-color: $disabled;
-  }
-}
-
-h2 {
-  color: white;
-  text-align: center;
-  font-size: 34px;
-}
-
-h3 {
-  color: white;
-  text-align: center;
-  font-size: 22px;
-  font-weight: 400;
-
-  &.options-title {
-    text-align: left;
-    margin: 0 0 0 30px;
-  }
-
-  &.list-title {
-    text-align: left;
-    margin: 0 0 0 30px;
-  }
-
-  &.paste-list-title {
-    text-align: left;
+  h2 {
+    color: white;
+    text-align: center;
+    font-size: 34px;
     margin: 0;
   }
-}
 
-h4 {
-  color: white;
-  font-size: 14px;
-  font-weight: 300;
-  margin: 0;
-}
+  h3 {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
 
-dialog {
-  flex-direction: column;
-  gap: 20px;
-  background-color: $container;
-  padding: 30px;
-  border-radius: 15px;
-  max-width: 800px;
-  border: none;
-}
+    &.options-title {
+      text-align: left;
+      margin: 0 0 0 30px;
+    }
 
-.list-area {
-  box-sizing: border-box;
-  background-color: $input;
-  width: 100%;
-  border: none;
-  border-radius: 5px;
-  padding: 6px 12px;
-  min-height: 20px;
-  color: $white;
-  resize: none;
-  border: none;
+    &.list-title {
+      text-align: left;
+      margin: 0 0 0 30px;
+    }
 
-  font-family: 'Montserrat';
-  font-weight: 500;
-  line-height: 1.6;
+    &.paste-list-title {
+      text-align: left;
+      margin: 0;
+    }
+  }
 
-  &:focus {
+  h4 {
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0 0 10px;
+  }
+
+  dialog {
+    box-sizing: border-box;
     border: none;
-    box-shadow: #3BB1E3 0 0 4px 0;
-    outline: none;
+    width: 100dvw;
+    height: 100dvh;
+    background: none;
+    padding: 0;
+    border: none;
+
+    &[open] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &::backdrop {
+      background: rgba(0, 0, 0, 0.3);
+  }
+  
+
   }
 
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-}
-
-.not-found {
-  align-items: center;
-}
-
-@keyframes pulse {
-  from {
-    transform: scale3d(1, 1, 1);
+  .paste-list-dialog-container {
+    flex-direction: column;
+    gap: 20px;
+    background-color: $container;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 800px;
+    border: none;
   }
 
-  50% {
-    transform: scale3d(1.05, 1.05, 1.05);
+  .list-area {
+    box-sizing: border-box;
+    background-color: $input;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    min-height: 20px;
+    color: $white;
+    resize: none;
+    border: none;
+
+    font-family: 'Montserrat';
+    font-weight: 500;
+    line-height: 1.6;
+
+    &:focus {
+      border: none;
+      box-shadow: #3BB1E3 0 0 4px 0;
+      outline: none;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   }
 
-  to {
-    transform: scale3d(1, 1, 1);
+  .not-found {
+    align-items: center;
   }
-}
 
-.pulse {
-  animation: pulse .2s forwards;
-}
+  @keyframes pulse {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  .pulse {
+    animation: pulse .2s forwards;
+  }

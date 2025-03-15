@@ -1,4 +1,4 @@
-import { CIRCLE, MAX_TITLE_LENGTH } from '../constants/constants';
+import { CIRCLE, MAX_TITLE_LENGTH, WHEEL_SIZE_RATIO } from '../constants/constants';
 import BaseComponent from '../utils/baseComponent';
 import type { WheelItem } from '../types/wheelItem';
 
@@ -57,7 +57,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   }
 
   public updateSize(): void {
-    const size = Math.min(window.innerWidth, window.innerHeight) * 0.7;
+    const size = Math.min(window.innerWidth, window.innerHeight) * WHEEL_SIZE_RATIO;
     this.width = this.getNode().width = size;
     this.height = this.getNode().height = size;
     this.radius = this.width / 2.2;

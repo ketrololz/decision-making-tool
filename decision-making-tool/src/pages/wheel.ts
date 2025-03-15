@@ -24,7 +24,12 @@ export class Wheel extends BaseComponent<'div'> {
 
     const buttonsContainer = new BaseComponent<'div'>({
       tag: 'div',
-      className: 'buttons-container',
+      className: 'buttons-container wheel-buttons-container',
+    });
+
+    const timerContainer = new BaseComponent<'div'>({
+      tag: 'div',
+      className: 'timer-container',
     });
 
     const timerInput = new BaseComponent<'input'>({
@@ -33,7 +38,7 @@ export class Wheel extends BaseComponent<'div'> {
     });
 
     timerInput.setAttribute('type', 'number');
-    timerInput.setAttribute('placeholder', 'seconds');
+    timerInput.setAttribute('placeholder', 'sec');
 
     timerInput.addListener('input', (e) => {
       if (e.target instanceof HTMLInputElement) {
@@ -42,7 +47,7 @@ export class Wheel extends BaseComponent<'div'> {
     });
 
     const backButton = new ButtonComponent({
-      className: 'options-button start-button',
+      className: 'options-button back-btn',
       text: 'back',
       event: 'click',
       listener: (): void => this.router.navigate('/options'),
@@ -58,9 +63,14 @@ export class Wheel extends BaseComponent<'div'> {
       },
     });
 
+    const settingsContainer = new BaseComponent({
+      tag: 'div',
+      className: 'settings-container',
+    });
+
     const startButton = new ButtonComponent({
-      className: 'options-button',
-      text: 'start',
+      className: 'start-button',
+      text: 'spin the wheel',
       event: 'click',
       listener: async (): Promise<void> => {
         if (this.rotationDuration < 2) {
@@ -102,15 +112,21 @@ export class Wheel extends BaseComponent<'div'> {
 
     window.addEventListener('resize', () => wheelElement.updateSize());
 
+    timerContainer.appendChildren([timerInput.getNode()]);
+
+    settingsContainer.appendChildren([
+      timerContainer.getNode(),
+      eliminationModeBtn.getNode(),
+    ]);
+
     buttonsContainer.appendChildren([
       backButton.getNode(),
-      timerInput.getNode(),
-      eliminationModeBtn.getNode(),
-      startButton.getNode(),
+      settingsContainer.getNode(),
     ]);
 
     this.appendChildren([
       buttonsContainer.getNode(),
+      startButton.getNode(),
       segmentTitle.getNode(),
       wheelElement.getNode(),
     ]);

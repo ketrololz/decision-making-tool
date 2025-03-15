@@ -5,6 +5,7 @@ import type Router from '../router/router.ts';
 export const DEFAULT_ID = 1;
 export const CIRCLE = Math.PI * 2;
 export const MAX_TITLE_LENGTH = 10;
+export const WHEEL_SIZE_RATIO = 0.65;
 
 export const PULSE_ANIMATION_MS = 200;
 

@@ -48,7 +48,7 @@ export class Options extends BaseComponent<'div'> {
 
     const clearButton = new ButtonComponent({
       className: 'options-button clear-btn',
-      text: 'clear options',
+      text: 'delete options',
       event: 'click',
       listener: (): void => this.clearOptions(),
     });
@@ -139,6 +139,17 @@ export class Options extends BaseComponent<'div'> {
       className: 'list-dialog',
     });
 
+    const pasteListDialogContainer = new BaseComponent({
+      tag: 'div',
+      className: 'paste-list-dialog-container',
+    });
+
+    pasteListDialog.addListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        pasteListDialog.getNode().close();
+      }
+    });
+
     const pasteButton = new ButtonComponent({
       text: 'paste list',
       event: 'click',
@@ -222,7 +233,9 @@ export class Options extends BaseComponent<'div'> {
       pasteListButtonsContainer.getNode(),
     ]);
 
-    pasteListDialog.appendChildren([pasteListContainer.getNode()]);
+    pasteListDialogContainer.appendChildren([pasteListContainer.getNode()]);
+
+    pasteListDialog.appendChildren([pasteListDialogContainer.getNode()]);
 
     optionButtonsContainer.appendChildren([
       addButton.getNode(),
