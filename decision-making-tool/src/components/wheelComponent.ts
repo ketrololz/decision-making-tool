@@ -140,6 +140,14 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   private drawWheel(startPosition: number): void {
     const colors = ['#e25e52', '#73cf52', '#dbcb33', '#35bad8', '#9459c6'];
     let colorNum = 0;
+    
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.width - this.width / 22, this.height / 2);
+    this.ctx.arc(this.width / 2, this.height / 2, this.radius + this.radius / 24, 0, CIRCLE);
+    this.ctx.fillStyle = 'white';
+    this.ctx.fill();
+    this.ctx.restore();
+    
     Object.values(this.segments).forEach((segment) => {
       this.drawSegment(
         segment.startAngle + startPosition,
@@ -162,13 +170,17 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
     this.ctx.stroke();
     this.ctx.restore();
-
+    
+    this.ctx.save();
     this.ctx.beginPath();
     this.ctx.moveTo(this.width - this.width / 22, this.height / 2);
-    this.ctx.arc(this.width / 2, this.height / 2, this.radius / 30, 0, CIRCLE);
+    this.ctx.arc(this.width / 2, this.height / 2, this.radius / 20, 0, CIRCLE);
     this.ctx.fillStyle = 'white';
+    this.ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+    this.ctx.shadowBlur = 12;
     this.ctx.fill();
     this.ctx.restore();
+
 
     this.drawArrow();
   }
@@ -184,11 +196,10 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     this.ctx.arc(this.width / 2, this.height / 2, this.radius, start, end);
     this.ctx.fillStyle = color;
     this.ctx.fill();
-    // this.ctx.lineWidth = 3;
+    this.ctx.lineWidth = 3;
+    this.ctx.closePath();
     this.ctx.strokeStyle = 'white';
     this.ctx.stroke();
-    // this.ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-    // this.ctx.shadowBlur = 10;
     const trimmedTitle = title.trim();
     let shortTitle = trimmedTitle 
     if(trimmedTitle .length > MAX_TITLE_LENGTH) {
@@ -208,15 +219,31 @@ export class WheelComponent extends BaseComponent<'canvas'> {
 
   private drawArrow(): void {
     this.ctx.beginPath();
+    this.ctx.moveTo(this.width - this.width / 8.7, this.width / 2);
+    this.ctx.lineTo(
+      this.width - this.width / 5 + this.width / 6.7,
+      this.width / 2 + this.width / 23,
+    );
+    this.ctx.lineTo(
+      this.width - this.width / 5 + this.width / 6.7,
+      this.width / 2 - this.width / 23,
+    );
+
+    this.ctx.closePath();
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';;
+    this.ctx.fill();
+
+    this.ctx.beginPath();
     this.ctx.moveTo(this.width - this.width / 10, this.width / 2);
     this.ctx.lineTo(
       this.width - this.width / 5 + this.width / 6,
-      this.width / 2 + this.width / 30,
+      this.width / 2 + this.width / 25,
     );
     this.ctx.lineTo(
       this.width - this.width / 5 + this.width / 6,
-      this.width / 2 - this.width / 30,
+      this.width / 2 - this.width / 25,
     );
+
     this.ctx.closePath();
     this.ctx.fillStyle = 'white';
     this.ctx.fill();
