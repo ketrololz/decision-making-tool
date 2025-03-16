@@ -1,7 +1,10 @@
+import { audioController } from '../audio/audio';
 import ButtonComponent from '../components/buttonComponent';
 import { WheelComponent } from '../components/wheelComponent';
+import { MAX_SPIN_SECONDS, MIN_SPIN_SECONDS } from '../constants/constants';
 import type Router from '../router/router';
 import { optionsState } from '../state/optionsState';
+import { AudioType } from '../types/audioTypes';
 import BaseComponent from '../utils/baseComponent';
 
 export class Wheel extends BaseComponent<'div'> {
@@ -17,7 +20,6 @@ export class Wheel extends BaseComponent<'div'> {
     super({ tag: 'div', className: 'container' });
     this.router = router;
 
-    
     if (this.state.getOptions().length < 1) {
       this.state.loadState();
     }
@@ -44,6 +46,21 @@ export class Wheel extends BaseComponent<'div'> {
       if (e.target instanceof HTMLInputElement) {
         this.rotationDuration = Number(e.target.value);
       }
+    });
+
+    const soundButton = new ButtonComponent({
+      className: 'options-button sound-btn',
+      text: 'sound',
+      event: 'click',
+      listener: (): void => {
+        if (soundButton.getNode().classList.contains('mute')) {
+          soundButton.toggleClass('mute');
+          audioController.unMute();
+        } else {
+          soundButton.toggleClass('mute');
+          audioController.mute();
+        }
+      },
     });
 
     const backButton = new ButtonComponent({
@@ -73,27 +90,26 @@ export class Wheel extends BaseComponent<'div'> {
       text: 'spin the wheel',
       event: 'click',
       listener: async (): Promise<void> => {
-        if (this.rotationDuration < 2) {
+        if (this.rotationDuration < MIN_SPIN_SECONDS) {
           this.showAttention(
-            'The rotation time should be from 2 to 500 seconds',
+            `The rotation time should be from ${MIN_SPIN_SECONDS} to ${MAX_SPIN_SECONDS} seconds`,
           );
           return;
         }
         if (this.rotationDuration > 500) {
           this.showAttention(
-            'The rotation time should be from 2 to 500 seconds',
+            `The rotation time should be from ${MIN_SPIN_SECONDS} to ${MAX_SPIN_SECONDS} seconds`,
           );
           return;
         }
-        startButton.getNode().disabled = true;
-        timerInput.getNode().disabled = true;
-        backButton.getNode().disabled = true;
+        this.disableButtons([startButton, timerInput, backButton, soundButton]);
         eliminationModeBtn.getNode().disabled = true;
-
+        audioController.playSound('baraban', AudioType.sound).then(() => {
+          audioController.playSound('spin', AudioType.sound);
+        });
         wheelElement.rotate(this.rotationDuration).then(() => {
-          startButton.getNode().disabled = false;
-          timerInput.getNode().disabled = false;
-          backButton.getNode().disabled = false;
+          audioController.playSound('end', AudioType.sound);
+          this.enableButtons([startButton, timerInput, backButton, soundButton]);
           eliminationModeBtn.getNode().disabled = false;
         });
       },
@@ -119,6 +135,7 @@ export class Wheel extends BaseComponent<'div'> {
     timerContainer.appendChildren([timerInput.getNode()]);
 
     settingsContainer.appendChildren([
+      soundButton.getNode(),
       timerContainer.getNode(),
       eliminationModeBtn.getNode(),
     ]);
@@ -143,8 +160,21 @@ export class Wheel extends BaseComponent<'div'> {
   };
 
   private enableButtonIfCanPlay(button: ButtonComponent): void {
-    const buttonStatus = this.state.getSectorOptions().length < 2 ? true : false;
+    const buttonStatus =
+      this.state.getSectorOptions().length < 2 ? true : false;
     button.getNode().disabled = buttonStatus;
+  }
+
+  private disableButtons(
+    buttons: (ButtonComponent | BaseComponent<'input'>)[],
+  ): void {
+    buttons.forEach((button) => (button.getNode().disabled = true));
+  }
+
+  private enableButtons(
+    buttons: (ButtonComponent | BaseComponent<'input'>)[],
+  ): void {
+    buttons.forEach((button) => (button.getNode().disabled = false));
   }
 
   private showAttention(text: string): void {

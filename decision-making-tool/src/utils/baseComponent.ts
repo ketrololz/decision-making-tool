@@ -1,8 +1,4 @@
-type Element<T extends keyof HTMLElementTagNameMap = keyof HTMLElementTagNameMap> = {
-  tag: T;
-  className?: string;
-  text?: string;
-};
+import type { Element } from "../types/element";
 
 export default class BaseComponent<T extends keyof HTMLElementTagNameMap> {
   protected _node: HTMLElementTagNameMap[T];

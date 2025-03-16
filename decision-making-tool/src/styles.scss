@@ -84,8 +84,7 @@ body {
     left: 5%;
     width: 20px;
     height: 20px;
-    background: url(../src/svg/timer.svg);
-    // background-color: #3BB1E3;
+    background: url(../src/assets/svg/timer.svg);
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 10;
@@ -185,7 +184,7 @@ button {
   transition: background .2s ease-in-out,
   box-shadow .2s ease-in-out;
 
-  &:hover:not(.remove-btn) {
+  &:hover:not(.remove-btn, :disabled) {
     background-color: $buttons-bright;
     box-shadow: rgba($buttons-bright, 0.3) 0 0 10px 0;
   }
@@ -195,7 +194,7 @@ button {
     font-size: 18px;
     background-color: $green;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: $bright-green;
       box-shadow: rgba($bright-green, 0.3) 0 0 10px 0;
     }
@@ -206,7 +205,7 @@ button {
     padding: 0;
     min-width: 15px;
     height: 15px;
-    background: url(../src/svg/cross.svg);
+    background: url(../src/assets/svg/cross.svg);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -237,7 +236,7 @@ button {
     background-color: $red;
 
     
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: $bright-red;
       box-shadow: rgba($bright-red, 0.3) 0 0 10px 0;
     }
