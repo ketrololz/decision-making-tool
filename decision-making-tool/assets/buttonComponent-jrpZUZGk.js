@@ -1,0 +1,1 @@
+import{B as a}from"./index-BjP4mAGP.js";class p extends a{constructor({text:s="",className:n="",event:t,listener:o}){super({tag:"button",text:s,className:n}),t&&o&&this.addListener(t,o)}}export{p as B};
