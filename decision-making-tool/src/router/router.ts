@@ -43,7 +43,7 @@ export default class Router {
     if (path === '/wheel' && !this.canCreateWheel()) {
       path = '/options';
     }
-    window.history.pushState(null, '', path);
+    window.history.pushState(null, '', `${window.location.origin}${path}`);
 
     this.createPage(path);
   }
