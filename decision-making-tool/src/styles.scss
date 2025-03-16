@@ -184,7 +184,7 @@ button {
   transition: background .2s ease-in-out,
   box-shadow .2s ease-in-out;
 
-  &:hover:not(.remove-btn, :disabled) {
+  &:hover:not(.remove-btn, :disabled, .sound-btn) {
     background-color: $buttons-bright;
     box-shadow: rgba($buttons-bright, 0.3) 0 0 10px 0;
   }
@@ -216,7 +216,26 @@ button {
     &:hover {
       opacity: 1;
     }
+  }
 
+  &.sound-btn {
+    width: 25px;
+    height: 25px;
+    background: url(../src/assets/svg/sound-on-2.svg);
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    background-position: center;
+    transition: opacity .2s ease-in-out;
+
+    &:hover:not(:disabled) {
+      opacity: 1;
+    }
+
+    &.mute {
+      background: url(../src/assets/svg/sound-off-2.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
 
   &.add-btn,
@@ -253,7 +272,7 @@ button {
     }
   }
 
-  &:disabled {
+  &:disabled:not(.sound-btn) {
     background-color: $disabled;
   }
 }

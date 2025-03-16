@@ -7,10 +7,11 @@ import { isWheelItem } from '../utils/itemIsWheelItem';
 export default class OptionsState {
   private id = DEFAULT_ID;
   private stateItems: State[] = [];
+  private isSoundMute = false;
 
   constructor() {
     if (localStorage.getItem('ketrololz-state') === null) {
-      this.add({id: 1});
+      this.add({ id: 1 });
     }
   }
 
@@ -42,6 +43,15 @@ export default class OptionsState {
     return this.stateItems;
   }
 
+  public isSoundMuteState(): boolean {
+    return this.isSoundMute;
+  }
+
+  public changeSoundState(isMute: boolean): void {
+    this.isSoundMute = isMute;
+    this.updateLocalStorage();
+  }
+
   public updateOptionState = (newState: State, dataType: DataType): void => {
     const currState = this.stateItems.find((state) => state.id === newState.id);
     if (currState) {
@@ -62,11 +72,15 @@ export default class OptionsState {
       const stateString: string | null =
         localStorage.getItem('ketrololz-state');
       const lastId: string | null = localStorage.getItem('ketrololz-last-id');
+      const soundState = localStorage.getItem('ketrololz-is-sound-mute');
       if (stateString) {
         this.stateItems = JSON.parse(stateString);
       }
       if (lastId) {
         this.id = JSON.parse(lastId);
+      }
+      if (soundState) {
+        this.isSoundMute = JSON.parse(soundState);
       }
     } catch {
       this.stateItems = [];
@@ -90,12 +104,16 @@ export default class OptionsState {
   }
 
   public getSectorOptions(): WheelItem[] {
-      return this.getOptions().filter(isWheelItem);
+    return this.getOptions().filter(isWheelItem);
   }
 
   private updateLocalStorage(): void {
     localStorage.setItem('ketrololz-state', JSON.stringify(this.stateItems));
     localStorage.setItem('ketrololz-last-id', JSON.stringify(this.id));
+    localStorage.setItem(
+      'ketrololz-is-sound-mute',
+      JSON.stringify(this.isSoundMute),
+    );
   }
 }
 

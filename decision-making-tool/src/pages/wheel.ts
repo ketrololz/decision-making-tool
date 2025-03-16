@@ -1,7 +1,7 @@
 import { audioController } from '../audio/audio';
 import ButtonComponent from '../components/buttonComponent';
 import { WheelComponent } from '../components/wheelComponent';
-import { MAX_SPIN_SECONDS, MIN_SPIN_SECONDS } from '../constants/constants';
+import { DEFAULT_SPIN_DURATION, MAX_SPIN_SECONDS, MIN_SPIN_SECONDS } from '../constants/constants';
 import type Router from '../router/router';
 import { optionsState } from '../state/optionsState';
 import { AudioType } from '../types/audioTypes';
@@ -10,7 +10,7 @@ import BaseComponent from '../utils/baseComponent';
 export class Wheel extends BaseComponent<'div'> {
   private router: Router;
   private state = optionsState;
-  private rotationDuration = 0;
+  private rotationDuration = DEFAULT_SPIN_DURATION;
 
   private isShowingAttention = false;
 
@@ -41,6 +41,7 @@ export class Wheel extends BaseComponent<'div'> {
 
     timerInput.setAttribute('type', 'number');
     timerInput.setAttribute('placeholder', 'sec');
+    timerInput.getNode().value = String(DEFAULT_SPIN_DURATION);
 
     timerInput.addListener('input', (e) => {
       if (e.target instanceof HTMLInputElement) {
@@ -50,18 +51,24 @@ export class Wheel extends BaseComponent<'div'> {
 
     const soundButton = new ButtonComponent({
       className: 'options-button sound-btn',
-      text: 'sound',
       event: 'click',
       listener: (): void => {
         if (soundButton.getNode().classList.contains('mute')) {
           soundButton.toggleClass('mute');
+          this.state.changeSoundState(false);
           audioController.unMute();
         } else {
           soundButton.toggleClass('mute');
           audioController.mute();
+          this.state.changeSoundState(true);
         }
       },
     });
+
+    if(this.state.isSoundMuteState()) {
+      soundButton.getNode().classList.add('mute');
+      audioController.mute();
+    }
 
     const backButton = new ButtonComponent({
       className: 'options-button back-btn',
@@ -120,7 +127,7 @@ export class Wheel extends BaseComponent<'div'> {
     const segmentTitle = new BaseComponent({
       tag: 'h2',
       className: 'segment-title',
-      text: 'press start',
+      text: 'SPIN IT!',
     });
 
     this.title = segmentTitle;

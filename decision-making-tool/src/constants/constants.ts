@@ -12,6 +12,7 @@ export const PULSE_ANIMATION_MS = 200;
 export const MIN_SPIN_SECONDS = 5;
 export const MAX_SPIN_SECONDS = 500;
 export const AUDIO_VOLUME = 0.3;
+export const DEFAULT_SPIN_DURATION = 10;
 
 export const ROUTES = [
   {
