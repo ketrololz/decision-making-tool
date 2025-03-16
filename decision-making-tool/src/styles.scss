@@ -7,6 +7,10 @@ $green: #73CF52;
 $disabled: #676D7E;
 $red: #E25E52;
 $blue: #3BB1E3;
+$buttons-bright: #8597D4;
+$bright-blue: #27BEFF;
+$bright-red: #FF5F51;
+$bright-green: #7DE357;
 
 body {
   background-color: $body;
@@ -14,10 +18,6 @@ body {
   font-size: 16px;
   font-weight: 400;
   margin: 0;
-}
-
-.hidden {
-  display: none;
 }
 
 .app {
@@ -107,7 +107,7 @@ input {
 
   &:focus {
     border: none;
-    box-shadow: #3BB1E3 0 0 4px 0;
+    animation: glow 5s ease-in-out infinite;
     outline: none;
   }
 
@@ -182,12 +182,23 @@ button {
   max-width: 200px;
   min-height: 20px;
   cursor: pointer;
+  transition: background .2s ease-in-out,
+  box-shadow .2s ease-in-out;
 
+  &:hover:not(.remove-btn) {
+    background-color: $buttons-bright;
+    box-shadow: rgba($buttons-bright, 0.3) 0 0 10px 0;
+  }
 
   &.start-button {
     margin: 0;
     font-size: 18px;
     background-color: $green;
+
+    &:hover {
+      background-color: $bright-green;
+      box-shadow: rgba($bright-green, 0.3) 0 0 10px 0;
+    }
   }
 
   &.remove-btn {
@@ -198,6 +209,7 @@ button {
     background: url(../src/svg/cross.svg);
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
     align-items: center;
     opacity: 0.5;
     transition: opacity ease-in .2s;
@@ -211,17 +223,34 @@ button {
   &.add-btn,
   &.confirm-btn {
     background-color: $blue;
+
+    &:hover {
+      background-color: $bright-blue;
+      box-shadow: rgba($bright-blue, 0.3) 0 0 10px 0;
+    }
+  
   }
 
   &.clear-btn,
   &.cancel-btn,
   &.back-btn {
     background-color: $red;
+
+    
+    &:hover {
+      background-color: $bright-red;
+      box-shadow: rgba($bright-red, 0.3) 0 0 10px 0;
+    }
   }
 
   &.elimination-btn {
     &.active {
       background-color: $green;
+
+      &:hover {
+        background-color: $bright-green;
+        box-shadow: rgba($bright-green, 0.3) 0 0 10px 0;
+      }
     }
   }
 
@@ -329,6 +358,7 @@ dialog {
   color: $white;
   resize: none;
   border: none;
+  transition: box-shadow .2 ease-in-out;
 
   font-family: 'Montserrat';
   font-weight: 500;
@@ -336,7 +366,7 @@ dialog {
 
   &:focus {
     border: none;
-    box-shadow: #3BB1E3 0 0 4px 0;
+    animation: glow 5s ease-in-out infinite;
     outline: none;
   }
 
@@ -379,6 +409,20 @@ dialog {
 
   to {
     transform: translateY(-200%);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: rgba($buttons-bright, 0.2) 0 0 6px 0;
+  }
+
+  50% {
+    box-shadow: rgba($buttons-bright, 0.5) 0 0 10px 0;
+  }
+
+  to {
+    box-shadow: rgba($buttons-bright, 0.2) 0 0 6px 0;
   }
 }
 
