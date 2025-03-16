@@ -11,10 +11,10 @@ export default class Router {
     this.routes = routes;
     this.outlet = outlet;
 
-    this.createPage(window.location.pathname);
+    this.navigate(window.location.pathname);
 
     window.addEventListener('popstate', () =>
-      this.createPage(window.location.pathname),
+      this.navigate(window.location.pathname),
     );
   }
 
@@ -23,11 +23,6 @@ export default class Router {
   }
 
   public createPage(path: string): void {
-    this.state.loadState()
-    if (path === '/wheel' && !this.canCreateWheel()) {
-      path = '/options';
-    }
-
     const route = this.routes.find((route) => route.path === path);
 
     if (route) {
@@ -44,6 +39,10 @@ export default class Router {
   }
 
   public navigate(path: string): void {
+    this.state.loadState()
+    if (path === '/wheel' && !this.canCreateWheel()) {
+      path = '/options';
+    }
     window.history.pushState(null, '', path);
 
     this.createPage(path);

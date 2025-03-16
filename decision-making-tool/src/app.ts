@@ -1,6 +1,5 @@
 import BaseComponent from './utils/baseComponent';
 import './pages/options';
-// import { Options } from './pages/options';
 import Router from './router/router';
 import { ROUTES } from './constants/constants';
 
