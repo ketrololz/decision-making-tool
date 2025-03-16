@@ -10,7 +10,6 @@ class AudioController {
 
   public async playSound(soundName: keyof typeof AUDIO_PATHS, type: AudioType): Promise<void> {
     const audio = type === AudioType.music ? this.music : this.sound;
-    // audio.volume = 0.3;
     audio.src = this.paths[soundName];
     audio.currentTime = 0; 
 
