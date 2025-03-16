@@ -1,9 +1,11 @@
+import { optionsState } from '../state/optionsState.ts';
 import type { Route } from '../types/route';
 import type BaseComponent from '../utils/baseComponent';
 
 export default class Router {
   private routes: Route[] = [];
   private outlet: BaseComponent<'div'>;
+  private state = optionsState;
 
   constructor(routes: Route[], outlet: BaseComponent<'div'>) {
     this.routes = routes;
@@ -16,7 +18,16 @@ export default class Router {
     );
   }
 
+  public canCreateWheel(): boolean {
+    return this.state.getSectorOptions().length > 1
+  }
+
   public createPage(path: string): void {
+    this.state.loadState()
+    if (path === '/wheel' && !this.canCreateWheel()) {
+      path = '/options';
+    }
+
     const route = this.routes.find((route) => route.path === path);
 
     if (route) {

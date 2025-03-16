@@ -2,9 +2,7 @@ import ButtonComponent from '../components/buttonComponent';
 import { WheelComponent } from '../components/wheelComponent';
 import type Router from '../router/router';
 import { optionsState } from '../state/optionsState';
-import type { WheelItem } from '../types/wheelItem';
 import BaseComponent from '../utils/baseComponent';
-import { isWheelItem } from '../utils/itemIsWheelItem';
 
 export class Wheel extends BaseComponent<'div'> {
   private router: Router;
@@ -17,9 +15,9 @@ export class Wheel extends BaseComponent<'div'> {
 
   constructor(router: Router) {
     super({ tag: 'div', className: 'container' });
-
     this.router = router;
 
+    
     if (this.state.getOptions().length < 1) {
       this.state.loadState();
     }
@@ -76,11 +74,15 @@ export class Wheel extends BaseComponent<'div'> {
       event: 'click',
       listener: async (): Promise<void> => {
         if (this.rotationDuration < 2) {
-          this.showAttention('The rotation time should be from 2 to 500 seconds');
+          this.showAttention(
+            'The rotation time should be from 2 to 500 seconds',
+          );
           return;
         }
         if (this.rotationDuration > 500) {
-          this.showAttention('The rotation time should be from 2 to 500 seconds');
+          this.showAttention(
+            'The rotation time should be from 2 to 500 seconds',
+          );
           return;
         }
         startButton.getNode().disabled = true;
@@ -108,7 +110,7 @@ export class Wheel extends BaseComponent<'div'> {
     this.title = segmentTitle;
 
     const wheelElement = new WheelComponent(
-      this.getSectorOptions(),
+      this.state.getSectorOptions(),
       this.showCurrentTitle,
     );
 
@@ -135,33 +137,31 @@ export class Wheel extends BaseComponent<'div'> {
   }
 
   public showCurrentTitle = (text: string): void => {
-    this.title.setText(text);
+    if (this.title) {
+      this.title.setText(text);
+    }
   };
 
-  public getSectorOptions(): WheelItem[] {
-    return this.state.getOptions().filter(isWheelItem);
-  }
-
   private enableButtonIfCanPlay(button: ButtonComponent): void {
-    const buttonStatus = this.getSectorOptions().length < 2 ? true : false;
+    const buttonStatus = this.state.getSectorOptions().length < 2 ? true : false;
     button.getNode().disabled = buttonStatus;
   }
 
-    private showAttention(text: string): void {
-      if (!this.isShowingAttention) {
-        const plate = new BaseComponent({
-          tag: 'div',
-          className: 'attention-plate slide',
-          text: text,
-        });
-  
-        this.appendChildren([plate.getNode()]);
-        this.isShowingAttention = true;
-  
-        setTimeout(() => {
-          plate.destroyNode();
-          this.isShowingAttention = false;
-        }, 2500);
-      }
+  private showAttention(text: string): void {
+    if (!this.isShowingAttention) {
+      const plate = new BaseComponent({
+        tag: 'div',
+        className: 'attention-plate slide',
+        text: text,
+      });
+
+      this.appendChildren([plate.getNode()]);
+      this.isShowingAttention = true;
+
+      setTimeout(() => {
+        plate.destroyNode();
+        this.isShowingAttention = false;
+      }, 2500);
     }
+  }
 }

@@ -1,6 +1,8 @@
 import { DEFAULT_ID } from '../constants/constants';
 import type { State } from '../types/state';
 import { DataType } from '../types/dataType';
+import type { WheelItem } from '../types/wheelItem';
+import { isWheelItem } from '../utils/itemIsWheelItem';
 
 export default class OptionsState {
   private id = DEFAULT_ID;
@@ -85,6 +87,10 @@ export default class OptionsState {
       return el;
     });
     this.updateLocalStorage();
+  }
+
+  public getSectorOptions(): WheelItem[] {
+      return this.getOptions().filter(isWheelItem);
   }
 
   private updateLocalStorage(): void {
