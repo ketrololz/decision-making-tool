@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "format": "prettier --write",
     "lint": "eslint . --fix",
-    "stylelint": "stylelint \"**/*.css\" --fix",
+    "stylelint": "stylelint \"**/*.scss\" --fix",
     "prepare": "husky"
   },
   "devDependencies": {

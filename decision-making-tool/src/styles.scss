@@ -1,3 +1,5 @@
+@import url("./assets/fonts/fonts.scss");
+
 $body: #232532;
 $white: #fff;
 $input: #2A2B38;
@@ -12,16 +14,16 @@ $bright-blue: #27BEFF;
 $bright-red: #FF5F51;
 $bright-green: #7DE357;
 
+
+
 body {
-  background-color: $body;
-  font-family: 'Montserrat';
+  margin: 0;
+
+  font-family: Montserrat, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  margin: 0;
-}
 
-.app {
-  position: relative;
+  background-color: $body;
 }
 
 .wheel {
@@ -42,21 +44,26 @@ body {
 }
 
 .app {
+  position: relative;
+
   display: flex;
-  justify-content: center;
-  height: 100dvh;
   align-items: center;
+  justify-content: center;
+
+  height: 100dvh;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 30px;
-  background-color: $container;
+  align-items: center;
+
+  max-width: 800px;
   padding: 30px;
   border-radius: 15px;
-  max-width: 800px;
+
+  background-color: $container;
 }
 
 .options-container {
@@ -68,8 +75,8 @@ body {
 .list-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
   gap: 10px;
+  width: 100%;
 }
 
 .timer-container {
@@ -78,41 +85,46 @@ body {
   align-items: center;
 
   &::before {
-    position: absolute;
     content: " ";
+
+    position: absolute;
+    z-index: 10;
     top: 20%;
     left: 5%;
+
     width: 20px;
     height: 20px;
-    background: url(../src/assets/svg/timer.svg);
+
+    background: url("../src/assets/svg/timer.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    z-index: 10;
   }
 }
 
 input {
   box-sizing: border-box;
-  font-family: 'Montserrat';
-  font-weight: 500;
-  background-color: $input;
-  font-size: 16px;
   width: 100%;
+  min-height: 20px;
+  padding: 6px 12px;
   border: none;
   border-radius: 5px;
-  padding: 6px 12px;
-  min-height: 20px;
+
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
   color: $white;
 
-  &:focus {
-    border: none;
-    animation: glow 5s ease-in-out infinite;
-    outline: none;
-  }
+  background-color: $input;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  &:focus {
+    border: none;
+    outline: none;
+    animation: glow 5s ease-in-out infinite;
   }
 
   &.timer {
@@ -127,9 +139,11 @@ input {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  list-style-type: none;
-  padding: 0;
+
   margin: 0;
+  padding: 0;
+
+  list-style-type: none;
 
   .position-num {
     min-width: 20px;
@@ -143,8 +157,8 @@ input {
   .options-item {
     display: flex;
     gap: 10px;
-    height: 30px;
     align-items: center;
+    height: 30px;
   }
 
   label {
@@ -159,34 +173,38 @@ input {
 
 .wheel-buttons-container {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
   gap: 10px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .settings-container {
   display: flex;
-  align-items: center;
   gap: 10px;
+  align-items: center;
 }
 
 button {
-  font-family: 'Montserrat';
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 20px;
-  background-color: $buttons;
-  color: $white;
+  cursor: pointer;
+
   max-width: 200px;
   min-height: 20px;
-  cursor: pointer;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  color: $white;
+
+  background-color: $buttons;
+
   transition: background .2s ease-in-out,
   box-shadow .2s ease-in-out;
 
   &:hover:not(.remove-btn, :disabled, .sound-btn) {
     background-color: $buttons-bright;
-    box-shadow: rgba($buttons-bright, 0.3) 0 0 10px 0;
+    box-shadow: rgb(133 151 212 / 30%) 0 0 10px 0;
   }
 
   &.start-button {
@@ -196,21 +214,24 @@ button {
 
     &:hover:not(:disabled) {
       background-color: $bright-green;
-      box-shadow: rgba($bright-green, 0.3) 0 0 10px 0;
+      box-shadow: rgb(125 227 87 / 30%) 0 0 10px 0;
     }
   }
 
   &.remove-btn {
-    margin: 0;
-    padding: 0;
+    align-items: center;
+
     min-width: 15px;
     height: 15px;
-    background: url(../src/assets/svg/cross.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    align-items: center;
+    margin: 0;
+    padding: 0;
+
     opacity: 0.5;
+    background: url("../src/assets/svg/cross.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
     transition: opacity ease-in .2s;
 
     &:hover {
@@ -221,10 +242,12 @@ button {
   &.sound-btn {
     width: 25px;
     height: 25px;
-    background: url(../src/assets/svg/sound-on-2.svg);
-    background-repeat: no-repeat;
+
     opacity: 0.5;
+    background: url("../src/assets/svg/sound-on-2.svg");
+    background-repeat: no-repeat;
     background-position: center;
+
     transition: opacity .2s ease-in-out;
 
     &:hover:not(:disabled) {
@@ -232,7 +255,7 @@ button {
     }
 
     &.mute {
-      background: url(../src/assets/svg/sound-off-2.svg);
+      background: url("../src/assets/svg/sound-off-2.svg");
       background-repeat: no-repeat;
       background-position: center;
     }
@@ -244,7 +267,7 @@ button {
 
     &:hover {
       background-color: $bright-blue;
-      box-shadow: rgba($bright-blue, 0.3) 0 0 10px 0;
+      box-shadow: rgb(39 190 255 / 30%) 0 0 10px 0;
     }
   
   }
@@ -257,7 +280,7 @@ button {
     
     &:hover:not(:disabled) {
       background-color: $bright-red;
-      box-shadow: rgba($bright-red, 0.3) 0 0 10px 0;
+      box-shadow: rgb(255 95 81 / 30%) 0 0 10px 0;
     }
   }
 
@@ -267,7 +290,7 @@ button {
 
       &:hover {
         background-color: $bright-green;
-        box-shadow: rgba($bright-green, 0.3) 0 0 10px 0;
+        box-shadow: rgb(125 227 87 / 30%) 0 0 10px 0;
       }
     }
   }
@@ -278,119 +301,127 @@ button {
 }
 
 h2 {
+  margin: 0;
+  font-size: 34px;
   color: white;
   text-align: center;
-  font-size: 34px;
-  margin: 0;
 }
 
 h3 {
-  color: white;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 400;
   margin: 0;
 
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+
   &.options-title {
-    text-align: left;
     margin: 0 0 0 30px;
+    text-align: left;
   }
 
   &.list-title {
-    text-align: left;
     margin: 0 0 0 30px;
+    text-align: left;
   }
 
   &.paste-list-title {
-    text-align: left;
     margin: 0;
+    text-align: left;
   }
 }
 
 h4 {
-  color: white;
+  margin: 0 0 10px;
   font-size: 14px;
   font-weight: 300;
-  margin: 0 0 10px;
+  color: white;
 }
 
 dialog {
   box-sizing: border-box;
-  border: none;
   width: 100dvw;
   height: 100dvh;
-  background: none;
   padding: 0;
   border: none;
+
+  background: none;
+
+  &::backdrop {
+    background: rgb(0 0 0 / 30%);
+  }
 
   &[open] {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
-  &::backdrop {
-    background: rgba(0, 0, 0, 0.3);
-  }
 }
 
 .attention-plate {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  top: 20px;
-  color: $white;
-  margin: auto;
   z-index: 10;
+  top: 20px;
+
   display: flex;
-  align-items: center;
-  text-align: center;
-  width: 80dvw;
   gap: 30px;
-  background-color: $red;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: 80dvw;
+  max-width: 800px;
+  min-height: 60px;
+  margin: auto;
   padding: 8px 12px;
   border-radius: 15px;
-  min-height: 60px;
-  max-width: 800px;
+
+  color: $white;
+  text-align: center;
+
+  background-color: $red;
 }
 
 .paste-list-dialog-container {
   flex-direction: column;
   gap: 20px;
-  background-color: $container;
-  padding: 30px;
-  border-radius: 15px;
+
   max-width: 800px;
+  padding: 30px;
   border: none;
+  border-radius: 15px;
+
+  background-color: $container;
 }
 
 .list-area {
+  resize: none;
+
   box-sizing: border-box;
-  background-color: $input;
   width: 100%;
+  min-height: 20px;
+  padding: 6px 12px;
   border: none;
   border-radius: 5px;
-  padding: 6px 12px;
-  min-height: 20px;
-  color: $white;
-  resize: none;
-  border: none;
-  transition: box-shadow .2 ease-in-out;
 
-  font-family: 'Montserrat';
+  font-family: Montserrat, sans-serif;
   font-weight: 500;
   line-height: 1.6;
+  color: $white;
 
-  &:focus {
-    border: none;
-    animation: glow 5s ease-in-out infinite;
-    outline: none;
-  }
+  background-color: $input;
+
+  transition: box-shadow .2s ease-in-out;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  &:focus {
+    border: none;
+    outline: none;
+    animation: glow 5s ease-in-out infinite;
   }
 }
 
@@ -399,7 +430,7 @@ dialog {
 }
 
 @keyframes pulse {
-  from {
+  0% {
     transform: scale3d(1, 1, 1);
   }
 
@@ -407,13 +438,13 @@ dialog {
     transform: scale3d(1.05, 1.05, 1.05);
   }
 
-  to {
+  100% {
     transform: scale3d(1, 1, 1);
   }
 }
 
 @keyframes slide {
-  from {
+  0% {
     transform: translateY(-200%);
   }
 
@@ -425,13 +456,13 @@ dialog {
     transform: translateY(0);
   }
 
-  to {
+  100% {
     transform: translateY(-200%);
   }
 }
 
 @keyframes glow {
-  from {
+  0% {
     box-shadow: rgba($buttons-bright, 0.2) 0 0 6px 0;
   }
 
@@ -439,7 +470,7 @@ dialog {
     box-shadow: rgba($buttons-bright, 0.5) 0 0 10px 0;
   }
 
-  to {
+  100% {
     box-shadow: rgba($buttons-bright, 0.2) 0 0 6px 0;
   }
 }
