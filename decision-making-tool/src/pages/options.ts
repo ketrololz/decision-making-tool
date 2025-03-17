@@ -136,108 +136,11 @@ export class Options extends BaseComponent<'div'> {
       },
     });
 
-    const pasteListDialog = new BaseComponent({
-      tag: 'dialog',
-      className: 'list-dialog',
-    });
-
-    const pasteListDialogContainer = new BaseComponent({
-      tag: 'div',
-      className: 'paste-list-dialog-container',
-    });
-
-    pasteListDialog.addListener('click', (e) => {
-      if (e.target === e.currentTarget) {
-        pasteListDialog.getNode().close();
-      }
-    });
-
     const pasteButton = new ButtonComponent({
       text: 'paste list',
       event: 'click',
-      listener: (): void => pasteListDialog.getNode().showModal(),
+      listener: (): void => this.createDialog(this),
     });
-
-    const pasteListContainer = new BaseComponent({
-      tag: 'form',
-      className: 'list-container',
-    });
-
-    const pasteListArea = new BaseComponent({
-      tag: 'textarea',
-      className: 'list-area',
-    });
-
-    const pasteListTitle = new BaseComponent({
-      tag: 'h3',
-      className: 'paste-list-title',
-      text: 'Paste a list of new options in a CSV-like format:',
-    });
-
-    const pasteListSubtitle = new BaseComponent({
-      tag: 'h4',
-      className: 'paste-list-subtitle',
-      text: 'Write the name and its weight after the last comma. Each option is indicated on a new line.',
-    });
-
-    pasteListArea.setAttribute('cols', '60');
-    pasteListArea.setAttribute('rows', '10');
-    pasteListArea.setAttribute('autocomplete', 'off');
-    pasteListArea.setAttribute(
-      'placeholder',
-      'example_1, 2   >   example_1 | 2 example_2, \nwith comma, 1   >   example_2, with comma | 1',
-    );
-
-    pasteListContainer.addListener('submit', (e) => {
-      e.preventDefault();
-    });
-
-    const pasteListCancel = new ButtonComponent({
-      text: 'cancel',
-      className: 'cancel-btn',
-    });
-
-    const pasteListConfirm = new ButtonComponent({
-      text: 'confirm',
-      className: 'confirm-btn',
-    });
-
-    const pasteListButtonsContainer = new BaseComponent({
-      tag: 'div',
-      className: 'buttons-container paste-list-buttons-container',
-    });
-
-    pasteListButtonsContainer.appendChildren([
-      pasteListCancel.getNode(),
-      pasteListConfirm.getNode(),
-    ]);
-
-    pasteListCancel.addListener('click', () => {
-      pasteListArea.getNode().value = '';
-      pasteListDialog.getNode().close();
-    });
-
-    pasteListConfirm.addListener('click', () => {
-      const options = this.createOptionsFromList(pasteListArea.getNode().value);
-      if (options.length > 0) {
-        this.clearOptions();
-        this.state.setState(options);
-        this.loadOptions();
-      }
-      pasteListDialog.getNode().close();
-      pasteListArea.getNode().value = '';
-    });
-
-    pasteListContainer.appendChildren([
-      pasteListTitle.getNode(),
-      pasteListSubtitle.getNode(),
-      pasteListArea.getNode(),
-      pasteListButtonsContainer.getNode(),
-    ]);
-
-    pasteListDialogContainer.appendChildren([pasteListContainer.getNode()]);
-
-    pasteListDialog.appendChildren([pasteListDialogContainer.getNode()]);
 
     optionButtonsContainer.appendChildren([
       addButton.getNode(),
@@ -259,7 +162,6 @@ export class Options extends BaseComponent<'div'> {
       optionsContainer.getNode(),
       listContainer.getNode(),
       startButton.getNode(),
-      pasteListDialog.getNode(),
     ]);
   }
 
@@ -340,5 +242,109 @@ export class Options extends BaseComponent<'div'> {
         this.isShowingAttention = false;
       }, 2500);
     }
+  }
+
+  private createDialog(parent: BaseComponent<'div'>): void {
+    
+    const pasteListDialog = new BaseComponent({
+      tag: 'dialog',
+      className: 'list-dialog',
+    });
+
+    const pasteListDialogContainer = new BaseComponent({
+      tag: 'div',
+      className: 'paste-list-dialog-container',
+    });
+
+    pasteListDialog.addListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        pasteListDialog.destroyNode();
+      }
+    });
+
+    const pasteListContainer = new BaseComponent({
+      tag: 'form',
+      className: 'list-container',
+    });
+
+    const pasteListArea = new BaseComponent({
+      tag: 'textarea',
+      className: 'list-area',
+    });
+
+    const pasteListTitle = new BaseComponent({
+      tag: 'h3',
+      className: 'paste-list-title',
+      text: 'Paste a list of new options in a CSV-like format:',
+    });
+
+    const pasteListSubtitle = new BaseComponent({
+      tag: 'h4',
+      className: 'paste-list-subtitle',
+      text: 'Write the name and its weight after the last comma. Each option is indicated on a new line.',
+    });
+
+    pasteListArea.setAttribute('cols', '60');
+    pasteListArea.setAttribute('rows', '10');
+    pasteListArea.setAttribute('autocomplete', 'off');
+    pasteListArea.setAttribute(
+      'placeholder',
+      'example_1, 2   >   example_1 | 2 example_2, \nwith comma, 1   >   example_2, with comma | 1',
+    );
+
+    pasteListContainer.addListener('submit', (e) => {
+      e.preventDefault();
+    });
+
+    const pasteListCancel = new ButtonComponent({
+      text: 'cancel',
+      className: 'cancel-btn',
+    });
+
+    const pasteListConfirm = new ButtonComponent({
+      text: 'confirm',
+      className: 'confirm-btn',
+    });
+
+    const pasteListButtonsContainer = new BaseComponent({
+      tag: 'div',
+      className: 'buttons-container paste-list-buttons-container',
+    });
+
+    pasteListButtonsContainer.appendChildren([
+      pasteListCancel.getNode(),
+      pasteListConfirm.getNode(),
+    ]);
+
+    pasteListCancel.addListener('click', () => {
+      pasteListArea.getNode().value = '';
+      pasteListDialog.destroyNode()
+    });
+
+    pasteListConfirm.addListener('click', () => {
+      const options = this.createOptionsFromList(pasteListArea.getNode().value);
+      if (options.length > 0) {
+        this.clearOptions();
+        this.state.setState(options);
+        this.loadOptions();
+      }
+      pasteListDialog.destroyNode()
+      pasteListArea.getNode().value = '';
+    });
+
+    pasteListContainer.appendChildren([
+      pasteListTitle.getNode(),
+      pasteListSubtitle.getNode(),
+      pasteListArea.getNode(),
+      pasteListButtonsContainer.getNode(),
+    ]);
+
+    pasteListDialogContainer.appendChildren([pasteListContainer.getNode()]);
+
+    pasteListDialog.appendChildren([pasteListDialogContainer.getNode()]);
+
+    parent.appendChildren([pasteListDialog.getNode()])
+
+    pasteListDialog.getNode().showModal();
   }
 }

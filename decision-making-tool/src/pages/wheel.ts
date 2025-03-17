@@ -1,7 +1,11 @@
 import { audioController } from '../audio/audio';
 import ButtonComponent from '../components/buttonComponent';
 import { WheelComponent } from '../components/wheelComponent';
-import { DEFAULT_SPIN_DURATION, MAX_SPIN_SECONDS, MIN_SPIN_SECONDS } from '../constants/constants';
+import {
+  DEFAULT_SPIN_DURATION,
+  MAX_SPIN_SECONDS,
+  MIN_SPIN_SECONDS,
+} from '../constants/constants';
 import type Router from '../router/router';
 import { optionsState } from '../state/optionsState';
 import { AudioType } from '../types/audioTypes';
@@ -65,7 +69,7 @@ export class Wheel extends BaseComponent<'div'> {
       },
     });
 
-    if(this.state.isSoundMuteState()) {
+    if (this.state.isSoundMuteState()) {
       soundButton.getNode().classList.add('mute');
       audioController.mute();
     }
@@ -116,7 +120,12 @@ export class Wheel extends BaseComponent<'div'> {
         });
         wheelElement.rotate(this.rotationDuration).then(() => {
           audioController.playSound('end', AudioType.sound);
-          this.enableButtons([startButton, timerInput, backButton, soundButton]);
+          this.enableButtons([
+            startButton,
+            timerInput,
+            backButton,
+            soundButton,
+          ]);
           eliminationModeBtn.getNode().disabled = false;
         });
       },
