@@ -111,7 +111,7 @@ export class Options extends BaseComponent<'div'> {
     loadInput.setAttribute('type', 'file');
     loadInput.setAttribute('accept', '.json');
 
-    loadInput.addListener('change', (e) => {
+    loadInput.addListener('change', async (e) => {
       return new Promise((resolve) => {
         if (e.target instanceof HTMLInputElement) {
           e.target.files?.item(0)?.text().then(resolve);
@@ -120,6 +120,8 @@ export class Options extends BaseComponent<'div'> {
         this.clearOptions();
         this.state.setState(JSON.parse(String(data)).list);
         this.loadOptions();
+
+        loadInput.getNode().value = '';
       });
     });
 
