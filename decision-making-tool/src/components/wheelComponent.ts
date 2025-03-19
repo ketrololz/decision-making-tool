@@ -1,4 +1,7 @@
-import { CIRCLE, MAX_TITLE_LENGTH, WHEEL_SIZE_RATIO } from '../constants/constants';
+import {
+  CIRCLE,
+  WHEEL_SIZE_RATIO,
+} from '../constants/constants';
 import BaseComponent from '../utils/baseComponent';
 import type { WheelItem } from '../types/wheelItem';
 
@@ -57,7 +60,8 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   }
 
   public updateSize(): void {
-    const size = Math.min(window.innerWidth, window.innerHeight) * WHEEL_SIZE_RATIO;
+    const size =
+      Math.min(window.innerWidth, window.innerHeight) * WHEEL_SIZE_RATIO;
     this.width = this.getNode().width = size;
     this.height = this.getNode().height = size;
     this.radius = this.width / 2.2;
@@ -65,7 +69,9 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   }
 
   public async rotate(durationInSec: number): Promise<void> {
-    const rotationsCount = Math.random() * (3 * durationInSec - 1) + 2;
+    const minSpins = 5;
+    const maxSpins = minSpins + Math.floor(durationInSec / 2);
+    const rotationsCount = Math.random() * (maxSpins - minSpins - 1) + minSpins;
     this.resultAngle = (rotationsCount * CIRCLE) % CIRCLE;
     await this.rotateAnimation(durationInSec, rotationsCount);
   }
@@ -96,10 +102,10 @@ export class WheelComponent extends BaseComponent<'canvas'> {
         let timeFraction = (timeStamp - start) / durationInSec / 1000;
         if (timeFraction > 1) timeFraction = 1;
 
-        const progress = easeInOutCubic(timeFraction);
+        const progress = smoothEasing(timeFraction);
 
-        function easeInOutCubic(x: number): number {
-          return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+        function smoothEasing(x: number): number {
+          return 1 - Math.pow(1 - x, 4);
         }
 
         const angle = progress * CIRCLE * rotationsCount + this.initAngle;
@@ -140,14 +146,20 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   private drawWheel(startPosition: number): void {
     const colors = ['#e25e52', '#73cf52', '#dbcb33', '#35bad8', '#9459c6'];
     let colorNum = 0;
-    
+
     this.ctx.beginPath();
     this.ctx.moveTo(this.width - this.width / 22, this.height / 2);
-    this.ctx.arc(this.width / 2, this.height / 2, this.radius + this.radius / 24, 0, CIRCLE);
+    this.ctx.arc(
+      this.width / 2,
+      this.height / 2,
+      this.radius + this.radius / 24,
+      0,
+      CIRCLE,
+    );
     this.ctx.fillStyle = 'white';
     this.ctx.fill();
     this.ctx.restore();
-    
+
     Object.values(this.segments).forEach((segment) => {
       this.drawSegment(
         segment.startAngle + startPosition,
@@ -156,7 +168,8 @@ export class WheelComponent extends BaseComponent<'canvas'> {
         segment.title,
       );
       if (colorNum >= 4) {
-        colorNum = 1;
+        colorNum = 0;
+        return;
       }
       colorNum += 1;
     });
@@ -170,7 +183,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     this.ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
     this.ctx.stroke();
     this.ctx.restore();
-    
+
     this.ctx.save();
     this.ctx.beginPath();
     this.ctx.moveTo(this.width - this.width / 22, this.height / 2);
@@ -180,7 +193,6 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     this.ctx.shadowBlur = 12;
     this.ctx.fill();
     this.ctx.restore();
-
 
     this.drawArrow();
   }
@@ -200,20 +212,24 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     this.ctx.closePath();
     this.ctx.strokeStyle = 'white';
     this.ctx.stroke();
-    const trimmedTitle = title.trim();
-    let shortTitle = trimmedTitle 
-    if(trimmedTitle .length > MAX_TITLE_LENGTH) {
-      shortTitle = trimmedTitle .slice(-MAX_TITLE_LENGTH).concat('...');
-    }
 
     this.ctx.save();
     this.ctx.translate(this.width / 2, this.height / 2);
     this.ctx.rotate((start + end) / 2);
     this.ctx.fillStyle = 'black';
-    this.ctx.font = `${this.width / 34}px Montserrat`;
+    this.ctx.font = `${this.radius / 15}px Montserrat`;
     this.ctx.textAlign = 'left';
+
+    const truncatedTitle = this.cutTitleByWidth(
+      title,
+      this.radius * 0.6,
+      this.ctx,
+    );
+
     this.ctx.textBaseline = 'middle';
-    this.ctx.fillText(shortTitle, this.radius / 4, 0);
+    if (end - start > 0.22) {
+      this.ctx.fillText(truncatedTitle, this.radius * 0.3, 0);
+    }
     this.ctx.restore();
   }
 
@@ -230,7 +246,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     );
 
     this.ctx.closePath();
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';;
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
     this.ctx.fill();
 
     this.ctx.beginPath();
@@ -253,5 +269,23 @@ export class WheelComponent extends BaseComponent<'canvas'> {
     return Object.values(this.segments).find(
       (el) => el.startAngle < angle && angle < el.endAngle,
     );
+  }
+
+  private cutTitleByWidth(
+    title: string,
+    requiredWidth: number,
+    ctx: CanvasRenderingContext2D,
+  ): string {
+    if (ctx.measureText(title).width <= requiredWidth) {
+      return title;
+    }
+
+    let trimmedTitle = title;
+
+    while (ctx.measureText(trimmedTitle.concat('...')).width > requiredWidth) {
+      trimmedTitle = trimmedTitle.slice(0, -2);
+    }
+
+    return trimmedTitle.trim().concat('...');
   }
 }

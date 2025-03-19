@@ -119,6 +119,7 @@ export class Wheel extends BaseComponent<'div'> {
           audioController.playSound('spin', AudioType.sound);
         });
         wheelElement.rotate(this.rotationDuration).then(() => {
+          segmentTitle.setAttribute('title', segmentTitle.getNode().textContent || '');
           audioController.playSound('end', AudioType.sound);
           this.enableButtons([
             startButton,
@@ -140,6 +141,7 @@ export class Wheel extends BaseComponent<'div'> {
     });
 
     this.title = segmentTitle;
+    segmentTitle.setAttribute('title', segmentTitle.getNode().textContent || '');
 
     const wheelElement = new WheelComponent(
       this.state.getSectorOptions(),

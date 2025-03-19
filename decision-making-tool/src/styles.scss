@@ -49,15 +49,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  height: 100dvh;
+  padding: 20px 0;
 }
 
 .container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 30px;
   align-items: center;
+  width: 90dvw;
 
   max-width: 800px;
   padding: 30px;
@@ -302,9 +303,13 @@ button {
 
 h2 {
   margin: 0;
-  font-size: 34px;
+  font-size: 30px;
   color: white;
   text-align: center;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  max-width: 100%;
+  text-wrap: nowrap;
 }
 
 h3 {
