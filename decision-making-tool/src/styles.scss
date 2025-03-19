@@ -17,6 +17,7 @@ $bright-green: #7DE357;
 
 
 body {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,8 +49,6 @@ body {
 }
 
 .app {
-  position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
