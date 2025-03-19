@@ -27,6 +27,8 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   private resultAngle: number = 0;
   private isEliminationMode = false;
 
+  private isCancelled = false;
+
   constructor(
     stateOptions: WheelItem[],
     private onUpdate: (text: string) => void,
@@ -125,7 +127,9 @@ export class WheelComponent extends BaseComponent<'canvas'> {
         }
 
         if (timeFraction < 1) {
-          requestAnimationFrame(rotate);
+          if (!this.isCancelled) {
+            requestAnimationFrame(rotate);
+          }
         } else {
           this.initAngle = angle;
 
@@ -141,8 +145,14 @@ export class WheelComponent extends BaseComponent<'canvas'> {
           resolve();
         }
       };
+      
+      window.addEventListener('popstate', () => {
+        this.isCancelled = true;
+      })
 
-      requestAnimationFrame(rotate);
+      if (!this.isCancelled) {
+        requestAnimationFrame(rotate);
+      }
     });
   }
 
