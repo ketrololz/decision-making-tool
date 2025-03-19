@@ -70,6 +70,7 @@ body {
 .options-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 10px;
 }
 
@@ -146,6 +147,10 @@ input {
 
   list-style-type: none;
 
+  .position-title {
+    min-width: 200px;
+  }
+
   .position-num {
     min-width: 20px;
     text-align: center;
@@ -153,6 +158,7 @@ input {
 
   .position-weight {
     max-width: 100px;
+    min-width: 50px;
   }
 
   .options-item {

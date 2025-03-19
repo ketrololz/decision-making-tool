@@ -78,7 +78,7 @@ export class Wheel extends BaseComponent<'div'> {
       className: 'options-button back-btn',
       text: 'back',
       event: 'click',
-      listener: (): void => this.router.navigate('/options'),
+      listener: (): void => { this.router.navigate('/options') },
     });
 
     const eliminationModeBtn = new ButtonComponent({

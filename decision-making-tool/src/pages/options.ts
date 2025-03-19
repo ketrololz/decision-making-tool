@@ -186,7 +186,7 @@ export class Options extends BaseComponent<'div'> {
 
     option.appendChildren([removeButton.getNode()]);
     if (!isLoaded) {
-      this.state.add({ id: this.state.getId() });
+      this.state.add({ id: this.state.getId(), title: state.title, weight: state.weight });
     }
     this.optionsList.appendChildren([option.getNode()]);
   }
@@ -206,15 +206,17 @@ export class Options extends BaseComponent<'div'> {
     const lines = text.split('\n');
     const splittedLines = lines.map((line) => line.split(','));
     const options: State[] = [];
+    let lastOptionId = this.state.getId();
     splittedLines.forEach((line) => {
       if (line.length > 1) {
         const weight = parseInt(line.pop()!, 10);
         if (!Number.isNaN(weight)) {
           const option = {
-            id: options.length + 1,
+            id: lastOptionId,
             weight: weight,
             title: line.join(','),
           };
+          lastOptionId += 1
           options.push(option);
         }
       }
@@ -245,7 +247,6 @@ export class Options extends BaseComponent<'div'> {
   }
 
   private createDialog(parent: BaseComponent<'div'>): void {
-    
     const pasteListDialog = new BaseComponent({
       tag: 'dialog',
       className: 'list-dialog',
@@ -318,17 +319,17 @@ export class Options extends BaseComponent<'div'> {
 
     pasteListCancel.addListener('click', () => {
       pasteListArea.getNode().value = '';
-      pasteListDialog.destroyNode()
+      pasteListDialog.destroyNode();
     });
 
     pasteListConfirm.addListener('click', () => {
       const options = this.createOptionsFromList(pasteListArea.getNode().value);
       if (options.length > 0) {
-        this.clearOptions();
-        this.state.setState(options);
-        this.loadOptions();
+        options.forEach((option) => {
+          this.addOption(option);
+        });
       }
-      pasteListDialog.destroyNode()
+      pasteListDialog.destroyNode();
       pasteListArea.getNode().value = '';
     });
 
@@ -343,7 +344,7 @@ export class Options extends BaseComponent<'div'> {
 
     pasteListDialog.appendChildren([pasteListDialogContainer.getNode()]);
 
-    parent.appendChildren([pasteListDialog.getNode()])
+    parent.appendChildren([pasteListDialog.getNode()]);
 
     pasteListDialog.getNode().showModal();
   }
