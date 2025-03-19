@@ -4,6 +4,8 @@ import {
 } from '../constants/constants';
 import BaseComponent from '../utils/baseComponent';
 import type { WheelItem } from '../types/wheelItem';
+import { audioController } from '../audio/audio';
+import { AudioType } from '../types/audioTypes';
 
 type WheelSegment = {
   startAngle: number;
@@ -69,7 +71,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
   }
 
   public async rotate(durationInSec: number): Promise<void> {
-    const minSpins = 5;
+    const minSpins = 5 + Math.floor(durationInSec / 2);
     const maxSpins = minSpins + Math.floor(durationInSec / 2);
     const rotationsCount = Math.random() * (maxSpins - minSpins - 1) + minSpins;
     this.resultAngle = (rotationsCount * CIRCLE) % CIRCLE;
@@ -116,6 +118,7 @@ export class WheelComponent extends BaseComponent<'canvas'> {
 
         if (winnerSegment) {
           if (!(winnerSegment.title === this.thisCurrentTitle)) {
+            audioController.playSound('click', AudioType.sound);
             this.thisCurrentTitle = winnerSegment.title;
             this.onUpdate(winnerSegment.title);
           }

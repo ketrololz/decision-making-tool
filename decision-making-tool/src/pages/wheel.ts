@@ -115,9 +115,9 @@ export class Wheel extends BaseComponent<'div'> {
         }
         this.disableButtons([startButton, timerInput, backButton, soundButton]);
         eliminationModeBtn.getNode().disabled = true;
-        audioController.playSound('baraban', AudioType.sound).then(() => {
-          audioController.playSound('spin', AudioType.sound);
-        });
+        // audioController.playSound('baraban', AudioType.sound).then(() => {
+        //   audioController.playSound('spin', AudioType.sound);
+        // });
         wheelElement.rotate(this.rotationDuration).then(() => {
           segmentTitle.setAttribute('title', segmentTitle.getNode().textContent || '');
           audioController.playSound('end', AudioType.sound);

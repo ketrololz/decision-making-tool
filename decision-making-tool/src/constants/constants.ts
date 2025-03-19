@@ -5,6 +5,7 @@ import type Router from '../router/router.ts';
 import spinSound from '../../src/assets/sounds/spin.mp3';
 import endSound from '../../src/assets/sounds/end.mp3';
 import startSound from '../../src/assets/sounds/start.mp3';
+import click from '../../src/assets/sounds/click.flac'
 
 export const DEFAULT_ID = 1;
 export const CIRCLE = Math.PI * 2;
@@ -43,4 +44,5 @@ export const AUDIO_PATHS = {
   spin: spinSound,
   end: endSound,
   baraban: startSound,
+  click: click,
 };
